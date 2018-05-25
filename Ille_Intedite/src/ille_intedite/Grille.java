@@ -15,7 +15,7 @@ public class Grille {
         this.tuilesListe = new HashMap();
         this.ihm = ihm;
         iniGrille();
-        
+        //test
     }
 	
         public void iniGrille(){
