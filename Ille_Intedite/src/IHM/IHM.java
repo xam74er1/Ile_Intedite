@@ -238,4 +238,3 @@ public class IHM extends Observe{
     }
         
 }
-//deuxieme test
