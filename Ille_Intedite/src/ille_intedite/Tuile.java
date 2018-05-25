@@ -94,4 +94,11 @@ public class Tuile {
         throw new UnsupportedOperationException();
     }
 
+    @Override
+    public String toString() {
+        return "Tuile{" + "num=" + num + ", statut=" + statut + ", type=" + type + ", xT=" + xT + ", yT=" + yT + '}';
+    }
+    
+    
+
 }

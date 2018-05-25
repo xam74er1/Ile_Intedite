@@ -14,7 +14,7 @@ public class Grille {
     public Grille(IHM ihm) {
         this.tuilesListe = new HashMap();
         this.ihm = ihm;
-        
+        iniGrille();
         
     }
 	
@@ -24,6 +24,7 @@ public class Grille {
                for(int y =0;y<6;y++){
                Tuile t = new Tuile(num,0,x,y);
                //Meme nom que pour les bouton 
+                  
                tuilesListe.put(x+":"+y,t);
                num++;
            }
@@ -50,6 +51,7 @@ public class Grille {
 	 */
 	public Tuile getTuile(int x, int y) {
 		// TODO - implement Grille.getTuile
+                
 		return tuilesListe.get(x+":"+y);
 	}
         

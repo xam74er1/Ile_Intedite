@@ -47,7 +47,9 @@ public class Controleur implements Observateur{
         //Provisoire pour les test 
         
             //Je met sur 0 0 pour les test 
-            joueursList.get(0).setPosition(grille.getTuile(0,0));
+            Tuile t = grille.getTuile(1,1);
+            System.out.println(t.toString());
+            joueursList.get(0).setPosition(t);
 	}
 
 	private void nextJoueur() {
