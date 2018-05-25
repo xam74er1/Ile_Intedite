@@ -17,7 +17,9 @@ public class Main {
         Controleur ctrl = new Controleur(ihm);
         
         ihm.addObservateur(ctrl);
-      
+      //Hello cest un com de test 
+      // sa vtest
+      //test 3
         
    }    
 }

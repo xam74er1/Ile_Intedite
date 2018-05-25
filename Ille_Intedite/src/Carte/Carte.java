@@ -23,6 +23,5 @@ public abstract class Carte {
 		// TODO - implement Carte.Carte
 		throw new UnsupportedOperationException();
 	}
-	//LALALALALALA
 
 }

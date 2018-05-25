@@ -6,6 +6,7 @@ import ille_intedite.Tresor;
 import ille_intedite.Tuile;
 import java.awt.Color;
 import java.util.*;
+import utils.Utils;
 import utils.Utils.Pion;
 
 public class Aventurier {
@@ -21,7 +22,7 @@ public class Aventurier {
         this.Num = Num;
         this.nom = nom;
         this.tuile = null;
-        
+        this.pion = pion;
         main = new ArrayList<Carte>();
     }
 
@@ -155,6 +156,7 @@ public class Aventurier {
         }
         
         this.tuile = t;
+        
         t.addAventurie(this);
     }
 
@@ -168,6 +170,7 @@ public class Aventurier {
     
     
     public Color getColor(){
+        
         return pion.getCouleur();
     }
 
