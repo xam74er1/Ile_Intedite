@@ -10,9 +10,33 @@ package ille_intedite;
  * @author clercma
  */
 public class Message {
+    TypeMessage message;
+    String location;
+    
+   
+
+	public Message(TypeMessage message) {
+
+		this.message = message;
+	}
+
+	public TypeMessage getMessage() {
+		return message;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setMessage(TypeMessage message) {
+		this.message = message;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+    
     
     //test
-	public void test() {
-		System.out.println("test");
-	}
+	
 }

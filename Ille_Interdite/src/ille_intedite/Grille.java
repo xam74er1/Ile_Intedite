@@ -69,4 +69,10 @@ public class Grille {
 		throw new UnsupportedOperationException();
 	}
 
+	public HashMap<String, Tuile> getTuilesListe() {
+		return tuilesListe;
+	}
+	
+	
+
 }

@@ -17,6 +17,8 @@ public class Aventurier {
     private String nom;
     private NomTresor getType;
     private Pion pion;
+    // nbr d'action pouvant etre jouer dans le tour 
+    private int nbAction = 3;
 
     public Aventurier(int Num, String nom,Pion pion) {
         this.Num = Num;
@@ -56,10 +58,13 @@ public class Aventurier {
      * @param t
      */
     //Action pour deplace la perssone 
-    public void deplacer(Tuile t) {
+    public boolean deplacer(Tuile t) {
         // TODO - implement Aventurier.deplacer
         if (deplacementPossible(getTuile(), t)) {
             setPosition(t);
+            return true;
+        }else {
+        	return false;
         }
 
     }
@@ -194,4 +199,20 @@ public class Aventurier {
         this.getType = getType;
     }
 
+	public int getNbAction() {
+		return nbAction;
+	}
+
+	public void setNbAction(int nbAction) {
+		this.nbAction = nbAction;
+	}
+    
+    public void actionJouer() {
+    	nbAction --;
+    }
+
+    public void actionAnuller() {
+    	nbAction++;
+    }
+    
 }

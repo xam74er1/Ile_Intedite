@@ -88,6 +88,14 @@ public class Tuile {
     public void removeAventurie(Aventurier joueur) {
         AventuriesList.remove(joueur);
     }
+    
+    public ArrayList<Aventurier> getAventurie() {
+    	return AventuriesList;
+    }
+    
+    public int getNbrAventurie() {
+    	return AventuriesList.size();
+    }
 
     public NomTresor getTresort() {
         // TODO - implement Tuile.getTresort
