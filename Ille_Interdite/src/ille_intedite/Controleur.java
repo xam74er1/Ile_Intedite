@@ -2,6 +2,8 @@ package ille_intedite;
 import Carte.Carte;
 import IHM.IHM;
 import ille_intedite.Aventurie.Aventurier;
+
+import java.awt.Color;
 import java.util.*;
 import java.util.Map.Entry;
 
@@ -23,7 +25,7 @@ public class Controleur implements Observateur{
 
 	public Controleur(IHM ihm) {
 		this.ihm = ihm;
-		joueursList = new ArrayList();
+		joueursList = new ArrayList<Aventurier>();
 		init();
 		miseAJourGrille();
 
@@ -39,6 +41,13 @@ public class Controleur implements Observateur{
 
 		if(msg.getMessage() == TypeMessage.Clique_Deplace) {
 			ihm.afichierConsole("Cliquer sur une classe pour vous deplace");
+
+
+			//Fair deplce joeur 
+		}else if(msg.getMessage() == TypeMessage.Clique_Asseche){
+
+			ihm.afichierConsole("Cliquer sur une classe pour l'assecher");
+
 		}else if(msg.getMessage() == TypeMessage.Clique_Tuille && lastAction == TypeMessage.Clique_Deplace) {
 			Utils.debugln("Tuille = "+msg.getLocation());
 
@@ -50,6 +59,16 @@ public class Controleur implements Observateur{
 				getJoueurTour().actionAnuller();
 			}
 
+
+		}else if(msg.getMessage() == TypeMessage.Clique_Tuille && lastAction == TypeMessage.Clique_Asseche){
+				
+			if(assecher(msg.getLocation())){
+				ihm.afichierConsole("Casse assache en "+msg.getLocation());
+			}else{
+				ihm.addConsole("Vous ne pouvez pas asseche en  "+msg.getLocation());
+				//Pour ne pas fair perdre une action 
+				getJoueurTour().actionAnuller();
+			}
 
 		}
 
@@ -83,7 +102,11 @@ public class Controleur implements Observateur{
 
 		//Je met sur 0 0 pour les test 
 		Tuile t = grille.getTuile(1,1);
-		System.out.println(t.toString());
+		
+		grille.getTuile(2,1).inonder();
+		grille.getTuile(2,2).inonder();
+		
+		Utils.debugln(" 2 2 = "+grille.getTuile(2,2).getStatue()+"");
 		joueursList.get(0).setPosition(t);
 	}
 
@@ -117,9 +140,17 @@ public class Controleur implements Observateur{
 
 	}
 
-	private void assecher() {
+	private boolean assecher(String str) {
 		// TODO - implement Controleur.assecher
-		throw new UnsupportedOperationException();
+		Aventurier a = getJoueurTour();
+		Tuile t = grille.getTuile(str);
+		
+		if(a.assecher(t)){
+			miseAJourGrille();
+			return true;
+		}
+		return false;
+	
 	}
 
 	private void donneCarte() {
@@ -199,6 +230,14 @@ public class Controleur implements Observateur{
 				//Provisoire 
 				ihm.getButonPlateau(me.getKey()).setBackground(a.getColor());;
 
+			}
+
+			if(me.getValue().getStatue()==1){
+				ihm.getButonPlateau(me.getKey()).setBackground(Color.BLUE);
+			}else if(me.getValue().getStatue()>1){
+				ihm.getButonPlateau(me.getKey()).setBackground(Color.BLUE);
+			}else{
+				ihm.getButonPlateau(me.getKey()).setForeground(Color.BLACK);
 			}
 
 		}

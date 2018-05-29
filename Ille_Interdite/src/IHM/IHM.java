@@ -163,11 +163,15 @@ public class IHM extends Observe{
 		});
 		bouton.add(btnAction);
 
-		JButton btnAction_1 = new JButton("action 2");
+		JButton btnAction_1 = new JButton("Assecher");
 		btnAction_1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+				Message m = new Message(TypeMessage.Clique_Asseche);
+
+				;
+
+				notifierObservateur(m);
 			}
 		});
 		bouton.add(btnAction_1);

@@ -34,7 +34,12 @@ public class Tuile {
 
     public void inonder() {
         // TODO - implement Tuile.inonder
+       
         statut++;
+    }
+    
+    public void assecher(){
+    	setStatut(0);
     }
 
     private void setStatut(int i) {

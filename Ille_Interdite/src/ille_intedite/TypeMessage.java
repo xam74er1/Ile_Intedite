@@ -14,6 +14,7 @@ public enum TypeMessage {
     Clique_Tuille,
     Clique_Deplace,
     Clique_DonneCarte,
+    Clique_Asseche,
     Clique_Send
     ;
     
