@@ -185,9 +185,14 @@ public class IHM extends Observe{
 		});
 		bouton.add(btnAction_3);
 
-		JButton btnAction_2 = new JButton("action 3");
+		JButton btnAction_2 = new JButton("Fin de Tour");
 		btnAction_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Message m = new Message(TypeMessage.Clique_Fin_Tour);
+
+				;
+
+				notifierObservateur(m);
 			}
 		});
 		bouton.add(btnAction_2);

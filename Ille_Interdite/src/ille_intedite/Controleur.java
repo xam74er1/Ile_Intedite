@@ -15,7 +15,7 @@ public class Controleur implements Observateur{
 	Curseur curseur;
 	Grille grille;
 	ArrayList<Aventurier> joueursList;
-	private final int NBR_JOUEUR = 4;
+	private int NBR_JOUEUR = 4;
 	// Dernere action effectuer 
 	private  TypeMessage lastAction = null;
 	private int numTour;
@@ -28,7 +28,8 @@ public class Controleur implements Observateur{
 		joueursList = new ArrayList<Aventurier>();
 		init();
 		miseAJourGrille();
-
+		numTour =0;
+		NBR_JOUEUR = joueursList.size();
 		Utils.debugln("controleur start");
 
 	}
@@ -70,6 +71,9 @@ public class Controleur implements Observateur{
 				getJoueurTour().actionAnuller();
 			}
 
+		}else if(msg.getMessage() == TypeMessage.Clique_Fin_Tour){
+			finDeTour();
+			Utils.debugln("player n ="+getJoueurTour().toString());
 		}
 
 		lastAction = msg.getMessage();
@@ -83,6 +87,7 @@ public class Controleur implements Observateur{
 
 	private void finDeTour() {
 		// TODO Auto-generated method stub
+		numTour++;
 		Utils.debugln("PAS ENCORE SUPORTE");
 	}
 
@@ -92,22 +97,25 @@ public class Controleur implements Observateur{
 	public void init() {
 		grille = new Grille(ihm);
 
-		for(int i = 0;i<NBR_JOUEUR;i++){
-			// Par defaut en attendent 
-			Aventurier a = new Aventurier(i,"Bob Morane",Pion.ROUGE);
+		//Metre les tuille de depare 
+		int i =0;
+		for(Pion p : Pion.values()){
+			Aventurier a = new Aventurier(i,"Bob Morane",p);
+			a.setPosition(1, i);
 			joueursList.add(a);
+			i++;
 		}
 
 		//Provisoire pour les test 
 
 		//Je met sur 0 0 pour les test 
-		Tuile t = grille.getTuile(1,1);
+		
 		
 		grille.getTuile(2,1).inonder();
 		grille.getTuile(2,2).inonder();
 		
-		Utils.debugln(" 2 2 = "+grille.getTuile(2,2).getStatue()+"");
-		joueursList.get(0).setPosition(t);
+		
+		
 	}
 
 	private void nextJoueur() {
@@ -177,7 +185,10 @@ public class Controleur implements Observateur{
 	//Provisoire 
 	@Deprecated
 	public Aventurier getJoueurTour() {
-		return joueursList.get(0);
+		int i =  numTour%(NBR_JOUEUR-1);
+		
+		Utils.debugln(" jouer n = "+i);
+		return joueursList.get(i);
 
 	}
 
