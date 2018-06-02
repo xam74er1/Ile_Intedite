@@ -6,8 +6,9 @@ public class Inondation extends Carte {
 
 	Tuile tuile;
 
-    public Inondation(String nom) {
+    public Inondation(String nom,Tuile tuile) {
         super(nom);
+        this.tuile = tuile;
     }
 
 }

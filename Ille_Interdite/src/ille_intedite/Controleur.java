@@ -14,6 +14,7 @@ public class Controleur implements Observateur{
 
 	Curseur curseur;
 	Grille grille;
+	ArrayList<Inondation> Inondationdeck;
 	ArrayList<Aventurier> joueursList;
 	private int NBR_JOUEUR = 4;
 	// Dernere action effectuer 
@@ -89,6 +90,10 @@ public class Controleur implements Observateur{
 		// TODO Auto-generated method stub
 		numTour++;
 		Utils.debugln("PAS ENCORE SUPORTE");
+	}
+	
+	public void creeDeckInondation() {
+		Inondationdeck.
 	}
 
 
