@@ -14,7 +14,8 @@ public class Controleur implements Observateur{
 
 	Curseur curseur;
 	Grille grille;
-	ArrayList<Inondation> Inondationdeck;
+	ArrayList<Inondation> inondationDeck;
+	ArrayList<Inondation> inondationDefausse;
 	ArrayList<Aventurier> joueursList;
 	private int NBR_JOUEUR = 4;
 	// Dernere action effectuer 
@@ -92,8 +93,14 @@ public class Controleur implements Observateur{
 		Utils.debugln("PAS ENCORE SUPORTE");
 	}
 	
+//	Mise en place du deck Inondation //\\ actuellement sur plus de 24 Tuile
 	public void creeDeckInondation() {
-		Inondationdeck.
+		for(int x = 0;x<6;x++){
+            for(int y =0;y<6;y++){
+			inondationDeck.add(new Inondation(x+":"+y, grille.getTuile(x, y)));
+            }
+		}
+//		Liste A randomisé par la suite
 	}
 
 
@@ -181,9 +188,12 @@ public class Controleur implements Observateur{
 		throw new UnsupportedOperationException();
 	}
 
+//	Mise en place de la pioche et deffause auto des carte innondation
 	private void piocherInondation() {
-		// TODO - implement Controleur.piocherInondation
-		throw new UnsupportedOperationException();
+		Inondation Cin = inondationDeck.get(1);
+		Cin.getTuile().inonder();
+		inondationDefausse.add(Cin);
+		inondationDeck.remove(Cin);
 	}
 
 

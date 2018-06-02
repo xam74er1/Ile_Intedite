@@ -11,4 +11,13 @@ public class Inondation extends Carte {
         this.tuile = tuile;
     }
 
+	public Tuile getTuile() {
+		return tuile;
+	}
+
+	public void setTuile(Tuile tuile) {
+		this.tuile = tuile;
+	}
+
+    
 }
