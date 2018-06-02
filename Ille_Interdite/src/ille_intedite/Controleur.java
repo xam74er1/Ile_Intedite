@@ -14,8 +14,10 @@ public class Controleur implements Observateur{
 
 	Curseur curseur;
 	Grille grille;
-	ArrayList<Inondation> inondationDeck;
-	ArrayList<Inondation> inondationDefausse;
+	ArrayList<CarteTresor> carteTresorDeck;
+	ArrayList<CarteTresor> carteTresorsDefausse;
+	ArrayList<CarteInondation> inondationDeck;
+	ArrayList<CarteInondation> inondationDefausse;
 	ArrayList<Aventurier> joueursList;
 	private int NBR_JOUEUR = 4;
 	// Dernere action effectuer 
@@ -75,7 +77,6 @@ public class Controleur implements Observateur{
 
 		}else if(msg.getMessage() == TypeMessage.Clique_Fin_Tour){
 			finDeTour();
-			piocherInondation();
 			Utils.debugln("player n ="+getJoueurTour().toString());
 		}
 
@@ -90,19 +91,46 @@ public class Controleur implements Observateur{
 
 	private void finDeTour() {
 		// TODO Auto-generated method stub
+		piocherInondation();
 		numTour++;
 		Utils.debugln("PAS ENCORE SUPORTE");
+		
 	}
+	
+////////////////////////	
+//	Gestion des carte //	
+////////////////////////
 	
 //	Mise en place du deck Inondation //\\ actuellement sur plus de 24 Tuile
 	public void creeDeckInondation() {
 		for(int x = 0;x<6;x++){
             for(int y =0;y<6;y++){
-			inondationDeck.add(new Inondation(x+":"+y, grille.getTuile(x, y)));
+			inondationDeck.add(new CarteInondation(x+":"+y, grille.getTuile(x, y)));
             }
 		}
 //		Liste A randomisé par la suite
 	}
+	
+	public void creeDeckClassique() {
+		for(int i=0;i<4;i++) {
+			for(int j=0;j<5;j++) {
+				switch (i) {
+				case 1:
+//					carteTresorDeck.add(new CarteTresor("carte"+i+":"+j, ))  A modifier
+					break;
+				case 2:
+					break;
+				case 3:
+					break;
+				case 4:
+					break;
+				}
+			}
+		}
+		
+			
+	}
+	
 
 
 
@@ -114,7 +142,7 @@ public class Controleur implements Observateur{
 		int i =0;
 		for(Pion p : Pion.values()){
 			Aventurier a = new Aventurier(i,"Bob Morane",p);
-			a.setPosition(1, i);
+			a.setPosition(grille.getTuile(i, 0));
 			joueursList.add(a);
 			i++;
 		}
@@ -191,7 +219,7 @@ public class Controleur implements Observateur{
 
 //	Mise en place de la pioche et deffause auto des carte innondation
 	private void piocherInondation() {
-		Inondation Cin = inondationDeck.get(1);
+		CarteInondation Cin = inondationDeck.get(1);
 		Cin.getTuile().inonder();
 		inondationDefausse.add(Cin);
 		inondationDeck.remove(Cin);

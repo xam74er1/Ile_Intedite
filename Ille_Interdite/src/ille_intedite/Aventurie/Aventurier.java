@@ -1,8 +1,9 @@
 package ille_intedite.Aventurie;
 
 import Carte.Carte;
+import Carte.Classique;
 import ille_intedite.NomTresor;
-import ille_intedite.Tresor;
+import ille_intedite.CarteTresor;
 import ille_intedite.Tuile;
 import java.awt.Color;
 import java.util.*;
@@ -10,8 +11,8 @@ import utils.Utils;
 import utils.Utils.Pion;
 
 public class Aventurier {
-
-    ArrayList<Carte> main;
+// Attention j'ai modifier le non de la listedecarte elle ne s'appele plus main
+    ArrayList<Classique> listeCarteJoueur;
     Tuile tuile;
     private int Num;
     private String nom;
@@ -25,7 +26,7 @@ public class Aventurier {
         this.nom = nom;
         this.tuile = null;
         this.pion = pion;
-        main = new ArrayList<Carte>();
+        listeCarteJoueur = new ArrayList<Classique>();
     }
 
     public Tuile getPosition() {
@@ -40,7 +41,7 @@ public class Aventurier {
      */
     public void setPosition(int xG, int yG) {
         // TODO - implement Aventurier.setPosition
-        throw new UnsupportedOperationException();
+        
     }
 
     /**
@@ -110,7 +111,7 @@ public class Aventurier {
     }
 
     public int getNbCarte() {
-        return main.size();
+        return listeCarteJoueur.size();
     }
 
     /**
@@ -119,7 +120,7 @@ public class Aventurier {
      */
     public Carte getCarte(int numCarte) {
         // TODO - implement Aventurier.getCarte
-        return main.get(numCarte);
+        return listeCarteJoueur.get(numCarte);
     }
 
     public void Defausse() {
@@ -131,25 +132,25 @@ public class Aventurier {
      *
      * @param C
      */
-    public void addCarte(Carte C) {
+    public void addCarte(Classique C) {
         // TODO - implement Aventurier.addCarte
-        main.add(C);
+    	listeCarteJoueur.add(C);
     }
 
     /**
      *
      * @param c
      */
-    public void removeCarte(Carte c) {
+    public void removeCarte(Classique c) {
         // TODO - implement Aventurier.removeCarte
-       main.remove(c);
+    	listeCarteJoueur.remove(c);
     }
 
     /**
      *
      * @param c
      */
-    public void addDefausePerso(Tresor c) {
+    public void addDefausePerso(CarteTresor c) {
         // TODO - implement Aventurier.addDefausePerso
         throw new UnsupportedOperationException();
     }
@@ -158,7 +159,7 @@ public class Aventurier {
      *
      * @param main
      */
-    public void restoreMain(ArrayList<Carte> main) {
+    public void restoreMain(ArrayList<Classique> main) {
         // TODO - implement Aventurier.restoreMain
         throw new UnsupportedOperationException();
     }

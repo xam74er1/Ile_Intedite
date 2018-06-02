@@ -2,11 +2,11 @@ package ille_intedite;
 
 import Carte.Carte;
 
-public class Inondation extends Carte {
+public class CarteInondation extends Carte {
 
 	Tuile tuile;
 
-    public Inondation(String nom,Tuile tuile) {
+    public CarteInondation(String nom,Tuile tuile) {
         super(nom);
         this.tuile = tuile;
     }

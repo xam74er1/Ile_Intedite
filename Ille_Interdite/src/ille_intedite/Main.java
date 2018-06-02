@@ -15,6 +15,7 @@ public class Main {
     public static void main(String [] args) {
         IHM ihm = new IHM();
         Controleur ctrl = new Controleur(ihm);
+        ctrl.creeDeckInondation();
         
         ihm.addObservateur(ctrl);
         
