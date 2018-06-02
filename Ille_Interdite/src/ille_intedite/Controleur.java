@@ -75,6 +75,7 @@ public class Controleur implements Observateur{
 
 		}else if(msg.getMessage() == TypeMessage.Clique_Fin_Tour){
 			finDeTour();
+			piocherInondation();
 			Utils.debugln("player n ="+getJoueurTour().toString());
 		}
 
