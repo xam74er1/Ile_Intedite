@@ -10,7 +10,7 @@ public class Tuile {
     // Pour les inodation : 0 = pas inonder , 1 = inonder , 2 couler 
     private int statut;
     //Type cest quoi ?
-    private final int type;
+    private final String nom;
     private int xT;
     private int yT;
 
@@ -20,9 +20,10 @@ public class Tuile {
      * @param statut
      * @param type
      */
-    public Tuile(int num, int type, int xT, int yT) {
+    
+    public Tuile(int num, String nom, int xT, int yT) {
         this.num = num;
-        this.type = type;
+        this.nom = nom;
         this.xT = xT;
         this.yT = yT;
         statut =0;
@@ -112,6 +113,9 @@ public class Tuile {
         return "Tuile{" + "num=" + num + ", statut=" + statut + ", type=" + type + ", xT=" + xT + ", yT=" + yT + '}';
     }
     
+    public String getNom() {
+    	return nom;
+    }
     
 
 }
