@@ -14,6 +14,7 @@ public class Controleur implements Observateur{
 
 	Curseur curseur;
 	Grille grille;
+
 	ArrayList<CarteTresor> carteTresorDeck;
 	ArrayList<CarteTresor> carteTresorsDefausse;
 	ArrayList<CarteInondation> inondationDeck;
@@ -26,19 +27,20 @@ public class Controleur implements Observateur{
 
 
 	IHM ihm;
-
+//Constructeur
 	public Controleur(IHM ihm) {
 		this.ihm = ihm;
-		carteTresorDeck = new ArrayList<CarteTresor>();
-		carteTresorsDefausse = new ArrayList<CarteTresor>();
+		joueursList = new ArrayList<Aventurier>();
 		inondationDeck = new ArrayList<CarteInondation>();
 		inondationDefausse = new ArrayList<CarteInondation>();
-		joueursList = new ArrayList<Aventurier>();
+		carteTresorDeck = new ArrayList<CarteTresor>();
+		carteTresorsDefausse = new ArrayList<CarteTresor>();
 		init();
 		miseAJourGrille();
 		numTour =0;
 		NBR_JOUEUR = joueursList.size();
 		Utils.debugln("controleur start");
+		
 
 	}
 
@@ -47,25 +49,35 @@ public class Controleur implements Observateur{
 
 	@Override
 	public void traiterMessage(Message msg) {
+		
+		/*
+		 * Marche as suire pour une action jouer par tour : 
+		 * Si laction est valide et fini utiliser : getJoueurTour().actionJouer(); 
+		 * Cela permet de savoir le nombre daction jouer en un tour par une perssone 
+		 */
 
+		//Mesage pour depalcer 
 		if(msg.getMessage() == TypeMessage.Clique_Deplace) {
 			ihm.afichierConsole("Cliquer sur une classe pour vous deplace");
 
 
-			//Fair deplce joeur 
+		//Message pour assehcer
 		}else if(msg.getMessage() == TypeMessage.Clique_Asseche){
 
 			ihm.afichierConsole("Cliquer sur une classe pour l'assecher");
-
+			//Fair deplce joeur 
 		}else if(msg.getMessage() == TypeMessage.Clique_Tuille && lastAction == TypeMessage.Clique_Deplace) {
 			Utils.debugln("Tuille = "+msg.getLocation());
 
+			//Si le deplacement cest bien passe 
 			if(deplacer(msg.getLocation())) {
 				ihm.afichierConsole("Deplacement en "+msg.getLocation());
+				getJoueurTour().actionJouer();
+				//Si le deplacement cest mal passe 
 			}else {
 				ihm.addConsole("Vous ne pouvez pas vous deplace en  "+msg.getLocation());
 				//Pour ne pas fair perdre une action 
-				getJoueurTour().actionAnuller();
+			
 			}
 
 
@@ -73,21 +85,24 @@ public class Controleur implements Observateur{
 				
 			if(assecher(msg.getLocation())){
 				ihm.afichierConsole("Casse assache en "+msg.getLocation());
+				getJoueurTour().actionJouer();
 			}else{
 				ihm.addConsole("Vous ne pouvez pas asseche en  "+msg.getLocation());
 				//Pour ne pas fair perdre une action 
-				getJoueurTour().actionAnuller();
+				
 			}
 
 		}else if(msg.getMessage() == TypeMessage.Clique_Fin_Tour){
 			finDeTour();
-			Utils.debugln("player n ="+getJoueurTour().toString());
+
+			Utils.debugln("bouton fin de tour ");
 		}
 
 		lastAction = msg.getMessage();
-		getJoueurTour().actionJouer();
+		
 
 		if(getJoueurTour().getNbAction()<1) {
+			System.out.println(" nb act = "+getJoueurTour().getNbAction());
 			finDeTour();
 		}
 
@@ -95,24 +110,23 @@ public class Controleur implements Observateur{
 
 	private void finDeTour() {
 		// TODO Auto-generated method stub
-		piocherInondation();
-		numTour++;
-		Utils.debugln("PAS ENCORE SUPORTE");
+		//piocherInondation();
 		
+		ihm.afichierConsole("Fin du tour du joeur n°"+numTour);
+		
+		getJoueurTour().finTour();
+		numTour++;
+		
+		ihm.addConsole("Jouer n°"+numTour+" as vous de jouer");
+		Utils.debugln("Fin de tour");
 	}
-	
-////////////////////////	
-//	Gestion des carte //	
-////////////////////////
 	
 //	Mise en place du deck Inondation //\\ actuellement sur plus de 24 Tuile
 	public void creeDeckInondation() {
-		for(Tuile t :grille.getTuilesListe().values()){
-            	
-			inondationDeck.add(
-					new CarteInondation(t.getxT()+":"+t.getyT(),
-							t));
-           
+		for(int x = 0;x<6;x++){
+            for(int y =0;y<6;y++){
+			inondationDeck.add(new CarteInondation(x+":"+y, grille.getTuile(x, y)));
+            }
 		}
 //		Liste A randomisé par la suite
 	}
@@ -136,8 +150,6 @@ public class Controleur implements Observateur{
 		
 			
 	}
-	
-
 
 
 
@@ -152,7 +164,6 @@ public class Controleur implements Observateur{
 			joueursList.add(a);
 			i++;
 		}
-		
 
 		//Provisoire pour les test 
 
@@ -162,7 +173,7 @@ public class Controleur implements Observateur{
 		grille.getTuile(2,1).inonder();
 		grille.getTuile(2,2).inonder();
 		
-		creeDeckInondation();
+		
 		
 	}
 
@@ -184,7 +195,7 @@ public class Controleur implements Observateur{
 	private boolean deplacer(String str) {
 		Aventurier a = getJoueurTour();
 		Tuile t = grille.getTuile(str);
-
+		System.out.println(" str = "+str+" location p ="+a.getTuile().toString());
 		if(a.deplacer(t)) {
 			miseAJourGrille();
 			return true;
@@ -226,19 +237,22 @@ public class Controleur implements Observateur{
 
 //	Mise en place de la pioche et deffause auto des carte innondation
 	private void piocherInondation() {
-		CarteInondation Cin = inondationDeck.get(1);
+		
+		//Jai change ici car sa me semblais plus logique mais pas sure que ce sois sa 
+		CarteInondation Cin = (CarteInondation) inondationDeck.get(1);
+
+		//Inondation Cin = inondationDeck.get(1);
 		Cin.getTuile().inonder();
 		inondationDefausse.add(Cin);
 		inondationDeck.remove(Cin);
 	}
 
 
-	//Provisoire 
-	@Deprecated
+	
 	public Aventurier getJoueurTour() {
 		int i =  numTour%(NBR_JOUEUR-1);
 		
-		Utils.debugln(" jouer n = "+i);
+		
 		return joueursList.get(i);
 
 	}
