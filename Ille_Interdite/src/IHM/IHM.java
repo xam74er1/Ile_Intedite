@@ -46,20 +46,20 @@ public class IHM extends Observe{
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					IHM window = new IHM();
-					window.frame.setVisible(true);
-
-
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	//	public static void main(String[] args) {
+	//		EventQueue.invokeLater(new Runnable() {
+	//			public void run() {
+	//				try {
+	//					IHM window = new IHM();
+	//					window.frame.setVisible(true);
+	//
+	//
+	//				} catch (Exception e) {
+	//					e.printStackTrace();
+	//				}
+	//			}
+	//		});
+	//	}
 
 	/**
 	 * Create the application.
@@ -109,6 +109,7 @@ public class IHM extends Observe{
 		Plateau = new JPanel();
 		Plateau .setLayout(new GridLayout(6,6));
 		fillPlataux();
+		Utils.debugln('plateau done');
 
 		Center.add(Plateau);
 
@@ -217,16 +218,17 @@ public class IHM extends Observe{
 
 	private void fillPlataux(){
 
-		for(int i =0;i<6;i++){
-			for(int j =0;j<6;j++){
+		HashMap<int, Tuile> tuilesListe = o.grille.getTuilesListe();
 
-				JButton bt = new JButton(j+":"+i);
-				bt.setName(j+":"+i);
-				bt.addActionListener(actionBoutonPlatau());
-				listButton.put(j+":"+i, bt);
+		for(int i =0;i<32;i++){
 
-				Plateau.add(bt); 
-			}
+			JButton bt = new JButton();
+			bt.setName(tuilesListe.get(i).getNom());
+			bt.addActionListener(actionBoutonPlatau());
+			listButton.put(i, bt);
+
+			Plateau.add(bt); 
+
 		}
 
 	}
@@ -235,7 +237,7 @@ public class IHM extends Observe{
 		return new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				Message m = new Message(TypeMessage.Clique_Tuille);
-				
+
 				JButton bt = (JButton) e.getSource();
 				m.setLocation(bt.getName());
 				notifierObservateur(m);
@@ -247,7 +249,7 @@ public class IHM extends Observe{
 	public void afichierConsole(String str){
 		console.setText(str);
 	}
-	
+
 	//Ajoute une message en plus des message aficher
 	public void addConsole(String str) {
 		console.setText(console.getText()+"\n"+str);
