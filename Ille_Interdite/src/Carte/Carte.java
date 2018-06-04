@@ -21,7 +21,7 @@ public abstract class Carte {
 	 */
 	public Carte(String nom) {
 		// TODO - implement Carte.Carte
-		throw new UnsupportedOperationException();
+		this.nom = nom;
 	}
 
 }

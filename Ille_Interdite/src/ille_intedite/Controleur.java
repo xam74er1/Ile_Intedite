@@ -29,6 +29,10 @@ public class Controleur implements Observateur{
 
 	public Controleur(IHM ihm) {
 		this.ihm = ihm;
+		carteTresorDeck = new ArrayList<CarteTresor>();
+		carteTresorsDefausse = new ArrayList<CarteTresor>();
+		inondationDeck = new ArrayList<CarteInondation>();
+		inondationDefausse = new ArrayList<CarteInondation>();
 		joueursList = new ArrayList<Aventurier>();
 		init();
 		miseAJourGrille();
@@ -103,10 +107,12 @@ public class Controleur implements Observateur{
 	
 //	Mise en place du deck Inondation //\\ actuellement sur plus de 24 Tuile
 	public void creeDeckInondation() {
-		for(int x = 0;x<6;x++){
-            for(int y =0;y<6;y++){
-			inondationDeck.add(new CarteInondation(x+":"+y, grille.getTuile(x, y)));
-            }
+		for(Tuile t :grille.getTuilesListe().values()){
+            	
+			inondationDeck.add(
+					new CarteInondation(t.getxT()+":"+t.getyT(),
+							t));
+           
 		}
 //		Liste A randomisé par la suite
 	}
@@ -146,6 +152,7 @@ public class Controleur implements Observateur{
 			joueursList.add(a);
 			i++;
 		}
+		
 
 		//Provisoire pour les test 
 
@@ -155,7 +162,7 @@ public class Controleur implements Observateur{
 		grille.getTuile(2,1).inonder();
 		grille.getTuile(2,2).inonder();
 		
-		
+		creeDeckInondation();
 		
 	}
 
