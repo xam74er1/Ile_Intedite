@@ -7,7 +7,7 @@ import javax.swing.JButton;
 public class Grille {
         IHM ihm;
 	private HashMap<int,Tuile> tuilesListe;
-	private String[] nomTuiles = ["000Le Pont des Abimes",//00x = tuile normale 02x = tuile spawn 3xx = tuile tresor
+	private String[24] nomTuiles = ["000Le Pont des Abimes",//00x = tuile normale 02x = tuile spawn 3xx = tuile tresor
 	                                    "021La Porte de Bronze",//021 = spawn ingé
 	                                    "311La Caverne des Ombres",//31x = tresor brasier
 	                                    "022La Porte de Fer",//022 = spawn plongeur

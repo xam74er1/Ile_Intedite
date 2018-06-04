@@ -7,12 +7,13 @@ import ille_intedite.NomTresor;
 import ille_intedite.Tuile;
 import java.awt.Color;
 import java.util.*;
-import utils.Utils;
 import utils.Utils.Pion;
 
 public class Aventurier {
 
-	 ArrayList<Classique> listeCarteJoueur;
+	ArrayList<Classique> listeCarteJoueur;
+	
+
 	Tuile tuile;
 	private int Num;
 	private String nom;
@@ -40,6 +41,13 @@ public class Aventurier {
 	 * @param yG
 	 */
 
+	public ArrayList<Classique> getListeCarteJoueur() {
+		return listeCarteJoueur;
+	}
+
+	public void setListeCarteJoueur(ArrayList<Classique> listeCarteJoueur) {
+		this.listeCarteJoueur = listeCarteJoueur;
+	}
 
 	/**
 	 *

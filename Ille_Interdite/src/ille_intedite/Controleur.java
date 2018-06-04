@@ -1,5 +1,6 @@
 package ille_intedite;
 import Carte.Carte;
+import Carte.Classique;
 import IHM.IHM;
 import ille_intedite.Aventurie.Aventurier;
 
@@ -122,19 +123,39 @@ public class Controleur implements Observateur{
 			for(int j=0;j<5;j++) {
 				switch (i) {
 				case 1:
-//					carteTresorDeck.add(new CarteTresor("carte"+i+":"+j, ))  A modifier
+					carteTresorDeck.add(new CarteTresor("carteTresorPierreSacree"+j,NomTresor.PierreSacree));
 					break;
 				case 2:
+					carteTresorDeck.add(new CarteTresor("carteTresorCaliceOnde"+j,NomTresor.CaliceOnde));
 					break;
 				case 3:
+					carteTresorDeck.add(new CarteTresor("carteTresorCristalArdent"+j,NomTresor.CristalArdent));
 					break;
 				case 4:
+					carteTresorDeck.add(new CarteTresor("carteTresorStatueZephir"+j,NomTresor.StatueZephir));
 					break;
 				}
 			}
 		}
-		
-			
+////////////Carte Helico+Sable+Montee des eau////////////
+//		for(int i = 0;i<3;i++) {
+//			Switch (i){
+//				case 1:
+//					carteTresorDeck.add(new CarteTresor("carteTresor"+i+":"+j,));
+//					carteTresorDeck.add(new CarteTresor("carteTresor"+i+":"+j,));
+//					carteTresorDeck.add(new CarteTresor("carteTresor"+i+":"+j,));
+//					break;
+//				case 2:
+//					carteTresorDeck.add(new CarteTresor("carteTresor"+i+":"+j,));
+//					carteTresorDeck.add(new CarteTresor("carteTresor"+i+":"+j,));
+//					carteTresorDeck.add(new CarteTresor("carteTresor"+i+":"+j,));
+//					break;
+//				case 3:
+//					carteTresorDeck.add(new CarteTresor("carteTresor"+i+":"+j,));
+//					carteTresorDeck.add(new CarteTresor("carteTresor"+i+":"+j,));
+//					break;
+//			}
+//		}
 	}
 	
 
@@ -218,18 +239,20 @@ public class Controleur implements Observateur{
 		// TODO - implement Controleur.actSpeciale
 		throw new UnsupportedOperationException();
 	}
-
-	private void piocherTresor() {
-		// TODO - implement Controleur.piocherTresor
-		throw new UnsupportedOperationException();
-	}
+////////////////////////////A FINIR////////////////////////////
+//	private void piocherTresor() {
+//		Classique cC = carteTresorDeck.get(1);
+//		getJoueurTour().getListeCarteJoueur().add(Cc);
+//		getJoueurTour().getListeCarteJoueur().add(Cc);
+//		
+//	}
 
 //	Mise en place de la pioche et deffause auto des carte innondation
 	private void piocherInondation() {
-		CarteInondation Cin = inondationDeck.get(1);
-		Cin.getTuile().inonder();
-		inondationDefausse.add(Cin);
-		inondationDeck.remove(Cin);
+		CarteInondation cIn = inondationDeck.get(1);
+		cIn.getTuile().inonder();
+		inondationDefausse.add(cIn);
+		inondationDeck.remove(cIn);
 	}
 
 
