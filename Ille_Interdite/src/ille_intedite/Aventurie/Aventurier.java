@@ -144,7 +144,7 @@ public class Aventurier {
 		}
 
 		this.tuile = t;
-
+		//System.out.println("t = "+t);
 		t.addAventurie(this);
 	}
 

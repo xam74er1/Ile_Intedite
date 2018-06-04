@@ -38,7 +38,7 @@ public class Controleur implements Observateur{
 		miseAJourGrille();
 		numTour =0;
 		NBR_JOUEUR = joueursList.size();
-		Utils.debugln("controleur start");
+		//Utils.debugln("controleur start");
 
 	}
 
@@ -66,7 +66,7 @@ public class Controleur implements Observateur{
 			ihm.afichierConsole("Cliquer sur une classe pour l'assecher");
 			//Fair deplce joeur 
 		}else if(msg.getMessage() == TypeMessage.Clique_Tuille && lastAction == TypeMessage.Clique_Deplace) {
-			Utils.debugln("Tuille = "+msg.getLocation());
+			//Utils.debugln("Tuille = "+msg.getLocation());
 
 			//Si le deplacement cest bien passe 
 			if(deplacer(msg.getLocation())) {
@@ -74,7 +74,8 @@ public class Controleur implements Observateur{
 				getJoueurTour().actionJouer();
 				//Si le deplacement cest mal passe 
 			}else {
-				ihm.addConsole("Vous ne pouvez pas vous deplace en  "+msg.getLocation());
+				Tuile to =getJoueurTour().getPosition();
+				ihm.addConsole("Vous ne pouvez pas vous deplace de"+to.getxT()+":"+to.getyT()+" a  "+msg.getLocation());
 				//Pour ne pas fair perdre une action 
 			
 			}
@@ -94,14 +95,14 @@ public class Controleur implements Observateur{
 		}else if(msg.getMessage() == TypeMessage.Clique_Fin_Tour){
 			finDeTour();
 
-			Utils.debugln("bouton fin de tour ");
+			//Utils.debugln("bouton fin de tour ");
 		}
 
 		lastAction = msg.getMessage();
 		
 
 		if(getJoueurTour().getNbAction()<1) {
-			System.out.println(" nb act = "+getJoueurTour().getNbAction());
+		//	System.out.println(" nb act = "+getJoueurTour().getNbAction());
 			finDeTour();
 		}
 
@@ -115,7 +116,7 @@ public class Controleur implements Observateur{
 		numTour++;
 		
 		ihm.addConsole("Jouer n°"+numTour+" as vous de jouer");
-		Utils.debugln("Fin de tour");
+	//	Utils.debugln("Fin de tour");
 		
 	}
 	
@@ -161,11 +162,15 @@ public class Controleur implements Observateur{
 
 	public void init() {
 		grille = new Grille(ihm);
-
+		
+		ihm.fillPlataux(grille);
 		//Metre les tuille de depare 
 		int i =0;
+		
+		
 		for(Pion p : Pion.values()){
 			Aventurier a = new Aventurier(i,"Bob Morane",p);
+			
 			a.setPosition(grille.getTuile(i, 0));
 			joueursList.add(a);
 			i++;
@@ -181,6 +186,7 @@ public class Controleur implements Observateur{
 		grille.getTuile(2,2).inonder();
 		
 		creeDeckInondation();
+		miseAJourGrille();
 		
 	}
 
@@ -201,8 +207,9 @@ public class Controleur implements Observateur{
 
 	private boolean deplacer(String str) {
 		Aventurier a = getJoueurTour();
+		
 		Tuile t = grille.getTuile(str);
-
+	
 		if(a.deplacer(t)) {
 			miseAJourGrille();
 			return true;
@@ -256,7 +263,7 @@ public class Controleur implements Observateur{
 	public Aventurier getJoueurTour() {
 		int i =  numTour%(NBR_JOUEUR-1);
 		
-		Utils.debugln(" jouer n = "+i);
+	//	Utils.debugln(" jouer n = "+i);
 		return joueursList.get(i);
 
 	}
@@ -319,7 +326,8 @@ public class Controleur implements Observateur{
 			}else{
 				ihm.getButonPlateau(me.getKey()).setForeground(Color.BLACK);
 			}
-
+			
+			
 		}
 
 

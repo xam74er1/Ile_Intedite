@@ -1,8 +1,11 @@
 package IHM;
 
+import ille_intedite.Grille;
 import ille_intedite.Message;
 import ille_intedite.Observe;
+import ille_intedite.Tuile;
 import ille_intedite.TypeMessage;
+import utils.Utils;
 
 import java.awt.EventQueue;
 
@@ -31,6 +34,8 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.util.HashMap;
+import java.util.Iterator;
+
 import javax.swing.JEditorPane;
 import javax.swing.JTextArea;
 
@@ -108,8 +113,8 @@ public class IHM extends Observe{
 		//Pannel de jeux 
 		Plateau = new JPanel();
 		Plateau .setLayout(new GridLayout(6,6));
-		fillPlataux();
-		Utils.debugln('plateau done');
+		//fillPlataux();
+		Utils.debugln("plateau done");
 
 		Center.add(Plateau);
 
@@ -216,21 +221,33 @@ public class IHM extends Observe{
 		frame.setVisible(true);
 	}
 
-	private void fillPlataux(){
+	public void fillPlataux(Grille g){
 
-		HashMap<int, Tuile> tuilesListe = o.grille.getTuilesListe();
+		HashMap<String, Tuile> tuilesListe = g.getTuilesListe();
+		
+		//int i = 0;
+		
+		Iterator<Tuile> it = g.getTuilesListe().values().iterator();
+		int k = 0;
+		String str;
+		for(int i =0;i<6;i++){
+			for(int j =0;j<6 ;j++){
 
-		for(int i =0;i<32;i++){
+				
+				str = g.getTuile(i, j).getNom();
+				
+				JButton bt = new JButton(str);
+				bt.setName(j+":"+i);
+				bt.addActionListener(actionBoutonPlatau());
+				listButton.put(j+":"+i, bt);
 
-			JButton bt = new JButton();
-			bt.setName(tuilesListe.get(i).getNom());
-			bt.addActionListener(actionBoutonPlatau());
-			listButton.put(i, bt);
-
-			Plateau.add(bt); 
-
+				Plateau.add(bt); 
+			}
 		}
+		
+		Plateau.revalidate();
 
+		
 	}
 
 	private ActionListener actionBoutonPlatau(){
