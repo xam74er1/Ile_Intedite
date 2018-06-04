@@ -4,7 +4,6 @@ import Carte.Carte;
 import Carte.Classique;
 import ille_intedite.CarteTresor;
 import ille_intedite.NomTresor;
-import ille_intedite.Tresor;
 import ille_intedite.Tuile;
 import java.awt.Color;
 import java.util.*;
@@ -120,11 +119,6 @@ public class Aventurier {
 		throw new UnsupportedOperationException();
 	}
 
-
-	public void addDefausePerso(Tresor c) {
-		// TODO - implement Aventurier.addDefausePerso
-		throw new UnsupportedOperationException();
-	}
 
 	/**
 	 *
