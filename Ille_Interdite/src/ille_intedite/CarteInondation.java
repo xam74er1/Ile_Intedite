@@ -28,5 +28,4 @@ public class CarteInondation extends Carte {
 		this.tuile = tuile;
 	}
 
-    //qsdqsdqsedqsdqsd
 }
