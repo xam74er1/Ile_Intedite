@@ -2,8 +2,8 @@ package ille_intedite.Aventurie;
 
 import Carte.Carte;
 import Carte.Classique;
-import ille_intedite.CarteTresor;
-import ille_intedite.NomTresor;
+import Carte.CarteTresor;
+import Carte.NomTresor;
 import ille_intedite.Tuile;
 import java.awt.Color;
 import java.util.*;

@@ -1,6 +1,7 @@
 package ille_intedite;
 import Carte.Carte;
 import Carte.Classique;
+import Carte.CarteInondation;
 import IHM.IHM;
 import ille_intedite.Aventurie.Aventurier;
 
@@ -336,7 +337,7 @@ public class Controleur implements Observateur{
 			}
 
 			if(me.getValue().getStatue()==1){
-				ihm.getButonPlateau(me.getKey()).setBackground(Color.BLUE);
+				ihm.getButonPlateau(me.getKey()).setBackground(Color.CYAN);
 			}else if(me.getValue().getStatue()>1){
 				ihm.getButonPlateau(me.getKey()).setBackground(Color.BLUE);
 			}else{
