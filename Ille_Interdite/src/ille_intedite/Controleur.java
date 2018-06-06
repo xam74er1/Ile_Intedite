@@ -264,20 +264,20 @@ public class Controleur implements Observateur{
 		// TODO - implement Controleur.actSpeciale
 		throw new UnsupportedOperationException();
 	}
-////////////////////////////A FINIR////////////////////////////
-//	private void piocherTresor() {
-//		Classique cC = carteTresorDeck.get(1);
-//		getJoueurTour().getListeCarteJoueur().add(Cc);
-//		getJoueurTour().getListeCarteJoueur().add(Cc);
-//		
-//	}
+
+	private void piocherTresor() {
+		for(int i =0;i<2;i++) {
+			Classique cC = carteTresorDeck.get(1);
+			getJoueurTour().getListeCarteJoueur().add(cC);
+		}
+		
+	}
 
 //	Mise en place de la pioche et deffause auto des carte innondation
 	private void piocherInondation() {
 		if(inondationDeck.size()!=1) {
 			CarteInondation cInP = inondationDeck.get(1);
 			cInP.getTuile().inonder();
-			System.out.println("Salut");
 			inondationDefausse.add(cInP);
 			inondationDeck.remove(cInP);
 		}
@@ -290,6 +290,7 @@ public class Controleur implements Observateur{
 			Collections.shuffle(inondationDeck);
 			piocherInondation();		
 		}
+		miseAJourGrille();
 	}
 
 
