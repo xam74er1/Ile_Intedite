@@ -100,7 +100,7 @@ public class Aventurier {
 	 * @param t1.
 	 * @param t2
 	 */
-	public static boolean deplacementPossible(Tuile from, Tuile to) {
+	public boolean deplacementPossible(Tuile from, Tuile to) {
 		System.out.println("to = "+to+" from = "+from);
 		int x = Math.abs(from.getxT() - to.getxT());
 		int y = Math.abs(from.getyT() - to.getyT());
