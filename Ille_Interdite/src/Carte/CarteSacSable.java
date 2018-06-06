@@ -1,10 +1,10 @@
-package ille_intedite;
+package Carte;
 
 import Carte.Classique;
 
-public class SacSable extends Classique {
+public class CarteSacSable extends Classique {
 
-    public SacSable(String nom) {
+    public CarteSacSable(String nom) {
         super(nom);
     }
 }

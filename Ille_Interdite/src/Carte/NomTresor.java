@@ -1,4 +1,4 @@
-package ille_intedite;
+package Carte;
 public enum NomTresor {
 
 	PierreSacree,

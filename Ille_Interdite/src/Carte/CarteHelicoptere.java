@@ -1,10 +1,10 @@
-package ille_intedite;
+package Carte;
 
 import Carte.Classique;
 
-public class Helicoptere extends Classique {
+public class CarteHelicoptere extends Classique {
 
-    public Helicoptere(String nom) {
+    public CarteHelicoptere(String nom) {
         super(nom);
     }
 }

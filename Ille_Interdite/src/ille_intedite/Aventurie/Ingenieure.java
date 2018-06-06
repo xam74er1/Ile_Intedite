@@ -1,6 +1,6 @@
 package ille_intedite.Aventurie;
 
-import ille_intedite.NomTresor;
+import Carte.NomTresor;
 import utils.Utils;
 
 public class Ingenieure extends Aventurier {

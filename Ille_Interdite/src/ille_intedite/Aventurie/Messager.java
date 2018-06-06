@@ -1,7 +1,7 @@
 package ille_intedite.Aventurie;
 
 import ille_intedite.Aventurie.Aventurier;
-import ille_intedite.NomTresor;
+import Carte.NomTresor;
 import utils.Utils;
 
 public class Messager extends Aventurier {
