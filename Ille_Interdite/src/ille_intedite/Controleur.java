@@ -116,6 +116,7 @@ public class Controleur implements Observateur{
 		getJoueurTour().finTour();
 		piocherInondation();
 		numTour++;
+		numTour%=joueursList.size();
 		
 		ihm.addConsole("Jouer n°"+numTour+" as vous de jouer");
 		ihm.miseAJourPlayer(numTour, getJoueurTour().getColor());
@@ -175,7 +176,7 @@ public class Controleur implements Observateur{
 		
 		grille = new Grille(ihm,joueursList);
 		
-		ihm.fillPlataux(grille);
+		ihm.fillPlataux2(grille);
 		//Metre les tuille de depare 
 
 		//Provisoire pour les test 
@@ -336,14 +337,18 @@ public class Controleur implements Observateur{
 
 			}
 
-			if(me.getValue().getStatue()==1){
-				ihm.getButonPlateau(me.getKey()).setBackground(Color.BLUE);
-			}else if(me.getValue().getStatue()>1){
-				ihm.getButonPlateau(me.getKey()).setBackground(Color.BLUE);
-			}else{
-				ihm.getButonPlateau(me.getKey()).setForeground(Color.BLACK);
-			}
+
+		
 			
+			if(me.getValue().getStatue()==1){
+			ihm.getButonPlateau(me.getKey()).setFond(Color.cyan);
+		}else if(me.getValue().getStatue()>1){
+			ihm.getButonPlateau(me.getKey()).setFond(Color.BLUE);
+		}else if(me.getValue().getStatue()==0){
+			ihm.getButonPlateau(me.getKey()).setFond(new Color(204, 102, 0));
+		}
+			
+			ihm.updateGrille();
 			
 		}
 
