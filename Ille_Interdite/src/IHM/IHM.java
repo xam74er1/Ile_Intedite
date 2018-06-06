@@ -40,10 +40,11 @@ import javax.swing.JEditorPane;
 import javax.swing.JTextArea;
 
 public class IHM extends Observe{
-
+//Com de debug
 	private JFrame frame;
 	private JTextArea console;
 	private JPanel Plateau ;
+	private JLabel lblJoeurN;
 
 
 	HashMap<String,JButton> listButton = new HashMap();
@@ -103,7 +104,7 @@ public class IHM extends Observe{
 		JPanel up = new JPanel();
 		aplication.add(up, BorderLayout.NORTH);
 
-		JLabel lblJoeurN = new JLabel("Joeur n \u00B0 X");
+		 lblJoeurN = new JLabel("Joeur n \u00B0 X");
 		up.add(lblJoeurN);
 
 		JPanel Center = new JPanel();
@@ -284,4 +285,9 @@ public class IHM extends Observe{
 		return listButton.get(str);
 	}
 
+	
+	public void miseAJourPlayer(int x ,Color c) {
+		lblJoeurN.setForeground(c);
+		 lblJoeurN.setText("Joeur n° "+x);
+	}
 }
