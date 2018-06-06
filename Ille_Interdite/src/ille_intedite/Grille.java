@@ -9,36 +9,32 @@ import javax.swing.JButton;
 
 public class Grille {
         IHM ihm;
-<<<<<<< HEAD
-	private HashMap<int,Tuile> tuilesListe;
-	private String[24] nomTuiles = ["000Le Pont des Abimes",//00x = tuile normale 02x = tuile spawn 3xx = tuile tresor
-=======
+
 	private HashMap<String, Tuile> tuilesListe;
 	private String[] nomTuiles = {"000Le Pont des Abimes",//00x = tuile normale 02x = tuile spawn 3xx = tuile tresor
->>>>>>> branch 'master' of https://github.com/xam74er1/Ile_Intedite.git
-	                                    "021La Porte de Bronze",//021 = spawn ingé
-	                                    "311La Caverne des Ombres",//31x = tresor brasier
-	                                    "022La Porte de Fer",//022 = spawn plongeur
-	                                    "023La Porte d’Or",//023 = spawn navigateur
-	                                    "001Les Falaises de l’Oubli",
-	                                    "321Le Palais de Corail",//32x = tresor calice
-	                                    "024La Porte d’Argent",//024 = spawn messager
-	                                    "002Les Dunes de l’Illusion",
-	                                    "025Heliport",//025 = spawn pilote
-	                                    "026La Porte de Cuivre",//026 = spawn explo
-	                                    "331Le Jardin des Hurlements",//33x = tresor statue
-	                                    "003La Foret Pourpre",
-	                                    "004Le Lagon Perdu",
-	                                    "005Le Marais Brumeux",
-	                                    "006Observatoire",
-	                                    "007Le Rocher Fantome",
-	                                    "312La Caverne du Brasier",
-	                                    "341Le Temple du Soleil",//34x = tresor pierre
-	                                    "342Le Temple de La Lune",
-	                                    "322Le Palais des Marees",
-	                                    "008Le Val du Crepuscule",
-	                                    "009La Tour du Guet",
-	                                    "332Le Jardin des Murmures"};
+                                   "021La Porte de Bronze",//021 = spawn ingé
+                                   "311La Caverne des Ombres",//31x = tresor brasier
+                                   "022La Porte de Fer",//022 = spawn plongeur
+                                   "023La Porte d’Or",//023 = spawn navigateur
+                                   "001Les Falaises de l’Oubli",
+                                   "321Le Palais de Corail",//32x = tresor calice
+                                   "024La Porte d’Argent",//024 = spawn messager
+                                   "002Les Dunes de l’Illusion",
+                                   "025Heliport",//025 = spawn pilote
+                                   "026La Porte de Cuivre",//026 = spawn explo
+                                   "331Le Jardin des Hurlements",//33x = tresor statue
+                                   "003La Foret Pourpre",
+                                   "004Le Lagon Perdu",
+                                   "005Le Marais Brumeux",
+                                   "006Observatoire",
+                                   "007Le Rocher Fantome",
+                                   "312La Caverne du Brasier",
+                                   "341Le Temple du Soleil",//34x = tresor pierre
+                                   "342Le Temple de La Lune",
+                                   "322Le Palais des Marees",
+                                   "008Le Val du Crepuscule",
+                                   "009La Tour du Guet",
+                                   "332Le Jardin des Murmures"};
 	private int tailleNom=nomTuiles.length;
     private ArrayList<String> listNomTuile;   
      
