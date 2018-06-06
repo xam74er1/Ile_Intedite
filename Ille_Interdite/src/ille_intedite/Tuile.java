@@ -110,7 +110,7 @@ public class Tuile {
 
     @Override
     public String toString() {
-        return "Tuile{" + "num=" + num + ", statut=" + statut + ", type=" + type + ", xT=" + xT + ", yT=" + yT + '}';
+        return "Tuile{" + "num=" + num + ", statut=" + statut + ", type=" + nom + ", xT=" + xT + ", yT=" + yT + '}';
     }
     
     public String getNom() {

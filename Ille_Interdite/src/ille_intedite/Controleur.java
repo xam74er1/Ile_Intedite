@@ -39,7 +39,7 @@ public class Controleur implements Observateur{
 		miseAJourGrille();
 		numTour =0;
 		NBR_JOUEUR = joueursList.size();
-		Utils.debugln("controleur start");
+		//Utils.debugln("controleur start");
 
 	}
 
@@ -49,24 +49,36 @@ public class Controleur implements Observateur{
 	@Override
 	public void traiterMessage(Message msg) {
 
+		
+		/*
+		 * Marche as suire pour une action jouer par tour : 
+		 * Si laction est valide et fini utiliser : getJoueurTour().actionJouer(); 
+		 * Cela permet de savoir le nombre daction jouer en un tour par une perssone 
+		 */
+
+		//Mesage pour depalcer 
 		if(msg.getMessage() == TypeMessage.Clique_Deplace) {
 			ihm.afichierConsole("Cliquer sur une classe pour vous deplace");
 
 
-			//Fair deplce joeur 
+		//Message pour assehcer
 		}else if(msg.getMessage() == TypeMessage.Clique_Asseche){
 
 			ihm.afichierConsole("Cliquer sur une classe pour l'assecher");
-
+			//Fair deplce joeur 
 		}else if(msg.getMessage() == TypeMessage.Clique_Tuille && lastAction == TypeMessage.Clique_Deplace) {
-			Utils.debugln("Tuille = "+msg.getLocation());
+			//Utils.debugln("Tuille = "+msg.getLocation());
 
+			//Si le deplacement cest bien passe 
 			if(deplacer(msg.getLocation())) {
 				ihm.afichierConsole("Deplacement en "+msg.getLocation());
+				getJoueurTour().actionJouer();
+				//Si le deplacement cest mal passe 
 			}else {
-				ihm.addConsole("Vous ne pouvez pas vous deplace en  "+msg.getLocation());
+				Tuile to =getJoueurTour().getPosition();
+				ihm.addConsole("Vous ne pouvez pas vous deplace de"+to.getxT()+":"+to.getyT()+" a  "+msg.getLocation());
 				//Pour ne pas fair perdre une action 
-				getJoueurTour().actionAnuller();
+			
 			}
 
 
@@ -74,21 +86,24 @@ public class Controleur implements Observateur{
 				
 			if(assecher(msg.getLocation())){
 				ihm.afichierConsole("Casse assache en "+msg.getLocation());
+				getJoueurTour().actionJouer();
 			}else{
 				ihm.addConsole("Vous ne pouvez pas asseche en  "+msg.getLocation());
 				//Pour ne pas fair perdre une action 
-				getJoueurTour().actionAnuller();
+				
 			}
 
 		}else if(msg.getMessage() == TypeMessage.Clique_Fin_Tour){
 			finDeTour();
-			Utils.debugln("player n ="+getJoueurTour().toString());
+
+			//Utils.debugln("bouton fin de tour ");
 		}
 
 		lastAction = msg.getMessage();
-		getJoueurTour().actionJouer();
+		
 
 		if(getJoueurTour().getNbAction()<1) {
+		//	System.out.println(" nb act = "+getJoueurTour().getNbAction());
 			finDeTour();
 		}
 
@@ -96,9 +111,13 @@ public class Controleur implements Observateur{
 
 	private void finDeTour() {
 		// TODO Auto-generated method stub
-		piocherInondation();
+		ihm.afichierConsole("Fin du tour du joeur n°"+numTour);
+		
+		getJoueurTour().finTour();
 		numTour++;
-		Utils.debugln("PAS ENCORE SUPORTE");
+		
+		ihm.addConsole("Jouer n°"+numTour+" as vous de jouer");
+	//	Utils.debugln("Fin de tour");
 		
 	}
 	
@@ -115,7 +134,7 @@ public class Controleur implements Observateur{
 							t));
            
 		}
-//		Liste A randomis� par la suite
+//		Liste A randomisé par la suite
 	}
 	
 	public void creeDeckClassique() {
@@ -164,11 +183,15 @@ public class Controleur implements Observateur{
 
 	public void init() {
 		grille = new Grille(ihm);
-
+		
+		ihm.fillPlataux(grille);
 		//Metre les tuille de depare 
 		int i =0;
+		
+		
 		for(Pion p : Pion.values()){
 			Aventurier a = new Aventurier(i,"Bob Morane",p);
+			
 			a.setPosition(grille.getTuile(i, 0));
 			joueursList.add(a);
 			i++;
@@ -184,6 +207,7 @@ public class Controleur implements Observateur{
 		grille.getTuile(2,2).inonder();
 		
 		creeDeckInondation();
+		miseAJourGrille();
 		
 	}
 
@@ -198,14 +222,15 @@ public class Controleur implements Observateur{
 	}
 
 	private void conditionDefaite() {
-		// TODO - implement Controleur.conditionDéfaite
+		// TODO - implement Controleur.conditionDÃ©faite
 		throw new UnsupportedOperationException();
 	}
 
 	private boolean deplacer(String str) {
 		Aventurier a = getJoueurTour();
+		
 		Tuile t = grille.getTuile(str);
-
+	
 		if(a.deplacer(t)) {
 			miseAJourGrille();
 			return true;
@@ -261,7 +286,7 @@ public class Controleur implements Observateur{
 	public Aventurier getJoueurTour() {
 		int i =  numTour%(NBR_JOUEUR-1);
 		
-		Utils.debugln(" jouer n = "+i);
+	//	Utils.debugln(" jouer n = "+i);
 		return joueursList.get(i);
 
 	}
@@ -324,7 +349,8 @@ public class Controleur implements Observateur{
 			}else{
 				ihm.getButonPlateau(me.getKey()).setForeground(Color.BLACK);
 			}
-
+			
+			
 		}
 
 

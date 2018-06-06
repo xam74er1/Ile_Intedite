@@ -1,13 +1,21 @@
 package ille_intedite;
 import IHM.IHM;
 import ille_intedite.Aventurie.Aventurier;
+import utils.Parameters;
+
+import java.lang.reflect.Parameter;
 import java.util.*;
 import javax.swing.JButton;
 
 public class Grille {
         IHM ihm;
+<<<<<<< HEAD
 	private HashMap<int,Tuile> tuilesListe;
 	private String[24] nomTuiles = ["000Le Pont des Abimes",//00x = tuile normale 02x = tuile spawn 3xx = tuile tresor
+=======
+	private HashMap<String, Tuile> tuilesListe;
+	private String[] nomTuiles = {"000Le Pont des Abimes",//00x = tuile normale 02x = tuile spawn 3xx = tuile tresor
+>>>>>>> branch 'master' of https://github.com/xam74er1/Ile_Intedite.git
 	                                    "021La Porte de Bronze",//021 = spawn ingé
 	                                    "311La Caverne des Ombres",//31x = tresor brasier
 	                                    "022La Porte de Fer",//022 = spawn plongeur
@@ -30,31 +38,55 @@ public class Grille {
 	                                    "322Le Palais des Marees",
 	                                    "008Le Val du Crepuscule",
 	                                    "009La Tour du Guet",
-	                                    "332Le Jardin des Murmures}"];
-	private int tailleNom=nomTuiles.lenght();
-        
+	                                    "332Le Jardin des Murmures"};
+	private int tailleNom=nomTuiles.length;
+    private ArrayList<String> listNomTuile;   
      
         
         //IHM pour metre en commun les bouton et les tuille 
     public Grille(IHM ihm) {
         this.tuilesListe = new HashMap();
         this.ihm = ihm;
+        
+        //Sa aurais pus marche mais sa la melange 
+        listNomTuile = new ArrayList<String>(Arrays.asList(nomTuiles));
+
+        if(Parameters.ALEAS) {
+        	 Collections.shuffle(listNomTuile);
+        }
+
+        
         iniGrille();
         //test
     }
 	
 	public void iniGrille(){
-		for (int i = 0;i<32;i++) {
-			int x = i%6;
-			int y = i/6;
+		
+		int i =0;
+	
+		for (int y = 0;y<6;y++) {
+			for(int x = 0;x<6;x++) {
+			
 			
 			if (i<2 || (i>3 && i<7) || i==11 || i==24 || (i>28 && i<32) || i>33) {
-				tuilesListe.put(i, new Tuile(null,null,x,y));
+				tuilesListe.put(x+":"+y, new Tuile(-1,null,x,y));
 			}else {
-				num=Math.random()*tailleNom;
-				Tuile t = new Tuile(Integer.parseInt(nomTuiles[num].substring(0,3)),nomTuiles[num].substring(3),x,y);
-				nomTuiles[num]=nomTuiles[tailleNom-1];
+			
+				int num = tailleNom-1;
+				
+				//Je tente un truc avec une arrayList 
+				Tuile t = new Tuile(Integer.parseInt(listNomTuile.get(num).substring(0,3)),listNomTuile.get(num).substring(3),x,y);
+
+				
+				
+//				int num=(int) (Math.random()*tailleNom);
+//				Tuile t = new Tuile(Integer.parseInt(nomTuiles[num].substring(0,3)),nomTuiles[num].substring(3),x,y);
+//				nomTuiles[num]=nomTuiles[tailleNom-1];
+				tuilesListe.put(x+":"+y, t);
+				
 				tailleNom--;
+			}
+			i++;
 			}
 		}
 	}
