@@ -114,7 +114,7 @@ public class IHM extends Observe{
 		Plateau = new JPanel();
 		Plateau .setLayout(new GridLayout(6,6));
 		//fillPlataux();
-		Utils.debugln("plateau done");
+		//Utils.debugln("plateau done");
 
 		Center.add(Plateau);
 
@@ -233,15 +233,21 @@ public class IHM extends Observe{
 		for(int y =0;y<6;y++){
 			for(int x =0;x<6 ;x++){
 
+				Tuile tile = g.getTuile(x, y);
+				//str = g.getTuile(x, y).getNom();
 				
-				str = g.getTuile(x, y).getNom();
-				
-				JButton bt = new JButton(str);
+				JButton bt = new JButton(tile.getNom());
+				if (tile.getNum()==-1) {
+					bt.setBackground(Color.BLACK);
+					Utils.debugln("Works");
+				}
 				bt.setName(x+":"+y);
 				bt.addActionListener(actionBoutonPlatau());
+				
 				listButton.put(x+":"+y, bt);
-
+				
 				Plateau.add(bt); 
+				
 			}
 		}
 		

@@ -36,7 +36,6 @@ public class Controleur implements Observateur{
 		inondationDefausse = new ArrayList<CarteInondation>();
 		joueursList = new ArrayList<Aventurier>();
 		init();
-		miseAJourGrille();
 		numTour =0;
 		NBR_JOUEUR = joueursList.size();
 		//Utils.debugln("controleur start");
@@ -182,9 +181,6 @@ public class Controleur implements Observateur{
 		//Je met sur 0 0 pour les test 
 		
 		
-//		grille.getTuile(2,1).inonder();
-//		grille.getTuile(2,2).inonder();
-		
 		creeDeckInondation();
 		miseAJourGrille();
 		
@@ -326,7 +322,9 @@ public class Controleur implements Observateur{
 		while(it.hasNext()) {
 			Entry<String, Tuile> me = it.next();
 
+			
 			//J'effasse laventurie 
+			
 			ihm.getButonPlateau(me.getKey()).setBackground(null);
 			//Puis je redessine 
 			for(Aventurier a : me.getValue().getAventurie()) {
@@ -334,13 +332,17 @@ public class Controleur implements Observateur{
 				ihm.getButonPlateau(me.getKey()).setBackground(a.getColor());;
 
 			}
+			
+			if (me.getValue().getNum()==-1) {
+				ihm.getButonPlateau(me.getKey()).setBackground(Color.BLACK);
+			}
 
 			if(me.getValue().getStatue()==1){
-				ihm.getButonPlateau(me.getKey()).setBackground(Color.BLUE);
+				ihm.getButonPlateau(me.getKey()).setBackground(Color.CYAN);
 			}else if(me.getValue().getStatue()>1){
 				ihm.getButonPlateau(me.getKey()).setBackground(Color.BLUE);
 			}else{
-				ihm.getButonPlateau(me.getKey()).setForeground(Color.BLACK);
+				ihm.getButonPlateau(me.getKey()).setForeground(null);
 			}
 			
 			
