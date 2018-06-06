@@ -112,7 +112,7 @@ public class Controleur implements Observateur{
 	private void finDeTour() {
 		// TODO Auto-generated method stub
 		ihm.afichierConsole("Fin du tour du joeur n°"+numTour);
-		piocherInondation();
+		
 		getJoueurTour().finTour();
 		numTour++;
 		
@@ -129,11 +129,12 @@ public class Controleur implements Observateur{
 	public void creeDeckInondation() {
 		for(Tuile t :grille.getTuilesListe().values()){
             	
-			inondationDeck.add(new CarteInondation(t.getxT()+":"+t.getyT(),t));
+			inondationDeck.add(
+					new CarteInondation(t.getxT()+":"+t.getyT(),
+							t));
            
 		}
 //		Liste A randomisé par la suite
-		Collections.shuffle(inondationDeck);
 	}
 	
 	public void creeDeckClassique() {
@@ -141,40 +142,19 @@ public class Controleur implements Observateur{
 			for(int j=0;j<5;j++) {
 				switch (i) {
 				case 1:
-					carteTresorDeck.add(new CarteTresor("carteTresorPierreSacree"+j,NomTresor.PierreSacree));
+//					carteTresorDeck.add(new CarteTresor("carte"+i+":"+j, ))  A modifier
 					break;
 				case 2:
-					carteTresorDeck.add(new CarteTresor("carteTresorCaliceOnde"+j,NomTresor.CaliceOnde));
 					break;
 				case 3:
-					carteTresorDeck.add(new CarteTresor("carteTresorCristalArdent"+j,NomTresor.CristalArdent));
 					break;
 				case 4:
-					carteTresorDeck.add(new CarteTresor("carteTresorStatueZephir"+j,NomTresor.StatueZephir));
 					break;
 				}
 			}
 		}
-////////////Carte Helico+Sable+Montee des eau////////////
-//		for(int i = 0;i<3;i++) {
-//			Switch (i){
-//				case 1:
-//					carteTresorDeck.add(new CarteTresor("carteTresor"+i+":"+j,));
-//					carteTresorDeck.add(new CarteTresor("carteTresor"+i+":"+j,));
-//					carteTresorDeck.add(new CarteTresor("carteTresor"+i+":"+j,));
-//					break;
-//				case 2:
-//					carteTresorDeck.add(new CarteTresor("carteTresor"+i+":"+j,));
-//					carteTresorDeck.add(new CarteTresor("carteTresor"+i+":"+j,));
-//					carteTresorDeck.add(new CarteTresor("carteTresor"+i+":"+j,));
-//					break;
-//				case 3:
-//					carteTresorDeck.add(new CarteTresor("carteTresor"+i+":"+j,));
-//					carteTresorDeck.add(new CarteTresor("carteTresor"+i+":"+j,));
-//					break;
-//			}
-//		}
-//		Liste A randomisé par la suite
+		
+			
 	}
 	
 
@@ -182,29 +162,28 @@ public class Controleur implements Observateur{
 
 
 	public void init() {
-		grille = new Grille(ihm);
-		
-		ihm.fillPlataux(grille);
-		//Metre les tuille de depare 
-		int i =0;
-		
+		int i =0;//creer les aventuriers
 		
 		for(Pion p : Pion.values()){
 			Aventurier a = new Aventurier(i,"Bob Morane",p);
 			
-			a.setPosition(grille.getTuile(i, 0));
+			//a.setPosition(grille.getTuile(i, 0));
 			joueursList.add(a);
 			i++;
 		}
 		
+		grille = new Grille(ihm,joueursList);
+		
+		ihm.fillPlataux(grille);
+		//Metre les tuille de depare 
 
 		//Provisoire pour les test 
 
 		//Je met sur 0 0 pour les test 
 		
 		
-		grille.getTuile(2,1).inonder();
-		grille.getTuile(2,2).inonder();
+		//grille.getTuile(2,1).inonder();
+		//grille.getTuile(2,2).inonder();
 		
 		creeDeckInondation();
 		miseAJourGrille();
@@ -264,32 +243,18 @@ public class Controleur implements Observateur{
 		// TODO - implement Controleur.actSpeciale
 		throw new UnsupportedOperationException();
 	}
-////////////////////////////A FINIR////////////////////////////
-//	private void piocherTresor() {
-//		Classique cC = carteTresorDeck.get(1);
-//		getJoueurTour().getListeCarteJoueur().add(Cc);
-//		getJoueurTour().getListeCarteJoueur().add(Cc);
-//		
-//	}
+
+	private void piocherTresor() {
+		// TODO - implement Controleur.piocherTresor
+		throw new UnsupportedOperationException();
+	}
 
 //	Mise en place de la pioche et deffause auto des carte innondation
 	private void piocherInondation() {
-		if(inondationDeck.size()!=1) {
-			CarteInondation cInP = inondationDeck.get(1);
-			cInP.getTuile().inonder();
-			System.out.println("Salut");
-			inondationDefausse.add(cInP);
-			inondationDeck.remove(cInP);
-		}
-		else {
-			for(int i=0;i<inondationDefausse.size();i++) {
-				CarteInondation cInD = inondationDefausse.get(1);
-				inondationDeck.add(cInD);
-				inondationDefausse.remove(cInD);
-			}
-			Collections.shuffle(inondationDeck);
-			piocherInondation();		
-		}
+		CarteInondation Cin = inondationDeck.get(1);
+		Cin.getTuile().inonder();
+		inondationDefausse.add(Cin);
+		inondationDeck.remove(Cin);
 	}
 
 
