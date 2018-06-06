@@ -15,8 +15,8 @@ public class Controleur implements Observateur{
 
 	Curseur curseur;
 	Grille grille;
-	ArrayList<CarteTresor> carteTresorDeck;
-	ArrayList<CarteTresor> carteTresorsDefausse;
+	ArrayList<Classique> carteTresorDeck;
+	ArrayList<Classique> carteTresorsDefausse;
 	ArrayList<CarteInondation> inondationDeck;
 	ArrayList<CarteInondation> inondationDefausse;
 	ArrayList<Aventurier> joueursList;
@@ -30,8 +30,8 @@ public class Controleur implements Observateur{
 
 	public Controleur(IHM ihm) {
 		this.ihm = ihm;
-		carteTresorDeck = new ArrayList<CarteTresor>();
-		carteTresorsDefausse = new ArrayList<CarteTresor>();
+		carteTresorDeck = new ArrayList<Classique>();
+		carteTresorsDefausse = new ArrayList<Classique>();
 		inondationDeck = new ArrayList<CarteInondation>();
 		inondationDefausse = new ArrayList<CarteInondation>();
 		joueursList = new ArrayList<Aventurier>();
@@ -277,6 +277,7 @@ public class Controleur implements Observateur{
 		if(inondationDeck.size()!=1) {
 			CarteInondation cInP = inondationDeck.get(1);
 			cInP.getTuile().inonder();
+			System.out.println("Salut");
 			inondationDefausse.add(cInP);
 			inondationDeck.remove(cInP);
 		}
@@ -287,10 +288,8 @@ public class Controleur implements Observateur{
 				inondationDefausse.remove(cInD);
 			}
 			Collections.shuffle(inondationDeck);
-			piocherInondation();
-			
+			piocherInondation();		
 		}
-
 	}
 
 
