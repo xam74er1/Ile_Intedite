@@ -33,7 +33,11 @@ public class Tuile {
     
     
 
-    public void inonder() {
+    public int getNum() {
+		return num;
+	}
+
+	public void inonder() {
         // TODO - implement Tuile.inonder
        
         statut++;

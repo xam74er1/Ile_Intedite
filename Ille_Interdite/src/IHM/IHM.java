@@ -230,16 +230,16 @@ public class IHM extends Observe{
 		Iterator<Tuile> it = g.getTuilesListe().values().iterator();
 		int k = 0;
 		String str;
-		for(int i =0;i<6;i++){
-			for(int j =0;j<6 ;j++){
+		for(int y =0;y<6;y++){
+			for(int x =0;x<6 ;x++){
 
 				
-				str = g.getTuile(i, j).getNom();
+				str = g.getTuile(x, y).getNom();
 				
 				JButton bt = new JButton(str);
-				bt.setName(j+":"+i);
+				bt.setName(x+":"+y);
 				bt.addActionListener(actionBoutonPlatau());
-				listButton.put(j+":"+i, bt);
+				listButton.put(x+":"+y, bt);
 
 				Plateau.add(bt); 
 			}
