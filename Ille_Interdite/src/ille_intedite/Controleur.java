@@ -224,6 +224,11 @@ public class Controleur implements Observateur{
 		// TODO - implement Controleur.assecher
 		Aventurier a = getJoueurTour();
 		Tuile t = grille.getTuile(str);
+		if (a instanceof Aventurier) {
+			if (a.assecher(t)) {
+				miseAJourGrille();
+			}
+		}
 		
 		if(a.assecher(t)){
 			miseAJourGrille();

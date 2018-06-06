@@ -10,17 +10,6 @@ public class Aviateur extends Aventurier {
         super(Num, nom,pion);
     }
     
-    @Override
-    public boolean deplacer(Tuile t) {
-		// TODO - implement Aventurier.deplacer
-		if (deplacementPossible(getTuile(), t)) {
-			setPosition(t);
-			return true;
-		}else {
-			return false;
-		}
-
-	}
     
     @Override
     public boolean deplacementPossible(Tuile from, Tuile to) {

@@ -256,6 +256,28 @@ public class Aventurier {
 		return "Aventurier [Num=" + Num + ", nom=" + nom + ", getType=" + getType + ", pion=" + pion + ", nbAction="
 				+ nbAction + "]";
 	}
+	
+	protected ArrayList<Tuile> getAdjacent(Tuile from, ArrayList<Tuile> listTuile){
+		ArrayList<Tuile> adjacent = new ArrayList<Tuile>();
+		int xF=from.getxT();
+		int yF=from.getyT();
+		
+		Iterator<Tuile> it = listTuile.iterator();
+		
+		while(it.hasNext()) {
+			Tuile to = it.next();
+			
+			int x = Math.abs(xF-to.getxT());
+			int y = Math.abs(yF-to.getyT());
+			
+			if ((x==0 && y==1 || x==1 && y==0) && to.getStatue()!=2 && to.getNum()!=-1) {
+				adjacent.add(to);
+			}
+			
+		}
+		
+		return adjacent;
+	}
 
 
 
