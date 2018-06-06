@@ -1,6 +1,7 @@
-package ille_intedite;
+package Carte;
 
 import Carte.Classique;
+import Carte.NomTresor;
 
 public class CarteTresor extends Classique {
 
