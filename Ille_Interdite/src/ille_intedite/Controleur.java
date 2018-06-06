@@ -1,6 +1,7 @@
 package ille_intedite;
 import Carte.Carte;
 import Carte.Classique;
+import Carte.CarteInondation;
 import IHM.IHM;
 import ille_intedite.Aventurie.Aventurier;
 
@@ -12,7 +13,7 @@ import utils.Utils;
 import utils.Utils.Pion;
 
 public class Controleur implements Observateur{
-
+//Com de referencement 1
 	Curseur curseur;
 	Grille grille;
 	ArrayList<Classique> carteTresorDeck;
@@ -36,7 +37,6 @@ public class Controleur implements Observateur{
 		inondationDefausse = new ArrayList<CarteInondation>();
 		joueursList = new ArrayList<Aventurier>();
 		init();
-		miseAJourGrille();
 		numTour =0;
 		NBR_JOUEUR = joueursList.size();
 		//Utils.debugln("controleur start");
@@ -184,9 +184,6 @@ public class Controleur implements Observateur{
 		//Je met sur 0 0 pour les test 
 		
 		
-//		grille.getTuile(2,1).inonder();
-//		grille.getTuile(2,2).inonder();
-		
 		creeDeckInondation();
 		miseAJourGrille();
 		ihm.miseAJourPlayer(0, getJoueurTour().getColor());
@@ -227,6 +224,11 @@ public class Controleur implements Observateur{
 		// TODO - implement Controleur.assecher
 		Aventurier a = getJoueurTour();
 		Tuile t = grille.getTuile(str);
+		if (a instanceof Aventurier) {
+			if (a.assecher(t)) {
+				miseAJourGrille();
+			}
+		}
 		
 		if(a.assecher(t)){
 			miseAJourGrille();
@@ -328,7 +330,9 @@ public class Controleur implements Observateur{
 		while(it.hasNext()) {
 			Entry<String, Tuile> me = it.next();
 
+			
 			//J'effasse laventurie 
+			
 			ihm.getButonPlateau(me.getKey()).setBackground(null);
 			//Puis je redessine 
 			for(Aventurier a : me.getValue().getAventurie()) {
@@ -336,9 +340,12 @@ public class Controleur implements Observateur{
 				ihm.getButonPlateau(me.getKey()).setBackground(a.getColor());;
 
 			}
+			
+			if (me.getValue().getNum()==-1) {
+				ihm.getButonPlateau(me.getKey()).setBackground(Color.BLACK);
+			}
 
 
-		
 			
 			if(me.getValue().getStatue()==1){
 			ihm.getButonPlateau(me.getKey()).setFond(Color.cyan);

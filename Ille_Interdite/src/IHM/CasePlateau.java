@@ -18,7 +18,7 @@ import ille_intedite.TypeMessage;
 import ille_intedite.Aventurie.Aventurier;
 
 public class CasePlateau extends JPanel  {
-
+//Com de referencement
 	private String str,location;
 	private Observe o;
 	private Tuile t;

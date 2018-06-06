@@ -1,6 +1,7 @@
-package ille_intedite;
+package Carte;
 
 import Carte.Carte;
+import ille_intedite.Tuile;
 
 public class CarteInondation extends Carte {
 

@@ -2,8 +2,8 @@ package ille_intedite.Aventurie;
 
 import Carte.Carte;
 import Carte.Classique;
-import ille_intedite.CarteTresor;
-import ille_intedite.NomTresor;
+import Carte.CarteTresor;
+import Carte.NomTresor;
 import ille_intedite.Tuile;
 import java.awt.Color;
 import java.util.*;
@@ -90,6 +90,7 @@ public class Aventurier {
 		int y = Math.abs(from.getyT() - to.getyT());
 		// Si il ce deplace sois a 1 case en X ou 1 case en Y et que la case de destination n'as pas couler
 		return ((x == 1 & y == 0) || (x == 0 & y == 1)) || (x==0 & y==0) & (to.getStatue() ==1);
+		
 	}
 
 
@@ -99,7 +100,7 @@ public class Aventurier {
 	 * @param t1.
 	 * @param t2
 	 */
-	public static boolean deplacementPossible(Tuile from, Tuile to) {
+	public boolean deplacementPossible(Tuile from, Tuile to) {
 		System.out.println("to = "+to+" from = "+from);
 		int x = Math.abs(from.getxT() - to.getxT());
 		int y = Math.abs(from.getyT() - to.getyT());
@@ -255,7 +256,30 @@ public class Aventurier {
 		return "Aventurier [Num=" + Num + ", nom=" + nom + ", getType=" + getType + ", pion=" + pion + ", nbAction="
 				+ nbAction + "]";
 	}
+	
+	protected ArrayList<Tuile> getAdjacent(Tuile from, ArrayList<Tuile> listTuile){
+		ArrayList<Tuile> adjacent = new ArrayList<Tuile>();
+		int xF=from.getxT();
+		int yF=from.getyT();
+		
+		Iterator<Tuile> it = listTuile.iterator();
+		
+		while(it.hasNext()) {
+			Tuile to = it.next();
+			
+			int x = Math.abs(xF-to.getxT());
+			int y = Math.abs(yF-to.getyT());
+			
+			if ((x==0 && y==1 || x==1 && y==0) && to.getStatue()!=2 && to.getNum()!=-1) {
+				adjacent.add(to);
+			}
+			
+		}
+		
+		return adjacent;
+	}
 
 
 
 }
+

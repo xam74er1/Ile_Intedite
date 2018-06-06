@@ -40,7 +40,7 @@ import javax.swing.JEditorPane;
 import javax.swing.JTextArea;
 
 public class IHM extends Observe{
-	//Com de debug
+	//Com de debug 2
 	private JFrame frame;
 	private JTextArea console;
 	private JPanel Plateau ;

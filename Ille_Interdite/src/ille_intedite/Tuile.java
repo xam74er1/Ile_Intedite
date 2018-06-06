@@ -1,6 +1,7 @@
 package ille_intedite;
 
 import ille_intedite.Aventurie.Aventurier;
+import Carte.NomTresor;
 import java.util.*;
 
 public class Tuile {
