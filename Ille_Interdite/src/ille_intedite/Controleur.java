@@ -117,8 +117,10 @@ public class Controleur implements Observateur{
 		getJoueurTour().finTour();
 		piocherInondation();
 		numTour++;
+		numTour%=joueursList.size();
 		
 		ihm.addConsole("Jouer n°"+numTour+" as vous de jouer");
+		ihm.miseAJourPlayer(numTour, getJoueurTour().getColor());
 	//	Utils.debugln("Fin de tour");
 		
 	}
@@ -188,7 +190,7 @@ public class Controleur implements Observateur{
 		
 		creeDeckInondation();
 		miseAJourGrille();
-		
+		ihm.miseAJourPlayer(0, getJoueurTour().getColor());
 	}
 
 	private void nextJoueur() {
@@ -278,7 +280,7 @@ public class Controleur implements Observateur{
 	//Provisoire 
 	@Deprecated
 	public Aventurier getJoueurTour() {
-		int i =  numTour%(NBR_JOUEUR-1);
+		int i =  numTour%(joueursList.size());
 		
 	//	Utils.debugln(" jouer n = "+i);
 		return joueursList.get(i);

@@ -10,7 +10,7 @@ import java.util.*;
 import utils.Utils.Pion;
 
 public class Aventurier {
-
+//Com de debug
 	ArrayList<Classique> listeCarteJoueur;
 	
 
@@ -90,20 +90,22 @@ public class Aventurier {
 		int y = Math.abs(from.getyT() - to.getyT());
 		// Si il ce deplace sois a 1 case en X ou 1 case en Y et que la case de destination n'as pas couler
 		return ((x == 1 & y == 0) || (x == 0 & y == 1)) || (x==0 & y==0) & (to.getStatue() ==1);
+		
 	}
 
 
 
 	/**
 	 *
-	 * @param t1
+	 * @param t1.
 	 * @param t2
 	 */
 	public static boolean deplacementPossible(Tuile from, Tuile to) {
+		System.out.println("to = "+to+" from = "+from);
 		int x = Math.abs(from.getxT() - to.getxT());
 		int y = Math.abs(from.getyT() - to.getyT());
 		// Si il ce deplace sois a 1 case en X ou 1 case en Y et que la case de destination n'as pas couler
-		return ((x == 1 & y == 0) || (x == 0 & y == 1)) & (to.getStatue() < 2);
+		return ((x == 1 & y == 0) || (x == 0 & y == 1)) & (to.getStatue() < 2)&to.getNum()!=-1;
 	}
 
 	/**
@@ -258,3 +260,4 @@ public class Aventurier {
 
 
 }
+
