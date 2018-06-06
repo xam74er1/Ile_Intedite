@@ -114,6 +114,7 @@ public class Controleur implements Observateur{
 		ihm.afichierConsole("Fin du tour du joeur n°"+numTour);
 		
 		getJoueurTour().finTour();
+		piocherInondation();
 		numTour++;
 		
 		ihm.addConsole("Jouer n°"+numTour+" as vous de jouer");
@@ -128,11 +129,12 @@ public class Controleur implements Observateur{
 //	Mise en place du deck Inondation //\\ actuellement sur plus de 24 Tuile
 	public void creeDeckInondation() {
 		for(Tuile t :grille.getTuilesListe().values()){
-            	
+            if(t.getNum()!=-1) {
 			inondationDeck.add(new CarteInondation(t.getNom(),t));
+            }
            
 		}
-//		Liste A randomisé par la suite
+		Collections.shuffle(inondationDeck);
 	}
 	
 	public void creeDeckClassique() {
@@ -253,15 +255,15 @@ public class Controleur implements Observateur{
 
 //	Mise en place de la pioche et deffause auto des carte innondation
 	private void piocherInondation() {
-		if(inondationDeck.size()!=1) {
-			CarteInondation cInP = inondationDeck.get(1);
+		if(inondationDeck.size()!=0) {
+			CarteInondation cInP = inondationDeck.get(0);
 			cInP.getTuile().inonder();
 			inondationDefausse.add(cInP);
 			inondationDeck.remove(cInP);
 		}
 		else {
 			for(int i=0;i<inondationDefausse.size();i++) {
-				CarteInondation cInD = inondationDefausse.get(1);
+				CarteInondation cInD = inondationDefausse.get(0);
 				inondationDeck.add(cInD);
 				inondationDefausse.remove(cInD);
 			}
@@ -324,7 +326,7 @@ public class Controleur implements Observateur{
 		while(it.hasNext()) {
 			Entry<String, Tuile> me = it.next();
 
-			//Jefasse laventurie 
+			//J'effasse laventurie 
 			ihm.getButonPlateau(me.getKey()).setBackground(null);
 			//Puis je redessine 
 			for(Aventurier a : me.getValue().getAventurie()) {

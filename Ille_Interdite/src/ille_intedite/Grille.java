@@ -73,10 +73,9 @@ public class Grille {
 					//Je tente un truc avec une arrayList 
 					Tuile t = new Tuile(Integer.parseInt(listNomTuile.get(current_tile).substring(0,3)),listNomTuile.get(current_tile).substring(3),x,y);
 					int typeT= t.getNum();
-					System.out.println(typeT);
 
 					if (typeT>19 && typeT < 30) {
-						t.addAventurie(aventuriers.get(typeT-(typeT/10*10)));
+						aventuriers.get(typeT-(typeT/10*10)).setPosition(t);
 
 					}
 
