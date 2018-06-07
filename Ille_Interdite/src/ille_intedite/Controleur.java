@@ -116,6 +116,7 @@ public class Controleur implements Observateur{
 		
 		getJoueurTour().finTour();
 		piocherInondation();
+		System.out.println("woua");
 		numTour++;
 		numTour%=joueursList.size();
 		
