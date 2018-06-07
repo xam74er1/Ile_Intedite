@@ -58,6 +58,7 @@ public class Grille {
 	public void iniGrille(ArrayList<Aventurier> aventuriers){
 
 		int i =0;
+		int p =0;
 		int current_tile = 0;
 		
 		for (int y = 0;y<6;y++) {
@@ -74,8 +75,11 @@ public class Grille {
 					Tuile t = new Tuile(Integer.parseInt(listNomTuile.get(current_tile).substring(0,3)),listNomTuile.get(current_tile).substring(3),x,y);
 					int typeT= t.getNum();
 
-					if (typeT>19 && typeT < 30) {
-						aventuriers.get(typeT-(typeT/10*10)).setPosition(t);
+					if (typeT>19 && typeT < 30 && p<aventuriers.size()) {
+						//System.out.println(typeT-(typeT/10*10));
+						aventuriers.get(p).setPosition(t);
+						p++;
+						//aventuriers.get(typeT-(typeT/10*10)).setPosition(t);
 
 					}
 

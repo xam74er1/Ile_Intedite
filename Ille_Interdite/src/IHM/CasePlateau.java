@@ -22,7 +22,7 @@ public class CasePlateau extends JPanel  {
 	private String str,location;
 	private Observe o;
 	private Tuile t;
-	private boolean activated = false;
+	private boolean activated = true;
 	private MouseListener m;
 	private Color c = new Color(204, 102, 0);
 

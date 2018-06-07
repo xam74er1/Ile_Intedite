@@ -16,7 +16,7 @@ public class Explorateur extends Aventurier {
 		int x = Math.abs(from.getxT() - to.getxT());
 		int y = Math.abs(from.getyT() - to.getyT());
 		// Si il ce deplace sois a 1 case en X ou 1 case en Y et que la case de destination n'as pas couler
-		return ((x > 2 && y > 2) && !(x == 0 && y == 0)) & (to.getStatue() < 2)&to.getNum()!=-1;
+		return ((x < 2 && y < 2) && !(x == 0 && y == 0)) & (to.getStatue() < 2)&to.getNum()!=-1;
 	}
 
 	@Override
@@ -24,7 +24,7 @@ public class Explorateur extends Aventurier {
 		int x = Math.abs(from.getxT() - to.getxT());
 		int y = Math.abs(from.getyT() - to.getyT());
 		// Si il ce deplace sois a 1 case en X ou 1 case en Y et que la case de destination n'as pas couler
-		return ((x > 2 && y > 2) & (to.getStatue() ==1));
+		return ((x < 2 && y < 2) & (to.getStatue() ==1));
 		
 	}
 
