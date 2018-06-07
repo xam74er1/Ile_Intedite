@@ -22,7 +22,7 @@ public class CasePlateau extends JPanel  {
 	private String str,location;
 	private Observe o;
 	private Tuile t;
-	private boolean activated = true;
+	private boolean activated = false;
 	private MouseListener m;
 	private Color c = new Color(204, 102, 0);
 
@@ -121,6 +121,11 @@ public class CasePlateau extends JPanel  {
 		this.removeMouseListener(m);
 		activated = false;
 	}
+	
+	public void activate() {
+		this.addMouseListener(mouse());
+		activated = true;
+	}
 
 	public void setFond(Color c) {
 		this.c =c ;
@@ -128,3 +133,5 @@ public class CasePlateau extends JPanel  {
 
 
 }
+
+//testEUUU

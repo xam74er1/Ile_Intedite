@@ -350,11 +350,25 @@ public class Controleur implements Observateur{
 	public void miseAJourGrille() {
 
 		//Provisoire 
-
 		vue.afficherGrille();
 
-	}
-	public String getMessageConsole() {
-		return messageConsole;
+	}	
+	public void miseAJourDep(ArrayList<Tuile> listdep) {
+		
+		HashMap<String, Tuile> hmTuille = ((Grille) grille).getTuilesListe();
+
+		Iterator<Entry<String, Tuile>> it = hmTuille.entrySet().iterator();
+
+		while(it.hasNext()) {
+			Entry<String, Tuile> me = it.next();
+
+						
+			if(!listdep.contains(me.getValue())) {
+				ihm.getButonPlateau(me.getKey()).unActivated();
+			}			
+		
+			
+		
+		}
 	}
 }
