@@ -5,6 +5,7 @@ import ille_intedite.Message;
 import ille_intedite.Observe;
 import ille_intedite.Tuile;
 import ille_intedite.TypeMessage;
+import ille_intedite.VueGrille;
 import utils.Utils;
 
 import java.awt.EventQueue;
@@ -40,7 +41,7 @@ import javax.swing.JEditorPane;
 import javax.swing.JTextArea;
 
 public class IHM extends Observe{
-//Com de debug
+	//Com de debug 2
 	private JFrame frame;
 	private JTextArea console;
 	private JPanel Plateau ;
@@ -48,7 +49,11 @@ public class IHM extends Observe{
 
 
 	HashMap<String,JButton> listButton = new HashMap();
+	HashMap<String,JPanel> listPan = new HashMap();
 	private JTextField textField;
+	
+	VueGrille vue;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -70,7 +75,8 @@ public class IHM extends Observe{
 	/**
 	 * Create the application.
 	 */
-	public IHM() {
+	public IHM(VueGrille vue) {
+		this.vue = vue;
 		initialize();
 	}
 
@@ -104,7 +110,7 @@ public class IHM extends Observe{
 		JPanel up = new JPanel();
 		aplication.add(up, BorderLayout.NORTH);
 
-		 lblJoeurN = new JLabel("Joeur n \u00B0 X");
+		lblJoeurN = new JLabel("Joeur n \u00B0 X");
 		up.add(lblJoeurN);
 
 		JPanel Center = new JPanel();
@@ -113,7 +119,7 @@ public class IHM extends Observe{
 
 		//Pannel de jeux 
 		Plateau = new JPanel();
-		Plateau .setLayout(new GridLayout(6,6));
+		Plateau .setLayout(new GridLayout(6,6,10,10));
 		//fillPlataux();
 		Utils.debugln("plateau done");
 
@@ -225,31 +231,73 @@ public class IHM extends Observe{
 	public void fillPlataux(Grille g){
 
 		HashMap<String, Tuile> tuilesListe = g.getTuilesListe();
-		
+
 		//int i = 0;
-		
+
 		Iterator<Tuile> it = g.getTuilesListe().values().iterator();
 		int k = 0;
 		String str;
 		for(int y =0;y<6;y++){
 			for(int x =0;x<6 ;x++){
 
-				
+
 				str = g.getTuile(x, y).getNom();
-				
+
 				JButton bt = new JButton(str);
 				bt.setName(x+":"+y);
 				bt.addActionListener(actionBoutonPlatau());
+
+
 				listButton.put(x+":"+y, bt);
 
 				Plateau.add(bt); 
 			}
 		}
-		
+
 		Plateau.revalidate();
 
-		
+
 	}
+
+	public void fillPlataux2(Grille g){
+
+		CasePlateau c;
+		HashMap<String, Tuile> tuilesListe = g.getTuilesListe();
+
+		//int i = 0;
+
+		Iterator<Tuile> it = g.getTuilesListe().values().iterator();
+		int k = 0;
+		String str;
+		for(int y =0;y<6;y++){
+			for(int x =0;x<6 ;x++){
+
+
+				str = g.getTuile(x, y).getNom();
+				c= new CasePlateau(str,x+":"+y,this, g.getTuile(x, y));
+				if(k%2==0) {
+					c.setBackground(Color.red);
+				}else {
+					c.setBackground(Color.BLUE);
+				}
+
+				if( g.getTuile(x, y).getNum()==-1) {
+					c.unActivated();
+				}
+
+				listPan.put(x+":"+y, c);
+
+				Plateau.add(c); 
+				k++;
+			}
+		}
+
+		Plateau.revalidate();
+
+
+	}
+
+
 
 	private ActionListener actionBoutonPlatau(){
 		return new ActionListener(){
@@ -281,13 +329,23 @@ public class IHM extends Observe{
 		return listButton;
 	}
 
-	public JButton getButonPlateau(String str){
-		return listButton.get(str);
+	//	public JButton getButonPlateau(String str){
+	//		return listButton.get(str);
+	//	}
+
+	public CasePlateau getButonPlateau(String str){
+		return (CasePlateau) listPan.get(str);
 	}
 
-	
+
 	public void miseAJourPlayer(int x ,Color c) {
 		lblJoeurN.setForeground(c);
-		 lblJoeurN.setText("Joeur n° "+x);
+		lblJoeurN.setText("Joeur n° "+x);
 	}
+
+	public void updateGrille() {
+		Plateau.repaint();
+		Plateau.revalidate();
+	}
+
 }
