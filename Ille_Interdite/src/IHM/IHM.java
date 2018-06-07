@@ -221,6 +221,9 @@ public class IHM extends Observe{
 		JButton send = new JButton("Send");
 		send.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Message m =new Message(TypeMessage.Clique_Send);
+				m.setText(textField.getText());
+				notifierObservateur(m);
 			}
 		});
 		chamText.add(send, BorderLayout.EAST);

@@ -12,8 +12,17 @@ package ille_intedite;
 public class Message {
     TypeMessage message;
     String location;
+    String text;
     
    
+
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
 
 	public Message(TypeMessage message) {
 

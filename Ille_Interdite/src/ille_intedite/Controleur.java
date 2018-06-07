@@ -17,10 +17,11 @@ public class Controleur implements Observateur{
 	Curseur curseur;
 	Grille grille;
 	ArrayList<Classique> carteTresorDeck;
-	ArrayList<Classique> carteTresorsDefausse;
+	public ArrayList<Classique> carteTresorsDefausse;
 	ArrayList<CarteInondation> inondationDeck;
-	ArrayList<CarteInondation> inondationDefausse;
+	public ArrayList<CarteInondation> inondationDefausse;
 	ArrayList<Aventurier> joueursList;
+	String messageConsole;
 	private int NBR_JOUEUR = 4;
 	// Dernere action effectuer 
 	private  TypeMessage lastAction = null;
@@ -112,6 +113,10 @@ public class Controleur implements Observateur{
 
 		case Clique_Fin_Tour :
 			finDeTour();
+			break;
+			
+		case Clique_Send :
+			messageConsole = msg.getText();
 			break;
 		}
 
@@ -348,5 +353,8 @@ public class Controleur implements Observateur{
 
 		vue.afficherGrille();
 
+	}
+	public String getMessageConsole() {
+		return messageConsole;
 	}
 }

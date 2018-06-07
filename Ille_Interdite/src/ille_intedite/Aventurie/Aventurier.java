@@ -4,6 +4,8 @@ import Carte.Carte;
 import Carte.Classique;
 import Carte.CarteTresor;
 import Carte.NomTresor;
+import IHM.IHM;
+import ille_intedite.Controleur;
 import ille_intedite.Tuile;
 import java.awt.Color;
 import java.util.*;
@@ -187,11 +189,16 @@ public class Aventurier {
      *
      * @param C
      */
-    public void addCarte(Classique C) {
-        // TODO - implement Aventurier.addCarte
+	public void addCarte(Classique C, Controleur ctrl, IHM ihm) {
+    	if (listeCarteJoueur.size() > 6) {
+    		ihm.afichierConsole("Saisir un carte à défausser :");
+    		int i = Integer.parseInt(ctrl.getMessageConsole());
+    		ctrl.carteTresorsDefausse.add(listeCarteJoueur.get(i));
+    		listeCarteJoueur.remove(i);
+    	}
+    	
     	listeCarteJoueur.add(C);
     }
-
 	public void setNum(int Num) {
 		this.Num = Num;
 	}
