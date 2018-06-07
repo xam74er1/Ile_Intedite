@@ -13,11 +13,17 @@ import IHM.IHM;
  */
 public class Main {
     public static void main(String [] args) {
-        IHM ihm = new IHM();
-        Controleur ctrl = new Controleur(ihm);
+    	VueGrille vue = new VueGrille();
+        IHM ihm = new IHM(vue);
+        Controleur ctrl = new Controleur(ihm,vue);
 //        ctrl.creeDeckInondation(); Debug en cours
         
+        vue.setCtrl(ctrl);
+        vue.setIhm(ihm);
+        
         ihm.addObservateur(ctrl);
+        
+        vue.afficherGrille();
         
    }    
 }

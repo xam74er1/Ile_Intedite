@@ -5,6 +5,7 @@ import ille_intedite.Message;
 import ille_intedite.Observe;
 import ille_intedite.Tuile;
 import ille_intedite.TypeMessage;
+import ille_intedite.VueGrille;
 import utils.Utils;
 
 import java.awt.EventQueue;
@@ -50,6 +51,9 @@ public class IHM extends Observe{
 	HashMap<String,JButton> listButton = new HashMap();
 	HashMap<String,JPanel> listPan = new HashMap();
 	private JTextField textField;
+	
+	VueGrille vue;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -71,7 +75,8 @@ public class IHM extends Observe{
 	/**
 	 * Create the application.
 	 */
-	public IHM() {
+	public IHM(VueGrille vue) {
+		this.vue = vue;
 		initialize();
 	}
 
