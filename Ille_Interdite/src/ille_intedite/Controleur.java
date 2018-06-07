@@ -1,14 +1,21 @@
+
 package ille_intedite;
 import Carte.Carte;
 import Carte.Classique;
 import Carte.CarteInondation;
 import IHM.IHM;
 import ille_intedite.Aventurie.Aventurier;
+import ille_intedite.Aventurie.Aviateur;
+import ille_intedite.Aventurie.Explorateur;
+import ille_intedite.Aventurie.Ingenieure;
+import ille_intedite.Aventurie.Messager;
+import ille_intedite.Aventurie.Plongeur;
 
 import java.awt.Color;
 import java.util.*;
 import java.util.Map.Entry;
 
+import utils.Parameters;
 import utils.Utils;
 import utils.Utils.Pion;
 
@@ -24,7 +31,7 @@ public class Controleur implements Observateur{
 	String messageConsole;
 	private int NBR_JOUEUR = 4;
 	// Dernere action effectuer 
-	private  TypeMessage lastAction = null;
+	private  TypeMessage lastAction = TypeMessage.Clique_Send;
 	private int numTour;
 	private VueGrille vue;
 
@@ -92,21 +99,21 @@ public class Controleur implements Observateur{
 				break;
 
 			case Clique_Asseche :
-
+				System.out.println("Assecher");
+				if(assecher(msg.getLocation())){
+					ihm.afichierConsole("Casse assache en "+msg.getLocation());
+					getJoueurTour().actionJouer();
+				}else{
+					ihm.addConsole("Vous ne pouvez pas asseche en  "+msg.getLocation());
+					//Pour ne pas fair perdre une action
+				}
 				break;
 
 
 			}
 
 
-			if(assecher(msg.getLocation())){
-				ihm.afichierConsole("Casse assache en "+msg.getLocation());
-				getJoueurTour().actionJouer();
-			}else{
-				ihm.addConsole("Vous ne pouvez pas asseche en  "+msg.getLocation());
-				//Pour ne pas fair perdre une action 
 
-			}
 
 
 			break;
@@ -164,7 +171,11 @@ public class Controleur implements Observateur{
 			}
 
 		}
-		Collections.shuffle(inondationDeck);
+		
+		if(Parameters.ALEAS) {
+			Collections.shuffle(inondationDeck);
+		}
+		
 	}
 
 	public void creeDeckClassique() {
@@ -192,15 +203,38 @@ public class Controleur implements Observateur{
 
 
 	public void init() {
-		int i =0;//creer les aventuriers
+		//creer les aventuriers
+		Aventurier a;
+	//Aviateur
+		//Marche
+		a = new Aviateur(0,"st exupery",Pion.ROUGE);
 
-		for(Pion p : Pion.values()){
-			Aventurier a = new Aventurier(i,"Bob Morane",p);
+		joueursList.add(a);
 
-			//a.setPosition(grille.getTuile(i, 0));
-			joueursList.add(a);
-			i++;
-		}
+		a = new Explorateur(1,"Bob Morane",Pion.BLEU);
+
+		joueursList.add(a);
+
+
+		a = new Ingenieure(2,"Jimy Neutron",Pion.VERT);
+
+		joueursList.add(a);
+
+		a = new Messager(3,"Cupidon",Pion.JAUNE);
+		joueursList.add(a);
+
+
+		a = new Plongeur(4,"Bob",Pion.VIOLET);
+		joueursList.add(a);
+
+//		int i = 0;
+//				for(Pion p : Pion.values()){
+//					Aventurier a = new Aventurier(i,"Bob Morane",p);
+//		
+//					//a.setPosition(grille.getTuile(i, 0));
+//					joueursList.add(a);
+//					i++;
+//				}
 
 		grille = new Grille(ihm,joueursList);
 
@@ -299,7 +333,11 @@ public class Controleur implements Observateur{
 				inondationDeck.add(cInD);
 				inondationDefausse.remove(cInD);
 			}
-			Collections.shuffle(inondationDeck);
+			
+			if(Parameters.ALEAS) {
+				Collections.shuffle(inondationDeck);
+			}
+			
 			piocherInondation();		
 		}
 		miseAJourGrille();
@@ -334,6 +372,13 @@ public class Controleur implements Observateur{
 		// TODO - implement Controleur.DonneCarte
 		throw new UnsupportedOperationException();
 	}
+
+	public String getMessageConsole() {
+		return messageConsole;
+	}
+
+
+
 
 	/**
 	 * 
@@ -372,3 +417,4 @@ public class Controleur implements Observateur{
 		}
 	}
 }
+
