@@ -352,9 +352,7 @@ public class Controleur implements Observateur{
 		//Provisoire 
 		vue.afficherGrille();
 
-	}
-<<<<<<< HEAD
-	
+	}	
 	public void miseAJourDep(ArrayList<Tuile> listdep) {
 		
 		HashMap<String, Tuile> hmTuille = ((Grille) grille).getTuilesListe();
@@ -372,10 +370,5 @@ public class Controleur implements Observateur{
 			
 		
 		}
-		
-=======
-	public String getMessageConsole() {
-		return messageConsole;
->>>>>>> branch 'master' of https://github.com/xam74er1/Ile_Intedite.git
 	}
 }
