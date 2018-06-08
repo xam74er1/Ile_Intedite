@@ -40,9 +40,11 @@ public class Plongeur extends Aventurier {
 			}
 			
 		}
+		
+		
 
 
-		return null;
+		return adjacent;
 	}
 
 

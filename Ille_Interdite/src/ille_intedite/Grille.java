@@ -76,10 +76,13 @@ public class Grille {
 					int typeT= t.getNum();
 
 					if (typeT>19 && typeT < 30 && p<aventuriers.size()) {
-						//System.out.println(typeT-(typeT/10*10));
-						aventuriers.get(p).setPosition(t);
-						p++;
-						//aventuriers.get(typeT-(typeT/10*10)).setPosition(t);
+						Iterator<Aventurier> it = aventuriers.iterator();
+						while(it.hasNext()) {
+							Aventurier a = it.next();
+							if (a.getNum()==typeT-20) {
+								a.setPosition(t);
+							}
+						}
 
 					}
 

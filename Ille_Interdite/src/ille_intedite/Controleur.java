@@ -9,6 +9,7 @@ import ille_intedite.Aventurie.Aviateur;
 import ille_intedite.Aventurie.Explorateur;
 import ille_intedite.Aventurie.Ingenieure;
 import ille_intedite.Aventurie.Messager;
+import ille_intedite.Aventurie.Navigateur;
 import ille_intedite.Aventurie.Plongeur;
 
 import java.awt.Color;
@@ -205,27 +206,30 @@ public class Controleur implements Observateur{
 	public void init() {
 		//creer les aventuriers
 		Aventurier a;
-	//Aviateur
 		//Marche
-		a = new Aviateur(0,"st exupery",Pion.ROUGE);
+		
+		a = new Ingenieure(0,"Jimy Neutron",Pion.ROUGE);
 
 		joueursList.add(a);
-
-		a = new Explorateur(1,"Bob Morane",Pion.BLEU);
-
-		joueursList.add(a);
-
-
-		a = new Ingenieure(2,"Jimy Neutron",Pion.VERT);
-
-		joueursList.add(a);
-
-		a = new Messager(3,"Cupidon",Pion.JAUNE);
-		joueursList.add(a);
-
-
+		
 		a = new Plongeur(4,"Bob",Pion.VIOLET);
 		joueursList.add(a);
+		
+		a = new Navigateur(5,"Amiral Nelson",Pion.JAUNE);
+		joueursList.add(a);
+		
+		a = new Messager(3,"Cupidon",Pion.ORANGE);
+		joueursList.add(a);
+		
+		a = new Aviateur(2,"st exupery",Pion.BLEU);
+
+		joueursList.add(a);
+
+		a = new Explorateur(1,"Bob Morane",Pion.VERT);
+
+		joueursList.add(a);
+		
+		
 
 //		int i = 0;
 //				for(Pion p : Pion.values()){
