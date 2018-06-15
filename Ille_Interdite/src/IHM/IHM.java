@@ -341,9 +341,9 @@ public class IHM extends Observe{
 	}
 
 
-	public void miseAJourPlayer(int x ,Color c) {
+	public void miseAJourPlayer(int x,String str ,Color c) {
 		lblJoeurN.setForeground(c);
-		lblJoeurN.setText("Joeur n° "+x);
+		lblJoeurN.setText("Joeur n° "+x+str);
 	}
 
 	public void updateGrille() {

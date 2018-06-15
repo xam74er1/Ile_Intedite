@@ -9,7 +9,7 @@ import javax.swing.JButton;
 
 public class Grille {
 	IHM ihm;
-	private HashMap<String, Tuile> tuilesListe;
+	public static HashMap<String, Tuile> tuilesListe;
 	private String[] nomTuiles = {"000Le Pont des Abimes",//00x = tuile normale 02x = tuile spawn 3xx = tuile tresor
 									"020La Porte de Bronze",//021 = spawn ingé
 									"311La Caverne des Ombres",//31x = tresor brasier
@@ -98,6 +98,8 @@ public class Grille {
 				i++;
 			}
 		}
+		
+		
 	}
 
 	/**

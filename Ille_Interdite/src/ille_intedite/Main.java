@@ -25,5 +25,8 @@ public class Main {
         
         vue.afficherGrille();
         
+       ctrl.piocher5Inondation();
+       //Comentaire de modification 
+        
    }    
 }

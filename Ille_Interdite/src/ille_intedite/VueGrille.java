@@ -12,10 +12,11 @@ public class VueGrille {
 
 	Controleur ctrl;
 	IHM ihm;
+	
 	public void afficherGrille() {
-		//Provisoire 
-
-		HashMap<String, Tuile> hmTuille = ((Grille) ctrl.grille).getTuilesListe();
+		
+		
+		HashMap<String, Tuile> hmTuille =  ctrl.grille.getTuilesListe();
 
 		Iterator<Entry<String, Tuile>> it = hmTuille.entrySet().iterator();
 
@@ -62,6 +63,7 @@ public class VueGrille {
 
 	public void setCtrl(Controleur ctrl) {
 		this.ctrl = ctrl;
+		
 	}
 
 	public IHM getIhm() {

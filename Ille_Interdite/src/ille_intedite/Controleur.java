@@ -51,6 +51,9 @@ public class Controleur implements Observateur{
 		numTour =0;
 		NBR_JOUEUR = joueursList.size();
 		//Utils.debugln("controleur start");
+		
+		
+		
 
 	}
 
@@ -155,7 +158,7 @@ public class Controleur implements Observateur{
 		numTour%=joueursList.size();
 
 		ihm.addConsole("Jouer n°"+numTour+" as vous de jouer");
-		ihm.miseAJourPlayer(numTour, getJoueurTour().getColor());
+		ihm.miseAJourPlayer(numTour," ( "+getJoueurTour().getNom()+" )", getJoueurTour().getColor());
 		//	Utils.debugln("Fin de tour");
 
 	}
@@ -208,24 +211,24 @@ public class Controleur implements Observateur{
 		Aventurier a;
 		//Marche
 		
-		a = new Ingenieure(0,"Jimy Neutron",Pion.ROUGE);
+		a = new Ingenieure(0,"Ingenieure",Pion.ROUGE);
 
 		joueursList.add(a);
 		
-		a = new Plongeur(4,"Bob",Pion.VIOLET);
+		a = new Plongeur(4,"Plongeur",Pion.VIOLET);
 		joueursList.add(a);
 		
-		a = new Navigateur(5,"Amiral Nelson",Pion.JAUNE);
+		a = new Navigateur(5,"Navigateur",Pion.JAUNE);
 		joueursList.add(a);
 		
-		a = new Messager(3,"Cupidon",Pion.ORANGE);
+		a = new Messager(3,"Messager",Pion.ORANGE);
 		joueursList.add(a);
 		
-		a = new Aviateur(2,"st exupery",Pion.BLEU);
+		a = new Aviateur(2,"Aviateur",Pion.BLEU);
 
 		joueursList.add(a);
 
-		a = new Explorateur(1,"Bob Morane",Pion.VERT);
+		a = new Explorateur(1,"Explorateur",Pion.VERT);
 
 		joueursList.add(a);
 		
@@ -252,7 +255,12 @@ public class Controleur implements Observateur{
 
 		creeDeckInondation();
 
-		ihm.miseAJourPlayer(0, getJoueurTour().getColor());
+		
+//		for(int j =0;j<5;j++) {
+//			piocherInondation();
+//		}
+		
+		ihm.miseAJourPlayer(0," ( "+getJoueurTour().getNom()+" )", getJoueurTour().getColor());
 	}
 
 	private void nextJoueur() {
@@ -274,6 +282,8 @@ public class Controleur implements Observateur{
 		Aventurier a = getJoueurTour();
 
 		Tuile t = grille.getTuile(str);
+		
+		
 
 		if(a.deplacer(t)) {
 			miseAJourGrille();
@@ -321,6 +331,12 @@ public class Controleur implements Observateur{
 			getJoueurTour().getListeCarteJoueur().add(cC);
 		}
 
+	}
+	
+	public void piocher5Inondation() {
+		 for(int i = 0 ;i <5 ;i++) {
+			piocherInondation();
+			}
 	}
 
 	//	Mise en place de la pioche et deffause auto des carte innondation
