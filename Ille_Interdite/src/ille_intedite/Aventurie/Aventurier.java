@@ -12,7 +12,7 @@ import java.awt.Color;
 import java.util.*;
 import utils.Utils.Pion;
 
-public class Aventurier {
+public abstract class Aventurier {
 //Com de debug
 	ArrayList<Classique> listeCarteJoueur;
 	
