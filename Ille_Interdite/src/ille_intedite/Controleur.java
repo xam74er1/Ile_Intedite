@@ -169,9 +169,10 @@ public class Controleur implements Observateur{
 		ihm.afichierConsole("Fin du tour du joeur n°"+numTour);
 
 		getJoueurTour().finTour();
-		piocherInondation();
-			
-
+		for (int i=0;i<curseur.getNbCartesInond();i++) {
+			piocherInondation();
+		}
+		
 		numTour++;
 		numTour%=joueursList.size();
 
@@ -286,6 +287,8 @@ public class Controleur implements Observateur{
 		//				}
 
 		grille = new Grille(ihm,joueursList);
+		
+		curseur = new Curseur(0);
 
 		ihm.fillPlataux2(grille);
 		//Metre les tuille de depare 
@@ -295,6 +298,7 @@ public class Controleur implements Observateur{
 		//Je met sur 0 0 pour les test 
 
 		creeDeckInondation();
+		creeDeckClassique();
 
 
 		//		for(int j =0;j<5;j++) {
