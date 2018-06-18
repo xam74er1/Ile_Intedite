@@ -1,11 +1,13 @@
 
 package ille_intedite;
 import Carte.Carte;
+import Carte.CarteHelicoptere;
 import Carte.Classique;
 import Carte.CarteInondation;
 import Carte.CarteTresor;
 import Carte.CarteSacSable;
 import Carte.MonteeEaux;
+import Carte.NomTresor;
 import IHM.IHM;
 import ille_intedite.Aventurie.Aventurier;
 import ille_intedite.Aventurie.Aviateur;
@@ -14,14 +16,16 @@ import ille_intedite.Aventurie.Ingenieure;
 import ille_intedite.Aventurie.Messager;
 import ille_intedite.Aventurie.Navigateur;
 import ille_intedite.Aventurie.Plongeur;
+import Carte.NomTresor;
+import Carte.CarteHelicoptere;
+
 import java.awt.Color;
 import java.util.*;
 import java.util.Map.Entry;
+
 import utils.Parameters;
 import utils.Utils;
 import utils.Utils.Pion;
-import ille_intedite.TypeMessage;
-import Carte.*;
 
 public class Controleur implements Observateur{
 	//Com de referencement 1
@@ -38,6 +42,7 @@ public class Controleur implements Observateur{
 	private  TypeMessage lastAction = TypeMessage.Clique_Send;
 	private int numTour;
 	private VueGrille vue;
+	private ArrayList<String> tresorsRecuperes = new ArrayList<>();
 
 
 	IHM ihm;
@@ -53,9 +58,16 @@ public class Controleur implements Observateur{
 		init();
 		numTour =0;
 		NBR_JOUEUR = joueursList.size();
-		//Utils.debugln("controleur start");	
+		//Utils.debugln("controleur start");
+		
+		
+		
 
 	}
+
+
+
+
 
 
 
@@ -93,6 +105,11 @@ public class Controleur implements Observateur{
 				deplacer(msg.getLocation());
 				ihm.updateGrille();
 				getJoueurTour().actionJouer();
+				
+				if(getJoueurTour() instanceof Ingenieure) {
+					Ingenieure i = (Ingenieure) getJoueurTour();
+					i.setDerniereActionAssecher(false);
+				}
 
 				break;
 
@@ -128,6 +145,16 @@ public class Controleur implements Observateur{
 				assecher(msg.getLocation());
 				ihm.updateGrille();
 				getJoueurTour().actionJouer();
+				 
+				if(getJoueurTour() instanceof Ingenieure) {
+					Ingenieure i = (Ingenieure) getJoueurTour();
+					
+					if(!i.getDerniereActionAssecher()) {
+						i.actionAnuller();
+					}
+					
+					i.setDerniereActionAssecher(!i.getDerniereActionAssecher());
+				}
 				break;
 
 
@@ -144,6 +171,9 @@ public class Controleur implements Observateur{
 			messageConsole = msg.getText();
 			defausserCarteMain();
 			break;
+		case Clique_RecupereTresort :
+			RecupereTresort();
+			break;	
 		}
 
 
@@ -153,7 +183,7 @@ public class Controleur implements Observateur{
 
 
 
-
+		System.out.println(" nb action = "+getJoueurTour().getNbAction());
 		lastAction = msg.getMessage();
 
 
@@ -515,12 +545,30 @@ public class Controleur implements Observateur{
 
 
 			if(!listdep.contains(me.getValue())) {
-				ihm.getButonPlateau(me.getKey()).unActivated();
+				ihm.getButonPlateau(me.getKey()).setBlanc();
 			}			
 
 
 
 		}
+	}
+	
+	public boolean RecupereTresort() {
+		// 
+		
+		Aventurier a = getJoueurTour();
+		
+		NomTresor  t = a.recupereTresor();
+		
+		if(t!=null) {
+			System.out.println(" AJOUTE LE TRESORT ");
+			return true;
+		}else {
+			return false;
+		}
+	
+		
+		
 	}
 }
 

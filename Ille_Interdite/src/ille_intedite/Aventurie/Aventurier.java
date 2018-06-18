@@ -136,6 +136,7 @@ public abstract class Aventurier {
 
 
 
+
 	public NomTresor recupereTresor() {
 		int num = getTuile().getNum();
 		int numTresor=0;
