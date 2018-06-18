@@ -189,11 +189,15 @@ public class IHM extends Observe{
 		});
 		bouton.add(btnAction_1);
 
-		JButton btnAction_3 = new JButton("action 4");
+		JButton btnAction_3 = new JButton("SacDeSable");
 		btnAction_3.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+				Message m = new Message(TypeMessage.Clique_Asseche_SacDeSable);
+				
+				;
+				
+				notifierObservateur(m);
 			}
 		});
 		bouton.add(btnAction_3);
@@ -312,6 +316,23 @@ public class IHM extends Observe{
 				notifierObservateur(m);
 			}
 		};
+
+	}
+
+
+	
+	public void afficherDep(ArrayList<Tuile> listDep) {
+		
+		for(Tuile t : Grille.tuilesListe.values()) {
+			if (!listDep.contains(t)) {
+				t.getCase().setBlanc();
+			}else {
+				t.getCase().removeBlanc();
+			}
+			
+			
+		}
+		
 	}
 
 	//effece les message et ajoute un message 
@@ -343,7 +364,7 @@ public class IHM extends Observe{
 
 	public void miseAJourPlayer(int x,String str ,Color c) {
 		lblJoeurN.setForeground(c);
-		lblJoeurN.setText("Joeur n° "+x+str);
+		lblJoeurN.setText("Joeur nÂ° "+(x+1)+str);
 	}
 
 	public void updateGrille() {

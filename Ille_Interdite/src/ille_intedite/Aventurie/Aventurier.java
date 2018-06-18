@@ -6,17 +6,18 @@ import Carte.CarteTresor;
 import Carte.NomTresor;
 import IHM.IHM;
 import ille_intedite.Controleur;
+import ille_intedite.Grille;
 import ille_intedite.Tuile;
 import java.awt.Color;
 import java.util.*;
 import utils.Utils.Pion;
 
-public class Aventurier {
+public abstract class Aventurier {
 //Com de debug
 	ArrayList<Classique> listeCarteJoueur;
 	
 
-	Tuile tuile;
+	private Tuile tuile;
 	private int Num;
 	private String nom;
 	private NomTresor type;
@@ -66,14 +67,9 @@ public class Aventurier {
 	 * @param t
 	 */
 	//Action pour deplace la perssone 
-	public boolean deplacer(Tuile t) {
+	public void deplacer(Tuile t) {
 		// TODO - implement Aventurier.deplacer
-		if (deplacementPossible(getTuile(), t)) {
-			setPosition(t);
-			return true;
-		}else {
-			return false;
-		}
+		setPosition(t);
 
 	}
 
@@ -261,7 +257,7 @@ public class Aventurier {
 				+ nbAction + "]";
 	}
 	
-	protected ArrayList<Tuile> getAdjacent(Tuile from, ArrayList<Tuile> listTuile){
+	public ArrayList<Tuile> getAdjacent(Tuile from, ArrayList<Tuile> listTuile){
 		ArrayList<Tuile> adjacent = new ArrayList<Tuile>();
 		int xF=from.getxT();
 		int yF=from.getyT();
@@ -281,9 +277,52 @@ public class Aventurier {
 		}
 		
 		return adjacent;
+		
+
 	}
 
 
+	
+	public ArrayList<Tuile> deplacer2(){
+		ArrayList<Tuile> listTuile = new ArrayList<Tuile>();
+		
+		for (Tuile t : Grille.tuilesListe.values()) {
+			listTuile.add(t);
+		}
+		
+		return getAdjacent(this.tuile, listTuile);
 
+	}
+
+	public ArrayList<Tuile> getAssecher(Tuile from, ArrayList<Tuile> listTuile){
+		ArrayList<Tuile> adjacent = new ArrayList<Tuile>();
+		int xF=from.getxT();
+		int yF=from.getyT();
+		
+		Iterator<Tuile> it = listTuile.iterator();
+		
+		while(it.hasNext()) {
+			Tuile to = it.next();
+			
+			int x = Math.abs(xF-to.getxT());
+			int y = Math.abs(yF-to.getyT());
+			
+			if ((x==0 && y==1 || x==1 && y==0 || to.equals(from)) && to.getStatue()==1 && to.getNum()!=-1) {
+				adjacent.add(to);
+			}
+			
+		}
+		return adjacent;
+	}
+	
+	public ArrayList<Tuile> assecher2(){
+		ArrayList<Tuile> listTuile = new ArrayList<Tuile>();
+		
+		for (Tuile t : Grille.tuilesListe.values()) {
+			listTuile.add(t);
+		}
+		
+		return getAssecher(this.tuile, listTuile);
+	}
 }
 

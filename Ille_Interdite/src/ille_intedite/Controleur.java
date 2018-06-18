@@ -3,6 +3,9 @@ package ille_intedite;
 import Carte.Carte;
 import Carte.Classique;
 import Carte.CarteInondation;
+import Carte.CarteTresor;
+import Carte.CarteSacSable;
+import Carte.MonteeEaux;
 import IHM.IHM;
 import ille_intedite.Aventurie.Aventurier;
 import ille_intedite.Aventurie.Aviateur;
@@ -164,6 +167,7 @@ public class Controleur implements Observateur{
 
 	}
 
+
 	////////////////////////	
 	//	Gestion des carte //	
 	////////////////////////
@@ -176,11 +180,11 @@ public class Controleur implements Observateur{
 			}
 
 		}
-		
+
 		if(Parameters.ALEAS) {
 			Collections.shuffle(inondationDeck);
 		}
-		
+
 	}
 
 	public void creeDeckClassique() {
@@ -188,19 +192,52 @@ public class Controleur implements Observateur{
 			for(int j=0;j<5;j++) {
 				switch (i) {
 				case 1:
-					//					carteTresorDeck.add(new CarteTresor("carte"+i+":"+j, ))  A modifier
+					carteTresorDeck.add(new CarteTresor("CristalArdent"+j, NomTresor.CristalArdent));
 					break;
 				case 2:
+					// Calise
+					carteTresorDeck.add(new CarteTresor("CaliceOnde"+j, NomTresor.CaliceOnde));
 					break;
 				case 3:
+					// Statue
+					carteTresorDeck.add(new CarteTresor("StatueZephir"+j, NomTresor.StatueZephir));
 					break;
 				case 4:
+					// Pierre
+					carteTresorDeck.add(new CarteTresor("PierreSacree"+j, NomTresor.PierreSacree));
 					break;
 				}
 			}
+
+			carteTresorDeck.add(new CarteSacSable("Sac de sable 1"));
+			carteTresorDeck.add(new CarteSacSable("Sac de sable 2"));
+			carteTresorDeck.add(new CarteSacSable("Sac de sable 3"));
+
+			carteTresorDeck.add(new MonteeEaux("Monte des EAU 1"));
+			carteTresorDeck.add(new MonteeEaux("Monte des EAU 2"));
+			//carteTresorDeck.add(new MonteeEaux("Monte des EAU 3"));
+
+		}
+		if(Parameters.ALEAS) {
+			Collections.shuffle(carteTresorDeck);
 		}
 
+	}
 
+	public void piocherClassique() {
+		if(carteTresorDeck.size() != 0) {
+			Classique cC = carteTresorDeck.get(0);
+			if(cC instanceof CarteTresor || cC instanceof CarteSacSable || cC instanceof CarteHelicoptere ) {
+				getJoueurTour().getListeCarteJoueur().add(cC);	
+				carteTresorDeck.remove(cC);
+			}
+			else {
+				carteTresorsDefausse.add(cC);
+				curseur.monteeEaux();
+				carteTresorDeck.remove(cC);
+			}
+
+		}
 	}
 
 
@@ -211,20 +248,20 @@ public class Controleur implements Observateur{
 		//creer les aventuriers
 		Aventurier a;
 		//Marche
-		
+
 		a = new Ingenieure(0,"Ingenieure",Pion.ROUGE);
 
 		joueursList.add(a);
-		
+
 		a = new Plongeur(4,"Plongeur",Pion.VIOLET);
 		joueursList.add(a);
-		
+
 		a = new Navigateur(5,"Navigateur",Pion.JAUNE);
 		joueursList.add(a);
-		
+
 		a = new Messager(3,"Messager",Pion.ORANGE);
 		joueursList.add(a);
-		
+
 		a = new Aviateur(2,"Aviateur",Pion.BLEU);
 
 		joueursList.add(a);
@@ -232,19 +269,21 @@ public class Controleur implements Observateur{
 		a = new Explorateur(1,"Explorateur",Pion.VERT);
 
 		joueursList.add(a);
-		
-		
 
-//		int i = 0;
-//				for(Pion p : Pion.values()){
-//					Aventurier a = new Aventurier(i,"Bob Morane",p);
-//		
-//					//a.setPosition(grille.getTuile(i, 0));
-//					joueursList.add(a);
-//					i++;
-//				}
+
+
+		//		int i = 0;
+		//				for(Pion p : Pion.values()){
+		//					Aventurier a = new Aventurier(i,"Bob Morane",p);
+		//		
+		//					//a.setPosition(grille.getTuile(i, 0));
+		//					joueursList.add(a);
+		//					i++;
+		//				}
 
 		grille = new Grille(ihm,joueursList);
+
+		curseur = new Curseur(0);
 
 		ihm.fillPlataux2(grille);
 		//Metre les tuille de depare 
@@ -253,20 +292,15 @@ public class Controleur implements Observateur{
 
 		//Je met sur 0 0 pour les test 
 
-
 		creeDeckInondation();
+		creeDeckClassique();
 
-		
-//		for(int j =0;j<5;j++) {
-//			piocherInondation();
-//		}
-		
+
+		//		for(int j =0;j<5;j++) {
+		//			piocherInondation();
+		//		}
+
 		ihm.miseAJourPlayer(0," ( "+getJoueurTour().getNom()+" )", getJoueurTour().getColor());
-	}
-
-	private void nextJoueur() {
-		// TODO - implement Controleur.nextJoueur
-		throw new UnsupportedOperationException();
 	}
 
 	private void conditionVictoire() {
@@ -279,40 +313,40 @@ public class Controleur implements Observateur{
 		throw new UnsupportedOperationException();
 	}
 
-	private boolean deplacer(String str) {
+	private void deplacer(String str) {
 		Aventurier a = getJoueurTour();
 
 		Tuile t = grille.getTuile(str);
-		
-		
 
-		if(a.deplacer(t)) {
-			miseAJourGrille();
-			return true;
-		}else {
-			return false;
-		}
-
-
+		a.deplacer(t);
+		grille.activateAll();
+		miseAJourGrille();
 
 	}
 
-	private boolean assecher(String str) {
-		// TODO - implement Controleur.assecher
+	private void deplacer2() {
+
 		Aventurier a = getJoueurTour();
+
+		ihm.afficherDep(a.deplacer2());
+		miseAJourGrille();
+
+	}
+
+	private void assecher(String str) {
+
 		Tuile t = grille.getTuile(str);
-		if (a instanceof Aventurier) {
-			if (a.assecher(t)) {
-				miseAJourGrille();
-			}
-		}
 
-		if(a.assecher(t)){
-			miseAJourGrille();
-			return true;
-		}
-		return false;
+		t.assecher();
+		grille.activateAll();
+		miseAJourGrille();
 
+	}
+
+	private void assecher2() {
+		Aventurier a = getJoueurTour();
+		ihm.afficherDep(a.assecher2());
+		miseAJourGrille();
 	}
 
 	private void donneCarte() {
@@ -333,11 +367,39 @@ public class Controleur implements Observateur{
 		}
 
 	}
-	
+
+	public void afficherListeCarteJoueur() {
+		ihm.afichierConsole("Main du joueur :" + getJoueurTour().getNom());
+		int i = 1;
+		for (Classique c : getJoueurTour().getListeCarteJoueur()){
+			ihm.addConsole(i +" : " + c.getNom());
+			i = i+1;
+		}
+
+		if (getJoueurTour().getListeCarteJoueur().size() > 5) {
+
+			ihm.addConsole("Vous avez " + (getJoueurTour().getListeCarteJoueur().size()-5) + " carte en trop dans votre main, choisir les cartes à défausser :");
+		}
+
+
+	}
+	public void defausserCarteMain() {
+		if (getJoueurTour().getListeCarteJoueur().size() > 5) {
+
+			int numCarte = Integer.parseInt(messageConsole) -1;
+			this.carteTresorsDefausse.add(getJoueurTour().getListeCarteJoueur().get(numCarte));
+			getJoueurTour().getListeCarteJoueur().remove(numCarte);
+			afficherListeCarteJoueur();
+
+
+		}
+	}
+
+
 	public void piocher5Inondation() {
-		 for(int i = 0 ;i <5 ;i++) {
+		for(int i = 0 ;i <5 ;i++) {
 			piocherInondation();
-			}
+		}
 	}
 
 	//	Mise en place de la pioche et deffause auto des carte innondation
@@ -354,19 +416,17 @@ public class Controleur implements Observateur{
 				inondationDeck.add(cInD);
 				inondationDefausse.remove(cInD);
 			}
-			
+
 			if(Parameters.ALEAS) {
 				Collections.shuffle(inondationDeck);
 			}
-			
+
 			piocherInondation();		
 		}
 		miseAJourGrille();
 	}
 
 
-	//Provisoire 
-	@Deprecated
 	public Aventurier getJoueurTour() {
 		int i =  numTour%(joueursList.size());
 
@@ -420,7 +480,7 @@ public class Controleur implements Observateur{
 
 	}	
 	public void miseAJourDep(ArrayList<Tuile> listdep) {
-		
+
 		HashMap<String, Tuile> hmTuille = ((Grille) grille).getTuilesListe();
 
 		Iterator<Entry<String, Tuile>> it = hmTuille.entrySet().iterator();
@@ -428,13 +488,13 @@ public class Controleur implements Observateur{
 		while(it.hasNext()) {
 			Entry<String, Tuile> me = it.next();
 
-						
+
 			if(!listdep.contains(me.getValue())) {
 				ihm.getButonPlateau(me.getKey()).unActivated();
 			}			
-		
-			
-		
+
+
+
 		}
 	}
 	
