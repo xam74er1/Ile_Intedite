@@ -57,7 +57,6 @@ public class Controleur implements Observateur{
 
 
 
-
 	@Override
 	public void traiterMessage(Message msg) {
 
@@ -72,6 +71,7 @@ public class Controleur implements Observateur{
 
 		switch(msg.getMessage()) {
 		case Clique_Deplace :
+			deplacer2();
 			ihm.afichierConsole("Cliquer sur une classe pour vous deplace");
 			break;
 
@@ -88,7 +88,6 @@ public class Controleur implements Observateur{
 
 				//Si le deplacement cest bien passe 
 				deplacer(msg.getLocation());
-					ihm.afichierConsole("Deplacement en "+msg.getLocation());
 					ihm.updateGrille();
 					getJoueurTour().actionJouer();
 

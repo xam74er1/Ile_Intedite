@@ -19,7 +19,6 @@ public class Plongeur extends Aventurier {
 		super(Num, nom,pion);
 	}
 	
-	//Pas encore implementee
 	//@Override
 	public ArrayList<Tuile> deplacementPossible(Tuile from, ArrayList<Tuile> listTuile) {
 		//creation de la liste des tuiles adjacentes et d'une copie
