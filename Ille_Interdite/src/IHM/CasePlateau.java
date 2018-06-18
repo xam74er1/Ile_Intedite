@@ -1,8 +1,8 @@
+
 package IHM;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-//import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -23,16 +23,15 @@ import ille_intedite.TypeMessage;
 import ille_intedite.Aventurie.Aventurier;
 
 public class CasePlateau extends JPanel  {
-	//Com de referencement
+//Com de referencement
 	private String str,location;
 	private Observe o;
 	private Tuile t;
-	private boolean activated = true;
+	private boolean activated = true , blanc = false;
 	private MouseListener m;
 	private Color c = new Color(204, 102, 0);
-	private File f;
-	private BufferedImage image;
 	String path=" ";
+
 	public CasePlateau(String str,String location, Observe o,Tuile t) {
 
 		this.str = str;
@@ -49,7 +48,9 @@ public class CasePlateau extends JPanel  {
 		lblNewLabel.setForeground(Color.BLACK);
 		add(lblNewLabel);
 		setBackground(Color.gray);
-
+		
+		this.t.setCase(this);
+		
 		//this.setBorder(BorderFactory.createLineBorder(Color.black));
 
 	}
@@ -60,19 +61,9 @@ public class CasePlateau extends JPanel  {
 		int s = x;
 		int xa = x;
 		int ya = y;
-
-
-		//		this.setLocation(t.getxT()*40, t.getyT()*40);
-
-		//	this.setPreferredSize(new Dimension(50,50));
-		//Image 
-
+		
 		BufferedImage image;
-
-
-
-
-
+		
 		if(activated) {
 			g.setColor(c);
 
@@ -81,12 +72,7 @@ public class CasePlateau extends JPanel  {
 			g.setColor(Color.black);
 			g.drawRect(0, 0,  this.getWidth(),this.getHeight());
 		}
-
-
-
-		//images\tuiles\LaCaverneDesOmbres_Inonde.png
-		//images\tuiles\LaCarverneDesOmbres_Inonde.png
-
+		
 		if(activated) {
 			String name = t.getNom();
 			path=" ";
@@ -141,6 +127,13 @@ public class CasePlateau extends JPanel  {
 			}
 		}
 
+		//Effect blanc pour la ou on ne peux pas ce deplace 
+		if(blanc&&activated) {
+			g.setColor(new Color(0,0,0,128));
+
+			g.fillRect(0, 0,  this.getWidth(),this.getHeight());
+		}
+		
 		for(Aventurier a : t.getAventurie()) {
 			String name = a.getPion().toString();
 			path = "images\\pions\\pion"+name+".png";
@@ -160,14 +153,21 @@ public class CasePlateau extends JPanel  {
 			xa += 2*s;
 
 		}
+		
+	
 
 
+		for(Aventurier a : t.getAventurie()) {
+			g.setColor(a.getColor());
+			g.fillOval(xa, ya, xa+s, ya+s);
+			xa += 2*s;
 
+		}
 
-
-
+		
+		
 	}
-
+	
 	public MouseListener mouse() {
 		return new MouseListener() {
 
@@ -209,7 +209,7 @@ public class CasePlateau extends JPanel  {
 
 			}
 		};
-
+		
 	}
 
 
@@ -218,16 +218,29 @@ public class CasePlateau extends JPanel  {
 		this.removeMouseListener(m);
 		activated = false;
 	}
-
+	
 	public void activate() {
 		this.addMouseListener(mouse());
 		activated = true;
+	}
+	
+	public boolean isActivated() {
+		return activated;
 	}
 
 	public void setFond(Color c) {
 		this.c =c ;
 	}
-
+	
+	public void setBlanc() {
+		this.removeMouseListener(m);
+		this.blanc = true;
+	}
+	
+	public void removeBlanc() {
+		this.blanc = false;
+		this.addMouseListener(mouse());
+	}
 
 }
 
