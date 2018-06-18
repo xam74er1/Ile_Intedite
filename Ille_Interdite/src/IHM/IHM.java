@@ -316,7 +316,9 @@ public class IHM extends Observe{
 				notifierObservateur(m);
 			}
 		};
+
 	}
+
 
 	
 	public void afficherDep(ArrayList<Tuile> listDep) {
@@ -331,7 +333,9 @@ public class IHM extends Observe{
 			
 		}
 		
+
 	}
+
 
 
 	//effece les message et ajoute un message 

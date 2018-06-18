@@ -3,6 +3,7 @@ package ille_intedite;
 import Carte.Carte;
 import Carte.Classique;
 import Carte.CarteInondation;
+import Carte.CarteTresor;
 import IHM.IHM;
 import ille_intedite.Aventurie.Aventurier;
 import ille_intedite.Aventurie.Aviateur;
@@ -303,11 +304,6 @@ public class Controleur implements Observateur{
 		ihm.miseAJourPlayer(0," ( "+getJoueurTour().getNom()+" )", getJoueurTour().getColor());
 	}
 
-	private void nextJoueur() {
-		// TODO - implement Controleur.nextJoueur
-		throw new UnsupportedOperationException();
-	}
-
 	private void conditionVictoire() {
 		// TODO - implement Controleur.conditionVictoire
 		throw new UnsupportedOperationException();
@@ -322,8 +318,6 @@ public class Controleur implements Observateur{
 		Aventurier a = getJoueurTour();
 
 		Tuile t = grille.getTuile(str);
-
-
 
 		a.deplacer(t);
 		grille.activateAll();
@@ -408,8 +402,6 @@ public class Controleur implements Observateur{
 	}
 
 
-	//Provisoire 
-	@Deprecated
 	public Aventurier getJoueurTour() {
 		int i =  numTour%(joueursList.size());
 

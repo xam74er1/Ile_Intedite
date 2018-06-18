@@ -277,7 +277,9 @@ public class Aventurier {
 		}
 		
 		return adjacent;
+
 	}
+
 
 	
 	public ArrayList<Tuile> deplacer2(){
@@ -288,9 +290,8 @@ public class Aventurier {
 		}
 		
 		return getAdjacent(this.tuile, listTuile);
+
 	}
-
-
 
 }
 

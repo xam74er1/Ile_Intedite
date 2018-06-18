@@ -15,7 +15,6 @@ public class Plongeur extends Aventurier {
 	private ArrayList<Tuile> tuilesDep = new ArrayList<Tuile>();
 	private boolean firstIter=true;
 
-
 	public Plongeur(int Num, String nom, Utils.Pion pion) {
 		super(Num, nom,pion);
 	}
@@ -96,8 +95,6 @@ public class Plongeur extends Aventurier {
 		return getAdjacent(this.getTuile(), listTuile);
 	}
 
-
-
 	@Override
 	public ArrayList<Tuile> getAdjacent(Tuile from, ArrayList<Tuile> listTuile){
 		
@@ -135,6 +132,5 @@ public class Plongeur extends Aventurier {
 		return tuilesDep;
 
 	}
-
 
 }
