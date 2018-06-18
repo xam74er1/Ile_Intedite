@@ -11,12 +11,8 @@ import utils.Utils;
 
 public class Plongeur extends Aventurier {
 
-<<<<<<< HEAD
 	private ArrayList<Tuile> tuilesDep = new ArrayList<Tuile>();
 	private boolean firstIter=true;
-
-=======
->>>>>>> refs/remotes/origin/master
 	public Plongeur(int Num, String nom, Utils.Pion pion) {
 		super(Num, nom,pion);
 	}
@@ -85,7 +81,6 @@ public class Plongeur extends Aventurier {
 		return listdep.contains(to);
 	}
 	
-<<<<<<< HEAD
 	@Override
 	public ArrayList<Tuile> deplacer2(){
 		ArrayList<Tuile> listTuile = new ArrayList<Tuile>();
@@ -96,14 +91,7 @@ public class Plongeur extends Aventurier {
 		firstIter=true;
 		return getAdjacent(this.getTuile(), listTuile);
 	}
-=======
 	
-	
-	
-	
->>>>>>> refs/remotes/origin/master
-
-<<<<<<< HEAD
 	@Override
 	public ArrayList<Tuile> getAdjacent(Tuile from, ArrayList<Tuile> listTuile){
 		
@@ -141,7 +129,5 @@ public class Plongeur extends Aventurier {
 		return tuilesDep;
 
 	}
-=======
->>>>>>> refs/remotes/origin/master
 
 }

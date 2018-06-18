@@ -3,6 +3,7 @@ package ille_intedite;
 import Carte.Carte;
 import Carte.Classique;
 import Carte.CarteInondation;
+import Carte.CarteTresor;
 import IHM.IHM;
 import ille_intedite.Aventurie.Aventurier;
 import ille_intedite.Aventurie.Aviateur;
@@ -202,7 +203,6 @@ public class Controleur implements Observateur{
 				}
 			}
 		}
-<<<<<<< HEAD
 	}
 
 	public void piocherClassique() {
@@ -218,10 +218,6 @@ public class Controleur implements Observateur{
 
 	public void defausserClassique(Classique c) {
 
-=======
-
-
->>>>>>> refs/remotes/origin/master
 	}
 
 
@@ -311,7 +307,6 @@ public class Controleur implements Observateur{
 		grille.activateAll();
 		miseAJourGrille();
 
-<<<<<<< HEAD
 	}
 
 	private void deplacer2() {
@@ -321,10 +316,6 @@ public class Controleur implements Observateur{
 		ihm.afficherDep(a.deplacer2());
 		miseAJourGrille();
 
-=======
-
-
->>>>>>> refs/remotes/origin/master
 	}
 
 	private boolean assecher(String str) {
@@ -395,8 +386,6 @@ public class Controleur implements Observateur{
 	}
 
 
-	//Provisoire 
-	@Deprecated
 	public Aventurier getJoueurTour() {
 		int i =  numTour%(joueursList.size());
 
