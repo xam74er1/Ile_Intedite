@@ -178,6 +178,8 @@ public class Controleur implements Observateur{
 		ihm.addConsole("Jouer n°"+numTour+" as vous de jouer");
 		ihm.miseAJourPlayer(numTour," ( "+getJoueurTour().getNom()+" )", getJoueurTour().getColor());
 		//	Utils.debugln("Fin de tour");
+		grille.activateAll();
+		miseAJourGrille();
 
 	}
 
