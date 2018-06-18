@@ -140,7 +140,7 @@ public class Aventurier {
 	
 
 	public void recupereTresor() {
-		// TODO - implement Aventurier.RecupereTresort
+		// TODO - implement Aventurier.RecupereTresor
 		throw new UnsupportedOperationException();
 	}
 
