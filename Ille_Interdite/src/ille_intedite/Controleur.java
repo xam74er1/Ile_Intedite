@@ -89,6 +89,7 @@ public class Controleur implements Observateur{
 
 				deplacer(msg.getLocation());
 				ihm.updateGrille();
+				getJoueurTour().actionJouer();
 
 
 				//Utils.debugln("Tuille = "+msg.getLocation());
