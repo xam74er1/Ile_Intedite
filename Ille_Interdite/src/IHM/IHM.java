@@ -189,11 +189,15 @@ public class IHM extends Observe{
 		});
 		bouton.add(btnAction_1);
 
-		JButton btnAction_3 = new JButton("action 4");
+		JButton btnAction_3 = new JButton("SacDeSable");
 		btnAction_3.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+				Message m = new Message(TypeMessage.Clique_Asseche_SacDeSable);
+				
+				;
+				
+				notifierObservateur(m);
 			}
 		});
 		bouton.add(btnAction_3);

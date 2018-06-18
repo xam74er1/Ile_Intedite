@@ -122,7 +122,7 @@ public class Controleur implements Observateur{
 				if(grille.getTuile(msg.getLocation()).getStatue() == 1){
 					grille.getTuile(msg.getLocation()).assecher();
 					ihm.afichierConsole("Casse assache en "+msg.getLocation());
-					getJoueurTour().actionJouer();
+					miseAJourGrille();
 				}else{
 					ihm.addConsole("Vous ne pouvez pas asseche en  "+msg.getLocation());
 					//Pour ne pas fair perdre une action
@@ -177,8 +177,10 @@ public class Controleur implements Observateur{
 		ihm.afichierConsole("Fin du tour du joeur n°"+numTour);
 
 		getJoueurTour().finTour();
+		for(int i=0;i < curseur.getNbCartesInond();i++) {
+			
+		}
 		piocherInondation();
-		System.out.println("woua");
 		numTour++;
 		numTour%=joueursList.size();
 
