@@ -296,8 +296,6 @@ public class Controleur implements Observateur{
 
 		Tuile t = grille.getTuile(str);
 
-
-
 		a.deplacer(t);
 		grille.activateAll();
 		miseAJourGrille();
