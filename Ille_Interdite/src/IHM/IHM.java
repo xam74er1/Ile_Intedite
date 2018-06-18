@@ -325,9 +325,9 @@ public class IHM extends Observe{
 		
 		for(Tuile t : Grille.tuilesListe.values()) {
 			if (!listDep.contains(t)) {
-				t.getCase().unActivated();
+				t.getCase().setBlanc();
 			}else {
-				t.getCase().activate();
+				t.getCase().removeBlanc();
 			}
 			
 			
@@ -364,7 +364,7 @@ public class IHM extends Observe{
 
 	public void miseAJourPlayer(int x,String str ,Color c) {
 		lblJoeurN.setForeground(c);
-		lblJoeurN.setText("Joeur n° "+(x+1)+str);
+		lblJoeurN.setText("Joeur nÂ° "+(x+1)+str);
 	}
 
 	public void updateGrille() {
