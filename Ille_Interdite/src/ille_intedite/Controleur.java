@@ -103,6 +103,17 @@ public class Controleur implements Observateur{
 				}
 
 				break;
+				
+			case Clique_Asseche_SacDeSable :
+				System.out.println("Assecher");
+				if(grille.getTuile(msg.getLocation()).getStatue() == -1){
+					ihm.afichierConsole("Casse assache en "+msg.getLocation());
+					getJoueurTour().actionJouer();
+				}else{
+					ihm.addConsole("Vous ne pouvez pas asseche en  "+msg.getLocation());
+					//Pour ne pas fair perdre une action
+				}
+				break;
 
 			case Clique_Asseche :
 				System.out.println("Assecher");
@@ -206,15 +217,30 @@ public class Controleur implements Observateur{
 				}
 			}
 		}
+		if(Parameters.ALEAS) {
+			Collections.shuffle(carteTresorDeck);
+		}
 	}
-	
+
 	public void piocherClassique() {
 		if(carteTresorDeck.size() != 0) {
 			Classique cC = carteTresorDeck.get(0);
 			if(cC instanceof CarteTresor) {
-				getJoueurTour().getListeCarteJoueur().add(cC);		
+				getJoueurTour().getListeCarteJoueur().add(cC);
+				carteTresorDeck.remove(cC);
 			}
-			
+		}
+		else {
+			for(int i =0;i<carteTresorsDefausse.size();i++) {
+				Classique cC = carteTresorsDefausse.get(i);
+				carteTresorDeck.add(cC);
+				carteTresorsDefausse.remove(cC);
+				
+				if(Parameters.ALEAS) {
+					Collections.shuffle(carteTresorDeck);
+				}
+			}
+			piocherClassique();
 		}
 	}
 	

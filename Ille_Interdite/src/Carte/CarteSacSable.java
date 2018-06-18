@@ -10,5 +10,6 @@ public class CarteSacSable extends Classique {
     
     public void utiliserSacDeSable() {
     	
+    	
     }
 }

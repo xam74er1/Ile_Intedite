@@ -11,6 +11,7 @@ package ille_intedite;
  */
 public enum TypeMessage {
     
+	Clique_Asseche_SacDeSable,
     Clique_Tuille,
     Clique_Deplace,
     Clique_DonneCarte,
