@@ -141,6 +141,7 @@ public class Controleur implements Observateur{
 			
 		case Clique_Send :
 			messageConsole = msg.getText();
+                        défausserCarteMain();
 			break;
 		}
 
@@ -245,9 +246,25 @@ public class Controleur implements Observateur{
 	}
 	
 	
-	public void defausserClassique(Classique c) {
-		
-	}
+	public void afficherListeCarteJoueur() {
+              ihm.afichierConsole("Main du joueur :" + getJoueurTour().getNom());
+              
+              for (Classique c : getJoueurTour().getListeCarteJoueur()){
+                  ihm.addConsole(c.getNom());
+              }
+
+        }
+        public void défausserCarteMain() {
+            if (getJoueurTour().getListeCarteJoueur().size() > 5) {
+                
+                int numCarte = Integer.parseInt(messageConsole);
+                this.carteTresorsDefausse.add(getJoueurTour().getListeCarteJoueur().get(numCarte));
+                getJoueurTour().getListeCarteJoueur().remove(numCarte);
+                afficherListeCarteJoueur();
+                
+                
+            }
+        }
 
 
 
