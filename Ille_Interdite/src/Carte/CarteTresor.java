@@ -12,4 +12,14 @@ public class CarteTresor extends Classique {
         this.type = type;
     }
 
+	public NomTresor getType() {
+		return type;
+	}
+
+	public void setType(NomTresor type) {
+		this.type = type;
+	}
+    
+    
+
 }

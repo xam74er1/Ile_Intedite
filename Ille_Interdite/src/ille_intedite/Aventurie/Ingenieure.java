@@ -1,5 +1,7 @@
 package ille_intedite.Aventurie;
 
+import Carte.Carte;
+import Carte.CarteTresor;
 import Carte.NomTresor;
 import ille_intedite.Tuile;
 import utils.Utils;
@@ -14,13 +16,17 @@ public class Ingenieure extends Aventurier {
     
     @Override
     public boolean assecher(Tuile t){
-
+    	System.out.println(" wololo");
 		if(assecherPossible(getTuile(), t)){
-			if(!getDerniereActionAssecher()) {
-				super.actionAnuller();
+			System.out.println("derniereActionAssecher");
+			if(!derniereActionAssecher) {
+				System.out.println(" assecher ");
+				actionAnuller();
 			}
 			t.assecher();
-			setDerniereActionAssecher(!getDerniereActionAssecher());
+			
+			derniereActionAssecher = !derniereActionAssecher;
+			
 			return true;
 		}
 		return false;
@@ -56,21 +62,44 @@ public class Ingenieure extends Aventurier {
 	}
     
     @Override
-    public void recupereTresor() {
+    public NomTresor recupereTresor() {
 		// TODO - implement Aventurier.RecupereTresort
     	if(getDerniereActionAssecher()) {
 			super.actionJouer();
 			setDerniereActionAssecher(false);
 		}
-		throw new UnsupportedOperationException();
+
+		int num = getTuile().getNum();
+		int numTresor=0;
+		if(num/100==3) {
+			 numTresor = (num/10)%10;
+			int nbr = 0;
+
+			for(Carte c : listeCarteJoueur) {
+				if(c instanceof CarteTresor) {
+					CarteTresor ct = (CarteTresor) c;
+					if(ct.getType().getNum()==num) {
+						nbr ++;
+					}
+				}
+			}
+
+		}
+		
+		if(num>=4) {
+		return NomTresor.getWisNum(numTresor);
+		}
+		return null;
+		
+	
 	}
 
     
-	private boolean getDerniereActionAssecher() {
+	public boolean getDerniereActionAssecher() {
 		return derniereActionAssecher;
 	}
 
-	private void setDerniereActionAssecher(boolean derniereActionAssecher) {
+	public void setDerniereActionAssecher(boolean derniereActionAssecher) {
 		this.derniereActionAssecher = derniereActionAssecher;
 	}
     
