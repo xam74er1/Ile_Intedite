@@ -87,7 +87,6 @@ public class Controleur implements Observateur{
 			break;
 
 		case Clique_Asseche :
-<<<<<<< HEAD
 			assecher2();
 			ihm.afichierConsole("Cliquer sur une classe pour l'assecher");
 			break;
@@ -120,55 +119,6 @@ public class Controleur implements Observateur{
 				deplacer(msg.getText());
 				grille.activateAll();
 				miseAJourGrille();
-
-			}
-
-
-
-
-
-			break;
-
-		case Clique_Fin_Tour :
-			finDeTour();
-			break;
-			
-		case Clique_Send :
-			messageConsole = msg.getText();
-			break;
-		}
-
-
-		//Si la conditon au dessu est fausse elle continue 
-
-
-
-
-		lastAction = msg.getMessage();
-
-
-		if(getJoueurTour().getNbAction()<1) {
-			//	System.out.println(" nb act = "+getJoueurTour().getNbAction());
-			finDeTour();
-		}
-
-=======
-			ihm.afichierConsole("Cliquer sur une classe pour l'assecher");
-			break;
-
-		case Clique_Tuille :
-			switch(lastAction) {
-			case Clique_Deplace:
-
-
-				//Utils.debugln("Tuille = "+msg.getLocation());
-
-				//Si le deplacement cest bien passe 
-				deplacer(msg.getLocation());
-					ihm.updateGrille();
-					getJoueurTour().actionJouer();
-
-				break;
 				
 			case Clique_Deplace_Helico :
 				// A modifier
@@ -198,16 +148,10 @@ public class Controleur implements Observateur{
 				}
 				break;
 
-			case Clique_Asseche :
-				System.out.println("Assecher");
-				assecher(msg.getLocation());
-				ihm.updateGrille();
-				getJoueurTour().actionJouer();
-				
-				break;
-
-
 			}
+
+
+
 
 
 			break;
@@ -218,25 +162,8 @@ public class Controleur implements Observateur{
 			
 		case Clique_Send :
 			messageConsole = msg.getText();
-                       // defausserCarteMain();
 			break;
 		}
-
-
-		//Si la conditon au dessu est fausse elle continue 
-
-
-
-
-		lastAction = msg.getMessage();
-
-
-		if(getJoueurTour().getNbAction()<1) {
-			//	System.out.println(" nb act = "+getJoueurTour().getNbAction());
-			finDeTour();
-		}
-
->>>>>>> branch 'master' of https://github.com/xam74er1/Ile_Intedite.git
 	}
 
 	private void finDeTour() {
