@@ -6,7 +6,6 @@ import Carte.CarteTresor;
 import Carte.NomTresor;
 import IHM.IHM;
 import ille_intedite.Controleur;
-import ille_intedite.Grille;
 import ille_intedite.Tuile;
 import java.awt.Color;
 import java.util.*;
@@ -20,7 +19,7 @@ public class Aventurier {
 	Tuile tuile;
 	private int Num;
 	private String nom;
-	private NomTresor getType;
+	private NomTresor type;
 	private Pion pion;
 	// nbr d'action pouvant etre jouer dans le tour 
 	private int nbAction = 3;
@@ -113,9 +112,9 @@ public class Aventurier {
 
 	/**
 	 *
-	 * @param joeur
+	 * @param joueur
 	 */
-	public void donneCarteJoeur(Aventurier joeur) {
+	public void donneCarteJoueur(Aventurier joueur) {
 		// TODO - implement Aventurier.donneCarteJoeur
 		throw new UnsupportedOperationException();
 	}
@@ -127,7 +126,7 @@ public class Aventurier {
 	 */
 	
 
-	public void Defausse() {
+	public void defausse() {
 		// TODO - implement Aventurier.Defausse
 		throw new UnsupportedOperationException();
 	}
@@ -140,7 +139,7 @@ public class Aventurier {
 	
 	
 
-	public void RecupereTresort() {
+	public void recupereTresor() {
 		// TODO - implement Aventurier.RecupereTresort
 		throw new UnsupportedOperationException();
 	}
@@ -215,10 +214,7 @@ public class Aventurier {
 	public String getNom() {
 		return nom;
 	}
-    /**
-     *
-     * @param c
-     */
+
     public void addDefausePerso(CarteTresor c) {
         // TODO - implement Aventurier.addDefausePerso
         throw new UnsupportedOperationException();
@@ -231,12 +227,12 @@ public class Aventurier {
         // TODO - implement Aventurier.restoreMain
         throw new UnsupportedOperationException();
     }
-	public NomTresor getGetType() {
-		return getType;
+	public NomTresor getType() {
+		return type;
 	}
 
-	public void setGetType(NomTresor getType) {
-		this.getType = getType;
+	public void setType(NomTresor type) {
+		this.type = type;
 	}
 
 	public int getNbAction() {
@@ -248,7 +244,7 @@ public class Aventurier {
 	}
 
 	public void actionJouer() {
-		nbAction --;
+		nbAction--;
 	}
 
 	public void actionAnuller() {
@@ -261,7 +257,7 @@ public class Aventurier {
 
 	@Override
 	public String toString() {
-		return "Aventurier [Num=" + Num + ", nom=" + nom + ", getType=" + getType + ", pion=" + pion + ", nbAction="
+		return "Aventurier [Num=" + Num + ", nom=" + nom + ", getType=" + type + ", pion=" + pion + ", nbAction="
 				+ nbAction + "]";
 	}
 	
@@ -286,16 +282,7 @@ public class Aventurier {
 		
 		return adjacent;
 	}
-	
-	public ArrayList<Tuile> deplacer2(Tuile from){
-		ArrayList<Tuile> listTuile = new ArrayList<Tuile>();
-		
-		for (Tuile t : Grille.tuilesListe.values()) {
-			listTuile.add(t);
-		}
-		
-		return getAdjacent(from, listTuile);
-	}
+
 
 
 }

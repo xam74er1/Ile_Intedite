@@ -2,9 +2,7 @@
 package ille_intedite;
 import Carte.Carte;
 import Carte.Classique;
-import Carte.NomTresor;
 import Carte.CarteInondation;
-import Carte.CarteTresor;
 import IHM.IHM;
 import ille_intedite.Aventurie.Aventurier;
 import ille_intedite.Aventurie.Aviateur;
@@ -13,14 +11,14 @@ import ille_intedite.Aventurie.Ingenieure;
 import ille_intedite.Aventurie.Messager;
 import ille_intedite.Aventurie.Navigateur;
 import ille_intedite.Aventurie.Plongeur;
-
 import java.awt.Color;
 import java.util.*;
 import java.util.Map.Entry;
-
 import utils.Parameters;
 import utils.Utils;
 import utils.Utils.Pion;
+import ille_intedite.TypeMessage;
+import Carte.*;
 
 public class Controleur implements Observateur{
 	//Com de referencement 1
@@ -152,7 +150,7 @@ public class Controleur implements Observateur{
 			
 		case Clique_Send :
 			messageConsole = msg.getText();
-                        defausserCarteMain();
+                       // defausserCarteMain();
 			break;
 		}
 
@@ -177,10 +175,9 @@ public class Controleur implements Observateur{
 		ihm.afichierConsole("Fin du tour du joeur n°"+numTour);
 
 		getJoueurTour().finTour();
-		for(int i=0;i < curseur.getNbCartesInond();i++) {
-			
-		}
 		piocherInondation();
+			
+
 		numTour++;
 		numTour%=joueursList.size();
 
@@ -189,6 +186,7 @@ public class Controleur implements Observateur{
 		//	Utils.debugln("Fin de tour");
 
 	}
+
 
 	////////////////////////	
 	//	Gestion des carte //	
@@ -235,49 +233,6 @@ public class Controleur implements Observateur{
 			Collections.shuffle(carteTresorDeck);
 		}
 	}
-
-	public void piocherClassique() {
-		if(carteTresorDeck.size() != 0) {
-			Classique cC = carteTresorDeck.get(0);
-			if(cC instanceof CarteTresor) {
-				getJoueurTour().getListeCarteJoueur().add(cC);
-				carteTresorDeck.remove(cC);
-			}
-		}
-		else {
-			for(int i =0;i<carteTresorsDefausse.size();i++) {
-				Classique cC = carteTresorsDefausse.get(i);
-				carteTresorDeck.add(cC);
-				carteTresorsDefausse.remove(cC);
-				
-				if(Parameters.ALEAS) {
-					Collections.shuffle(carteTresorDeck);
-				}
-			}
-			piocherClassique();
-		}
-	}
-	
-	
-	public void afficherListeCarteJoueur() {
-              ihm.afichierConsole("Main du joueur :" + getJoueurTour().getNom());
-              
-              for (Classique c : getJoueurTour().getListeCarteJoueur()){
-                  ihm.addConsole(c.getNom());
-              }
-
-        }
-        public void defausserCarteMain() {
-            if (getJoueurTour().getListeCarteJoueur().size() > 5) {
-                
-                int numCarte = Integer.parseInt(messageConsole);
-                this.carteTresorsDefausse.add(getJoueurTour().getListeCarteJoueur().get(numCarte));
-                getJoueurTour().getListeCarteJoueur().remove(numCarte);
-                afficherListeCarteJoueur();
-                
-                
-            }
-        }
 
 
 
@@ -329,7 +284,6 @@ public class Controleur implements Observateur{
 
 		//Je met sur 0 0 pour les test 
 
-
 		creeDeckInondation();
 
 		
@@ -369,15 +323,8 @@ public class Controleur implements Observateur{
 			return false;
 		}
 
-	}
-	
-	private void deplacer2() {
-		
-		Aventurier a = getJoueurTour();
-		
-		
-		
-		
+
+
 	}
 
 	private boolean assecher(String str) {
@@ -448,6 +395,8 @@ public class Controleur implements Observateur{
 	}
 
 
+	//Provisoire 
+	@Deprecated
 	public Aventurier getJoueurTour() {
 		int i =  numTour%(joueursList.size());
 

@@ -26,6 +26,7 @@ public class Curseur {
 		if(niveau>7 && niveau<10) {
 			return 5;
 		}
+		else { return 0;}
 			
 	}
 

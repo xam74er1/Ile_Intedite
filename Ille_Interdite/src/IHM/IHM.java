@@ -317,10 +317,6 @@ public class IHM extends Observe{
 			}
 		};
 	}
-	
-	public void afficherDep(ArrayList<Tuile> listDep) {
-		
-	}
 
 	//effece les message et ajoute un message 
 	public void afichierConsole(String str){
@@ -351,7 +347,7 @@ public class IHM extends Observe{
 
 	public void miseAJourPlayer(int x,String str ,Color c) {
 		lblJoeurN.setForeground(c);
-		lblJoeurN.setText("Joeur n° "+(x+1)+str);
+		lblJoeurN.setText("Joeur n° "+x+str);
 	}
 
 	public void updateGrille() {
