@@ -14,6 +14,8 @@ import ille_intedite.Aventurie.Ingenieure;
 import ille_intedite.Aventurie.Messager;
 import ille_intedite.Aventurie.Navigateur;
 import ille_intedite.Aventurie.Plongeur;
+import Carte.NomTresor;
+import Carte.CarteHelicoptere;
 
 import java.awt.Color;
 import java.util.*;
@@ -78,6 +80,7 @@ public class Controleur implements Observateur{
 
 		switch(msg.getMessage()) {
 		case Clique_Deplace :
+			deplacer2();
 			ihm.afichierConsole("Cliquer sur une classe pour vous deplace");
 			break;
 
@@ -93,35 +96,50 @@ public class Controleur implements Observateur{
 				//Utils.debugln("Tuille = "+msg.getLocation());
 
 				//Si le deplacement cest bien passe 
-				if(deplacer(msg.getLocation())) {
-					ihm.afichierConsole("Deplacement en "+msg.getLocation());
+				deplacer(msg.getLocation());
+					ihm.updateGrille();
 					getJoueurTour().actionJouer();
-					//Si le deplacement cest mal passe 
-				}else {
-					Tuile to =getJoueurTour().getPosition();
-					ihm.addConsole("Vous ne pouvez pas vous deplace de"+to.getxT()+":"+to.getyT()+" a  "+msg.getLocation());
+
+				break;
+				
+			case Clique_Deplace_Helico :
+				// A modifier
+				if (grille.getTuile(msg.getLocation()).getStatue() != 2 && grille.getTuile(msg.getLocation()).getStatue() != -1) {
+					Tuile t = grille.getTuile(msg.getLocation());
+					for(int i=0;i<t.getAventurie().size();i++) {
+						
+					}
+					
+				}
+				else {
+					ihm.addConsole("Vous ne pouvez pas utiliser l'helicopter sur cette case "+msg.getLocation());
 					//Pour ne pas fair perdre une action 
 
 				}
-
 				break;
-
-			case Clique_Asseche :
+				
+			case Clique_Asseche_SacDeSable :
 				System.out.println("Assecher");
-				if(assecher(msg.getLocation())){
+				if(grille.getTuile(msg.getLocation()).getStatue() == 1){
+					grille.getTuile(msg.getLocation()).assecher();
 					ihm.afichierConsole("Casse assache en "+msg.getLocation());
-					getJoueurTour().actionJouer();
+					miseAJourGrille();
 				}else{
 					ihm.addConsole("Vous ne pouvez pas asseche en  "+msg.getLocation());
 					//Pour ne pas fair perdre une action
 				}
 				break;
 
+			case Clique_Asseche :
+				System.out.println("Assecher");
+				assecher(msg.getLocation());
+				ihm.updateGrille();
+				getJoueurTour().actionJouer();
+				
+				break;
+
 
 			}
-
-
-
 
 
 			break;
@@ -132,6 +150,7 @@ public class Controleur implements Observateur{
 			
 		case Clique_Send :
 			messageConsole = msg.getText();
+                       // defausserCarteMain();
 			break;
 		}
 
