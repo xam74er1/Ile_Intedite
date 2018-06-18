@@ -7,9 +7,9 @@ public class Curseur {
 	 * 
 	 * @param niv
 	 */
-	public Curseur(String niv) {
+	public Curseur(int niveau) {
 		// TODO - implement Curseur.Curseur
-		throw new UnsupportedOperationException();
+		this.niveau = niveau;
 	}
 
 	public int getNbCartesInond() {
