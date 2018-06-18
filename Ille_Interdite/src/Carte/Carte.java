@@ -24,4 +24,5 @@ public abstract class Carte {
 		this.nom = nom;
 	}
         //test netbeans 2
+        //test
 }
