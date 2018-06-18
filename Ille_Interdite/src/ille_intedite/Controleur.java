@@ -144,7 +144,7 @@ public class Controleur implements Observateur{
 			
 		case Clique_Send :
 			messageConsole = msg.getText();
-                       // defausserCarteMain();
+            defausserCarteMain();
 			break;
 		}
 
@@ -376,6 +376,34 @@ public class Controleur implements Observateur{
 		}
 
 	}
+	
+	public void afficherListeCarteJoueur() {
+        ihm.afichierConsole("Main du joueur :" + getJoueurTour().getNom());
+        int i = 1;
+        for (Classique c : getJoueurTour().getListeCarteJoueur()){
+            ihm.addConsole(i +" : " + c.getNom());
+            i = i+1;
+        }
+        
+        if (getJoueurTour().getListeCarteJoueur().size() > 5) {
+            
+            ihm.addConsole("Vous avez " + (getJoueurTour().getListeCarteJoueur().size()-5) + " carte en trop dans votre main, choisir les cartes à défausser :");
+        }
+        
+        
+  }
+  public void defausserCarteMain() {
+      if (getJoueurTour().getListeCarteJoueur().size() > 5) {
+          
+          int numCarte = Integer.parseInt(messageConsole) -1;
+          this.carteTresorsDefausse.add(getJoueurTour().getListeCarteJoueur().get(numCarte));
+          getJoueurTour().getListeCarteJoueur().remove(numCarte);
+          afficherListeCarteJoueur();
+          
+          
+      }
+  }
+
 
 	public void piocher5Inondation() {
 		for(int i = 0 ;i <5 ;i++) {
