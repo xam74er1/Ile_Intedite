@@ -94,7 +94,7 @@ public class Controleur implements Observateur{
 				if(deplacer(msg.getLocation())) {
 					ihm.afichierConsole("Deplacement en "+msg.getLocation());
 					getJoueurTour().actionJouer();
-					//Si le deplacement cest mal passe 
+					//Si le deplacement cest mal passe
 				}else {
 					Tuile to =getJoueurTour().getPosition();
 					ihm.addConsole("Vous ne pouvez pas vous deplace de"+to.getxT()+":"+to.getyT()+" a  "+msg.getLocation());
@@ -104,9 +104,26 @@ public class Controleur implements Observateur{
 
 				break;
 				
+			case Clique_Deplace_Helico :
+				// A modifier
+				if (grille.getTuile(msg.getLocation()).getStatue() != 2 && grille.getTuile(msg.getLocation()).getStatue() != -1) {
+					Tuile t = grille.getTuile(msg.getLocation());
+					for(int i=0;i<t.getAventurie().size();i++) {
+						
+					}
+					
+				}
+				else {
+					ihm.addConsole("Vous ne pouvez pas utiliser l'helicopter sur cette case "+msg.getLocation());
+					//Pour ne pas fair perdre une action 
+
+				}
+				break;
+				
 			case Clique_Asseche_SacDeSable :
 				System.out.println("Assecher");
-				if(grille.getTuile(msg.getLocation()).getStatue() == -1){
+				if(grille.getTuile(msg.getLocation()).getStatue() == 1){
+					grille.getTuile(msg.getLocation()).assecher();
 					ihm.afichierConsole("Casse assache en "+msg.getLocation());
 					getJoueurTour().actionJouer();
 				}else{

@@ -17,7 +17,7 @@ public enum TypeMessage {
     Clique_DonneCarte,
     Clique_Asseche,
     Clique_Send,
-    Clique_Fin_Tour
-    ;
+    Clique_Fin_Tour, 
+    Clique_Deplace_Helico;
     
 }

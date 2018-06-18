@@ -8,8 +8,4 @@ public class CarteSacSable extends Classique {
         super(nom);
     }
     
-    public void utiliserSacDeSable() {
-    	
-    	
-    }
 }
