@@ -184,7 +184,6 @@ public class Controleur implements Observateur{
 		piocherTresor();
 		piocherTresor();
 		
-		System.out.println("woua");
 		numTour++;
 		numTour%=joueursList.size();
 		afficherListeCarteJoueur();
