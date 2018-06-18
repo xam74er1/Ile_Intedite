@@ -182,6 +182,7 @@ public class Controleur implements Observateur{
 
 	}
 
+
 	////////////////////////	
 	//	Gestion des carte //	
 	////////////////////////
