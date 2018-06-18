@@ -52,10 +52,7 @@ public class Controleur implements Observateur{
 		init();
 		numTour =0;
 		NBR_JOUEUR = joueursList.size();
-		//Utils.debugln("controleur start");
-		
-		
-		
+		//Utils.debugln("controleur start");	
 
 	}
 
@@ -94,7 +91,7 @@ public class Controleur implements Observateur{
 				if(deplacer(msg.getLocation())) {
 					ihm.afichierConsole("Deplacement en "+msg.getLocation());
 					getJoueurTour().actionJouer();
-					//Si le deplacement cest mal passe
+					//Si le deplacement cest mal passe 
 				}else {
 					Tuile to =getJoueurTour().getPosition();
 					ihm.addConsole("Vous ne pouvez pas vous deplace de"+to.getxT()+":"+to.getyT()+" a  "+msg.getLocation());
@@ -147,9 +144,6 @@ public class Controleur implements Observateur{
 			}
 
 
-
-
-
 			break;
 
 		case Clique_Fin_Tour :
@@ -158,6 +152,7 @@ public class Controleur implements Observateur{
 			
 		case Clique_Send :
 			messageConsole = msg.getText();
+                        defausserCarteMain();
 			break;
 		}
 
@@ -262,9 +257,25 @@ public class Controleur implements Observateur{
 	}
 	
 	
-	public void defausserClassique(Classique c) {
-		
-	}
+	public void afficherListeCarteJoueur() {
+              ihm.afichierConsole("Main du joueur :" + getJoueurTour().getNom());
+              
+              for (Classique c : getJoueurTour().getListeCarteJoueur()){
+                  ihm.addConsole(c.getNom());
+              }
+
+        }
+        public void defausserCarteMain() {
+            if (getJoueurTour().getListeCarteJoueur().size() > 5) {
+                
+                int numCarte = Integer.parseInt(messageConsole);
+                this.carteTresorsDefausse.add(getJoueurTour().getListeCarteJoueur().get(numCarte));
+                getJoueurTour().getListeCarteJoueur().remove(numCarte);
+                afficherListeCarteJoueur();
+                
+                
+            }
+        }
 
 
 
