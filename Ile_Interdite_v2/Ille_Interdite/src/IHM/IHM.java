@@ -313,7 +313,6 @@ public class IHM extends Observe{
 			}
 		};
 	}
-<<<<<<< HEAD
 	
 	public void afficherDep(ArrayList<Tuile> listDep) {
 		
@@ -328,8 +327,6 @@ public class IHM extends Observe{
 		}
 		
 	}
-=======
->>>>>>> refs/remotes/origin/master
 
 	//effece les message et ajoute un message 
 	public void afichierConsole(String str){
@@ -360,7 +357,7 @@ public class IHM extends Observe{
 
 	public void miseAJourPlayer(int x,String str ,Color c) {
 		lblJoeurN.setForeground(c);
-		lblJoeurN.setText("Joeur n° "+x+str);
+		lblJoeurN.setText("Joeur n° "+(x+1)+str);
 	}
 
 	public void updateGrille() {

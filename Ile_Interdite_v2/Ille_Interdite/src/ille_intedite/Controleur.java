@@ -2,7 +2,9 @@
 package ille_intedite;
 import Carte.Carte;
 import Carte.Classique;
+import Carte.NomTresor;
 import Carte.CarteInondation;
+import Carte.CarteTresor;
 import IHM.IHM;
 import ille_intedite.Aventurie.Aventurier;
 import ille_intedite.Aventurie.Aviateur;
@@ -191,18 +193,23 @@ public class Controleur implements Observateur{
 			for(int j=0;j<5;j++) {
 				switch (i) {
 				case 1:
-					//					carteTresorDeck.add(new CarteTresor("carte"+i+":"+j, ))  A modifier
+					carteTresorDeck.add(new CarteTresor("CristalArdent"+j, NomTresor.CristalArdent));
 					break;
 				case 2:
+					// Calise
+					carteTresorDeck.add(new CarteTresor("CaliceOnde"+j, NomTresor.CaliceOnde));
 					break;
 				case 3:
+					// Statue
+					carteTresorDeck.add(new CarteTresor("StatueZephir"+j, NomTresor.StatueZephir));
 					break;
 				case 4:
+					// Pierre
+					carteTresorDeck.add(new CarteTresor("PierreSacree"+j, NomTresor.PierreSacree));
 					break;
 				}
 			}
 		}
-<<<<<<< HEAD
 	}
 
 	public void piocherClassique() {
@@ -218,10 +225,6 @@ public class Controleur implements Observateur{
 
 	public void defausserClassique(Classique c) {
 
-=======
-
-
->>>>>>> refs/remotes/origin/master
 	}
 
 
@@ -311,7 +314,6 @@ public class Controleur implements Observateur{
 		grille.activateAll();
 		miseAJourGrille();
 
-<<<<<<< HEAD
 	}
 
 	private void deplacer2() {
@@ -321,10 +323,6 @@ public class Controleur implements Observateur{
 		ihm.afficherDep(a.deplacer2());
 		miseAJourGrille();
 
-=======
-
-
->>>>>>> refs/remotes/origin/master
 	}
 
 	private boolean assecher(String str) {
@@ -395,8 +393,6 @@ public class Controleur implements Observateur{
 	}
 
 
-	//Provisoire 
-	@Deprecated
 	public Aventurier getJoueurTour() {
 		int i =  numTour%(joueursList.size());
 
