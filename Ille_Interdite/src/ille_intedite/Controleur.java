@@ -1,11 +1,13 @@
 
 package ille_intedite;
 import Carte.Carte;
+import Carte.CarteHelicoptere;
 import Carte.Classique;
 import Carte.CarteInondation;
 import Carte.CarteTresor;
 import Carte.CarteSacSable;
 import Carte.MonteeEaux;
+import Carte.NomTresor;
 import IHM.IHM;
 import ille_intedite.Aventurie.Aventurier;
 import ille_intedite.Aventurie.Aviateur;
@@ -183,6 +185,8 @@ public class Controleur implements Observateur{
 		ihm.addConsole("Jouer n°"+numTour+" as vous de jouer");
 		ihm.miseAJourPlayer(numTour," ( "+getJoueurTour().getNom()+" )", getJoueurTour().getColor());
 		//	Utils.debugln("Fin de tour");
+		grille.activateAll();
+		miseAJourGrille();
 
 	}
 
@@ -351,6 +355,11 @@ public class Controleur implements Observateur{
 		miseAJourGrille();
 
 	}
+	
+	private void deplacerUrgence(Aventurier a) {
+		ihm.afficherDepUrg(a.deplacer2());
+		miseAJourGrille();
+	}
 
 	private void assecher(String str) {
 
@@ -426,6 +435,9 @@ public class Controleur implements Observateur{
 		if(inondationDeck.size()!=0) {
 			CarteInondation cInP = inondationDeck.get(0);
 			cInP.getTuile().inonder();
+			for (Aventurier a : cInP.getTuile().getAventurie()) {
+				deplacerUrgence(a);
+			}
 			inondationDefausse.add(cInP);
 			inondationDeck.remove(cInP);
 		}
