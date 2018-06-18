@@ -339,8 +339,15 @@ public class Controleur implements Observateur{
 			return false;
 		}
 
-
-
+	}
+	
+	private void deplacer2() {
+		
+		Aventurier a = getJoueurTour();
+		
+		
+		
+		
 	}
 
 	private boolean assecher(String str) {
@@ -411,8 +418,6 @@ public class Controleur implements Observateur{
 	}
 
 
-	//Provisoire 
-	@Deprecated
 	public Aventurier getJoueurTour() {
 		int i =  numTour%(joueursList.size());
 

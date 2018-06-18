@@ -6,6 +6,7 @@ import Carte.CarteTresor;
 import Carte.NomTresor;
 import IHM.IHM;
 import ille_intedite.Controleur;
+import ille_intedite.Grille;
 import ille_intedite.Tuile;
 import java.awt.Color;
 import java.util.*;
@@ -285,7 +286,16 @@ public class Aventurier {
 		
 		return adjacent;
 	}
-
+	
+	public ArrayList<Tuile> deplacer2(Tuile from){
+		ArrayList<Tuile> listTuile = new ArrayList<Tuile>();
+		
+		for (Tuile t : Grille.tuilesListe.values()) {
+			listTuile.add(t);
+		}
+		
+		return getAdjacent(from, listTuile);
+	}
 
 
 }
