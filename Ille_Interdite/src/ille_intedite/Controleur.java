@@ -4,6 +4,8 @@ import Carte.Carte;
 import Carte.Classique;
 import Carte.CarteInondation;
 import Carte.CarteTresor;
+import Carte.CarteSacSable;
+import Carte.MonteeEaux;
 import IHM.IHM;
 import ille_intedite.Aventurie.Aventurier;
 import ille_intedite.Aventurie.Aviateur;
@@ -172,6 +174,12 @@ public class Controleur implements Observateur{
 		for (int i=0;i<curseur.getNbCartesInond();i++) {
 			piocherInondation();
 		}
+		for (int i=0;i<2;i++) {
+			piocherClassique();
+		}
+		//afficherListeCarteJoueur
+		
+		
 		
 		numTour++;
 		numTour%=joueursList.size();
@@ -225,6 +233,15 @@ public class Controleur implements Observateur{
 					break;
 				}
 			}
+			
+			carteTresorDeck.add(new CarteSacSable("Sac de sable 1"));
+			carteTresorDeck.add(new CarteSacSable("Sac de sable 2"));
+			carteTresorDeck.add(new CarteSacSable("Sac de sable 3"));
+			
+			carteTresorDeck.add(new MonteeEaux("Monte des EAU 1"));
+			carteTresorDeck.add(new MonteeEaux("Monte des EAU 2"));
+			//carteTresorDeck.add(new MonteeEaux("Monte des EAU 3"));
+			
 		}
 		if(Parameters.ALEAS) {
 			Collections.shuffle(carteTresorDeck);
@@ -236,15 +253,11 @@ public class Controleur implements Observateur{
 		if(carteTresorDeck.size() != 0) {
 			Classique cC = carteTresorDeck.get(0);
 			if(cC instanceof CarteTresor) {
-				getJoueurTour().getListeCarteJoueur().add(cC);		
+				getJoueurTour().getListeCarteJoueur().add(cC);	
+				carteTresorDeck.remove(cC);
 			}
 
 		}
-	}
-
-
-	public void defausserClassique(Classique c) {
-
 	}
 
 
