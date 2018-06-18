@@ -2,10 +2,15 @@ package IHM;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+//import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -18,14 +23,16 @@ import ille_intedite.TypeMessage;
 import ille_intedite.Aventurie.Aventurier;
 
 public class CasePlateau extends JPanel  {
-//Com de referencement
+	//Com de referencement
 	private String str,location;
 	private Observe o;
 	private Tuile t;
 	private boolean activated = true;
 	private MouseListener m;
 	private Color c = new Color(204, 102, 0);
-
+	private File f;
+	private BufferedImage image;
+	String path=" ";
 	public CasePlateau(String str,String location, Observe o,Tuile t) {
 
 		this.str = str;
@@ -42,9 +49,7 @@ public class CasePlateau extends JPanel  {
 		lblNewLabel.setForeground(Color.BLACK);
 		add(lblNewLabel);
 		setBackground(Color.gray);
-		
-		this.t.setCase(this);
-		
+
 		//this.setBorder(BorderFactory.createLineBorder(Color.black));
 
 	}
@@ -55,25 +60,114 @@ public class CasePlateau extends JPanel  {
 		int s = x;
 		int xa = x;
 		int ya = y;
-		
+
+
+		//		this.setLocation(t.getxT()*40, t.getyT()*40);
+
+		//	this.setPreferredSize(new Dimension(50,50));
+		//Image 
+
+		BufferedImage image;
+
+
+
+
+
 		if(activated) {
 			g.setColor(c);
 
 			g.fillRect(0, 0,  this.getWidth(),this.getHeight());
+
+			g.setColor(Color.black);
+			g.drawRect(0, 0,  this.getWidth(),this.getHeight());
+		}
+
+
+
+		//images\tuiles\LaCaverneDesOmbres_Inonde.png
+		//images\tuiles\LaCarverneDesOmbres_Inonde.png
+
+		if(activated) {
+			String name = t.getNom();
+			path=" ";
+
+			int min = Math.min(this.getWidth(),this.getHeight());
+
+
+			name=	name.replace(" d", "D");
+			name=	name.replace(" ", "");
+			name = name.replace("’", "");
+			name = name.replace("'", "");
+
+
+
+			try {
+				if(t.getStatue()<2) {
+
+
+					if(t.getStatue()==0) {
+						path = "images\\tuiles\\"+name+".png";
+					}else if(t.getStatue()==1) {
+						path = "images\\tuiles\\"+name+"_Inonde.png";
+					}
+
+					image = ImageIO.read(new File(path));
+					//super.paintComponent(g);
+					g.drawImage(image, min, 0,min,min, null);
+				}else {
+					path = "images\\watterTexture.jpg";
+					System.out.println("coule");
+					image = ImageIO.read(new File(path));
+					//super.paintComponent(g);
+					g.drawImage(image, 0,0,this.getWidth(),this.getHeight(), null);
+
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				System.out.println("name = "+name);
+				System.out.println("erruer :"+ path+" ");
+				//e.printStackTrace();
+			}
+		}else {
+
+			try {
+				image = ImageIO.read(new File("images\\watterTexture.jpg"));
+				//super.paintComponent(g);
+				g.drawImage(image, 0, 0,this.getWidth(),this.getHeight(), null);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				//System.out.println(new File().exists());
+				e.printStackTrace();
+			}
 		}
 
 		for(Aventurier a : t.getAventurie()) {
-			g.setColor(a.getColor());
-			g.fillOval(xa, ya, xa+s, ya+s);
-			System.out.println(xa);
+			String name = a.getPion().toString();
+			path = "images\\pions\\pion"+name+".png";
+
+			try {
+				image = ImageIO.read(new File(path));
+				//super.paintComponent(g);
+				g.drawImage(image, xa, ya, 10*s, 10*s, null);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				//System.out.println(new File().exists());
+				System.out.println(path);
+				//e.printStackTrace();
+			}
+			//			g.setColor(a.getColor());
+			//			g.fillOval(xa, ya, xa+s, ya+s);
 			xa += 2*s;
 
 		}
 
-		
-		
+
+
+
+
+
 	}
-	
+
 	public MouseListener mouse() {
 		return new MouseListener() {
 
@@ -115,7 +209,7 @@ public class CasePlateau extends JPanel  {
 
 			}
 		};
-		
+
 	}
 
 
@@ -124,18 +218,17 @@ public class CasePlateau extends JPanel  {
 		this.removeMouseListener(m);
 		activated = false;
 	}
-	
+
 	public void activate() {
 		this.addMouseListener(mouse());
 		activated = true;
-	}
-	
-	public boolean isActivated() {
-		return activated;
 	}
 
 	public void setFond(Color c) {
 		this.c =c ;
 	}
 
+
 }
+
+//testEUUU
