@@ -86,16 +86,10 @@ public class Controleur implements Observateur{
 				//Utils.debugln("Tuille = "+msg.getLocation());
 
 				//Si le deplacement cest bien passe 
-				if(deplacer(msg.getLocation())) {
+				deplacer(msg.getLocation());
 					ihm.afichierConsole("Deplacement en "+msg.getLocation());
+					ihm.updateGrille();
 					getJoueurTour().actionJouer();
-					//Si le deplacement cest mal passe 
-				}else {
-					Tuile to =getJoueurTour().getPosition();
-					ihm.addConsole("Vous ne pouvez pas vous deplace de"+to.getxT()+":"+to.getyT()+" a  "+msg.getLocation());
-					//Pour ne pas fair perdre une action 
-
-				}
 
 				break;
 				
@@ -187,7 +181,6 @@ public class Controleur implements Observateur{
 
 	}
 
-
 	////////////////////////	
 	//	Gestion des carte //	
 	////////////////////////
@@ -200,11 +193,11 @@ public class Controleur implements Observateur{
 			}
 
 		}
-		
+
 		if(Parameters.ALEAS) {
 			Collections.shuffle(inondationDeck);
 		}
-		
+
 	}
 
 	public void creeDeckClassique() {
@@ -232,6 +225,22 @@ public class Controleur implements Observateur{
 		if(Parameters.ALEAS) {
 			Collections.shuffle(carteTresorDeck);
 		}
+
+	}
+
+	public void piocherClassique() {
+		if(carteTresorDeck.size() != 0) {
+			Classique cC = carteTresorDeck.get(0);
+			if(cC instanceof CarteTresor) {
+				getJoueurTour().getListeCarteJoueur().add(cC);		
+			}
+
+		}
+	}
+
+
+	public void defausserClassique(Classique c) {
+
 	}
 
 
@@ -242,20 +251,20 @@ public class Controleur implements Observateur{
 		//creer les aventuriers
 		Aventurier a;
 		//Marche
-		
+
 		a = new Ingenieure(0,"Ingenieure",Pion.ROUGE);
 
 		joueursList.add(a);
-		
+
 		a = new Plongeur(4,"Plongeur",Pion.VIOLET);
 		joueursList.add(a);
-		
+
 		a = new Navigateur(5,"Navigateur",Pion.JAUNE);
 		joueursList.add(a);
-		
+
 		a = new Messager(3,"Messager",Pion.ORANGE);
 		joueursList.add(a);
-		
+
 		a = new Aviateur(2,"Aviateur",Pion.BLEU);
 
 		joueursList.add(a);
@@ -263,17 +272,17 @@ public class Controleur implements Observateur{
 		a = new Explorateur(1,"Explorateur",Pion.VERT);
 
 		joueursList.add(a);
-		
-		
 
-//		int i = 0;
-//				for(Pion p : Pion.values()){
-//					Aventurier a = new Aventurier(i,"Bob Morane",p);
-//		
-//					//a.setPosition(grille.getTuile(i, 0));
-//					joueursList.add(a);
-//					i++;
-//				}
+
+
+		//		int i = 0;
+		//				for(Pion p : Pion.values()){
+		//					Aventurier a = new Aventurier(i,"Bob Morane",p);
+		//		
+		//					//a.setPosition(grille.getTuile(i, 0));
+		//					joueursList.add(a);
+		//					i++;
+		//				}
 
 		grille = new Grille(ihm,joueursList);
 
@@ -286,11 +295,11 @@ public class Controleur implements Observateur{
 
 		creeDeckInondation();
 
-		
-//		for(int j =0;j<5;j++) {
-//			piocherInondation();
-//		}
-		
+
+		//		for(int j =0;j<5;j++) {
+		//			piocherInondation();
+		//		}
+
 		ihm.miseAJourPlayer(0," ( "+getJoueurTour().getNom()+" )", getJoueurTour().getColor());
 	}
 
@@ -309,21 +318,25 @@ public class Controleur implements Observateur{
 		throw new UnsupportedOperationException();
 	}
 
-	private boolean deplacer(String str) {
+	private void deplacer(String str) {
 		Aventurier a = getJoueurTour();
 
 		Tuile t = grille.getTuile(str);
-		
-		
-
-		if(a.deplacer(t)) {
-			miseAJourGrille();
-			return true;
-		}else {
-			return false;
-		}
 
 
+
+		a.deplacer(t);
+		grille.activateAll();
+		miseAJourGrille();
+
+	}
+
+	private void deplacer2() {
+
+		Aventurier a = getJoueurTour();
+
+		ihm.afficherDep(a.deplacer2());
+		miseAJourGrille();
 
 	}
 
@@ -363,11 +376,11 @@ public class Controleur implements Observateur{
 		}
 
 	}
-	
+
 	public void piocher5Inondation() {
-		 for(int i = 0 ;i <5 ;i++) {
+		for(int i = 0 ;i <5 ;i++) {
 			piocherInondation();
-			}
+		}
 	}
 
 	//	Mise en place de la pioche et deffause auto des carte innondation
@@ -384,11 +397,11 @@ public class Controleur implements Observateur{
 				inondationDeck.add(cInD);
 				inondationDefausse.remove(cInD);
 			}
-			
+
 			if(Parameters.ALEAS) {
 				Collections.shuffle(inondationDeck);
 			}
-			
+
 			piocherInondation();		
 		}
 		miseAJourGrille();
@@ -450,7 +463,7 @@ public class Controleur implements Observateur{
 
 	}	
 	public void miseAJourDep(ArrayList<Tuile> listdep) {
-		
+
 		HashMap<String, Tuile> hmTuille = ((Grille) grille).getTuilesListe();
 
 		Iterator<Entry<String, Tuile>> it = hmTuille.entrySet().iterator();
@@ -458,13 +471,13 @@ public class Controleur implements Observateur{
 		while(it.hasNext()) {
 			Entry<String, Tuile> me = it.next();
 
-						
+
 			if(!listdep.contains(me.getValue())) {
 				ihm.getButonPlateau(me.getKey()).unActivated();
 			}			
-		
-			
-		
+
+
+
 		}
 	}
 }
