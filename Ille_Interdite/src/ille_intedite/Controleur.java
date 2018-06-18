@@ -148,6 +148,8 @@ public class Controleur implements Observateur{
 			break;
 		}
 
+		
+		
 
 		//Si la conditon au dessu est fausse elle continue 
 
