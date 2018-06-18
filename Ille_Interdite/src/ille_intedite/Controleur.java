@@ -177,10 +177,17 @@ public class Controleur implements Observateur{
 		ihm.afichierConsole("Fin du tour du joeur n°"+numTour);
 
 		getJoueurTour().finTour();
-		piocherInondation();
+		
+		for(int i =0;i<curseur.getNbCartesInond();i++) {
+			piocherInondation();
+		}
+		piocherTresor();
+		piocherTresor();
+		
 		System.out.println("woua");
 		numTour++;
 		numTour%=joueursList.size();
+		afficherListeCarteJoueur();
 
 		ihm.addConsole("Jouer n°"+numTour+" as vous de jouer");
 		ihm.miseAJourPlayer(numTour," ( "+getJoueurTour().getNom()+" )", getJoueurTour().getColor());
