@@ -16,6 +16,8 @@ import ille_intedite.Aventurie.Ingenieure;
 import ille_intedite.Aventurie.Messager;
 import ille_intedite.Aventurie.Navigateur;
 import ille_intedite.Aventurie.Plongeur;
+import Carte.NomTresor;
+import Carte.CarteHelicoptere;
 
 import java.awt.Color;
 import java.util.*;
@@ -85,6 +87,7 @@ public class Controleur implements Observateur{
 			break;
 
 		case Clique_Asseche :
+<<<<<<< HEAD
 			assecher2();
 			ihm.afichierConsole("Cliquer sur une classe pour l'assecher");
 			break;
@@ -149,6 +152,91 @@ public class Controleur implements Observateur{
 			finDeTour();
 		}
 
+=======
+			ihm.afichierConsole("Cliquer sur une classe pour l'assecher");
+			break;
+
+		case Clique_Tuille :
+			switch(lastAction) {
+			case Clique_Deplace:
+
+
+				//Utils.debugln("Tuille = "+msg.getLocation());
+
+				//Si le deplacement cest bien passe 
+				deplacer(msg.getLocation());
+					ihm.updateGrille();
+					getJoueurTour().actionJouer();
+
+				break;
+				
+			case Clique_Deplace_Helico :
+				// A modifier
+				if (grille.getTuile(msg.getLocation()).getStatue() != 2 && grille.getTuile(msg.getLocation()).getStatue() != -1) {
+					Tuile t = grille.getTuile(msg.getLocation());
+					for(int i=0;i<t.getAventurie().size();i++) {
+						
+					}
+					
+				}
+				else {
+					ihm.addConsole("Vous ne pouvez pas utiliser l'helicopter sur cette case "+msg.getLocation());
+					//Pour ne pas fair perdre une action 
+
+				}
+				break;
+				
+			case Clique_Asseche_SacDeSable :
+				System.out.println("Assecher");
+				if(grille.getTuile(msg.getLocation()).getStatue() == 1){
+					grille.getTuile(msg.getLocation()).assecher();
+					ihm.afichierConsole("Casse assache en "+msg.getLocation());
+					miseAJourGrille();
+				}else{
+					ihm.addConsole("Vous ne pouvez pas asseche en  "+msg.getLocation());
+					//Pour ne pas fair perdre une action
+				}
+				break;
+
+			case Clique_Asseche :
+				System.out.println("Assecher");
+				assecher(msg.getLocation());
+				ihm.updateGrille();
+				getJoueurTour().actionJouer();
+				
+				break;
+
+
+			}
+
+
+			break;
+
+		case Clique_Fin_Tour :
+			finDeTour();
+			break;
+			
+		case Clique_Send :
+			messageConsole = msg.getText();
+                       // defausserCarteMain();
+			break;
+		}
+
+
+		//Si la conditon au dessu est fausse elle continue 
+
+
+
+
+		lastAction = msg.getMessage();
+
+
+		if(getJoueurTour().getNbAction()<1) {
+			//	System.out.println(" nb act = "+getJoueurTour().getNbAction());
+			finDeTour();
+		}
+
+>>>>>>> branch 'master' of https://github.com/xam74er1/Ile_Intedite.git
 	}
 
 	private void finDeTour() {
@@ -156,10 +244,16 @@ public class Controleur implements Observateur{
 		ihm.afichierConsole("Fin du tour du joeur n°"+numTour);
 
 		getJoueurTour().finTour();
-		piocherInondation();
-		System.out.println("woua");
+		
+		for(int i =0;i<curseur.getNbCartesInond();i++) {
+			piocherInondation();
+		}
+		piocherTresor();
+		piocherTresor();
+		
 		numTour++;
 		numTour%=joueursList.size();
+		afficherListeCarteJoueur();
 
 		ihm.addConsole("Jouer n°"+numTour+" as vous de jouer");
 		ihm.miseAJourPlayer(numTour," ( "+getJoueurTour().getNom()+" )", getJoueurTour().getColor());
