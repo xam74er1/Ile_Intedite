@@ -31,8 +31,7 @@ public class Curseur {
 	}
 
 	public void monteeEaux() {
-		// TODO - implement Curseur.monteeEaux
-		throw new UnsupportedOperationException();
+		niveau++;
 	}
 
 }

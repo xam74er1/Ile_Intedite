@@ -171,15 +171,17 @@ public class Controleur implements Observateur{
 		for (int i=0;i<curseur.getNbCartesInond();i++) {
 			piocherInondation();
 		}
-		for (int i=0;i<2;i++) {
-			piocherClassique();
-		}
+		piocherClassique();
+		piocherClassique();
+
+		
 		//afficherListeCarteJoueur
 		
 		
 		
-		numTour++;
+		numTour++;		
 		numTour%=joueursList.size();
+		afficherListeCarteJoueur();
 
 		ihm.addConsole("Jouer n°"+numTour+" as vous de jouer");
 		ihm.miseAJourPlayer(numTour," ( "+getJoueurTour().getNom()+" )", getJoueurTour().getColor());
@@ -249,8 +251,13 @@ public class Controleur implements Observateur{
 	public void piocherClassique() {
 		if(carteTresorDeck.size() != 0) {
 			Classique cC = carteTresorDeck.get(0);
-			if(cC instanceof CarteTresor) {
+			if(cC instanceof CarteTresor || cC instanceof CarteSacSable || cC instanceof CarteHelicoptere ) {
 				getJoueurTour().getListeCarteJoueur().add(cC);	
+				carteTresorDeck.remove(cC);
+			}
+			else {
+				carteTresorsDefausse.add(cC);
+				curseur.monteeEaux();
 				carteTresorDeck.remove(cC);
 			}
 
