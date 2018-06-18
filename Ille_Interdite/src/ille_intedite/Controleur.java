@@ -1,11 +1,13 @@
 
 package ille_intedite;
 import Carte.Carte;
+import Carte.CarteHelicoptere;
 import Carte.Classique;
 import Carte.CarteInondation;
 import Carte.CarteTresor;
 import Carte.CarteSacSable;
 import Carte.MonteeEaux;
+import Carte.NomTresor;
 import IHM.IHM;
 import ille_intedite.Aventurie.Aventurier;
 import ille_intedite.Aventurie.Aviateur;
@@ -78,10 +80,12 @@ public class Controleur implements Observateur{
 
 		switch(msg.getMessage()) {
 		case Clique_Deplace :
+			deplacer2();
 			ihm.afichierConsole("Cliquer sur une classe pour vous deplace");
 			break;
 
 		case Clique_Asseche :
+			assecher2();
 			ihm.afichierConsole("Cliquer sur une classe pour l'assecher");
 			break;
 
@@ -93,28 +97,18 @@ public class Controleur implements Observateur{
 				//Utils.debugln("Tuille = "+msg.getLocation());
 
 				//Si le deplacement cest bien passe 
-				if(deplacer(msg.getLocation())) {
-					ihm.afichierConsole("Deplacement en "+msg.getLocation());
-					getJoueurTour().actionJouer();
-					//Si le deplacement cest mal passe 
-				}else {
-					Tuile to =getJoueurTour().getPosition();
-					ihm.addConsole("Vous ne pouvez pas vous deplace de"+to.getxT()+":"+to.getyT()+" a  "+msg.getLocation());
-					//Pour ne pas fair perdre une action 
-
-				}
+				deplacer(msg.getText());
+				grille.activateAll();
+				miseAJourGrille();
+				getJoueurTour().actionJouer();
 
 				break;
 
 			case Clique_Asseche :
-				System.out.println("Assecher");
-				if(assecher(msg.getLocation())){
-					ihm.afichierConsole("Casse assache en "+msg.getLocation());
-					getJoueurTour().actionJouer();
-				}else{
-					ihm.addConsole("Vous ne pouvez pas asseche en  "+msg.getLocation());
-					//Pour ne pas fair perdre une action
-				}
+				assecher(msg.getText());
+				grille.activateAll();
+				miseAJourGrille();
+				getJoueurTour().actionJouer();
 				break;
 
 
@@ -164,6 +158,8 @@ public class Controleur implements Observateur{
 		ihm.addConsole("Jouer n°"+numTour+" as vous de jouer");
 		ihm.miseAJourPlayer(numTour," ( "+getJoueurTour().getNom()+" )", getJoueurTour().getColor());
 		//	Utils.debugln("Fin de tour");
+		grille.activateAll();
+		miseAJourGrille();
 
 	}
 
@@ -332,6 +328,11 @@ public class Controleur implements Observateur{
 		miseAJourGrille();
 
 	}
+	
+	private void deplacerUrgence(Aventurier a) {
+		ihm.afficherDepUrg(a.deplacer2());
+		miseAJourGrille();
+	}
 
 	private void assecher(String str) {
 
@@ -407,6 +408,9 @@ public class Controleur implements Observateur{
 		if(inondationDeck.size()!=0) {
 			CarteInondation cInP = inondationDeck.get(0);
 			cInP.getTuile().inonder();
+			for (Aventurier a : cInP.getTuile().getAventurie()) {
+				deplacerUrgence(a);
+			}
 			inondationDefausse.add(cInP);
 			inondationDeck.remove(cInP);
 		}

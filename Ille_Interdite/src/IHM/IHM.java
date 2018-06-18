@@ -334,6 +334,18 @@ public class IHM extends Observe{
 		}
 		
 	}
+	
+	public void afficherDepUrg(ArrayList<Tuile> listDep) {
+		for(Tuile t : Grille.tuilesListe.values()) {
+			if (!listDep.contains(t)) {
+				t.getCase().setBlanc();
+			}else {
+				t.getCase().removeBlanc();
+			}
+			
+			
+		}
+	}
 
 	//effece les message et ajoute un message 
 	public void afichierConsole(String str){
