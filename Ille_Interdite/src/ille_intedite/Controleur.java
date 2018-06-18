@@ -111,6 +111,12 @@ public class Controleur implements Observateur{
 				getJoueurTour().actionJouer();
 				break;
 
+				
+			case Clique_Deplace_Urgence :
+				
+				deplacer(msg.getText());
+				grille.activateAll();
+				miseAJourGrille();
 
 			}
 
@@ -332,6 +338,7 @@ public class Controleur implements Observateur{
 	private void deplacerUrgence(Aventurier a) {
 		ihm.afficherDepUrg(a.deplacer2());
 		miseAJourGrille();
+		lastAction=TypeMessage.Clique_Deplace_Urgence;
 	}
 
 	private void assecher(String str) {
@@ -408,9 +415,11 @@ public class Controleur implements Observateur{
 		if(inondationDeck.size()!=0) {
 			CarteInondation cInP = inondationDeck.get(0);
 			cInP.getTuile().inonder();
-			for (Aventurier a : cInP.getTuile().getAventurie()) {
-				deplacerUrgence(a);
-			}
+			if (cInP.getTuile().getStatue()==2) {
+				for (Aventurier a : cInP.getTuile().getAventurie()) {
+					deplacerUrgence(a);
+				}
+			}		
 			inondationDefausse.add(cInP);
 			inondationDeck.remove(cInP);
 		}
