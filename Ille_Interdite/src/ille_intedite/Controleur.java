@@ -35,6 +35,7 @@ public class Controleur implements Observateur{
 	private  TypeMessage lastAction = TypeMessage.Clique_Send;
 	private int numTour;
 	private VueGrille vue;
+	private ArrayList<String> tresorsRecuperes = new ArrayList<>();
 
 
 	IHM ihm;
@@ -435,6 +436,52 @@ public class Controleur implements Observateur{
 			
 		
 		}
+	}
+	
+	
+	/**
+	 * 
+	 * @return 1 pour victoire, 0 si neutre et -1 pour partie perdue
+	 */
+	public int finDePartie() {
+		
+		/*SOLUTION TEMPORAIRE (ou pas si ça marche bien)
+		 *Retourne 1 pour victoire, 0 si neutre et -1 pour partie perdue 
+		 */
+		
+		//Verification de si un joueur a une carte helicoptère
+		boolean aCarteHelicoptere = false;
+		for(int i=0; i<joueursList.size(); i++) {
+			for(int j=0; j<joueursList.get(i).getNbCarte();j++) {
+				if(joueursList.get(i).getCarte(j).getClass().getName()=="CarteHelicoptere") {
+					aCarteHelicoptere=true;
+				}
+			}
+		}
+		
+		//Condition victoire
+		if(	grille.getTuile("Heliport").isOnTuile(joueursList.get(0))&
+			grille.getTuile("Heliport").isOnTuile(joueursList.get(1))&
+			grille.getTuile("Heliport").isOnTuile(joueursList.get(2))&
+			grille.getTuile("Heliport").isOnTuile(joueursList.get(3))&
+			tresorsRecuperes.size()==4&
+			aCarteHelicoptere) {
+			return 1;
+		}
+		
+		//Condition(s) défaite
+		if(grille.getTuile("Heliport").getStatue()==-2) {
+			return -1;
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		return 0;
 	}
 }
 
