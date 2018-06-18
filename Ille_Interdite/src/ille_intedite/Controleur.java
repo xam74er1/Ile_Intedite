@@ -78,6 +78,7 @@ public class Controleur implements Observateur{
 			break;
 
 		case Clique_Asseche :
+			assecher2();
 			ihm.afichierConsole("Cliquer sur une classe pour l'assecher");
 			break;
 
@@ -90,19 +91,19 @@ public class Controleur implements Observateur{
 
 				//Si le deplacement cest bien passe 
 				deplacer(msg.getLocation());
-					ihm.updateGrille();
-					getJoueurTour().actionJouer();
+				ihm.updateGrille();
+				getJoueurTour().actionJouer();
 
 				break;
-				
+
 			case Clique_Deplace_Helico :
 				// A modifier
 				if (grille.getTuile(msg.getLocation()).getStatue() != 2 && grille.getTuile(msg.getLocation()).getStatue() != -1) {
 					Tuile t = grille.getTuile(msg.getLocation());
 					for(int i=0;i<t.getAventurie().size();i++) {
-						
+
 					}
-					
+
 				}
 				else {
 					ihm.addConsole("Vous ne pouvez pas utiliser l'helicopter sur cette case "+msg.getLocation());
@@ -110,7 +111,7 @@ public class Controleur implements Observateur{
 
 				}
 				break;
-				
+
 			case Clique_Asseche_SacDeSable :
 				System.out.println("Assecher");
 				if(grille.getTuile(msg.getLocation()).getStatue() == 1){
@@ -138,15 +139,15 @@ public class Controleur implements Observateur{
 		case Clique_Fin_Tour :
 			finDeTour();
 			break;
-			
+
 		case Clique_Send :
 			messageConsole = msg.getText();
-            defausserCarteMain();
+			defausserCarteMain();
 			break;
 		}
 
-		
-		
+
+
 
 		//Si la conditon au dessu est fausse elle continue 
 
@@ -174,11 +175,11 @@ public class Controleur implements Observateur{
 		piocherClassique();
 		piocherClassique();
 
-		
+
 		//afficherListeCarteJoueur
-		
-		
-		
+
+
+
 		numTour++;		
 		numTour%=joueursList.size();
 		afficherListeCarteJoueur();
@@ -232,15 +233,15 @@ public class Controleur implements Observateur{
 					break;
 				}
 			}
-			
+
 			carteTresorDeck.add(new CarteSacSable("Sac de sable 1"));
 			carteTresorDeck.add(new CarteSacSable("Sac de sable 2"));
 			carteTresorDeck.add(new CarteSacSable("Sac de sable 3"));
-			
+
 			carteTresorDeck.add(new MonteeEaux("Monte des EAU 1"));
 			carteTresorDeck.add(new MonteeEaux("Monte des EAU 2"));
 			//carteTresorDeck.add(new MonteeEaux("Monte des EAU 3"));
-			
+
 		}
 		if(Parameters.ALEAS) {
 			Collections.shuffle(carteTresorDeck);
@@ -306,7 +307,7 @@ public class Controleur implements Observateur{
 		//				}
 
 		grille = new Grille(ihm,joueursList);
-		
+
 		curseur = new Curseur(0);
 
 		ihm.fillPlataux2(grille);
@@ -366,7 +367,7 @@ public class Controleur implements Observateur{
 		miseAJourGrille();
 
 	}
-	
+
 	private void assecher2() {
 		Aventurier a = getJoueurTour();
 		ihm.afficherDep(a.assecher2());
@@ -391,33 +392,33 @@ public class Controleur implements Observateur{
 		}
 
 	}
-	
+
 	public void afficherListeCarteJoueur() {
-        ihm.afichierConsole("Main du joueur :" + getJoueurTour().getNom());
-        int i = 1;
-        for (Classique c : getJoueurTour().getListeCarteJoueur()){
-            ihm.addConsole(i +" : " + c.getNom());
-            i = i+1;
-        }
-        
-        if (getJoueurTour().getListeCarteJoueur().size() > 5) {
-            
-            ihm.addConsole("Vous avez " + (getJoueurTour().getListeCarteJoueur().size()-5) + " carte en trop dans votre main, choisir les cartes à défausser :");
-        }
-        
-        
-  }
-  public void defausserCarteMain() {
-      if (getJoueurTour().getListeCarteJoueur().size() > 5) {
-          
-          int numCarte = Integer.parseInt(messageConsole) -1;
-          this.carteTresorsDefausse.add(getJoueurTour().getListeCarteJoueur().get(numCarte));
-          getJoueurTour().getListeCarteJoueur().remove(numCarte);
-          afficherListeCarteJoueur();
-          
-          
-      }
-  }
+		ihm.afichierConsole("Main du joueur :" + getJoueurTour().getNom());
+		int i = 1;
+		for (Classique c : getJoueurTour().getListeCarteJoueur()){
+			ihm.addConsole(i +" : " + c.getNom());
+			i = i+1;
+		}
+
+		if (getJoueurTour().getListeCarteJoueur().size() > 5) {
+
+			ihm.addConsole("Vous avez " + (getJoueurTour().getListeCarteJoueur().size()-5) + " carte en trop dans votre main, choisir les cartes à défausser :");
+		}
+
+
+	}
+	public void defausserCarteMain() {
+		if (getJoueurTour().getListeCarteJoueur().size() > 5) {
+
+			int numCarte = Integer.parseInt(messageConsole) -1;
+			this.carteTresorsDefausse.add(getJoueurTour().getListeCarteJoueur().get(numCarte));
+			getJoueurTour().getListeCarteJoueur().remove(numCarte);
+			afficherListeCarteJoueur();
+
+
+		}
+	}
 
 
 	public void piocher5Inondation() {

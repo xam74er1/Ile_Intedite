@@ -307,12 +307,11 @@ public abstract class Aventurier {
 			int x = Math.abs(xF-to.getxT());
 			int y = Math.abs(yF-to.getyT());
 			
-			if ((x==0 && y==1 || x==1 && y==0) && to.getStatue()==1 && to.getNum()!=-1) {
+			if ((x==0 && y==1 || x==1 && y==0 || to.equals(from)) && to.getStatue()==1 && to.getNum()!=-1) {
 				adjacent.add(to);
 			}
 			
 		}
-		adjacent.add(from);
 		return adjacent;
 	}
 	

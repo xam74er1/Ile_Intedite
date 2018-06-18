@@ -65,6 +65,7 @@ public class CasePlateau extends JPanel  {
 		for(Aventurier a : t.getAventurie()) {
 			g.setColor(a.getColor());
 			g.fillOval(xa, ya, xa+s, ya+s);
+			System.out.println(xa);
 			xa += 2*s;
 
 		}
@@ -138,5 +139,3 @@ public class CasePlateau extends JPanel  {
 	}
 
 }
-
-//testEUUU
