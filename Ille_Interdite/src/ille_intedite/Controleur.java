@@ -2,7 +2,9 @@
 package ille_intedite;
 import Carte.Carte;
 import Carte.Classique;
+import Carte.NomTresor;
 import Carte.CarteInondation;
+import Carte.CarteTresor;
 import IHM.IHM;
 import ille_intedite.Aventurie.Aventurier;
 import ille_intedite.Aventurie.Aviateur;
@@ -187,19 +189,38 @@ public class Controleur implements Observateur{
 			for(int j=0;j<5;j++) {
 				switch (i) {
 				case 1:
-					//					carteTresorDeck.add(new CarteTresor("carte"+i+":"+j, ))  A modifier
+					carteTresorDeck.add(new CarteTresor("CristalArdent"+j, NomTresor.CristalArdent));
 					break;
 				case 2:
+					// Calise
+					carteTresorDeck.add(new CarteTresor("CaliceOnde"+j, NomTresor.CaliceOnde));
 					break;
 				case 3:
+					// Statue
+					carteTresorDeck.add(new CarteTresor("StatueZephir"+j, NomTresor.StatueZephir));
 					break;
 				case 4:
+					// Pierre
+					carteTresorDeck.add(new CarteTresor("PierreSacree"+j, NomTresor.PierreSacree));
 					break;
 				}
 			}
 		}
-
-
+	}
+	
+	public void piocherClassique() {
+		if(carteTresorDeck.size() != 0) {
+			Classique cC = carteTresorDeck.get(0);
+			if(cC instanceof CarteTresor) {
+				getJoueurTour().getListeCarteJoueur().add(cC);		
+			}
+			
+		}
+	}
+	
+	
+	public void defausserClassique(Classique c) {
+		
 	}
 
 
