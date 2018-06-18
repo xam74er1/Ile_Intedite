@@ -313,6 +313,10 @@ public class IHM extends Observe{
 			}
 		};
 	}
+	
+	public void afficherDep(ArrayList<Tuile> listDep) {
+		
+	}
 
 	//effece les message et ajoute un message 
 	public void afichierConsole(String str){
