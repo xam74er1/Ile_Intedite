@@ -17,7 +17,7 @@ public class Aventurier {
 	ArrayList<Classique> listeCarteJoueur;
 	
 
-	Tuile tuile;
+	private Tuile tuile;
 	private int Num;
 	private String nom;
 	private NomTresor getType;
@@ -67,14 +67,9 @@ public class Aventurier {
 	 * @param t
 	 */
 	//Action pour deplace la perssone 
-	public boolean deplacer(Tuile t) {
+	public void deplacer(Tuile t) {
 		// TODO - implement Aventurier.deplacer
-		if (deplacementPossible(getTuile(), t)) {
-			setPosition(t);
-			return true;
-		}else {
-			return false;
-		}
+		setPosition(t);
 
 	}
 
@@ -265,7 +260,7 @@ public class Aventurier {
 				+ nbAction + "]";
 	}
 	
-	protected ArrayList<Tuile> getAdjacent(Tuile from, ArrayList<Tuile> listTuile){
+	public ArrayList<Tuile> getAdjacent(Tuile from, ArrayList<Tuile> listTuile){
 		ArrayList<Tuile> adjacent = new ArrayList<Tuile>();
 		int xF=from.getxT();
 		int yF=from.getyT();
@@ -287,14 +282,14 @@ public class Aventurier {
 		return adjacent;
 	}
 	
-	public ArrayList<Tuile> deplacer2(Tuile from){
+	public ArrayList<Tuile> deplacer2(){
 		ArrayList<Tuile> listTuile = new ArrayList<Tuile>();
 		
 		for (Tuile t : Grille.tuilesListe.values()) {
 			listTuile.add(t);
 		}
 		
-		return getAdjacent(from, listTuile);
+		return getAdjacent(this.tuile, listTuile);
 	}
 
 

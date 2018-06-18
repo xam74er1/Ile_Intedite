@@ -316,6 +316,16 @@ public class IHM extends Observe{
 	
 	public void afficherDep(ArrayList<Tuile> listDep) {
 		
+		for(Tuile t : Grille.tuilesListe.values()) {
+			if (!listDep.contains(t)) {
+				t.getCase().unActivated();
+			}else {
+				t.getCase().activate();
+			}
+			
+			
+		}
+		
 	}
 
 	//effece les message et ajoute un message 

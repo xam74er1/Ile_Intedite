@@ -2,6 +2,8 @@ package ille_intedite;
 
 import ille_intedite.Aventurie.Aventurier;
 import Carte.NomTresor;
+import IHM.CasePlateau;
+
 import java.util.*;
 
 public class Tuile {
@@ -14,7 +16,8 @@ public class Tuile {
     private final String nom;
     private int xT;
     private int yT;
-
+    private CasePlateau casePlateau;
+    
     /**
      *
      * @param num
@@ -120,6 +123,14 @@ public class Tuile {
     
     public String getNom() {
     	return nom;
+    }
+    
+    public CasePlateau getCase() {
+    	return this.casePlateau;
+    }
+    
+    public void setCase(CasePlateau c) {
+    	this.casePlateau=c;
     }
     
 

@@ -12,10 +12,10 @@ public class VueGrille {
 
 	Controleur ctrl;
 	IHM ihm;
-	
+
 	public void afficherGrille() {
-		
-		
+
+
 		HashMap<String, Tuile> hmTuille =  ctrl.grille.getTuilesListe();
 
 		Iterator<Entry<String, Tuile>> it = hmTuille.entrySet().iterator();
@@ -23,9 +23,9 @@ public class VueGrille {
 		while(it.hasNext()) {
 			Entry<String, Tuile> me = it.next();
 
-			
+
 			//J'effasse laventurie 
-			
+
 			ihm.getButonPlateau(me.getKey()).setBackground(null);
 			//Puis je redessine 
 			for(Aventurier a : me.getValue().getAventurie()) {
@@ -33,21 +33,25 @@ public class VueGrille {
 				ihm.getButonPlateau(me.getKey()).setBackground(a.getColor());;
 
 			}
-			
+
 			if (me.getValue().getNum()==-1) {
 				ihm.getButonPlateau(me.getKey()).setBackground(Color.BLACK);
 			}
 
 
-			
-			if(me.getValue().getStatue()==1){
-			ihm.getButonPlateau(me.getKey()).setFond(Color.cyan);
-		}else if(me.getValue().getStatue()>1){
-			ihm.getButonPlateau(me.getKey()).setFond(Color.BLUE);
-		}else if(me.getValue().getStatue()==0){
-			ihm.getButonPlateau(me.getKey()).setFond(new Color(204, 102, 0));
-		}
-			
+			if(me.getValue().getCase().isActivated()) {
+
+
+				if(me.getValue().getStatue()==1){
+					ihm.getButonPlateau(me.getKey()).setFond(Color.cyan);
+				}else if(me.getValue().getStatue()>1){
+					ihm.getButonPlateau(me.getKey()).setFond(Color.BLUE);
+				}else if(me.getValue().getStatue()==0){
+					ihm.getButonPlateau(me.getKey()).setFond(new Color(204, 102, 0));
+				}
+
+			}
+
 			ihm.updateGrille();
 		}
 	}
@@ -63,7 +67,7 @@ public class VueGrille {
 
 	public void setCtrl(Controleur ctrl) {
 		this.ctrl = ctrl;
-		
+
 	}
 
 	public IHM getIhm() {
@@ -74,6 +78,6 @@ public class VueGrille {
 		this.ihm = ihm;
 	}
 
-	
-	
+
+
 }

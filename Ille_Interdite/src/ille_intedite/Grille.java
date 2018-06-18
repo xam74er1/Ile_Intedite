@@ -11,29 +11,29 @@ public class Grille {
 	IHM ihm;
 	public static HashMap<String, Tuile> tuilesListe;
 	private String[] nomTuiles = {"000Le Pont des Abimes",//00x = tuile normale 02x = tuile spawn 3xx = tuile tresor
-									"020La Porte de Bronze",//021 = spawn ingé
-									"311La Caverne des Ombres",//31x = tresor brasier
-									"024La Porte de Fer",//025 = spawn plongeur
-									"025La Porte d’Or",//026 = spawn navigateur
-									"001Les Falaises de l’Oubli",
-									"321Le Palais de Corail",//32x = tresor calice
-									"023La Porte d’Argent",//024 = spawn messager
-									"002Les Dunes de l’Illusion",
-									"022Heliport",//023 = spawn pilote
-									"021La Porte de Cuivre",//022 = spawn explo
-									"331Le Jardin des Hurlements",//33x = tresor statue
-									"003La Foret Pourpre",
-									"004Le Lagon Perdu",
-									"005Le Marais Brumeux",
-									"006Observatoire",
-									"007Le Rocher Fantome",
-									"312La Caverne du Brasier",
-									"341Le Temple du Soleil",//34x = tresor pierre
-									"342Le Temple de La Lune",
-									"322Le Palais des Marees",
-									"008Le Val du Crepuscule",
-									"009La Tour du Guet",
-									"332Le Jardin des Murmures"};
+			"020La Porte de Bronze",//021 = spawn ingé
+			"311La Caverne des Ombres",//31x = tresor brasier
+			"024La Porte de Fer",//025 = spawn plongeur
+			"025La Porte d’Or",//026 = spawn navigateur
+			"001Les Falaises de l’Oubli",
+			"321Le Palais de Corail",//32x = tresor calice
+			"023La Porte d’Argent",//024 = spawn messager
+			"002Les Dunes de l’Illusion",
+			"022Heliport",//023 = spawn pilote
+			"021La Porte de Cuivre",//022 = spawn explo
+			"331Le Jardin des Hurlements",//33x = tresor statue
+			"003La Foret Pourpre",
+			"004Le Lagon Perdu",
+			"005Le Marais Brumeux",
+			"006Observatoire",
+			"007Le Rocher Fantome",
+			"312La Caverne du Brasier",
+			"341Le Temple du Soleil",//34x = tresor pierre
+			"342Le Temple de La Lune",
+			"322Le Palais des Marees",
+			"008Le Val du Crepuscule",
+			"009La Tour du Guet",
+	"332Le Jardin des Murmures"};
 	private int tailleNom=nomTuiles.length;
 	private ArrayList<String> listNomTuile;   
 
@@ -60,7 +60,7 @@ public class Grille {
 		int i =0;
 		int p =0;
 		int current_tile = 0;
-		
+
 		for (int y = 0;y<6;y++) {
 			for(int x = 0;x<6;x++) {
 
@@ -87,10 +87,10 @@ public class Grille {
 					}
 
 
-						//				int num=(int) (Math.random()*tailleNom);
-						//				Tuile t = new Tuile(Integer.parseInt(nomTuiles[num].substring(0,3)),nomTuiles[num].substring(3),x,y);
-						//				nomTuiles[num]=nomTuiles[tailleNom-1];
-						tuilesListe.put(x+":"+y, t);
+					//				int num=(int) (Math.random()*tailleNom);
+					//				Tuile t = new Tuile(Integer.parseInt(nomTuiles[num].substring(0,3)),nomTuiles[num].substring(3),x,y);
+					//				nomTuiles[num]=nomTuiles[tailleNom-1];
+					tuilesListe.put(x+":"+y, t);
 
 					//tailleNom--;
 					current_tile++;
@@ -98,8 +98,8 @@ public class Grille {
 				i++;
 			}
 		}
-		
-		
+
+
 	}
 
 	/**
@@ -139,6 +139,14 @@ public class Grille {
 
 	public HashMap<String, Tuile> getTuilesListe() {
 		return tuilesListe;
+	}
+
+	public void activateAll() {
+		for(Tuile t : tuilesListe.values()) {
+			if (t.getNum()!=-1) {
+				t.getCase().activate();
+			}
+		}
 	}
 
 

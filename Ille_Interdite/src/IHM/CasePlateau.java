@@ -43,6 +43,8 @@ public class CasePlateau extends JPanel  {
 		add(lblNewLabel);
 		setBackground(Color.gray);
 		
+		this.t.setCase(this);
+		
 		//this.setBorder(BorderFactory.createLineBorder(Color.black));
 
 	}
@@ -126,11 +128,14 @@ public class CasePlateau extends JPanel  {
 		this.addMouseListener(mouse());
 		activated = true;
 	}
+	
+	public boolean isActivated() {
+		return activated;
+	}
 
 	public void setFond(Color c) {
 		this.c =c ;
 	}
-
 
 }
 

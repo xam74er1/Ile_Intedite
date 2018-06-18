@@ -12,6 +12,7 @@ import utils.Utils;
 public class Plongeur extends Aventurier {
 
 	private ArrayList<Tuile> tuilesDep = new ArrayList<Tuile>();
+	private boolean firstIter=true;
 
 	public Plongeur(int Num, String nom, Utils.Pion pion) {
 		super(Num, nom,pion);
@@ -40,11 +41,27 @@ public class Plongeur extends Aventurier {
 		//return listdep.contains(to);
 		return listdep.contains(to);
 	}
+	
+	@Override
+	public ArrayList<Tuile> deplacer2(){
+		ArrayList<Tuile> listTuile = new ArrayList<Tuile>();
+		
+		for (Tuile t : Grille.tuilesListe.values()) {
+			listTuile.add(t);
+		}
+		firstIter=true;
+		return getAdjacent(this.getTuile(), listTuile);
+	}
 
 	@Override
 	public ArrayList<Tuile> getAdjacent(Tuile from, ArrayList<Tuile> listTuile){
+		
+		if (firstIter){
+			tuilesDep = new ArrayList<Tuile>();
+			firstIter=false;;
+		}
 
-		if (from.getStatue()==0) {
+		if (from.getStatue()==0 && from!=this.getTuile()) {
 			return null;
 		}else {
 			
@@ -54,15 +71,22 @@ public class Plongeur extends Aventurier {
 				int y = Math.abs(from.getyT() - to.getyT());
 
 				if (((x == 1 & y == 0) || (x == 0 & y == 1)) &to.getNum()!=-1){
+					
 					if (!tuilesDep.contains(to)) {
 						tuilesDep.add(to);
-						return getAdjacent(to,listTuile);
+						getAdjacent(to, listTuile);
 					}
 				}
 			}
 
 		}
-
+		
+		tuilesDep.remove(this.getTuile());
+		for (Tuile t : tuilesDep) {
+			if (t.getStatue()==2) {
+				tuilesDep.remove(t);
+			}
+		}
 		return tuilesDep;
 
 	}
