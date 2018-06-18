@@ -11,14 +11,14 @@ public class Grille {
 	IHM ihm;
 	public static HashMap<String, Tuile> tuilesListe;
 	private String[] nomTuiles = {"000Le Pont des Abimes",//00x = tuile normale 02x = tuile spawn 3xx = tuile tresor
-			"020La Porte de Bronze",//021 = spawn ingé
+			"020La Porte de Bronze",//021 = spawn ingÃ©
 			"311La Caverne des Ombres",//31x = tresor brasier
 			"024La Porte de Fer",//025 = spawn plongeur
-			"025La Porte d’Or",//026 = spawn navigateur
-			"001Les Falaises de l’Oubli",
+			"025La Porte dâ€™Or",//026 = spawn navigateur
+			"001Les Falaises de lâ€™Oubli",
 			"321Le Palais de Corail",//32x = tresor calice
-			"023La Porte d’Argent",//024 = spawn messager
-			"002Les Dunes de l’Illusion",
+			"023La Porte dâ€™Argent",//024 = spawn messager
+			"002Les Dunes de lâ€™Illusion",
 			"022Heliport",//023 = spawn pilote
 			"021La Porte de Cuivre",//022 = spawn explo
 			"331Le Jardin des Hurlements",//33x = tresor statue
@@ -144,7 +144,7 @@ public class Grille {
 	public void activateAll() {
 		for(Tuile t : tuilesListe.values()) {
 			if (t.getNum()!=-1) {
-				t.getCase().activate();
+				t.getCase().removeBlanc();
 			}
 		}
 	}

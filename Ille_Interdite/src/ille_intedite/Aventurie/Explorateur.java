@@ -52,5 +52,28 @@ public class Explorateur extends Aventurier {
 		
 		return adjacent;
 	}
+	
+	@Override
+	public ArrayList<Tuile> getAssecher(Tuile from, ArrayList<Tuile> listTuile){
+		ArrayList<Tuile> adjacent = new ArrayList<Tuile>();
+		int xF=from.getxT();
+		int yF=from.getyT();
+		
+		Iterator<Tuile> it = listTuile.iterator();
+		
+		while(it.hasNext()) {
+			Tuile to = it.next();
+			
+			int x = Math.abs(xF-to.getxT());
+			int y = Math.abs(yF-to.getyT());
+			
+			if ((x<2 && y<2 ) && to.getStatue()==1 && to.getNum()!=-1) {
+				adjacent.add(to);
+			}
+			
+		}
+		
+		return adjacent;
+	}
 
 }

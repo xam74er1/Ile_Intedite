@@ -14,14 +14,14 @@ import ille_intedite.Aventurie.Ingenieure;
 import ille_intedite.Aventurie.Messager;
 import ille_intedite.Aventurie.Navigateur;
 import ille_intedite.Aventurie.Plongeur;
+
 import java.awt.Color;
 import java.util.*;
 import java.util.Map.Entry;
+
 import utils.Parameters;
 import utils.Utils;
 import utils.Utils.Pion;
-import ille_intedite.TypeMessage;
-import Carte.*;
 
 public class Controleur implements Observateur{
 	//Com de referencement 1
@@ -38,6 +38,7 @@ public class Controleur implements Observateur{
 	private  TypeMessage lastAction = TypeMessage.Clique_Send;
 	private int numTour;
 	private VueGrille vue;
+	private ArrayList<String> tresorsRecuperes = new ArrayList<>();
 
 
 	IHM ihm;
@@ -53,9 +54,13 @@ public class Controleur implements Observateur{
 		init();
 		numTour =0;
 		NBR_JOUEUR = joueursList.size();
-		//Utils.debugln("controleur start");	
+		//Utils.debugln("controleur start");
+		
+		
+		
 
 	}
+
 
 
 
@@ -73,7 +78,6 @@ public class Controleur implements Observateur{
 
 		switch(msg.getMessage()) {
 		case Clique_Deplace :
-			deplacer2();
 			ihm.afichierConsole("Cliquer sur une classe pour vous deplace");
 			break;
 
@@ -89,38 +93,17 @@ public class Controleur implements Observateur{
 				//Utils.debugln("Tuille = "+msg.getLocation());
 
 				//Si le deplacement cest bien passe 
-				deplacer(msg.getLocation());
-					ihm.updateGrille();
+				if(deplacer(msg.getLocation())) {
+					ihm.afichierConsole("Deplacement en "+msg.getLocation());
 					getJoueurTour().actionJouer();
-
-				break;
-				
-			case Clique_Deplace_Helico :
-				// A modifier
-				if (grille.getTuile(msg.getLocation()).getStatue() != 2 && grille.getTuile(msg.getLocation()).getStatue() != -1) {
-					Tuile t = grille.getTuile(msg.getLocation());
-					for(int i=0;i<t.getAventurie().size();i++) {
-						
-					}
-					
-				}
-				else {
-					ihm.addConsole("Vous ne pouvez pas utiliser l'helicopter sur cette case "+msg.getLocation());
+					//Si le deplacement cest mal passe 
+				}else {
+					Tuile to =getJoueurTour().getPosition();
+					ihm.addConsole("Vous ne pouvez pas vous deplace de"+to.getxT()+":"+to.getyT()+" a  "+msg.getLocation());
 					//Pour ne pas fair perdre une action 
 
 				}
-				break;
-				
-			case Clique_Asseche_SacDeSable :
-				System.out.println("Assecher");
-				if(grille.getTuile(msg.getLocation()).getStatue() == 1){
-					grille.getTuile(msg.getLocation()).assecher();
-					ihm.afichierConsole("Casse assache en "+msg.getLocation());
-					miseAJourGrille();
-				}else{
-					ihm.addConsole("Vous ne pouvez pas asseche en  "+msg.getLocation());
-					//Pour ne pas fair perdre une action
-				}
+
 				break;
 
 			case Clique_Asseche :
@@ -138,6 +121,9 @@ public class Controleur implements Observateur{
 			}
 
 
+
+
+
 			break;
 
 		case Clique_Fin_Tour :
@@ -146,12 +132,9 @@ public class Controleur implements Observateur{
 			
 		case Clique_Send :
 			messageConsole = msg.getText();
-            defausserCarteMain();
 			break;
 		}
 
-		
-		
 
 		//Si la conditon au dessu est fausse elle continue 
 
@@ -173,26 +156,14 @@ public class Controleur implements Observateur{
 		ihm.afichierConsole("Fin du tour du joeur nÂ°"+numTour);
 
 		getJoueurTour().finTour();
-		for (int i=0;i<curseur.getNbCartesInond();i++) {
-			piocherInondation();
-		}
-		piocherClassique();
-		piocherClassique();
-
-		
-		//afficherListeCarteJoueur
-		
-		
-		
-		numTour++;		
+		piocherInondation();
+		System.out.println("woua");
+		numTour++;
 		numTour%=joueursList.size();
-		afficherListeCarteJoueur();
 
 		ihm.addConsole("Jouer nÂ°"+numTour+" as vous de jouer");
 		ihm.miseAJourPlayer(numTour," ( "+getJoueurTour().getNom()+" )", getJoueurTour().getColor());
 		//	Utils.debugln("Fin de tour");
-		grille.activateAll();
-		miseAJourGrille();
 
 	}
 
@@ -237,15 +208,15 @@ public class Controleur implements Observateur{
 					break;
 				}
 			}
-			
+
 			carteTresorDeck.add(new CarteSacSable("Sac de sable 1"));
 			carteTresorDeck.add(new CarteSacSable("Sac de sable 2"));
 			carteTresorDeck.add(new CarteSacSable("Sac de sable 3"));
-			
+
 			carteTresorDeck.add(new MonteeEaux("Monte des EAU 1"));
 			carteTresorDeck.add(new MonteeEaux("Monte des EAU 2"));
 			//carteTresorDeck.add(new MonteeEaux("Monte des EAU 3"));
-			
+
 		}
 		if(Parameters.ALEAS) {
 			Collections.shuffle(carteTresorDeck);
@@ -311,7 +282,7 @@ public class Controleur implements Observateur{
 		//				}
 
 		grille = new Grille(ihm,joueursList);
-		
+
 		curseur = new Curseur(0);
 
 		ihm.fillPlataux2(grille);
@@ -362,22 +333,20 @@ public class Controleur implements Observateur{
 
 	}
 
-	private boolean assecher(String str) {
-		// TODO - implement Controleur.assecher
-		Aventurier a = getJoueurTour();
+	private void assecher(String str) {
+
 		Tuile t = grille.getTuile(str);
-		if (a instanceof Aventurier) {
-			if (a.assecher(t)) {
-				miseAJourGrille();
-			}
-		}
 
-		if(a.assecher(t)){
-			miseAJourGrille();
-			return true;
-		}
-		return false;
+		t.assecher();
+		grille.activateAll();
+		miseAJourGrille();
 
+	}
+
+	private void assecher2() {
+		Aventurier a = getJoueurTour();
+		ihm.afficherDep(a.assecher2());
+		miseAJourGrille();
 	}
 
 	private void donneCarte() {
@@ -398,33 +367,33 @@ public class Controleur implements Observateur{
 		}
 
 	}
-	
+
 	public void afficherListeCarteJoueur() {
-        ihm.afichierConsole("Main du joueur :" + getJoueurTour().getNom());
-        int i = 1;
-        for (Classique c : getJoueurTour().getListeCarteJoueur()){
-            ihm.addConsole(i +" : " + c.getNom());
-            i = i+1;
-        }
-        
-        if (getJoueurTour().getListeCarteJoueur().size() > 5) {
-            
-            ihm.addConsole("Vous avez " + (getJoueurTour().getListeCarteJoueur().size()-5) + " carte en trop dans votre main, choisir les cartes à défausser :");
-        }
-        
-        
-  }
-  public void defausserCarteMain() {
-      if (getJoueurTour().getListeCarteJoueur().size() > 5) {
-          
-          int numCarte = Integer.parseInt(messageConsole) -1;
-          this.carteTresorsDefausse.add(getJoueurTour().getListeCarteJoueur().get(numCarte));
-          getJoueurTour().getListeCarteJoueur().remove(numCarte);
-          afficherListeCarteJoueur();
-          
-          
-      }
-  }
+		ihm.afichierConsole("Main du joueur :" + getJoueurTour().getNom());
+		int i = 1;
+		for (Classique c : getJoueurTour().getListeCarteJoueur()){
+			ihm.addConsole(i +" : " + c.getNom());
+			i = i+1;
+		}
+
+		if (getJoueurTour().getListeCarteJoueur().size() > 5) {
+
+			ihm.addConsole("Vous avez " + (getJoueurTour().getListeCarteJoueur().size()-5) + " carte en trop dans votre main, choisir les cartes à défausser :");
+		}
+
+
+	}
+	public void defausserCarteMain() {
+		if (getJoueurTour().getListeCarteJoueur().size() > 5) {
+
+			int numCarte = Integer.parseInt(messageConsole) -1;
+			this.carteTresorsDefausse.add(getJoueurTour().getListeCarteJoueur().get(numCarte));
+			getJoueurTour().getListeCarteJoueur().remove(numCarte);
+			afficherListeCarteJoueur();
+
+
+		}
+	}
 
 
 	public void piocher5Inondation() {
@@ -527,6 +496,52 @@ public class Controleur implements Observateur{
 
 
 		}
+	}
+	
+	
+	/**
+	 * 
+	 * @return 1 pour victoire, 0 si neutre et -1 pour partie perdue
+	 */
+	public int finDePartie() {
+		
+		/*SOLUTION TEMPORAIRE (ou pas si ça marche bien)
+		 *Retourne 1 pour victoire, 0 si neutre et -1 pour partie perdue 
+		 */
+		
+		//Verification de si un joueur a une carte helicoptère
+		boolean aCarteHelicoptere = false;
+		for(int i=0; i<joueursList.size(); i++) {
+			for(int j=0; j<joueursList.get(i).getNbCarte();j++) {
+				if(joueursList.get(i).getCarte(j).getClass().getName()=="CarteHelicoptere") {
+					aCarteHelicoptere=true;
+				}
+			}
+		}
+		
+		//Condition victoire
+		if(	grille.getTuile("Heliport").isOnTuile(joueursList.get(0))&
+			grille.getTuile("Heliport").isOnTuile(joueursList.get(1))&
+			grille.getTuile("Heliport").isOnTuile(joueursList.get(2))&
+			grille.getTuile("Heliport").isOnTuile(joueursList.get(3))&
+			tresorsRecuperes.size()==4&
+			aCarteHelicoptere) {
+			return 1;
+		}
+		
+		//Condition(s) défaite
+		if(grille.getTuile("Heliport").getStatue()==-2) {
+			return -1;
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		return 0;
 	}
 }
 

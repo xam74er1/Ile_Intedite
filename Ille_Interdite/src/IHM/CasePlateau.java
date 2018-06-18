@@ -1,3 +1,4 @@
+
 package IHM;
 
 import java.awt.BorderLayout;
@@ -5,7 +6,11 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -22,9 +27,10 @@ public class CasePlateau extends JPanel  {
 	private String str,location;
 	private Observe o;
 	private Tuile t;
-	private boolean activated = true;
+	private boolean activated = true , blanc = false;
 	private MouseListener m;
 	private Color c = new Color(204, 102, 0);
+	String path=" ";
 
 	public CasePlateau(String str,String location, Observe o,Tuile t) {
 
@@ -56,11 +62,100 @@ public class CasePlateau extends JPanel  {
 		int xa = x;
 		int ya = y;
 		
+		BufferedImage image;
+		
 		if(activated) {
 			g.setColor(c);
 
 			g.fillRect(0, 0,  this.getWidth(),this.getHeight());
+
+			g.setColor(Color.black);
+			g.drawRect(0, 0,  this.getWidth(),this.getHeight());
 		}
+		
+		if(activated) {
+			String name = t.getNom();
+			path=" ";
+
+			int min = Math.min(this.getWidth(),this.getHeight());
+
+
+			name=	name.replace(" d", "D");
+			name=	name.replace(" ", "");
+			name = name.replace("’", "");
+			name = name.replace("'", "");
+
+
+
+			try {
+				if(t.getStatue()<2) {
+
+
+					if(t.getStatue()==0) {
+						path = "images\\tuiles\\"+name+".png";
+					}else if(t.getStatue()==1) {
+						path = "images\\tuiles\\"+name+"_Inonde.png";
+					}
+
+					image = ImageIO.read(new File(path));
+					//super.paintComponent(g);
+					g.drawImage(image, min, 0,min,min, null);
+				}else {
+					path = "images\\watterTexture.jpg";
+					System.out.println("coule");
+					image = ImageIO.read(new File(path));
+					//super.paintComponent(g);
+					g.drawImage(image, 0,0,this.getWidth(),this.getHeight(), null);
+
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				System.out.println("name = "+name);
+				System.out.println("erruer :"+ path+" ");
+				//e.printStackTrace();
+			}
+		}else {
+
+			try {
+				image = ImageIO.read(new File("images\\watterTexture.jpg"));
+				//super.paintComponent(g);
+				g.drawImage(image, 0, 0,this.getWidth(),this.getHeight(), null);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				//System.out.println(new File().exists());
+				e.printStackTrace();
+			}
+		}
+
+		//Effect blanc pour la ou on ne peux pas ce deplace 
+		if(blanc&&activated) {
+			g.setColor(new Color(0,0,0,128));
+
+			g.fillRect(0, 0,  this.getWidth(),this.getHeight());
+		}
+		
+		for(Aventurier a : t.getAventurie()) {
+			String name = a.getPion().toString();
+			path = "images\\pions\\pion"+name+".png";
+
+			try {
+				image = ImageIO.read(new File(path));
+				//super.paintComponent(g);
+				g.drawImage(image, xa, ya, 10*s, 10*s, null);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				//System.out.println(new File().exists());
+				System.out.println(path);
+				//e.printStackTrace();
+			}
+			//			g.setColor(a.getColor());
+			//			g.fillOval(xa, ya, xa+s, ya+s);
+			xa += 2*s;
+
+		}
+		
+	
+
 
 		for(Aventurier a : t.getAventurie()) {
 			g.setColor(a.getColor());
@@ -135,6 +230,16 @@ public class CasePlateau extends JPanel  {
 
 	public void setFond(Color c) {
 		this.c =c ;
+	}
+	
+	public void setBlanc() {
+		this.removeMouseListener(m);
+		this.blanc = true;
+	}
+	
+	public void removeBlanc() {
+		this.blanc = false;
+		this.addMouseListener(mouse());
 	}
 
 }
