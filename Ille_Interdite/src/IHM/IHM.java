@@ -333,11 +333,7 @@ public class IHM extends Observe{
 			
 		}
 		
-
-		
 	}
-
-
 
 	//effece les message et ajoute un message 
 	public void afichierConsole(String str){

@@ -294,5 +294,36 @@ public abstract class Aventurier {
 
 	}
 
+	public ArrayList<Tuile> getAssecher(Tuile from, ArrayList<Tuile> listTuile){
+		ArrayList<Tuile> adjacent = new ArrayList<Tuile>();
+		int xF=from.getxT();
+		int yF=from.getyT();
+		
+		Iterator<Tuile> it = listTuile.iterator();
+		
+		while(it.hasNext()) {
+			Tuile to = it.next();
+			
+			int x = Math.abs(xF-to.getxT());
+			int y = Math.abs(yF-to.getyT());
+			
+			if ((x==0 && y==1 || x==1 && y==0) && to.getStatue()==1 && to.getNum()!=-1) {
+				adjacent.add(to);
+			}
+			
+		}
+		adjacent.add(from);
+		return adjacent;
+	}
+	
+	public ArrayList<Tuile> assecher2(){
+		ArrayList<Tuile> listTuile = new ArrayList<Tuile>();
+		
+		for (Tuile t : Grille.tuilesListe.values()) {
+			listTuile.add(t);
+		}
+		
+		return getAssecher(this.tuile, listTuile);
+	}
 }
 

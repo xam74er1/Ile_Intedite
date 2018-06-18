@@ -124,14 +124,9 @@ public class Controleur implements Observateur{
 				break;
 
 			case Clique_Asseche :
-				System.out.println("Assecher");
-				if(assecher(msg.getLocation())){
-					ihm.afichierConsole("Casse assache en "+msg.getLocation());
-					getJoueurTour().actionJouer();
-				}else{
-					ihm.addConsole("Vous ne pouvez pas asseche en  "+msg.getLocation());
-					//Pour ne pas fair perdre une action
-				}
+				assecher(msg.getLocation());
+				ihm.updateGrille();
+				getJoueurTour().actionJouer();
 				break;
 
 
@@ -355,22 +350,20 @@ public class Controleur implements Observateur{
 
 	}
 
-	private boolean assecher(String str) {
-		// TODO - implement Controleur.assecher
-		Aventurier a = getJoueurTour();
+	private void assecher(String str) {
+
 		Tuile t = grille.getTuile(str);
-		if (a instanceof Aventurier) {
-			if (a.assecher(t)) {
-				miseAJourGrille();
-			}
-		}
 
-		if(a.assecher(t)){
-			miseAJourGrille();
-			return true;
-		}
-		return false;
+		t.assecher();
+		grille.activateAll();
+		miseAJourGrille();
 
+	}
+	
+	private void assecher2() {
+		Aventurier a = getJoueurTour();
+		ihm.afficherDep(a.assecher2());
+		miseAJourGrille();
 	}
 
 	private void donneCarte() {
