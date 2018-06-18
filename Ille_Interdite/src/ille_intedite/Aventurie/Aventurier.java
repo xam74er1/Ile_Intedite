@@ -277,6 +277,7 @@ public class Aventurier {
 		}
 		
 		return adjacent;
+		
 
 	}
 
