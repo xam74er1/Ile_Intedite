@@ -196,7 +196,6 @@ private JLabel textCusor;
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Message m = new Message(TypeMessage.Clique_Asseche_SacDeSable);
-				
 				notifierObservateur(m);
 			}
 		});

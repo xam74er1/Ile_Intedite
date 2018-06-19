@@ -45,6 +45,7 @@ public class Controleur implements Observateur{
 	private ArrayList<NomTresor> tresorsRecuperes = new ArrayList<>();
 	private Aventurier givePlayer = null;
 	private boolean noyade=false;
+	private boolean helicoTuileSelect = false;
 
 	IHM ihm;
 
@@ -87,12 +88,12 @@ public class Controleur implements Observateur{
 		switch(msg.getMessage()) {
 		case Clique_Deplace :
 			deplacer2(getJoueurTour());
-			ihm.afichierConsole("Cliquez sur une case pour vous dÃ©placer");
+			ihm.afichierConsole("Cliquez sur une case pour vous y déplacer");
 			break;
 
 		case Clique_Asseche :
 			assecher2();
-			ihm.afichierConsole("Cliquez sur une case pour l'assÃ©cher");
+			ihm.afichierConsole("Cliquez sur une case pour l'assécher");
 			break;
 
 		case Clique_Tuille :
@@ -116,11 +117,28 @@ public class Controleur implements Observateur{
 
 			case Clique_Deplace_Helico :
 				// A modifier
-				Tuile t = grille.getTuile(msg.getLocation());
-
-				for(Aventurier a : t.getAventurie()) {
-					deplacer(msg.getLocation(),a);
+				if (helicoTuileSelect) {
+					Tuile t = grille.getTuile(msg.getLocation());
+					System.out.println(msg.getLocation());
+					for(int i=0; i<t.getNbrAventurie();i++) {
+						deplacer(msg.getLocation(),t.getAventurie().get(i));
+						System.out.println(t.getAventurie().get(i).getTuile().getNom());
+					}
+					System.out.println(t.getNbrAventurie());
+					miseAJourGrille();
+					helicoTuileSelect=false;
+				}else {
+					ArrayList<Tuile> tuilesDep = new ArrayList<Tuile>();
+					for(Tuile t : Grille.tuilesListe.values()) {
+						if(t.getStatue()!=2 && t.getNum()!=-1 && !(t.equals(grille.getTuile(msg.getLocation())))) {
+							tuilesDep.add(t);
+						}
+					}
+					ihm.afficherDep(tuilesDep);
+					miseAJourGrille();
+					helicoTuileSelect=true;
 				}
+				
 
 				break;
 
@@ -191,10 +209,11 @@ public class Controleur implements Observateur{
 			ihm.afficherDep(listAsseche);
 			miseAJourGrille();
 			break;
+			
 		case Clique_Deplace_Helico :
 			ArrayList<Tuile> listCaseAvent = new ArrayList<Tuile>() ;
 			for(Tuile t : Grille.tuilesListe.values()) {
-				if (t.getAventurie()!=null) {
+				if (t.getAventurie().size()!=0) {
 					listCaseAvent.add(t);
 				}
 			}
@@ -208,11 +227,11 @@ public class Controleur implements Observateur{
 
 
 		//Si la conditon au dessu est fausse elle continue 
-
-
-
-		System.out.println(" nb action = "+getJoueurTour().getNbAction());
 		lastAction = msg.getMessage();
+		if (helicoTuileSelect) {
+			lastAction=TypeMessage.Clique_Deplace_Helico;
+			System.out.println("lastAction modifiee");
+		}
 
 
 		if(getJoueurTour().getNbAction()<1) {
@@ -226,7 +245,7 @@ public class Controleur implements Observateur{
 
 	private void finDeTour() {
 		// TODO Auto-generated method stub
-		ihm.afichierConsole("Fin du tour du joeur n Â°"+numTour);
+		ihm.afichierConsole("Fin du tour du joueur n°"+numTour);
 
 
 		for (int i=0;i<curseur.getNbCartesInond();i++) {
@@ -245,7 +264,7 @@ public class Controleur implements Observateur{
 		numTour%=joueursList.size();
 		afficherListeCarteJoueur();
 
-		ihm.addConsole("Joueur n Â°"+numTour+" Ã  vous de jouer");
+		ihm.addConsole("Joueur n°"+numTour+" A vous de jouer");
 		ihm.miseAJourPlayer(numTour," ( "+getJoueurTour().getNom()+" )", getJoueurTour().getColor());
 		//	Utils.debugln("Fin de tour");
 		grille.activateAll();
@@ -302,6 +321,10 @@ public class Controleur implements Observateur{
 			carteTresorDeck.add(new MonteeEaux("Montee des EAU 1"));
 			carteTresorDeck.add(new MonteeEaux("Montee des EAU 2"));
 			//carteTresorDeck.add(new MonteeEaux("Monte des EAU 3"));
+			
+			carteTresorDeck.add(new CarteHelicoptere("Helico 1"));
+			carteTresorDeck.add(new CarteHelicoptere("Helico 2"));
+			carteTresorDeck.add(new CarteHelicoptere("Helico 3"));
 
 		}
 		if(Parameters.ALEAS) {
@@ -336,7 +359,7 @@ public class Controleur implements Observateur{
 		Aventurier a;
 		//Marche
 
-		a = new Ingenieur(0,"Ingenieure",Pion.ROUGE);
+		a = new Ingenieur(0,"Ingénieur",Pion.ROUGE);
 
 		joueursList.add(a);
 
