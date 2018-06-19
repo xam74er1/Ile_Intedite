@@ -476,7 +476,9 @@ public class Controleur implements Observateur{
 			CarteInondation cInP = inondationDeck.get(0);
 			cInP.getTuile().inonder();
 			if (cInP.getTuile().getStatue()==2) {
-				deplacerUrgence(getJoueurTour());
+				for (Aventurier a : cInP.getTuile().getAventurie()) {
+					deplacerUrgence(a);
+				}
 			}
 			inondationDefausse.add(cInP);
 			inondationDeck.remove(cInP);
@@ -550,24 +552,6 @@ public class Controleur implements Observateur{
 		vue.afficherGrille();
 
 	}	
-	public void miseAJourDep(ArrayList<Tuile> listdep) {
-
-		HashMap<String, Tuile> hmTuille = ((Grille) grille).getTuilesListe();
-
-		Iterator<Entry<String, Tuile>> it = hmTuille.entrySet().iterator();
-
-		while(it.hasNext()) {
-			Entry<String, Tuile> me = it.next();
-
-
-			if(!listdep.contains(me.getValue())) {
-				ihm.getButonPlateau(me.getKey()).setBlanc();
-			}			
-
-
-
-		}
-	}
 	
 	public boolean RecupereTresort() {
 		// 
