@@ -88,12 +88,12 @@ public class CasePlateau extends JPanel  {
 
 
 			try {
-				if(t.getStatue()<2) {
+				if(t.getStatut()<2) {
 
 
-					if(t.getStatue()==0) {
+					if(t.getStatut()==0) {
 						path = "images\\tuiles\\"+name+".png";
-					}else if(t.getStatue()==1) {
+					}else if(t.getStatut()==1) {
 						path = "images\\tuiles\\"+name+"_Inonde.png";
 					}
 

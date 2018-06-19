@@ -86,7 +86,7 @@ public class Tuile {
      * 
      * @return 0 si asseché, -1 si innondé, -2 si coulé.
      */
-    public int getStatue() {
+    public int getStatut() {
         // TODO - implement Tuile.getStatue
         return statut;
     }

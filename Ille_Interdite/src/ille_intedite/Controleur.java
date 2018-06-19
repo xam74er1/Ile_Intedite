@@ -88,12 +88,12 @@ public class Controleur implements Observateur{
 		switch(msg.getMessage()) {
 		case Clique_Deplace :
 			deplacer2(getJoueurTour());
-			ihm.afichierConsole("Cliquez sur une case pour vous y dÃ©placer");
+			ihm.afichierConsole("Cliquez sur une case pour vous y déplacer");
 			break;
 
 		case Clique_Asseche :
 			assecher2();
-			ihm.afichierConsole("Cliquez sur une case pour l'assÃ©cher");
+			ihm.afichierConsole("Cliquez sur une case pour l'assécher");
 			break;
 
 		case Clique_Tuille :
@@ -121,9 +121,9 @@ public class Controleur implements Observateur{
 					Tuile t = grille.getTuile(msg.getLocation());
 					for(Aventurier a : joueursList) {
 						if(a.getTuile().equals(helicoTuileSelect)) {
-							
-						
-						deplacer(msg.getLocation(),a);
+
+
+							deplacer(msg.getLocation(),a);
 						}
 					}
 					miseAJourGrille();
@@ -131,7 +131,7 @@ public class Controleur implements Observateur{
 				}else {
 					ArrayList<Tuile> tuilesDep = new ArrayList<Tuile>();
 					for(Tuile t : Grille.tuilesListe.values()) {
-						if(t.getStatue()!=2 && t.getNum()!=-1 && !(t.equals(grille.getTuile(msg.getLocation())))) {
+						if(t.getStatut()!=2 && t.getNum()!=-1 && !(t.equals(grille.getTuile(msg.getLocation())))) {
 							tuilesDep.add(t);
 						}
 					}
@@ -139,15 +139,15 @@ public class Controleur implements Observateur{
 					miseAJourGrille();
 					helicoTuileSelect=grille.getTuile(msg.getLocation());
 				}
-				
+
 
 				break;
 
 			case Clique_Asseche_SacDeSable :
-					grille.getTuile(msg.getLocation()).assecher();
-					ihm.afichierConsole("Case assÃ©chÃ©e en "+msg.getLocation());
-					grille.activateAll();
-					miseAJourGrille();
+				grille.getTuile(msg.getLocation()).assecher();
+				ihm.afichierConsole("Case asséchée en "+msg.getLocation());
+				grille.activateAll();
+				miseAJourGrille();
 				break;
 
 			case Clique_Asseche :
@@ -202,7 +202,7 @@ public class Controleur implements Observateur{
 				}
 				break;
 			case Defausse_NumCarte :
-				
+
 				if(donneCarte(messageConsole)) {
 					getJoueurTour().actionJouer();
 					
@@ -219,9 +219,9 @@ public class Controleur implements Observateur{
 		case Clique_RecupereTresort :
 			if(RecupereTresort()) {
 				getJoueurTour().actionJouer();
-				ihm.afichierConsole("Vous avez rÃ©cupÃ©rÃ© le trÃ©sor");
+				ihm.afichierConsole("Vous avez récupéré le trésor");
 			}else {
-				ihm.afichierConsole("Impossible de rÃ©cupÃ©rer le trÃ©sor");
+				ihm.afichierConsole("Impossible de récupérer le trésor");
 			}
 			break;
 		case Clique_DonneCarte :
@@ -230,14 +230,14 @@ public class Controleur implements Observateur{
 		case Clique_Asseche_SacDeSable :
 			ArrayList<Tuile> listAsseche = new ArrayList<Tuile>() ;
 			for(Tuile t : Grille.tuilesListe.values()) {
-				if (t.getStatue()==1) {
+				if (t.getStatut()==1) {
 					listAsseche.add(t);
 				}
 			}
 			ihm.afficherDep(listAsseche);
 			miseAJourGrille();
 			break;
-			
+
 		case Clique_Deplace_Helico :
 			ArrayList<Tuile> listCaseAvent = new ArrayList<Tuile>() ;
 			for(Tuile t : Grille.tuilesListe.values()) {
@@ -360,7 +360,7 @@ public class Controleur implements Observateur{
 			carteTresorDeck.add(new MonteeEaux("Montee des EAU 1"));
 			carteTresorDeck.add(new MonteeEaux("Montee des EAU 2"));
 			//carteTresorDeck.add(new MonteeEaux("Monte des EAU 3"));
-			
+
 			carteTresorDeck.add(new CarteHelicoptere("Helico 1"));
 			carteTresorDeck.add(new CarteHelicoptere("Helico 2"));
 			carteTresorDeck.add(new CarteHelicoptere("Helico 3"));
@@ -398,7 +398,7 @@ public class Controleur implements Observateur{
 		Aventurier a;
 		//Marche
 
-		a = new Ingenieur(0,"IngÃ©nieur",Pion.ROUGE);
+		a = new Ingenieur(0,"Ingénieur",Pion.ROUGE);
 
 		joueursList.add(a);
 
@@ -486,7 +486,7 @@ public class Controleur implements Observateur{
 	private void deplacerUrgence() {
 
 		for(Tuile t : Grille.tuilesListe.values()) {
-			if (t.getStatue()==2) {
+			if (t.getStatut()==2) {
 				Iterator<Aventurier> it = joueursList.iterator();
 				while(it.hasNext()) {
 					Aventurier a =it.next();
@@ -547,7 +547,7 @@ public class Controleur implements Observateur{
 		return  false;
 	}
 
-	
+
 	private boolean donneCarte(String str) {
 
 		int num = Integer.parseInt(str);
@@ -695,11 +695,11 @@ public class Controleur implements Observateur{
 		}
 
 	}
-	
+
 	public void activateSpecialButton(Aventurier a) {
 		boolean aHelico=false;
 		boolean aSacSable=false;
-		
+
 		for(Classique c : a.getListeCarteJoueur()) {
 			if (c instanceof CarteHelicoptere) {
 				aHelico=true;
@@ -708,9 +708,9 @@ public class Controleur implements Observateur{
 				aSacSable=true;
 			}
 		}
-		
+
 		ihm.activateSpecialButton(aHelico, aSacSable);
-		
+
 	}
 
 	/**
@@ -787,9 +787,9 @@ public class Controleur implements Observateur{
 		boolean heliportCoule=false;
 		for(Tuile t : grille.getTuilesListe().values()) {
 			System.out.println(t.getNum());
-			if(t.getNum()==22) {			//Si la tuile est l'hÃ©liport
+			if(t.getNum()==22) {			//Si la tuile est l'héliport
 				joueursPresentsHeliport = t.getNbrAventurie();
-				heliportCoule = t.getStatue()==-2;
+				heliportCoule = t.getStatut()==-2;
 			}
 		}
 
@@ -798,7 +798,7 @@ public class Controleur implements Observateur{
 				tresorsRecuperes.size()==4&&
 				aCarteHelicoptere) {
 			return 1;												//Partie gagnee et livraison de colis de bonbons
-		}
+		}															//De bonbons ? et pas de cookies ?
 
 		//Condition(s) defaite
 
@@ -810,7 +810,7 @@ public class Controleur implements Observateur{
 		if(heliportCoule) {
 
 
-			if(grille.getTuile("Heliport").getStatue()==-2) {
+			if(grille.getTuile("Heliport").getStatut()==-2) {
 
 				return -1;												//Heliport coule
 			}
@@ -834,22 +834,22 @@ public class Controleur implements Observateur{
 
 
 			for(Tuile t : grille.getTuilesListe().values()) {
-				if(temple>-1 && (t.getNum()==341 || t.getNum()==342) && t.getStatue()==-2) {
+				if(temple>-1 && (t.getNum()==341 || t.getNum()==342) && t.getStatut()==-2) {
 
 
 
 					for(String key : grille.getTuilesListe().keySet()) {
-						if(temple>-1 && grille.getTuilesListe().get(key).toString().toLowerCase().contains("temple") && grille.getTuilesListe().get(key).getStatue()==-2) {
+						if(temple>-1 && grille.getTuilesListe().get(key).toString().toLowerCase().contains("temple") && grille.getTuilesListe().get(key).getStatut()==-2) {
 
 							temple++;
 						}
-						if(caverne>-1 && (t.getNum()==311 || t.getNum()==312) && t.getStatue()==-2) {
+						if(caverne>-1 && (t.getNum()==311 || t.getNum()==312) && t.getStatut()==-2) {
 							caverne++;
 						}
-						if(palais>-1 && (t.getNum()==321 || t.getNum()==322) && t.getStatue()==-2) {
+						if(palais>-1 && (t.getNum()==321 || t.getNum()==322) && t.getStatut()==-2) {
 							palais++;
 						}
-						if(jardin>-1 && (t.getNum()==331 || t.getNum()==332) && t.getStatue()==-2) {
+						if(jardin>-1 && (t.getNum()==331 || t.getNum()==332) && t.getStatut()==-2) {
 							jardin++;
 						}
 					}
@@ -880,10 +880,9 @@ public class Controleur implements Observateur{
 
 
 
-		
 
 	}
 
-	
+
 }
 

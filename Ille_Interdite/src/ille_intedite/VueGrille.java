@@ -42,11 +42,11 @@ public class VueGrille {
 			if(me.getValue().getCase().isActivated()) {
 
 
-				if(me.getValue().getStatue()==1){
+				if(me.getValue().getStatut()==1){
 					ihm.getButonPlateau(me.getKey()).setFond(Color.cyan);
-				}else if(me.getValue().getStatue()>1){
+				}else if(me.getValue().getStatut()>1){
 					ihm.getButonPlateau(me.getKey()).setFond(Color.BLUE);
-				}else if(me.getValue().getStatue()==0){
+				}else if(me.getValue().getStatut()==0){
 					ihm.getButonPlateau(me.getKey()).setFond(new Color(204, 102, 0));
 				}
 
