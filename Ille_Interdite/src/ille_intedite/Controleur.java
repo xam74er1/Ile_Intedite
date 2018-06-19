@@ -42,7 +42,7 @@ public class Controleur implements Observateur{
 	private  TypeMessage lastAction = TypeMessage.Clique_Send;
 	private int numTour;
 	private VueGrille vue;
-	private ArrayList<String> tresorsRecuperes = new ArrayList<>();
+	private ArrayList<NomTresor> tresorsRecuperes = new ArrayList<>();
 
 
 	IHM ihm;
@@ -514,7 +514,7 @@ public class Controleur implements Observateur{
 
 	}
 
-	public void recupereTresort() {
+	public boolean recupereTresort() {
 		// 
 		
 		Aventurier a = getJoueurTour();
