@@ -82,6 +82,10 @@ public class Tuile {
         return new int[]{this.xT, this.yT};
     }
 
+    /**
+     * 
+     * @return 0 si asseché, -1 si innondé, -2 si coulé.
+     */
     public int getStatue() {
         // TODO - implement Tuile.getStatue
         return statut;

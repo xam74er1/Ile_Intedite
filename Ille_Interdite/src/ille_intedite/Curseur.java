@@ -12,6 +12,11 @@ public class Curseur {
 		this.niveau = niveau;
 	}
 
+	
+	/**
+	 * 
+	 * @return 2 si niveau<3, 3 si niveau>2 et niveau<6, 4 si niveau>5 et niveau<8, 5 si niveau>7 et niveau<10, 0 si niveau=10 (perdu).
+	 */
 	public int getNbCartesInond() {
 		// TODO - implement Curseur.getNbCartesInond
 		if(niveau<3) {

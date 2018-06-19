@@ -505,9 +505,8 @@ public class Controleur implements Observateur{
 	 */
 	public int finDePartie() {
 		
-		/*SOLUTION TEMPORAIRE (ou pas si ça marche bien)
-		 *Retourne 1 pour victoire, 0 si neutre et -1 pour partie perdue 
-		 */
+		//SOLUTION TEMPORAIRE (ou pas si ça marche bien)
+
 		
 		//Verification de si un joueur a une carte helicoptère
 		boolean aCarteHelicoptere = false;
@@ -520,22 +519,43 @@ public class Controleur implements Observateur{
 		}
 		
 		//Condition victoire
-		if(	grille.getTuile("Heliport").isOnTuile(joueursList.get(0))&
-			grille.getTuile("Heliport").isOnTuile(joueursList.get(1))&
-			grille.getTuile("Heliport").isOnTuile(joueursList.get(2))&
-			grille.getTuile("Heliport").isOnTuile(joueursList.get(3))&
-			tresorsRecuperes.size()==4&
+		if(	grille.getTuile("Heliport").isOnTuile(joueursList.get(0))&&
+			grille.getTuile("Heliport").isOnTuile(joueursList.get(1))&&
+			grille.getTuile("Heliport").isOnTuile(joueursList.get(2))&&
+			grille.getTuile("Heliport").isOnTuile(joueursList.get(3))&&
+			tresorsRecuperes.size()==4&&
 			aCarteHelicoptere) {
 			return 1;
 		}
 		
 		//Condition(s) défaite
 		if(grille.getTuile("Heliport").getStatue()==-2) {
-			return -1;
+			return -1;												//Héliport coulé
 		}
 		
+		if(curseur.getNbCartesInond()==0) {
+			return -1;												//Curseur au niveau maximum
+		}
 		
-		
+		//A COMPLETER SI TRESOR DEJA RECUP
+		int temple=0,caverne=0,palais=0,jardin=0;
+		for(String key : grille.getTuilesListe().keySet()) {
+			if(grille.getTuilesListe().get(key).toString().toLowerCase().contains("temple") && grille.getTuilesListe().get(key).getStatue()==-2) {
+				temple++;
+			}
+			if(grille.getTuilesListe().get(key).toString().toLowerCase().contains("caverne") && grille.getTuilesListe().get(key).getStatue()==-2) {
+				caverne++;
+			}
+			if(grille.getTuilesListe().get(key).toString().toLowerCase().contains("palais") && grille.getTuilesListe().get(key).getStatue()==-2) {
+				palais++;
+			}
+			if(grille.getTuilesListe().get(key).toString().toLowerCase().contains("jardin") && grille.getTuilesListe().get(key).getStatue()==-2) {
+				jardin++;
+			}
+		}
+		if(temple==2||caverne==2||palais==2||jardin==2) {
+			return -1;												//Deux cases de récupération de trésor coulées
+		}
 		
 		
 		
