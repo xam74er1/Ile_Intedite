@@ -622,12 +622,12 @@ public class Controleur implements Observateur{
 				grille.getTuile("Heliport").isOnTuile(joueursList.get(3))&&
 				tresorsRecuperes.size()==4&&
 				aCarteHelicoptere) {
-			return 1;
+			return 1;												//Partie gagnee et livraison de colis de bonbons
 		}
 
 		//Condition(s) défaite
 		if(grille.getTuile("Heliport").getStatue()==-2) {
-			return -1;												//Héliport coulé
+			return -1;												//Heliport coule
 		}
 
 		if(curseur.getNbCartesInond()==0) {
@@ -665,9 +665,7 @@ public class Controleur implements Observateur{
 			return -1;												//Deux cases de récupération de trésor coulées
 		}
 
-
-
-
+		// A COMPLETER
 
 		return 0;
 
