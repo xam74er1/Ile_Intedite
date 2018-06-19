@@ -750,6 +750,7 @@ public class Controleur implements Observateur{
 			if(!dejaPresent) {
 				tresorsRecuperes.add(t);
 			}
+			//TODO RETIRER LES CARTES TRESOR
 			return true;
 		}else {
 			return false;
@@ -787,7 +788,7 @@ public class Controleur implements Observateur{
 				aCarteHelicoptere) {
 			return 1;												//Partie gagnee et livraison de colis de bonbons
 		}															//De bonbons ? et pas de cookies ?
-
+																	//Et pourquoi pas les deux ??
 		//Condition(s) defaite
 
 		if(noyade) {
