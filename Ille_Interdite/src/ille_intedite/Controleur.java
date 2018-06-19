@@ -157,13 +157,6 @@ public class Controleur implements Observateur{
 				}
 				break;
 
-			case Clique_Deplace_Urgence :
-
-				deplacer(msg.getText());
-				grille.activateAll();
-				miseAJourGrille();
-				break;
-
 
 			}
 
@@ -401,12 +394,6 @@ public class Controleur implements Observateur{
 
 	}
 
-	private void deplacerUrgence(Aventurier a) {
-		ihm.afficherDepUrg(a.deplacer2());
-		miseAJourGrille();
-		lastAction=TypeMessage.Clique_Deplace_Urgence;
-	}
-
 	private void assecher(String str) {
 
 		Tuile t = grille.getTuile(str);
@@ -483,7 +470,14 @@ public class Controleur implements Observateur{
 			cInP.getTuile().inonder();
 			if (cInP.getTuile().getStatue()==2) {
 				for (Aventurier a : cInP.getTuile().getAventurie()) {
-					deplacerUrgence(a);
+					//marche pas
+					try {
+						ArrayList<Tuile> tuilesDep =a.getAdjacent(a.getTuile(),(ArrayList<Tuile>) Grille.tuilesListe.values()); 
+						a.setPosition(tuilesDep.get(tuilesDep.size()-1));
+						miseAJourGrille();
+					}catch(Exception e) {
+						System.out.println("Perdu");
+					}
 				}
 			}
 			inondationDefausse.add(cInP);
