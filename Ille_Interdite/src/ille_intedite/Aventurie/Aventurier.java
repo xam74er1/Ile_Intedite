@@ -207,13 +207,8 @@ public abstract class Aventurier {
 	 *
 	 * @param C
 	 */
-	public void addCarte(Classique C, Controleur ctrl, IHM ihm) {
-		if (listeCarteJoueur.size() > 6) {
-			ihm.afichierConsole("Saisir un carte à défausser :");
-			int i = Integer.parseInt(ctrl.getMessageConsole());
-			ctrl.carteTresorsDefausse.add(listeCarteJoueur.get(i));
-			listeCarteJoueur.remove(i);
-		}
+	public void addCarte(Classique C) {
+	
 
 		listeCarteJoueur.add(C);
 	}

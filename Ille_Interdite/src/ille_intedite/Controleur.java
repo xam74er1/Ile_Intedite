@@ -43,7 +43,7 @@ public class Controleur implements Observateur{
 	private int numTour;
 	private VueGrille vue;
 	private ArrayList<NomTresor> tresorsRecuperes = new ArrayList<>();
-
+	private Aventurier givePlayer = null;
 
 	IHM ihm;
 
@@ -175,8 +175,17 @@ public class Controleur implements Observateur{
 			break;
 
 		case Clique_Send :
-			messageConsole = msg.getText();
-			defausserCarteMain();
+			
+			switch(lastAction) {
+			case Defausse :
+				messageConsole = msg.getText();
+			defausserCarteMain(); break;
+			
+			case Clique_DonneCarte: 
+				messageConsole = msg.getText();
+				break;
+			}
+			
 			break;
 		case Clique_RecupereTresort :
 			if(RecupereTresort()) {
@@ -185,7 +194,10 @@ public class Controleur implements Observateur{
 			}else {
 				ihm.afichierConsole("Imposible de  recupere un tresort");
 			}
-			break;	
+			break;
+		case Clique_DonneCarte :
+			aficherJoeurCase();
+			break;
 		}
 
 
@@ -205,6 +217,8 @@ public class Controleur implements Observateur{
 		}
 
 	}
+	
+	
 
 	private void finDeTour() {
 		// TODO Auto-generated method stub
@@ -423,9 +437,12 @@ public class Controleur implements Observateur{
 		miseAJourGrille();
 	}
 
-	private void donneCarte() {
+	private boolean donneCarte(String str) {
 		// TODO - implement Controleur.donneCarte
-		throw new UnsupportedOperationException();
+		
+		int num = Integer.parseInt(str);
+		
+		return  true;
 	}
 
 	private void actSpeciale() {
@@ -442,6 +459,7 @@ public class Controleur implements Observateur{
 
 	}
 
+	@Deprecated
 	public void afficherListeCarteJoueur() {
 		ihm.afichierConsole("Main du joueur :" + getJoueurTour().getNom());
 		int i = 1;
@@ -451,7 +469,7 @@ public class Controleur implements Observateur{
 		}
 
 		if (getJoueurTour().getListeCarteJoueur().size() > 5) {
-
+			lastAction = TypeMessage.Defausse;
 			ihm.addConsole("Vous avez " + (getJoueurTour().getListeCarteJoueur().size()-5) + " cartes en trop dans votre main, choisir les cartes à défausser :");
 		}
 
@@ -649,6 +667,18 @@ public class Controleur implements Observateur{
 
 		return 0;
 
+	}
+	
+	public void aficherJoeurCase() {
+		String str = "";
+		int nbr = getJoueurTour().getNum();
+		for(Aventurier a : getJoueurTour().getTuile().getAventurie()) {
+			if(nbr != a.getNum()) {
+				str += a.getNum()+" ";
+			}
+		}
+		
+		ihm.afichierConsole("Tappe dans la console le numereau des joeur disponible qui son : "+str);
 	}
 }
 

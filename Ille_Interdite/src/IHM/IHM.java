@@ -243,6 +243,19 @@ private JLabel textCusor;
 			}
 		});
 		bouton.add(btnAction_4);
+		
+		
+		JButton btnAction_5 = new JButton("Donne carte");
+		btnAction_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Message m = new Message(TypeMessage.Clique_DonneCarte);
+
+				;
+
+				notifierObservateur(m);
+			}
+		});
+		bouton.add(btnAction_5);
 
 		frame.setVisible(true);
 	}

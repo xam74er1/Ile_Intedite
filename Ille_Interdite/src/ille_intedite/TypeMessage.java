@@ -20,6 +20,7 @@ public enum TypeMessage {
     Clique_Deplace_Helico, 
     Clique_Asseche_SacDeSable,
     Clique_RecupereTresort,
+    Defausse,
     Clique_Deplace_Urgence;
     
 }
