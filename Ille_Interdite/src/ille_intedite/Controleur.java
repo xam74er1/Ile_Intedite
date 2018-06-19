@@ -443,16 +443,6 @@ public class Controleur implements Observateur{
 		test();
 	}
 
-	private void conditionVictoire() {
-		// TODO - implement Controleur.conditionVictoire
-		throw new UnsupportedOperationException();
-	}
-
-	private void conditionDefaite() {
-		// TODO - implement Controleur.conditionDÃÂÃÂÃÂÃÂ©faite
-		throw new UnsupportedOperationException();
-	}
-
 	private void deplacer(String str, Aventurier a) {
 
 		Tuile t = grille.getTuile(str);
