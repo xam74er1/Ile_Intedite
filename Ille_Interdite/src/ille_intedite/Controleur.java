@@ -222,6 +222,7 @@ public class Controleur implements Observateur{
 		for (int i=0;i<curseur.getNbCartesInond();i++) {
 			piocherInondation();
 		}
+		deplacerUrgence();
 		piocherClassique();
 		piocherClassique();
 
@@ -409,23 +410,25 @@ public class Controleur implements Observateur{
 
 	}
 	
-	private void deplacerUrgence(Tuile t) {
+	private void deplacerUrgence() {
 
-		Iterator<Aventurier> it = joueursList.iterator();
-		while(it.hasNext()) {
-			Aventurier a =it.next();
-			if(t.getAventurie().contains(a)) {
-				try {
-					ArrayList<Tuile> tuilesDep =a.deplacer2();
-					Collections.shuffle(tuilesDep);
-					deplacer(tuilesDep.get(0).getxT()+":"+tuilesDep.get(0).getyT(),a);
-					miseAJourGrille();
-				}catch(Exception e) {
-					noyade=true;
-					verifierFinDePartie();
+		for(Tuile t : Grille.tuilesListe.values()) {
+			if (t.getStatue()==2) {
+				Iterator<Aventurier> it = joueursList.iterator();
+				while(it.hasNext()) {
+					Aventurier a =it.next();
+					if(t.getAventurie().contains(a)) {
+						try {
+							ArrayList<Tuile> tuilesDep =a.deplacer2();
+							Collections.shuffle(tuilesDep);
+							deplacer(tuilesDep.get(0).getxT()+":"+tuilesDep.get(0).getyT(),a);
+							miseAJourGrille();
+						}catch(Exception e) {
+							System.out.println("Perdu");
+						}
+					}
 				}
 			}
-			
 		}
 	}
 
@@ -507,9 +510,6 @@ public class Controleur implements Observateur{
 		if(inondationDeck.size()!=0) {
 			CarteInondation cInP = inondationDeck.get(0);
 			cInP.getTuile().inonder();
-			if (cInP.getTuile().getStatue()==2) {
-				deplacerUrgence(cInP.getTuile());
-			}
 			inondationDefausse.add(cInP);
 			inondationDeck.remove(cInP);
 		}
@@ -612,7 +612,7 @@ public class Controleur implements Observateur{
 	 * 
 	 * @return 1 pour victoire, 0 si neutre et -1 pour partie perdue
 	 */
-	public int verifierFinDePartie() {
+	public int finDePartie() {
 
 		//Verification de si un joueur a une carte helicoptere
 		boolean aCarteHelicoptere = false;
@@ -684,8 +684,6 @@ public class Controleur implements Observateur{
 		return 0;
 
 	}
-	
-
 	
 	public void aficherJoeurCase() {
 		String str = "";
