@@ -752,7 +752,6 @@ public class Controleur implements Observateur{
 			if(t.getNum()==22) {			//Si la tuile est l'héliport
 				joueursPresentsHeliport = t.getNbrAventurie();
 				heliportCoule = t.getStatue()==-2;
-				System.out.println("Check etat heliport");
 			}
 		}
 
