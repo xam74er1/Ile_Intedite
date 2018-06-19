@@ -86,12 +86,12 @@ public class Controleur implements Observateur{
 		switch(msg.getMessage()) {
 		case Clique_Deplace :
 			deplacer2();
-			ihm.afichierConsole("Cliquer sur une classe pour vous deplace");
+			ihm.afichierConsole("Cliquez sur une case pour vous déplacer");
 			break;
 
 		case Clique_Asseche :
 			assecher2();
-			ihm.afichierConsole("Cliquer sur une classe pour l'assecher");
+			ihm.afichierConsole("Cliquez sur une case pour l'assécher");
 			break;
 
 		case Clique_Tuille :
@@ -123,7 +123,7 @@ public class Controleur implements Observateur{
 
 				}
 				else {
-					ihm.addConsole("Vous ne pouvez pas utiliser l'helicopter sur cette case "+msg.getLocation());
+					ihm.addConsole("Vous ne pouvez pas utiliser l'hélicoptère sur cette case "+msg.getLocation());
 					//Pour ne pas fair perdre une action 
 
 				}
@@ -133,10 +133,10 @@ public class Controleur implements Observateur{
 				System.out.println("Assecher");
 				if(grille.getTuile(msg.getLocation()).getStatue() == 1){
 					grille.getTuile(msg.getLocation()).assecher();
-					ihm.afichierConsole("Casse assache en "+msg.getLocation());
+					ihm.afichierConsole("Casse asséchée en "+msg.getLocation());
 					miseAJourGrille();
 				}else{
-					ihm.addConsole("Vous ne pouvez pas asseche en  "+msg.getLocation());
+					ihm.addConsole("Vous ne pouvez pas assécher en  "+msg.getLocation());
 					//Pour ne pas fair perdre une action
 				}
 				break;
@@ -155,6 +155,13 @@ public class Controleur implements Observateur{
 					
 					i.setDerniereActionAssecher(!i.getDerniereActionAssecher());
 				}
+				break;
+				
+			case Clique_Deplace_Urgence :
+
+				deplacer(msg.getText());
+				grille.activateAll();
+				miseAJourGrille();
 				break;
 
 
@@ -196,9 +203,9 @@ public class Controleur implements Observateur{
 
 	private void finDeTour() {
 		// TODO Auto-generated method stub
-		ihm.afichierConsole("Fin du tour du joeur nÂ°"+numTour);
+		ihm.afichierConsole("Fin du tour du joeur n °"+numTour);
 
-		getJoueurTour().finTour();
+		
 		for (int i=0;i<curseur.getNbCartesInond();i++) {
 			piocherInondation();
 		}
@@ -209,12 +216,12 @@ public class Controleur implements Observateur{
 		//afficherListeCarteJoueur
 
 
-
+		getJoueurTour().finTour();
 		numTour++;		
 		numTour%=joueursList.size();
 		afficherListeCarteJoueur();
 
-		ihm.addConsole("Jouer nÂ°"+numTour+" as vous de jouer");
+		ihm.addConsole("Joueur n °"+numTour+" à vous de jouer");
 		ihm.miseAJourPlayer(numTour," ( "+getJoueurTour().getNom()+" )", getJoueurTour().getColor());
 		//	Utils.debugln("Fin de tour");
 		grille.activateAll();
@@ -268,8 +275,8 @@ public class Controleur implements Observateur{
 			carteTresorDeck.add(new CarteSacSable("Sac de sable 2"));
 			carteTresorDeck.add(new CarteSacSable("Sac de sable 3"));
 
-			carteTresorDeck.add(new MonteeEaux("Monte des EAU 1"));
-			carteTresorDeck.add(new MonteeEaux("Monte des EAU 2"));
+			carteTresorDeck.add(new MonteeEaux("Montee des EAU 1"));
+			carteTresorDeck.add(new MonteeEaux("Montee des EAU 2"));
 			//carteTresorDeck.add(new MonteeEaux("Monte des EAU 3"));
 
 		}
@@ -387,6 +394,12 @@ public class Controleur implements Observateur{
 		miseAJourGrille();
 
 	}
+	
+	private void deplacerUrgence(Aventurier a) {
+		ihm.afficherDepUrg(a.deplacer2());
+		miseAJourGrille();
+		lastAction=TypeMessage.Clique_Deplace_Urgence;
+	}
 
 	private void assecher(String str) {
 
@@ -433,7 +446,7 @@ public class Controleur implements Observateur{
 
 		if (getJoueurTour().getListeCarteJoueur().size() > 5) {
 
-			ihm.addConsole("Vous avez " + (getJoueurTour().getListeCarteJoueur().size()-5) + " carte en trop dans votre main, choisir les cartes à défausser :");
+			ihm.addConsole("Vous avez " + (getJoueurTour().getListeCarteJoueur().size()-5) + " cartes en trop dans votre main, choisir les cartes à défausser :");
 		}
 
 
@@ -462,6 +475,9 @@ public class Controleur implements Observateur{
 		if(inondationDeck.size()!=0) {
 			CarteInondation cInP = inondationDeck.get(0);
 			cInP.getTuile().inonder();
+			if (cInP.getTuile().getStatue()==2) {
+				deplacerUrgence(getJoueurTour());
+			}
 			inondationDefausse.add(cInP);
 			inondationDeck.remove(cInP);
 		}
@@ -561,7 +577,7 @@ public class Controleur implements Observateur{
 		NomTresor  t = a.recupereTresor();
 		
 		if(t!=null) {
-			System.out.println(" AJOUTE LE TRESORT ");
+			System.out.println(" AJOUTEZ LE TRESOR ");
 			return true;
 		}else {
 			return false;

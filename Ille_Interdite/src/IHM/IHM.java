@@ -110,7 +110,7 @@ public class IHM extends Observe{
 		JPanel up = new JPanel();
 		aplication.add(up, BorderLayout.NORTH);
 
-		lblJoeurN = new JLabel("Joeur n \u00B0 X");
+		lblJoeurN = new JLabel("Joueur n \u00B0 X");
 		up.add(lblJoeurN);
 
 		JPanel Center = new JPanel();
