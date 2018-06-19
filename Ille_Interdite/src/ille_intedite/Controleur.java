@@ -422,7 +422,7 @@ public class Controleur implements Observateur{
 					miseAJourGrille();
 				}catch(Exception e) {
 					noyade=true;
-					finDePartie();
+					verifierFinDePartie();
 				}
 			}
 			
@@ -612,7 +612,7 @@ public class Controleur implements Observateur{
 	 * 
 	 * @return 1 pour victoire, 0 si neutre et -1 pour partie perdue
 	 */
-	public int finDePartie() {
+	public int verifierFinDePartie() {
 
 		//Verification de si un joueur a une carte helicoptere
 		boolean aCarteHelicoptere = false;
@@ -684,6 +684,8 @@ public class Controleur implements Observateur{
 		return 0;
 
 	}
+	
+
 	
 	public void aficherJoeurCase() {
 		String str = "";
