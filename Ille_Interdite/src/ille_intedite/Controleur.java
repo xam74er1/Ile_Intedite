@@ -131,7 +131,7 @@ public class Controleur implements Observateur{
 				}else {
 					ArrayList<Tuile> tuilesDep = new ArrayList<Tuile>();
 					for(Tuile t : Grille.tuilesListe.values()) {
-						if(t.getStatue()!=2 && t.getNum()!=-1 && !(t.equals(grille.getTuile(msg.getLocation())))) {
+						if(t.getStatut()!=2 && t.getNum()!=-1 && !(t.equals(grille.getTuile(msg.getLocation())))) {
 							tuilesDep.add(t);
 						}
 					}
@@ -226,7 +226,7 @@ public class Controleur implements Observateur{
 		case Clique_Asseche_SacDeSable :
 			ArrayList<Tuile> listAsseche = new ArrayList<Tuile>() ;
 			for(Tuile t : Grille.tuilesListe.values()) {
-				if (t.getStatue()==1) {
+				if (t.getStatut()==1) {
 					listAsseche.add(t);
 				}
 			}
@@ -479,7 +479,7 @@ public class Controleur implements Observateur{
 	private void deplacerUrgence() {
 
 		for(Tuile t : Grille.tuilesListe.values()) {
-			if (t.getStatue()==2) {
+			if (t.getStatut()==2) {
 				Iterator<Aventurier> it = joueursList.iterator();
 				while(it.hasNext()) {
 					Aventurier a =it.next();
@@ -769,7 +769,7 @@ public class Controleur implements Observateur{
 			System.out.println(t.getNum());
 			if(t.getNum()==22) {			//Si la tuile est l'héliport
 				joueursPresentsHeliport = t.getNbrAventurie();
-				heliportCoule = t.getStatue()==-2;
+				heliportCoule = t.getStatut()==-2;
 			}
 		}
 
@@ -790,7 +790,7 @@ public class Controleur implements Observateur{
 		if(heliportCoule) {
 
 
-			if(grille.getTuile("Heliport").getStatue()==-2) {
+			if(grille.getTuile("Heliport").getStatut()==-2) {
 
 				return -1;												//Heliport coule
 			}
@@ -814,22 +814,22 @@ public class Controleur implements Observateur{
 
 
 			for(Tuile t : grille.getTuilesListe().values()) {
-				if(temple>-1 && (t.getNum()==341 || t.getNum()==342) && t.getStatue()==-2) {
+				if(temple>-1 && (t.getNum()==341 || t.getNum()==342) && t.getStatut()==-2) {
 
 
 
 					for(String key : grille.getTuilesListe().keySet()) {
-						if(temple>-1 && grille.getTuilesListe().get(key).toString().toLowerCase().contains("temple") && grille.getTuilesListe().get(key).getStatue()==-2) {
+						if(temple>-1 && grille.getTuilesListe().get(key).toString().toLowerCase().contains("temple") && grille.getTuilesListe().get(key).getStatut()==-2) {
 
 							temple++;
 						}
-						if(caverne>-1 && (t.getNum()==311 || t.getNum()==312) && t.getStatue()==-2) {
+						if(caverne>-1 && (t.getNum()==311 || t.getNum()==312) && t.getStatut()==-2) {
 							caverne++;
 						}
-						if(palais>-1 && (t.getNum()==321 || t.getNum()==322) && t.getStatue()==-2) {
+						if(palais>-1 && (t.getNum()==321 || t.getNum()==322) && t.getStatut()==-2) {
 							palais++;
 						}
-						if(jardin>-1 && (t.getNum()==331 || t.getNum()==332) && t.getStatue()==-2) {
+						if(jardin>-1 && (t.getNum()==331 || t.getNum()==332) && t.getStatut()==-2) {
 							jardin++;
 						}
 					}

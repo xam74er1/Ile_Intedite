@@ -87,7 +87,7 @@ public abstract class Aventurier {
 		int x = Math.abs(from.getxT() - to.getxT());
 		int y = Math.abs(from.getyT() - to.getyT());
 		// Si il ce deplace sois a 1 case en X ou 1 case en Y et que la case de destination n'as pas couler
-		return ((x == 1 & y == 0) || (x == 0 & y == 1)) || (x==0 & y==0) & (to.getStatue() ==1);
+		return ((x == 1 & y == 0) || (x == 0 & y == 1)) || (x==0 & y==0) & (to.getStatut() ==1);
 
 	}
 
@@ -103,7 +103,7 @@ public abstract class Aventurier {
 		int x = Math.abs(from.getxT() - to.getxT());
 		int y = Math.abs(from.getyT() - to.getyT());
 		// Si il ce deplace sois a 1 case en X ou 1 case en Y et que la case de destination n'as pas couler
-		return ((x == 1 & y == 0) || (x == 0 & y == 1)) & (to.getStatue() < 2)&to.getNum()!=-1;
+		return ((x == 1 & y == 0) || (x == 0 & y == 1)) & (to.getStatut() < 2)&to.getNum()!=-1;
 	}
 
 	/**
@@ -287,7 +287,7 @@ public abstract class Aventurier {
 			int x = Math.abs(xF-to.getxT());
 			int y = Math.abs(yF-to.getyT());
 
-			if ((x==0 && y==1 || x==1 && y==0) && to.getStatue()!=2 && to.getNum()!=-1) {
+			if ((x==0 && y==1 || x==1 && y==0) && to.getStatut()!=2 && to.getNum()!=-1) {
 				adjacent.add(to);
 			}
 
@@ -324,7 +324,7 @@ public abstract class Aventurier {
 			int x = Math.abs(xF-to.getxT());
 			int y = Math.abs(yF-to.getyT());
 
-			if ((x==0 && y==1 || x==1 && y==0 || to.equals(from)) && to.getStatue()==1 && to.getNum()!=-1) {
+			if ((x==0 && y==1 || x==1 && y==0 || to.equals(from)) && to.getStatut()==1 && to.getNum()!=-1) {
 				adjacent.add(to);
 			}
 

@@ -38,7 +38,7 @@ public class Plongeur extends Aventurier {
 			while (it.hasNext()) {
 				Tuile t = it.next();
 				//seulement si les tuiles de depart sont inondees ou coulees
-				if (t.getStatue()!=0) {
+				if (t.getStatut()!=0) {
 					ArrayList<Tuile> prox = getAdjacent(t, listTuile);
 					Iterator<Tuile> iP = prox.iterator();
 					//on rajoute les tuiles dans la copie si celles-ci n'y sont pas deja
@@ -59,7 +59,7 @@ public class Plongeur extends Aventurier {
 		Iterator<Tuile> it = adjacent.iterator();
 		while (it.hasNext()) {
 			Tuile t = it.next();
-			if (t.equals(from)||t.getStatue()==2) {
+			if (t.equals(from)||t.getStatut()==2) {
 				adjacent.remove(t);
 			}
 		}
@@ -96,7 +96,7 @@ public class Plongeur extends Aventurier {
 		Iterator<Tuile> it = Grille.tuilesListe.values().iterator();
 		while(it.hasNext()) {
 			Tuile t = it.next();
-			if(t.getStatue()==2) {
+			if(t.getStatut()==2) {
 				tuilesDep.remove(t);
 			}
 		}
@@ -114,7 +114,7 @@ public class Plongeur extends Aventurier {
 			firstIter=false;;
 		}
 
-		if (from.getStatue()==0 && from!=this.getTuile()) {
+		if (from.getStatut()==0 && from!=this.getTuile()) {
 			return null;
 		}else {
 			
