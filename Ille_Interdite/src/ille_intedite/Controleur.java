@@ -295,7 +295,7 @@ public class Controleur implements Observateur{
 		numTour%=joueursList.size();
 		afficherListeCarteJoueur();
 
-		ihm.addConsole("Joueur nÂ°"+numTour+" A vous de jouer");
+		ihm.addConsole("Joueur n°"+numTour+" A vous de jouer");
 		ihm.miseAJourPlayer(numTour," ( "+getJoueurTour().getNom()+" )", getJoueurTour().getColor());
 		activateSpecialButton(getJoueurTour());
 		//	Utils.debugln("Fin de tour");
