@@ -1,5 +1,8 @@
 package IHM;
 
+import ille_intedite.Message;
+import ille_intedite.Observe;
+import ille_intedite.TypeMessage;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -20,7 +23,7 @@ import javax.swing.border.MatteBorder;
 import javax.swing.JLabel;
 import java.awt.CardLayout;
 
-public class IHMV3 {
+public class IHMV3 extends Observe{
 
 	private JFrame frame;
 
@@ -172,6 +175,8 @@ public class IHMV3 {
 		JButton btAide = new JButton("Aide");
 		btAide.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+                            Message m = new Message(TypeMessage.Clique_Aide);
+                            notifierObservateur(m);
 			}
 		});
 		northP8.add(btAide);
