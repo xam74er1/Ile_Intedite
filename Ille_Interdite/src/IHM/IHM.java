@@ -110,7 +110,7 @@ private JLabel textCusor;
 		JPanel up = new JPanel();
 		aplication.add(up, BorderLayout.NORTH);
 
-		lblJoeurN = new JLabel("Joeur n \u00B0 X");
+		lblJoeurN = new JLabel(" ");
 		up.add(lblJoeurN);
 
 		JPanel Center = new JPanel();
@@ -196,7 +196,6 @@ private JLabel textCusor;
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Message m = new Message(TypeMessage.Clique_Asseche_SacDeSable);
-				
 				notifierObservateur(m);
 			}
 		});
@@ -426,7 +425,7 @@ private JLabel textCusor;
 
 	public void miseAJourPlayer(int x,String str ,Color c) {
 		lblJoeurN.setForeground(c);
-		lblJoeurN.setText("Joeur nÂ° "+(x+1)+str);
+		lblJoeurN.setText("Joueur n° "+(x+1)+str);
 	}
 
 	public void updateGrille() {
@@ -435,7 +434,7 @@ private JLabel textCusor;
 	}
 
 	public void setLevelCursort(int i) {
-		 textCusor.setText("Niveau de leau "+i);
+		 textCusor.setText("Niveau de l'eau "+i);
 	}
 	
 }

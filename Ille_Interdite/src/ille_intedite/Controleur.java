@@ -45,6 +45,7 @@ public class Controleur implements Observateur{
 	private ArrayList<NomTresor> tresorsRecuperes = new ArrayList<>();
 	private Aventurier givePlayer = null;
 	private boolean noyade=false;
+	private Tuile helicoTuileSelect;
 
 	IHM ihm;
 
@@ -87,7 +88,7 @@ public class Controleur implements Observateur{
 		switch(msg.getMessage()) {
 		case Clique_Deplace :
 			deplacer2(getJoueurTour());
-			ihm.afichierConsole("Cliquez sur une case pour vous déplacer");
+			ihm.afichierConsole("Cliquez sur une case pour vous y déplacer");
 			break;
 
 		case Clique_Asseche :
@@ -116,17 +117,35 @@ public class Controleur implements Observateur{
 
 			case Clique_Deplace_Helico :
 				// A modifier
-				Tuile t = grille.getTuile(msg.getLocation());
-
-				for(Aventurier a : t.getAventurie()) {
-					deplacer(msg.getLocation(),a);
+				if (helicoTuileSelect!=null) {
+					Tuile t = grille.getTuile(msg.getLocation());
+					for(Aventurier a : joueursList) {
+						if(a.getTuile().equals(helicoTuileSelect)) {
+							
+						
+						deplacer(msg.getLocation(),a);
+						}
+					}
+					miseAJourGrille();
+					helicoTuileSelect=null;
+				}else {
+					ArrayList<Tuile> tuilesDep = new ArrayList<Tuile>();
+					for(Tuile t : Grille.tuilesListe.values()) {
+						if(t.getStatue()!=2 && t.getNum()!=-1 && !(t.equals(grille.getTuile(msg.getLocation())))) {
+							tuilesDep.add(t);
+						}
+					}
+					ihm.afficherDep(tuilesDep);
+					miseAJourGrille();
+					helicoTuileSelect=grille.getTuile(msg.getLocation());
 				}
+				
 
 				break;
 
 			case Clique_Asseche_SacDeSable :
 					grille.getTuile(msg.getLocation()).assecher();
-					ihm.afichierConsole("Case ass�ch�e en "+msg.getLocation());
+					ihm.afichierConsole("Case asséchée en "+msg.getLocation());
 					grille.activateAll();
 					miseAJourGrille();
 				break;
@@ -200,9 +219,9 @@ public class Controleur implements Observateur{
 		case Clique_RecupereTresort :
 			if(RecupereTresort()) {
 				getJoueurTour().actionJouer();
-				ihm.afichierConsole("Vous avez r�cup�r� le tr�sor");
+				ihm.afichierConsole("Vous avez récupéré le trésor");
 			}else {
-				ihm.afichierConsole("Impossible de r�cup�rer le tr�sor");
+				ihm.afichierConsole("Impossible de récupérer le trésor");
 			}
 			break;
 		case Clique_DonneCarte :
@@ -218,10 +237,11 @@ public class Controleur implements Observateur{
 			ihm.afficherDep(listAsseche);
 			miseAJourGrille();
 			break;
+			
 		case Clique_Deplace_Helico :
 			ArrayList<Tuile> listCaseAvent = new ArrayList<Tuile>() ;
 			for(Tuile t : Grille.tuilesListe.values()) {
-				if (t.getAventurie()!=null) {
+				if (t.getAventurie().size()!=0) {
 					listCaseAvent.add(t);
 				}
 			}
@@ -236,10 +256,10 @@ public class Controleur implements Observateur{
 
 		//Si la conditon au dessu est fausse elle continue 
 
-
-
-		//System.out.println(" nb action = "+getJoueurTour().getNbAction());
 		lastAction = msg.getMessage();
+		if (helicoTuileSelect!=null) {
+			lastAction=TypeMessage.Clique_Deplace_Helico;
+		}
 
 
 		if(getJoueurTour().getNbAction()<1) {
@@ -253,7 +273,7 @@ public class Controleur implements Observateur{
 
 	private void finDeTour() {
 		// TODO Auto-generated method stub
-		ihm.afichierConsole("Fin du tour du joeur n °"+numTour);
+		ihm.afichierConsole("Fin du tour du joueur n°"+numTour);
 
 
 		for (int i=0;i<curseur.getNbCartesInond();i++) {
@@ -267,7 +287,9 @@ public class Controleur implements Observateur{
 		if (getJoueurTour().getListeCarteJoueur().size() > 5) {
 			lastAction = TypeMessage.Defausse_Joueur;
 
+
 			ihm.addConsole("Vous avez " + (getJoueurTour().getListeCarteJoueur().size()-5) + " cartes en trop dans votre main, choisir les cartes à défausser :");
+
 		}
 
 
@@ -280,7 +302,7 @@ public class Controleur implements Observateur{
 		numTour%=joueursList.size();
 		afficherListeCarteJoueur();
 
-		ihm.addConsole("Joueur n °"+numTour+" à vous de jouer");
+		ihm.addConsole("Joueur n°"+numTour+" A vous de jouer");
 		ihm.miseAJourPlayer(numTour," ( "+getJoueurTour().getNom()+" )", getJoueurTour().getColor());
 		//	Utils.debugln("Fin de tour");
 		grille.activateAll();
@@ -337,6 +359,10 @@ public class Controleur implements Observateur{
 			carteTresorDeck.add(new MonteeEaux("Montee des EAU 1"));
 			carteTresorDeck.add(new MonteeEaux("Montee des EAU 2"));
 			//carteTresorDeck.add(new MonteeEaux("Monte des EAU 3"));
+			
+			carteTresorDeck.add(new CarteHelicoptere("Helico 1"));
+			carteTresorDeck.add(new CarteHelicoptere("Helico 2"));
+			carteTresorDeck.add(new CarteHelicoptere("Helico 3"));
 
 		}
 		if(Parameters.ALEAS) {
@@ -371,7 +397,7 @@ public class Controleur implements Observateur{
 		Aventurier a;
 		//Marche
 
-		a = new Ingenieur(0,"Ingenieure",Pion.ROUGE);
+		a = new Ingenieur(0,"Ingénieur",Pion.ROUGE);
 
 		joueursList.add(a);
 
@@ -432,7 +458,7 @@ public class Controleur implements Observateur{
 	}
 
 	private void conditionDefaite() {
-		// TODO - implement Controleur.conditionDÃÂ©faite
+		// TODO - implement Controleur.conditionDÃÂÃÂ©faite
 		throw new UnsupportedOperationException();
 	}
 
@@ -501,9 +527,11 @@ public class Controleur implements Observateur{
 	private boolean donneCarteJoeur(String str) {
 		// TODO - implement Controleur.donneCarte
 
+
 		int num = Integer.parseInt(str)-1;
 
 	
+
 		int nbr = getJoueurTour().getNum();
 		for(Aventurier a : getJoueurTour().getJoueurTuile()) {
 			System.out.println(" k = "+a.getNum()+" nbr "+nbr);
@@ -554,6 +582,7 @@ public class Controleur implements Observateur{
 			}
 		}
 
+
 		if(str.equalsIgnoreCase("")) {
 			
 			return false;
@@ -561,6 +590,8 @@ public class Controleur implements Observateur{
 		ihm.addConsole("Joueur sur la meme case  : "+str+" \n Veiller entre le numerau du joeur selectione");
 			return true;
 		}
+
+
 
 
 
@@ -591,7 +622,7 @@ public class Controleur implements Observateur{
 
 		if (getJoueurTour().getListeCarteJoueur().size() > 5) {
 			lastAction = TypeMessage.Defausse_Joueur;
-			ihm.addConsole("Vous avez " + (getJoueurTour().getListeCarteJoueur().size()-5) + " cartes en trop dans votre main, choisir les cartes à défausser :");
+			ihm.addConsole("Vous avez " + (getJoueurTour().getListeCarteJoueur().size()-5) + " cartes en trop dans votre main, choisir les cartes Ã  dÃ©fausser :");
 		}
 
 
@@ -722,7 +753,7 @@ public class Controleur implements Observateur{
 	 * 
 	 * @return 1 pour victoire, 0 si neutre et -1 pour partie perdue
 	 */
-	public int finDePartie() {
+	public int verifierFinDePartie() {
 
 		//Verification de si un joueur a une carte helicoptere
 		boolean aCarteHelicoptere = false;
@@ -734,11 +765,18 @@ public class Controleur implements Observateur{
 			}
 		}
 
+		int joueursPresentsHeliport=0;
+		boolean heliportCoule=false;
+		for(Tuile t : grille.getTuilesListe().values()) {
+			System.out.println(t.getNum());
+			if(t.getNum()==22) {			//Si la tuile est l'héliport
+				joueursPresentsHeliport = t.getNbrAventurie();
+				heliportCoule = t.getStatue()==-2;
+			}
+		}
+
 		//Condition victoire
-		if(	grille.getTuile("Heliport").isOnTuile(joueursList.get(0))&&
-				grille.getTuile("Heliport").isOnTuile(joueursList.get(1))&&
-				grille.getTuile("Heliport").isOnTuile(joueursList.get(2))&&
-				grille.getTuile("Heliport").isOnTuile(joueursList.get(3))&&
+		if(	joueursPresentsHeliport>3&&
 				tresorsRecuperes.size()==4&&
 				aCarteHelicoptere) {
 			return 1;												//Partie gagnee et livraison de colis de bonbons
@@ -750,59 +788,81 @@ public class Controleur implements Observateur{
 			return -1;
 		}
 
-		if(grille.getTuile("Heliport").getStatue()==-2) {
-			return -1;												//Heliport coule
-		}
 
-		if(curseur.getNbCartesInond()==0) {
-			return -1;												//Curseur au niveau maximum
-		}
+		if(heliportCoule) {
 
 
-		int temple=0,caverne=0,palais=0,jardin=0;
-		for(int i=0;i<tresorsRecuperes.size(); i++) {
-			int numT=tresorsRecuperes.get(i).getNum();
-			switch (numT) {
-			case 1: caverne=-1;
-			case 2: palais=-1;
-			case 3: jardin=-1;
-			case 4: temple=-1;
+			if(grille.getTuile("Heliport").getStatue()==-2) {
+
+				return -1;												//Heliport coule
+			}
+
+			if(curseur.getNbCartesInond()==0) {
+				return -1;												//Curseur au niveau maximum
+			}
+
+
+			int temple=0,caverne=0,palais=0,jardin=0;
+			for(int i=0;i<tresorsRecuperes.size(); i++) {
+				int numT=tresorsRecuperes.get(i).getNum();
+				switch (numT) {
+				case 1: caverne=-1;
+				case 2: palais=-1;
+				case 3: jardin=-1;
+				case 4: temple=-1;
+				}
+			}
+
+
+
+			for(Tuile t : grille.getTuilesListe().values()) {
+				if(temple>-1 && (t.getNum()==341 || t.getNum()==342) && t.getStatue()==-2) {
+
+
+
+					for(String key : grille.getTuilesListe().keySet()) {
+						if(temple>-1 && grille.getTuilesListe().get(key).toString().toLowerCase().contains("temple") && grille.getTuilesListe().get(key).getStatue()==-2) {
+
+							temple++;
+						}
+						if(caverne>-1 && (t.getNum()==311 || t.getNum()==312) && t.getStatue()==-2) {
+							caverne++;
+						}
+						if(palais>-1 && (t.getNum()==321 || t.getNum()==322) && t.getStatue()==-2) {
+							palais++;
+						}
+						if(jardin>-1 && (t.getNum()==331 || t.getNum()==332) && t.getStatue()==-2) {
+							jardin++;
+						}
+					}
+					if(temple==2||caverne==2||palais==2||jardin==2) {
+						return -1;												//Deux cases de rÃ©cupÃ©ration de trÃ©sor coulÃ©es
+					}
+
+					// A COMPLETER
+
+
+
+				}
 			}
 		}
-
-
-		for(String key : grille.getTuilesListe().keySet()) {
-			if(temple>-1 && grille.getTuilesListe().get(key).toString().toLowerCase().contains("temple") && grille.getTuilesListe().get(key).getStatue()==-2) {
-				temple++;
-			}
-			if(caverne>-1 && grille.getTuilesListe().get(key).toString().toLowerCase().contains("caverne") && grille.getTuilesListe().get(key).getStatue()==-2) {
-				caverne++;
-			}
-			if(palais>-1 && grille.getTuilesListe().get(key).toString().toLowerCase().contains("palais") && grille.getTuilesListe().get(key).getStatue()==-2) {
-				palais++;
-			}
-			if(jardin>-1 && grille.getTuilesListe().get(key).toString().toLowerCase().contains("jardin") && grille.getTuilesListe().get(key).getStatue()==-2) {
-				jardin++;
-			}
-		}
-		if(temple==2||caverne==2||palais==2||jardin==2) {
-			return -1;												//Deux cases de récupération de trésor coulées
-		}
-
-		// A COMPLETER
-
 		return 0;
-
 	}
 
 
 	public void test() {
 
+
 		getJoueurTour().addCarte(new CarteTresor("test ", NomTresor.CaliceOnde));
 		getJoueurTour().addCarte(new CarteTresor("test ", NomTresor.CaliceOnde));
 		getJoueurTour().addCarte(new CarteTresor("test ", NomTresor.CaliceOnde));
 		getJoueurTour().addCarte(new CarteTresor("test ", NomTresor.CaliceOnde));
 		getJoueurTour().addCarte(new CarteTresor("test ", NomTresor.CaliceOnde));
+
+
+
+
+		
 
 	}
 
