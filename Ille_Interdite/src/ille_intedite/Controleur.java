@@ -28,17 +28,16 @@ import utils.Utils;
 import utils.Utils.Pion;
 
 public class Controleur implements Observateur{
-	//Com de referencement 1
-	Curseur curseur;
-	Grille grille;
-	ArrayList<Classique> carteTresorDeck;
+
+	private Curseur curseur;
+	private Grille grille;
+	private ArrayList<Classique> carteTresorDeck;
 	public ArrayList<Classique> carteTresorsDefausse;
-	ArrayList<CarteInondation> inondationDeck;
+	private ArrayList<CarteInondation> inondationDeck;
 	public ArrayList<CarteInondation> inondationDefausse;
 	public static ArrayList<Aventurier> joueursList;
-	String messageConsole;
+	private String messageConsole;
 	private int NBR_JOUEUR = 4;
-	// Dernere action effectuer 
 	private  TypeMessage lastAction = TypeMessage.Clique_Send;
 	private int numTour;
 	private VueGrille vue;
@@ -47,7 +46,7 @@ public class Controleur implements Observateur{
 	private boolean noyade=false;
 	private Tuile helicoTuileSelect;
 
-	IHM ihm;
+	private IHM ihm;
 
 	public Controleur(IHM ihm,VueGrille vue) {
 		this.ihm = ihm;
@@ -66,7 +65,7 @@ public class Controleur implements Observateur{
 
 
 	}
-	
+
 	@Override
 	public void traiterMessage(Message msg) {
 
@@ -263,8 +262,6 @@ public class Controleur implements Observateur{
 
 	}
 
-
-
 	private void finDeTour() {
 		// TODO Auto-generated method stub
 		ihm.afichierConsole("Fin du tour du joueur n°"+numTour);
@@ -305,12 +302,6 @@ public class Controleur implements Observateur{
 
 	}
 
-
-	////////////////////////	
-	//	Gestion des carte //	
-	////////////////////////
-
-	//	Mise en place du deck Inondation //\\ actuellement sur plus de 24 Tuile
 	public void creeDeckInondation() {
 		for(Tuile t :grille.getTuilesListe().values()){
 			if(t.getNum()!=-1) {
@@ -369,7 +360,7 @@ public class Controleur implements Observateur{
 	public void piocherClassique() {
 		if(carteTresorDeck.size() != 0) {
 			Classique cC = carteTresorDeck.get(0);
-			if(cC instanceof CarteTresor || cC instanceof CarteSacSable || cC instanceof CarteHelicoptere ) {
+			if(!(cC instanceof MonteeEaux)) {
 				getJoueurTour().getListeCarteJoueur().add(cC);	
 				carteTresorDeck.remove(cC);
 			}
@@ -382,7 +373,7 @@ public class Controleur implements Observateur{
 
 		}
 	}
-	
+
 	public void init() {
 		//creer les aventuriers
 		Aventurier a;
@@ -440,7 +431,7 @@ public class Controleur implements Observateur{
 		//		}
 		activateSpecialButton(getJoueurTour());
 		ihm.miseAJourPlayer(0," ( "+getJoueurTour().getNom()+" )", getJoueurTour().getColor());
-		test();
+		//test();
 	}
 
 	private void deplacer(String str, Aventurier a) {
@@ -501,10 +492,6 @@ public class Controleur implements Observateur{
 		miseAJourGrille();
 	}
 
-	//--------------------------------------------
-	//DONE LES CARTE 
-	//-----------------------------
-
 	private boolean donneCarteJoeur(String str) {
 		// TODO - implement Controleur.donneCarte
 
@@ -526,7 +513,6 @@ public class Controleur implements Observateur{
 
 		return  false;
 	}
-
 
 	private boolean donneCarte(String str) {
 
@@ -552,7 +538,6 @@ public class Controleur implements Observateur{
 
 
 	}
-
 
 	public boolean aficherJoeurCase() {
 		String str = "";
@@ -608,6 +593,7 @@ public class Controleur implements Observateur{
 
 
 	}
+
 	public void defausserCarteMain() {
 		if (getJoueurTour().getListeCarteJoueur().size() > 5) {
 
@@ -620,14 +606,12 @@ public class Controleur implements Observateur{
 		}
 	}
 
-
 	public void piocher5Inondation() {
 		for(int i = 0 ;i <5 ;i++) {
 			piocherInondation();
 		}
 	}
 
-	//	Mise en place de la pioche et deffause auto des carte innondation
 	private void piocherInondation() {
 		if(inondationDeck.size()!=0) {
 			CarteInondation cInP = inondationDeck.get(0);
@@ -650,7 +634,6 @@ public class Controleur implements Observateur{
 		}
 		miseAJourGrille();
 	}
-
 
 	public Aventurier getJoueurTour() {
 		int i =  numTour%(joueursList.size());
@@ -693,10 +676,6 @@ public class Controleur implements Observateur{
 
 	}
 
-	/**
-	 * 
-	 * @param numJoeur
-	 */
 	public void getAventurie(int numJoeur) {
 		// TODO - implement Controleur.getAventurie
 		throw new UnsupportedOperationException();
@@ -711,21 +690,11 @@ public class Controleur implements Observateur{
 		return messageConsole;
 	}
 
-
-
-
-	/**
-	 * 
-	 * @param main
-	 */
 	public void addDefausse(ArrayList<Carte> main) {
 		// TODO - implement Controleur.addDefausse
 		throw new UnsupportedOperationException();
 	}
-
-
-	//Provisoire 
-	// A optimiser 
+ 
 	public void miseAJourGrille() {
 
 		//Provisoire 
@@ -747,10 +716,7 @@ public class Controleur implements Observateur{
 			return false;
 		}
 	}
-	/**
-	 * 
-	 * @return 1 pour victoire, 0 si neutre et -1 pour partie perdue
-	 */
+
 	public int verifierFinDePartie() {
 
 		//Verification de si un joueur a une carte helicoptere
@@ -838,8 +804,7 @@ public class Controleur implements Observateur{
 		return 0;
 	}
 
-
-	public void test() {
+	/*public void test() {
 
 
 		getJoueurTour().addCarte(new CarteTresor("test ", NomTresor.CaliceOnde));
@@ -852,7 +817,7 @@ public class Controleur implements Observateur{
 
 
 
-	}
+	}*/
 
 
 }
