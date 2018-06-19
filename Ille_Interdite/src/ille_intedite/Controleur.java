@@ -59,9 +59,9 @@ public class Controleur implements Observateur{
 		numTour =0;
 		NBR_JOUEUR = joueursList.size();
 		//Utils.debugln("controleur start");
-		
-		
-		
+
+
+
 
 	}
 
@@ -105,7 +105,7 @@ public class Controleur implements Observateur{
 				deplacer(msg.getLocation());
 				ihm.updateGrille();
 				getJoueurTour().actionJouer();
-				
+
 				if(getJoueurTour() instanceof Ingenieur) {
 					Ingenieur i = (Ingenieur) getJoueurTour();
 					i.setDerniereActionAssecher(false);
@@ -145,18 +145,18 @@ public class Controleur implements Observateur{
 				assecher(msg.getLocation());
 				ihm.updateGrille();
 				getJoueurTour().actionJouer();
-				 
+
 				if(getJoueurTour() instanceof Ingenieur) {
 					Ingenieur i = (Ingenieur) getJoueurTour();
-					
+
 					if(!i.getDerniereActionAssecher()) {
 						i.actionAnuller();
 					}
-					
+
 					i.setDerniereActionAssecher(!i.getDerniereActionAssecher());
 				}
 				break;
-				
+
 			case Clique_Deplace_Urgence :
 
 				deplacer(msg.getText());
@@ -210,7 +210,7 @@ public class Controleur implements Observateur{
 		// TODO Auto-generated method stub
 		ihm.afichierConsole("Fin du tour du joeur n °"+numTour);
 
-		
+
 		for (int i=0;i<curseur.getNbCartesInond();i++) {
 			piocherInondation();
 		}
@@ -400,7 +400,7 @@ public class Controleur implements Observateur{
 		miseAJourGrille();
 
 	}
-	
+
 	private void deplacerUrgence(Aventurier a) {
 		ihm.afficherDepUrg(a.deplacer2());
 		miseAJourGrille();
@@ -516,18 +516,18 @@ public class Controleur implements Observateur{
 
 	public boolean recupereTresort() {
 		// 
-		
+
 		Aventurier a = getJoueurTour();
-		
+
 		NomTresor  t = a.recupereTresor();
-		
+
 		if(t!=null) {
 			tresorsRecuperes.add(t);
 			return true;
 		}else {
 			return false;
 		}
-	
+
 	}
 
 	/**
@@ -569,16 +569,16 @@ public class Controleur implements Observateur{
 		vue.afficherGrille();
 
 	}	
-	
+
 	public boolean RecupereTresort() {
 		// 
-		
+
 		Aventurier a = getJoueurTour();
-		
+
 		NomTresor  t = a.recupereTresor();
-		
+
 		if(t!=null) {
-			System.out.println(" AJOUTEZ LE TRESOR ");
+			tresorsRecuperes.add(t);
 			return true;
 		}else {
 			return false;
@@ -589,10 +589,10 @@ public class Controleur implements Observateur{
 	 * @return 1 pour victoire, 0 si neutre et -1 pour partie perdue
 	 */
 	public int finDePartie() {
-		
+
 		//SOLUTION TEMPORAIRE (ou pas si ça marche bien)
 
-		
+
 		//Verification de si un joueur a une carte helicoptère
 		boolean aCarteHelicoptere = false;
 		for(int i=0; i<joueursList.size(); i++) {
@@ -602,26 +602,26 @@ public class Controleur implements Observateur{
 				}
 			}
 		}
-		
+
 		//Condition victoire
 		if(	grille.getTuile("Heliport").isOnTuile(joueursList.get(0))&&
-			grille.getTuile("Heliport").isOnTuile(joueursList.get(1))&&
-			grille.getTuile("Heliport").isOnTuile(joueursList.get(2))&&
-			grille.getTuile("Heliport").isOnTuile(joueursList.get(3))&&
-			tresorsRecuperes.size()==4&&
-			aCarteHelicoptere) {
+				grille.getTuile("Heliport").isOnTuile(joueursList.get(1))&&
+				grille.getTuile("Heliport").isOnTuile(joueursList.get(2))&&
+				grille.getTuile("Heliport").isOnTuile(joueursList.get(3))&&
+				tresorsRecuperes.size()==4&&
+				aCarteHelicoptere) {
 			return 1;
 		}
-		
+
 		//Condition(s) défaite
 		if(grille.getTuile("Heliport").getStatue()==-2) {
 			return -1;												//Héliport coulé
 		}
-		
+
 		if(curseur.getNbCartesInond()==0) {
 			return -1;												//Curseur au niveau maximum
 		}
-		
+
 
 		//A COMPLETER SI TRESOR DEJA RECUP
 		int temple=0,caverne=0,palais=0,jardin=0;
@@ -642,11 +642,11 @@ public class Controleur implements Observateur{
 		if(temple==2||caverne==2||palais==2||jardin==2) {
 			return -1;												//Deux cases de récupération de trésor coulées
 		}
-		
-		
-		
-		
-		
+
+
+
+
+
 		return 0;
 
 	}
