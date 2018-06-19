@@ -86,12 +86,12 @@ public class Controleur implements Observateur{
 		switch(msg.getMessage()) {
 		case Clique_Deplace :
 			deplacer2();
-			ihm.afichierConsole("Cliquez sur une case pour vous déplacer");
+			ihm.afichierConsole("Cliquez sur une case pour vous dÃ©placer");
 			break;
 
 		case Clique_Asseche :
 			assecher2();
-			ihm.afichierConsole("Cliquez sur une case pour l'assécher");
+			ihm.afichierConsole("Cliquez sur une case pour l'assÃ©cher");
 			break;
 
 		case Clique_Tuille :
@@ -123,7 +123,7 @@ public class Controleur implements Observateur{
 
 				}
 				else {
-					ihm.addConsole("Vous ne pouvez pas utiliser l'hélicoptère sur cette case "+msg.getLocation());
+					ihm.addConsole("Vous ne pouvez pas utiliser l'hÃ©licoptÃ¨re sur cette case "+msg.getLocation());
 					//Pour ne pas fair perdre une action 
 
 				}
@@ -133,10 +133,10 @@ public class Controleur implements Observateur{
 				System.out.println("Assecher");
 				if(grille.getTuile(msg.getLocation()).getStatue() == 1){
 					grille.getTuile(msg.getLocation()).assecher();
-					ihm.afichierConsole("Case asséchée en "+msg.getLocation());
+					ihm.afichierConsole("Case assÃ©chÃ©e en "+msg.getLocation());
 					miseAJourGrille();
 				}else{
-					ihm.addConsole("Vous ne pouvez pas assécher en  "+msg.getLocation());
+					ihm.addConsole("Vous ne pouvez pas assÃ©cher en  "+msg.getLocation());
 					//Pour ne pas fair perdre une action
 				}
 				break;
@@ -179,7 +179,12 @@ public class Controleur implements Observateur{
 			defausserCarteMain();
 			break;
 		case Clique_RecupereTresort :
-			RecupereTresort();
+			if(RecupereTresort()) {
+				getJoueurTour().actionJouer();
+				ihm.afichierConsole("Vous avez recupere un tresort");
+			}else {
+				ihm.afichierConsole("Imposible de  recupere un tresort");
+			}
 			break;	
 		}
 
@@ -203,7 +208,7 @@ public class Controleur implements Observateur{
 
 	private void finDeTour() {
 		// TODO Auto-generated method stub
-		ihm.afichierConsole("Fin du tour du joeur n °"+numTour);
+		ihm.afichierConsole("Fin du tour du joeur n Â°"+numTour);
 
 		
 		for (int i=0;i<curseur.getNbCartesInond();i++) {
@@ -221,7 +226,7 @@ public class Controleur implements Observateur{
 		numTour%=joueursList.size();
 		afficherListeCarteJoueur();
 
-		ihm.addConsole("Joueur n °"+numTour+" à vous de jouer");
+		ihm.addConsole("Joueur n Â°"+numTour+" Ã  vous de jouer");
 		ihm.miseAJourPlayer(numTour," ( "+getJoueurTour().getNom()+" )", getJoueurTour().getColor());
 		//	Utils.debugln("Fin de tour");
 		grille.activateAll();
@@ -297,6 +302,7 @@ public class Controleur implements Observateur{
 				carteTresorsDefausse.add(cC);
 				curseur.monteeEaux();
 				carteTresorDeck.remove(cC);
+				ihm.setLevelCursort(curseur.getNbCartesInond());
 			}
 
 		}
@@ -371,7 +377,7 @@ public class Controleur implements Observateur{
 	}
 
 	private void conditionDefaite() {
-		// TODO - implement Controleur.conditionDÃƒÂ©faite
+		// TODO - implement Controleur.conditionDÃƒÂƒÃ‚Â©faite
 		throw new UnsupportedOperationException();
 	}
 
@@ -446,7 +452,7 @@ public class Controleur implements Observateur{
 
 		if (getJoueurTour().getListeCarteJoueur().size() > 5) {
 
-			ihm.addConsole("Vous avez " + (getJoueurTour().getListeCarteJoueur().size()-5) + " cartes en trop dans votre main, choisir les cartes à défausser :");
+			ihm.addConsole("Vous avez " + (getJoueurTour().getListeCarteJoueur().size()-5) + " cartes en trop dans votre main, choisir les cartes Ã  dÃ©fausser :");
 		}
 
 
@@ -509,8 +515,19 @@ public class Controleur implements Observateur{
 	}
 
 	public void recupereTresort() {
-		// TODO - implement Controleur.recupereTresort
-		throw new UnsupportedOperationException();
+		// 
+		
+		Aventurier a = getJoueurTour();
+		
+		NomTresor  t = a.recupereTresor();
+		
+		if(t!=null) {
+			tresorsRecuperes.add(t);
+			return true;
+		}else {
+			return false;
+		}
+	
 	}
 
 	/**
@@ -573,10 +590,10 @@ public class Controleur implements Observateur{
 	 */
 	public int finDePartie() {
 		
-		//SOLUTION TEMPORAIRE (ou pas si ça marche bien)
+		//SOLUTION TEMPORAIRE (ou pas si Ã§a marche bien)
 
 		
-		//Verification de si un joueur a une carte helicoptère
+		//Verification de si un joueur a une carte helicoptÃ¨re
 		boolean aCarteHelicoptere = false;
 		for(int i=0; i<joueursList.size(); i++) {
 			for(int j=0; j<joueursList.get(i).getNbCarte();j++) {
@@ -596,9 +613,9 @@ public class Controleur implements Observateur{
 			return 1;
 		}
 		
-		//Condition(s) défaite
+		//Condition(s) dÃ©faite
 		if(grille.getTuile("Heliport").getStatue()==-2) {
-			return -1;												//Héliport coulé
+			return -1;												//HÃ©liport coulÃ©
 		}
 		
 		if(curseur.getNbCartesInond()==0) {
@@ -623,7 +640,7 @@ public class Controleur implements Observateur{
 			}
 		}
 		if(temple==2||caverne==2||palais==2||jardin==2) {
-			return -1;												//Deux cases de récupération de trésor coulées
+			return -1;												//Deux cases de rÃ©cupÃ©ration de trÃ©sor coulÃ©es
 		}
 		
 		
