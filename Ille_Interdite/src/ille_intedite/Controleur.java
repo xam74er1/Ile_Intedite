@@ -778,7 +778,7 @@ public class Controleur implements Observateur{
 				tresorsRecuperes.size()==4&&
 				aCarteHelicoptere) {
 			return 1;												//Partie gagnee et livraison de colis de bonbons
-		}
+		}															//De bonbons ? et pas de cookies ?
 
 		//Condition(s) defaite
 
