@@ -91,7 +91,19 @@ public class Plongeur extends Aventurier {
 			listTuile.add(t);
 		}
 		firstIter=true;
-		return getAdjacent(this.getTuile(), listTuile);
+		getAdjacent(this.getTuile(), listTuile);
+		
+		Iterator<Tuile> it = Grille.tuilesListe.values().iterator();
+		while(it.hasNext()) {
+			Tuile t = it.next();
+			if(t.getStatue()==2) {
+				tuilesDep.remove(t);
+			}
+		}
+
+		tuilesDep.remove(this.getTuile());
+		
+		return tuilesDep;
 	}
 
 	@Override
@@ -122,12 +134,7 @@ public class Plongeur extends Aventurier {
 
 		}
 		
-		tuilesDep.remove(this.getTuile());
-		for (Tuile t : tuilesDep) {
-			if (t.getStatue()==2) {
-				tuilesDep.remove(t);
-			}
-		}
+		
 		return tuilesDep;
 		
 
