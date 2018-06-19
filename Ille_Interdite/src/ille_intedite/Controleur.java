@@ -156,7 +156,7 @@ public class Controleur implements Observateur{
 		case Clique_Fin_Tour :
 			finDeTour();
 			break;
-
+			//------------------------SEND---------------------------------
 		case Clique_Send :
 
 			messageConsole = msg.getText();
@@ -178,18 +178,22 @@ public class Controleur implements Observateur{
 					ihm.addConsole("Choisire le numero : ");
 				}else {
 					ihm.afichierConsole(" Ce joeur n'est pas dans la liste , merci de recomencer  ");
+					msg.setMessage( TypeMessage.Clique_DonneCarte);
+					aficherJoeurCase();
 				}
 				break;
 			case Defausse_NumCarte :
 				
 				if(donneCarte(messageConsole)) {
 					getJoueurTour().actionJouer();
-					ihm.addConsole("Action jouer ");
+					
 				}else {
+					msg.setMessage( TypeMessage.Defausse_NumCarte);
 					ihm.addConsole("Cette carte n'est pas disponible");
 				}
 
 				break;
+				//------------------------ FIN SEND---------------------------------
 			}
 
 			break;
@@ -234,7 +238,7 @@ public class Controleur implements Observateur{
 
 
 
-		System.out.println(" nb action = "+getJoueurTour().getNbAction());
+		//System.out.println(" nb action = "+getJoueurTour().getNbAction());
 		lastAction = msg.getMessage();
 
 
@@ -260,10 +264,10 @@ public class Controleur implements Observateur{
 		piocherClassique();
 
 
-		if (givePlayer.getListeCarteJoueur().size() > 5) {
+		if (getJoueurTour().getListeCarteJoueur().size() > 5) {
 			lastAction = TypeMessage.Defausse_Joueur;
 
-			ihm.addConsole("Vous avez " + (givePlayer.getListeCarteJoueur().size()-5) + " cartes en trop dans votre main, choisir les cartes à défausser :");
+			ihm.addConsole("Vous avez " + (getJoueurTour().getListeCarteJoueur().size()-5) + " cartes en trop dans votre main, choisir les cartes à défausser :");
 		}
 
 
@@ -497,9 +501,9 @@ public class Controleur implements Observateur{
 	private boolean donneCarteJoeur(String str) {
 		// TODO - implement Controleur.donneCarte
 
-		int num = Integer.parseInt(str);
+		int num = Integer.parseInt(str)-1;
 
-		System.out.println(" num = "+num);
+	
 		int nbr = getJoueurTour().getNum();
 		for(Aventurier a : getJoueurTour().getJoueurTuile()) {
 			System.out.println(" k = "+a.getNum()+" nbr "+nbr);
@@ -519,7 +523,9 @@ public class Controleur implements Observateur{
 
 		int num = Integer.parseInt(str);
 		num-=1;
-		if(givePlayer != null &&  getJoueurTour().getListeCarteJoueur().contains(num)) {
+		if(givePlayer != null &&  getJoueurTour().getListeCarteJoueur().size()>num&&num>=0) {
+			
+			
 
 			Classique c =  getJoueurTour().getListeCarteJoueur().get(num);
 
@@ -528,6 +534,7 @@ public class Controleur implements Observateur{
 			givePlayer.getListeCarteJoueur().add(c);
 
 			ihm.addConsole("Carte donne");
+			givePlayer = null;
 			return true;
 		}else {
 			return false;
@@ -538,17 +545,22 @@ public class Controleur implements Observateur{
 	}
 
 
-	public void aficherJoeurCase() {
+	public boolean aficherJoeurCase() {
 		String str = "";
 		int nbr = getJoueurTour().getNum();
 		for(Aventurier a : getJoueurTour().getJoueurTuile()) {
 			if(nbr != a.getNum()) {
-				str += a.getNum()+" ";
+				str +=a.getNom()+" ( n� "+(a.getNum()+1)+") \n";
 			}
 		}
 
-		ihm.afichierConsole("Tappe dans la console le numereau des joeur disponible qui son : "+str);
-
+		if(str.equalsIgnoreCase("")) {
+			
+			return false;
+		}else {
+		ihm.addConsole("Joueur sur la meme case  : "+str+" \n Veiller entre le numerau du joeur selectione");
+			return true;
+		}
 
 
 
@@ -786,9 +798,11 @@ public class Controleur implements Observateur{
 
 	public void test() {
 
-
-
-		
+		getJoueurTour().addCarte(new CarteTresor("test ", NomTresor.CaliceOnde));
+		getJoueurTour().addCarte(new CarteTresor("test ", NomTresor.CaliceOnde));
+		getJoueurTour().addCarte(new CarteTresor("test ", NomTresor.CaliceOnde));
+		getJoueurTour().addCarte(new CarteTresor("test ", NomTresor.CaliceOnde));
+		getJoueurTour().addCarte(new CarteTresor("test ", NomTresor.CaliceOnde));
 
 	}
 
