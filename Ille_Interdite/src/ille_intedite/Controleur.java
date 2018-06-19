@@ -268,7 +268,7 @@ public class Controleur implements Observateur{
 
 	private void finDeTour() {
 		// TODO Auto-generated method stub
-		ihm.afichierConsole("Fin du tour du joueur nÂ°"+numTour);
+		ihm.afichierConsole("Fin du tour du joueur n°"+numTour);
 
 
 		for (int i=0;i<curseur.getNbCartesInond();i++) {
