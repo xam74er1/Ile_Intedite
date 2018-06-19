@@ -46,7 +46,7 @@ public class IHM extends Observe{
 	private JTextArea console;
 	private JPanel Plateau ;
 	private JLabel lblJoeurN;
-
+private JLabel textCusor;
 
 	HashMap<String,JButton> listButton = new HashMap();
 	HashMap<String,JPanel> listPan = new HashMap();
@@ -99,7 +99,7 @@ public class IHM extends Observe{
 		Main.add(cursor, BorderLayout.WEST);
 		cursor.setLayout(new BorderLayout(0, 0));
 
-		JLabel textCusor = new JLabel("Monte \r\ndes eau :\r\n X");
+		 textCusor = new JLabel("Monte \r\ndes eau :\r\n X");
 		cursor.add(textCusor);
 
 		JPanel aplication = new JPanel();
@@ -161,7 +161,7 @@ public class IHM extends Observe{
 
 		JPanel bouton = new JPanel();
 		bouton_et_autre.add(bouton, BorderLayout.CENTER);
-		bouton.setLayout(new GridLayout(2, 2, 0, 0));
+		bouton.setLayout(new GridLayout(3, 2, 0, 0));
 
 		JButton btnAction = new JButton("Deplace");
 		btnAction.addActionListener(new ActionListener() {
@@ -231,6 +231,18 @@ public class IHM extends Observe{
 			}
 		});
 		chamText.add(send, BorderLayout.EAST);
+		
+		JButton btnAction_4 = new JButton("Recupere tresort");
+		btnAction_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Message m = new Message(TypeMessage.Clique_RecupereTresort);
+
+				;
+
+				notifierObservateur(m);
+			}
+		});
+		bouton.add(btnAction_4);
 
 		frame.setVisible(true);
 	}
@@ -384,4 +396,8 @@ public class IHM extends Observe{
 		Plateau.revalidate();
 	}
 
+	public void setLevelCursort(int i) {
+		 textCusor.setText("Niveau de leau "+i);
+	}
+	
 }
