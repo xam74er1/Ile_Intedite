@@ -45,7 +45,7 @@ public class Controleur implements Observateur{
 	private ArrayList<NomTresor> tresorsRecuperes = new ArrayList<>();
 	private Aventurier givePlayer = null;
 	private boolean noyade=false;
-	private boolean helicoTuileSelect = false;
+	private Tuile helicoTuileSelect;
 
 	IHM ihm;
 
@@ -117,16 +117,17 @@ public class Controleur implements Observateur{
 
 			case Clique_Deplace_Helico :
 				// A modifier
-				if (helicoTuileSelect) {
+				if (helicoTuileSelect!=null) {
 					Tuile t = grille.getTuile(msg.getLocation());
-					System.out.println(msg.getLocation());
-					for(int i=0; i<t.getNbrAventurie();i++) {
-						deplacer(msg.getLocation(),t.getAventurie().get(i));
-						System.out.println(t.getAventurie().get(i).getTuile().getNom());
+					for(Aventurier a : joueursList) {
+						if(a.getTuile().equals(helicoTuileSelect)) {
+							
+						
+						deplacer(msg.getLocation(),a);
+						}
 					}
-					System.out.println(t.getNbrAventurie());
 					miseAJourGrille();
-					helicoTuileSelect=false;
+					helicoTuileSelect=null;
 				}else {
 					ArrayList<Tuile> tuilesDep = new ArrayList<Tuile>();
 					for(Tuile t : Grille.tuilesListe.values()) {
@@ -136,7 +137,7 @@ public class Controleur implements Observateur{
 					}
 					ihm.afficherDep(tuilesDep);
 					miseAJourGrille();
-					helicoTuileSelect=true;
+					helicoTuileSelect=grille.getTuile(msg.getLocation());
 				}
 				
 
@@ -251,9 +252,8 @@ public class Controleur implements Observateur{
 
 		//Si la conditon au dessu est fausse elle continue 
 		lastAction = msg.getMessage();
-		if (helicoTuileSelect) {
+		if (helicoTuileSelect!=null) {
 			lastAction=TypeMessage.Clique_Deplace_Helico;
-			System.out.println("lastAction modifiee");
 		}
 
 
