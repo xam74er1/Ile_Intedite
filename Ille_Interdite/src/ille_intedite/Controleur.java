@@ -133,7 +133,7 @@ public class Controleur implements Observateur{
 				System.out.println("Assecher");
 				if(grille.getTuile(msg.getLocation()).getStatue() == 1){
 					grille.getTuile(msg.getLocation()).assecher();
-					ihm.afichierConsole("Casse asséchée en "+msg.getLocation());
+					ihm.afichierConsole("Case asséchée en "+msg.getLocation());
 					miseAJourGrille();
 				}else{
 					ihm.addConsole("Vous ne pouvez pas assécher en  "+msg.getLocation());
