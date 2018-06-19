@@ -85,7 +85,7 @@ public class Controleur implements Observateur{
 
 		switch(msg.getMessage()) {
 		case Clique_Deplace :
-			deplacer2();
+			deplacer2(getJoueurTour());
 			ihm.afichierConsole("Cliquez sur une case pour vous déplacer");
 			break;
 
@@ -102,7 +102,7 @@ public class Controleur implements Observateur{
 				//Utils.debugln("Tuille = "+msg.getLocation());
 
 				//Si le deplacement cest bien passe 
-				deplacer(msg.getLocation());
+				deplacer(msg.getLocation(),getJoueurTour());
 				ihm.updateGrille();
 				getJoueurTour().actionJouer();
 
@@ -388,24 +388,43 @@ public class Controleur implements Observateur{
 		throw new UnsupportedOperationException();
 	}
 
-	private void deplacer(String str) {
-		Aventurier a = getJoueurTour();
+	private void deplacer(String str, Aventurier a) {
 
 		Tuile t = grille.getTuile(str);
-
 		a.deplacer(t);
 		grille.activateAll();
 		miseAJourGrille();
 
 	}
 
-	private void deplacer2() {
+	private void deplacer2(Aventurier a) {
 
-		Aventurier a = getJoueurTour();
+		ArrayList<Tuile> tuilesDep = a.deplacer2();
 
-		ihm.afficherDep(a.deplacer2());
+
+		ihm.afficherDep(tuilesDep);
 		miseAJourGrille();
 
+
+	}
+	
+	private void deplacerUrgence(Tuile t) {
+
+		Iterator<Aventurier> it = joueursList.iterator();
+		while(it.hasNext()) {
+			Aventurier a =it.next();
+			if(t.getAventurie().contains(a)) {
+				try {
+					ArrayList<Tuile> tuilesDep =a.deplacer2();
+					Collections.shuffle(tuilesDep);
+					deplacer(tuilesDep.get(0).getxT()+":"+tuilesDep.get(0).getyT(),a);
+					miseAJourGrille();
+				}catch(Exception e) {
+					System.out.println("Perdu");
+				}
+			}
+			
+		}
 	}
 
 	private void assecher(String str) {
@@ -487,16 +506,7 @@ public class Controleur implements Observateur{
 			CarteInondation cInP = inondationDeck.get(0);
 			cInP.getTuile().inonder();
 			if (cInP.getTuile().getStatue()==2) {
-				for (Aventurier a : cInP.getTuile().getAventurie()) {
-					//marche pas
-					try {
-						ArrayList<Tuile> tuilesDep =a.getAdjacent(a.getTuile(),(ArrayList<Tuile>) Grille.tuilesListe.values()); 
-						a.setPosition(tuilesDep.get(tuilesDep.size()-1));
-						miseAJourGrille();
-					}catch(Exception e) {
-						System.out.println("Perdu");
-					}
-				}
+				deplacerUrgence(cInP.getTuile());
 			}
 			inondationDefausse.add(cInP);
 			inondationDeck.remove(cInP);
