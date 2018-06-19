@@ -168,17 +168,34 @@ public class Controleur implements Observateur{
 			break;
 
 		case Clique_Send :
-			
+			messageConsole = msg.getText();
 			switch(lastAction) {
-			case Defausse :
-				messageConsole = msg.getText();
-			defausserCarteMain(); break;
-			
+			case Defausse_Joueur :
+
+				defausserCarteMain(); break;
+
 			case Clique_DonneCarte: 
-				messageConsole = msg.getText();
+
+				if(donneCarteJoeur(messageConsole)) {
+					afficherListeCarteJoueur();
+					msg.setMessage( TypeMessage.Defausse_NumCarte);
+					ihm.addConsole("Choisire le numero : ");
+				}else {
+					ihm.afichierConsole(" Ce joeur n'est pas dans la liste , merci de recomencer  ");
+				}
+				break;
+			case Defausse_NumCarte :
+				
+				if(donneCarte(messageConsole)) {
+					getJoueurTour().actionJouer();
+					ihm.addConsole("Action jouer ");
+				}else {
+					ihm.addConsole("Cette carte n'est pas disponible");
+				}
+
 				break;
 			}
-			
+
 			break;
 		case Clique_RecupereTresort :
 			if(RecupereTresort()) {
@@ -210,8 +227,8 @@ public class Controleur implements Observateur{
 		}
 
 	}
-	
-	
+
+
 
 	private void finDeTour() {
 		// TODO Auto-generated method stub
@@ -223,6 +240,14 @@ public class Controleur implements Observateur{
 		}
 		piocherClassique();
 		piocherClassique();
+
+
+		if (givePlayer.getListeCarteJoueur().size() > 5) {
+			lastAction = TypeMessage.Defausse_Joueur;
+
+			ihm.addConsole("Vous avez " + (givePlayer.getListeCarteJoueur().size()-5) + " cartes en trop dans votre main, choisir les cartes à défausser :");
+		}
+
 
 
 		//afficherListeCarteJoueur
@@ -376,6 +401,7 @@ public class Controleur implements Observateur{
 		//		}
 
 		ihm.miseAJourPlayer(0," ( "+getJoueurTour().getNom()+" )", getJoueurTour().getColor());
+		test();
 	}
 
 	private void conditionVictoire() {
@@ -424,12 +450,63 @@ public class Controleur implements Observateur{
 		miseAJourGrille();
 	}
 
-	private boolean donneCarte(String str) {
+	//--------------------------------------------
+	//DONE LES CARTE 
+	//-----------------------------
+
+	private boolean donneCarteJoeur(String str) {
 		// TODO - implement Controleur.donneCarte
-		
+
 		int num = Integer.parseInt(str);
-		
-		return  true;
+		System.out.println(" num = "+num);
+		int nbr = getJoueurTour().getNum();
+		for(Aventurier a : getJoueurTour().getJoueurTuile()) {
+			System.out.println(" k = "+a.getNum()+" nbr "+nbr);
+			if(nbr != a.getNum()&&num==a.getNum()) {
+				givePlayer = a;
+				return true;
+			}
+
+
+		}
+
+		return  false;
+	}
+
+	
+	private boolean donneCarte(String str) {
+
+		int num = Integer.parseInt(str);
+		num-=1;
+		if(givePlayer != null &&  getJoueurTour().getListeCarteJoueur().contains(num)) {
+
+			Classique c =  getJoueurTour().getListeCarteJoueur().get(num);
+
+			getJoueurTour().getListeCarteJoueur().remove(c);
+
+			givePlayer.getListeCarteJoueur().add(c);
+
+			ihm.addConsole("Carte donne");
+			return true;
+		}else {
+			return false;
+		}
+
+
+
+	}
+
+
+	public void aficherJoeurCase() {
+		String str = "";
+		int nbr = getJoueurTour().getNum();
+		for(Aventurier a : getJoueurTour().getJoueurTuile()) {
+			if(nbr != a.getNum()) {
+				str += a.getNum()+" ";
+			}
+		}
+
+		ihm.afichierConsole("Tappe dans la console le numereau des joeur disponible qui son : "+str);
 	}
 
 	private void actSpeciale() {
@@ -456,7 +533,7 @@ public class Controleur implements Observateur{
 		}
 
 		if (getJoueurTour().getListeCarteJoueur().size() > 5) {
-			lastAction = TypeMessage.Defausse;
+			lastAction = TypeMessage.Defausse_Joueur;
 			ihm.addConsole("Vous avez " + (getJoueurTour().getListeCarteJoueur().size()-5) + " cartes en trop dans votre main, choisir les cartes à défausser :");
 		}
 
@@ -662,17 +739,11 @@ public class Controleur implements Observateur{
 		return 0;
 
 	}
-	
-	public void aficherJoeurCase() {
-		String str = "";
-		int nbr = getJoueurTour().getNum();
-		for(Aventurier a : getJoueurTour().getTuile().getAventurie()) {
-			if(nbr != a.getNum()) {
-				str += a.getNum()+" ";
-			}
-		}
-		
-		ihm.afichierConsole("Tappe dans la console le numereau des joeur disponible qui son : "+str);
+
+	public void test() {
+
 	}
+
+	
 }
 
