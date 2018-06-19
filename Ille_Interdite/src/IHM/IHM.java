@@ -54,6 +54,9 @@ private JLabel textCusor;
 	
 	VueGrille vue;
 	
+	private JButton btnSacSable;
+	private JButton btnHelico;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -191,7 +194,7 @@ private JLabel textCusor;
 
 		JPanel panelAction_3 = new JPanel(new GridLayout(1,2));
 		
-		JButton btnSacSable = new JButton("Sable");
+		btnSacSable = new JButton("Sable");
 		btnSacSable.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -201,7 +204,7 @@ private JLabel textCusor;
 		});
 		panelAction_3.add(btnSacSable);
 		
-		JButton btnHelico = new JButton("Helico");
+		btnHelico = new JButton("Helico");
 		btnHelico.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -437,4 +440,8 @@ private JLabel textCusor;
 		 textCusor.setText("Niveau de l'eau "+i);
 	}
 	
+	public void activateSpecialButton(boolean he, boolean sa) {
+		btnHelico.setEnabled(he);
+		btnSacSable.setEnabled(sa);
+	}
 }

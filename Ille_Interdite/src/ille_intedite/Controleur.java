@@ -297,6 +297,7 @@ public class Controleur implements Observateur{
 
 		ihm.addConsole("Joueur n°"+numTour+" A vous de jouer");
 		ihm.miseAJourPlayer(numTour," ( "+getJoueurTour().getNom()+" )", getJoueurTour().getColor());
+		activateSpecialButton(getJoueurTour());
 		//	Utils.debugln("Fin de tour");
 		grille.activateAll();
 		miseAJourGrille();
@@ -440,7 +441,7 @@ public class Controleur implements Observateur{
 		//		for(int j =0;j<5;j++) {
 		//			piocherInondation();
 		//		}
-
+		activateSpecialButton(getJoueurTour());
 		ihm.miseAJourPlayer(0," ( "+getJoueurTour().getNom()+" )", getJoueurTour().getColor());
 		test();
 	}
@@ -673,6 +674,23 @@ public class Controleur implements Observateur{
 			return false;
 		}
 
+	}
+	
+	public void activateSpecialButton(Aventurier a) {
+		boolean aHelico=false;
+		boolean aSacSable=false;
+		
+		for(Classique c : a.getListeCarteJoueur()) {
+			if (c instanceof CarteHelicoptere) {
+				aHelico=true;
+			}
+			if(c instanceof CarteSacSable) {
+				aSacSable=true;
+			}
+		}
+		
+		ihm.activateSpecialButton(aHelico, aSacSable);
+		
 	}
 
 	/**
