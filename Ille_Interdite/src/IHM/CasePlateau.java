@@ -157,12 +157,7 @@ public class CasePlateau extends JPanel  {
 	
 
 
-		for(Aventurier a : t.getAventurie()) {
-			g.setColor(a.getColor());
-			g.fillOval(xa, ya, xa+s, ya+s);
-			xa += 2*s;
-
-		}
+	
 
 		
 		
@@ -199,12 +194,12 @@ public class CasePlateau extends JPanel  {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-
-				System.out.println(location);
+				if(!blanc) {
+				
 				Message m = new Message(TypeMessage.Clique_Tuille);
 				m.setLocation(location);
 				o.notifierObservateur(m);
-
+				}
 
 
 			}
@@ -220,7 +215,7 @@ public class CasePlateau extends JPanel  {
 	}
 	
 	public void activate() {
-		this.addMouseListener(mouse());
+		this.addMouseListener(m);
 		activated = true;
 	}
 	
@@ -234,12 +229,13 @@ public class CasePlateau extends JPanel  {
 	
 	public void setBlanc() {
 		this.removeMouseListener(m);
+		
 		this.blanc = true;
 	}
 	
 	public void removeBlanc() {
 		this.blanc = false;
-		this.addMouseListener(mouse());
+		this.addMouseListener(m);
 	}
 
 }

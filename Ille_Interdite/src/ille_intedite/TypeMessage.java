@@ -18,6 +18,8 @@ public enum TypeMessage {
     Clique_Send,
     Clique_Fin_Tour, 
     Clique_Deplace_Helico, 
-    Clique_Asseche_SacDeSable;
+    Clique_Asseche_SacDeSable,
+    Clique_RecupereTresort,
+    Clique_Deplace_Urgence;
     
 }

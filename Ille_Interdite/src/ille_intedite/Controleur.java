@@ -1,11 +1,13 @@
 
 package ille_intedite;
 import Carte.Carte;
+import Carte.CarteHelicoptere;
 import Carte.Classique;
 import Carte.CarteInondation;
 import Carte.CarteTresor;
 import Carte.CarteSacSable;
 import Carte.MonteeEaux;
+import Carte.NomTresor;
 import IHM.IHM;
 import ille_intedite.Aventurie.Aventurier;
 import ille_intedite.Aventurie.Aviateur;
@@ -14,6 +16,8 @@ import ille_intedite.Aventurie.Ingenieure;
 import ille_intedite.Aventurie.Messager;
 import ille_intedite.Aventurie.Navigateur;
 import ille_intedite.Aventurie.Plongeur;
+import Carte.NomTresor;
+import Carte.CarteHelicoptere;
 
 import java.awt.Color;
 import java.util.*;
@@ -64,6 +68,9 @@ public class Controleur implements Observateur{
 
 
 
+
+
+
 	@Override
 	public void traiterMessage(Message msg) {
 
@@ -78,10 +85,12 @@ public class Controleur implements Observateur{
 
 		switch(msg.getMessage()) {
 		case Clique_Deplace :
+			deplacer2();
 			ihm.afichierConsole("Cliquer sur une classe pour vous deplace");
 			break;
 
 		case Clique_Asseche :
+			assecher2();
 			ihm.afichierConsole("Cliquer sur une classe pour l'assecher");
 			break;
 
@@ -93,27 +102,58 @@ public class Controleur implements Observateur{
 				//Utils.debugln("Tuille = "+msg.getLocation());
 
 				//Si le deplacement cest bien passe 
-				if(deplacer(msg.getLocation())) {
-					ihm.afichierConsole("Deplacement en "+msg.getLocation());
-					getJoueurTour().actionJouer();
-					//Si le deplacement cest mal passe 
-				}else {
-					Tuile to =getJoueurTour().getPosition();
-					ihm.addConsole("Vous ne pouvez pas vous deplace de"+to.getxT()+":"+to.getyT()+" a  "+msg.getLocation());
-					//Pour ne pas fair perdre une action 
-
+				deplacer(msg.getLocation());
+				ihm.updateGrille();
+				getJoueurTour().actionJouer();
+				
+				if(getJoueurTour() instanceof Ingenieure) {
+					Ingenieure i = (Ingenieure) getJoueurTour();
+					i.setDerniereActionAssecher(false);
 				}
 
 				break;
 
-			case Clique_Asseche :
+			case Clique_Deplace_Helico :
+				// A modifier
+				if (grille.getTuile(msg.getLocation()).getStatue() != 2 && grille.getTuile(msg.getLocation()).getStatue() != -1) {
+					Tuile t = grille.getTuile(msg.getLocation());
+					for(int i=0;i<t.getAventurie().size();i++) {
+
+					}
+
+				}
+				else {
+					ihm.addConsole("Vous ne pouvez pas utiliser l'helicopter sur cette case "+msg.getLocation());
+					//Pour ne pas fair perdre une action 
+
+				}
+				break;
+
+			case Clique_Asseche_SacDeSable :
 				System.out.println("Assecher");
-				if(assecher(msg.getLocation())){
+				if(grille.getTuile(msg.getLocation()).getStatue() == 1){
+					grille.getTuile(msg.getLocation()).assecher();
 					ihm.afichierConsole("Casse assache en "+msg.getLocation());
-					getJoueurTour().actionJouer();
+					miseAJourGrille();
 				}else{
 					ihm.addConsole("Vous ne pouvez pas asseche en  "+msg.getLocation());
 					//Pour ne pas fair perdre une action
+				}
+				break;
+
+			case Clique_Asseche :
+				assecher(msg.getLocation());
+				ihm.updateGrille();
+				getJoueurTour().actionJouer();
+				 
+				if(getJoueurTour() instanceof Ingenieure) {
+					Ingenieure i = (Ingenieure) getJoueurTour();
+					
+					if(!i.getDerniereActionAssecher()) {
+						i.actionAnuller();
+					}
+					
+					i.setDerniereActionAssecher(!i.getDerniereActionAssecher());
 				}
 				break;
 
@@ -121,26 +161,29 @@ public class Controleur implements Observateur{
 			}
 
 
-
-
-
 			break;
 
 		case Clique_Fin_Tour :
 			finDeTour();
 			break;
-			
+
 		case Clique_Send :
 			messageConsole = msg.getText();
+			defausserCarteMain();
 			break;
+		case Clique_RecupereTresort :
+			RecupereTresort();
+			break;	
 		}
+
+
 
 
 		//Si la conditon au dessu est fausse elle continue 
 
 
 
-
+		System.out.println(" nb action = "+getJoueurTour().getNbAction());
 		lastAction = msg.getMessage();
 
 
@@ -156,14 +199,26 @@ public class Controleur implements Observateur{
 		ihm.afichierConsole("Fin du tour du joeur n°"+numTour);
 
 		getJoueurTour().finTour();
-		piocherInondation();
-		System.out.println("woua");
-		numTour++;
+		for (int i=0;i<curseur.getNbCartesInond();i++) {
+			piocherInondation();
+		}
+		piocherClassique();
+		piocherClassique();
+
+
+		//afficherListeCarteJoueur
+
+
+
+		numTour++;		
 		numTour%=joueursList.size();
+		afficherListeCarteJoueur();
 
 		ihm.addConsole("Jouer n°"+numTour+" as vous de jouer");
 		ihm.miseAJourPlayer(numTour," ( "+getJoueurTour().getNom()+" )", getJoueurTour().getColor());
 		//	Utils.debugln("Fin de tour");
+		grille.activateAll();
+		miseAJourGrille();
 
 	}
 
@@ -490,7 +545,7 @@ public class Controleur implements Observateur{
 
 
 			if(!listdep.contains(me.getValue())) {
-				ihm.getButonPlateau(me.getKey()).unActivated();
+				ihm.getButonPlateau(me.getKey()).setBlanc();
 			}			
 
 
@@ -498,7 +553,20 @@ public class Controleur implements Observateur{
 		}
 	}
 	
-	
+	public boolean RecupereTresort() {
+		// 
+		
+		Aventurier a = getJoueurTour();
+		
+		NomTresor  t = a.recupereTresor();
+		
+		if(t!=null) {
+			System.out.println(" AJOUTE LE TRESORT ");
+			return true;
+		}else {
+			return false;
+		}
+	}
 	/**
 	 * 
 	 * @return 1 pour victoire, 0 si neutre et -1 pour partie perdue
@@ -537,6 +605,7 @@ public class Controleur implements Observateur{
 			return -1;												//Curseur au niveau maximum
 		}
 		
+
 		//A COMPLETER SI TRESOR DEJA RECUP
 		int temple=0,caverne=0,palais=0,jardin=0;
 		for(String key : grille.getTuilesListe().keySet()) {
@@ -562,6 +631,7 @@ public class Controleur implements Observateur{
 		
 		
 		return 0;
+
 	}
 }
 
