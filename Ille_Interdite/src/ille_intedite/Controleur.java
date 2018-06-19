@@ -44,6 +44,7 @@ public class Controleur implements Observateur{
 	private VueGrille vue;
 	private ArrayList<NomTresor> tresorsRecuperes = new ArrayList<>();
 	private Aventurier givePlayer = null;
+	private boolean noyade=false;
 
 	IHM ihm;
 
@@ -420,7 +421,8 @@ public class Controleur implements Observateur{
 					deplacer(tuilesDep.get(0).getxT()+":"+tuilesDep.get(0).getyT(),a);
 					miseAJourGrille();
 				}catch(Exception e) {
-					System.out.println("Perdu");
+					noyade=true;
+					finDePartie();
 				}
 			}
 			
@@ -612,10 +614,7 @@ public class Controleur implements Observateur{
 	 */
 	public int finDePartie() {
 
-		//SOLUTION TEMPORAIRE (ou pas si ça marche bien)
-
-
-		//Verification de si un joueur a une carte helicoptère
+		//Verification de si un joueur a une carte helicoptere
 		boolean aCarteHelicoptere = false;
 		for(int i=0; i<joueursList.size(); i++) {
 			for(int j=0; j<joueursList.get(i).getNbCarte();j++) {
@@ -635,7 +634,12 @@ public class Controleur implements Observateur{
 			return 1;												//Partie gagnee et livraison de colis de bonbons
 		}
 
-		//Condition(s) défaite
+		//Condition(s) defaite
+		
+		if(noyade) {
+			return -1;
+		}
+		
 		if(grille.getTuile("Heliport").getStatue()==-2) {
 			return -1;												//Heliport coule
 		}
