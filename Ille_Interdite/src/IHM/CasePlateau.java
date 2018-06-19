@@ -43,11 +43,11 @@ public class CasePlateau extends JPanel  {
 		this.addMouseListener(m);
 		setLayout(new BorderLayout(0, 0));
 
-		JLabel lblNewLabel = new JLabel(str);
+		/*JLabel lblNewLabel = new JLabel(str);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setForeground(Color.BLACK);
 		add(lblNewLabel);
-		setBackground(Color.gray);
+		setBackground(Color.gray);*/
 		
 		this.t.setCase(this);
 		

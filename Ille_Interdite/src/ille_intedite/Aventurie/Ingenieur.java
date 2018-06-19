@@ -6,11 +6,11 @@ import Carte.NomTresor;
 import ille_intedite.Tuile;
 import utils.Utils;
 
-public class Ingenieure extends Aventurier {
+public class Ingenieur extends Aventurier {
 	
 	private boolean derniereActionAssecher = false;
 
-	public Ingenieure(int Num, String nom, Utils.Pion pion) {
+	public Ingenieur(int Num, String nom, Utils.Pion pion) {
         super(Num, nom,pion);
     }
     

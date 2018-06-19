@@ -12,7 +12,7 @@ import IHM.IHM;
 import ille_intedite.Aventurie.Aventurier;
 import ille_intedite.Aventurie.Aviateur;
 import ille_intedite.Aventurie.Explorateur;
-import ille_intedite.Aventurie.Ingenieure;
+import ille_intedite.Aventurie.Ingenieur;
 import ille_intedite.Aventurie.Messager;
 import ille_intedite.Aventurie.Navigateur;
 import ille_intedite.Aventurie.Plongeur;
@@ -106,8 +106,8 @@ public class Controleur implements Observateur{
 				ihm.updateGrille();
 				getJoueurTour().actionJouer();
 				
-				if(getJoueurTour() instanceof Ingenieure) {
-					Ingenieure i = (Ingenieure) getJoueurTour();
+				if(getJoueurTour() instanceof Ingenieur) {
+					Ingenieur i = (Ingenieur) getJoueurTour();
 					i.setDerniereActionAssecher(false);
 				}
 
@@ -146,8 +146,8 @@ public class Controleur implements Observateur{
 				ihm.updateGrille();
 				getJoueurTour().actionJouer();
 				 
-				if(getJoueurTour() instanceof Ingenieure) {
-					Ingenieure i = (Ingenieure) getJoueurTour();
+				if(getJoueurTour() instanceof Ingenieur) {
+					Ingenieur i = (Ingenieur) getJoueurTour();
 					
 					if(!i.getDerniereActionAssecher()) {
 						i.actionAnuller();
@@ -304,7 +304,7 @@ public class Controleur implements Observateur{
 		Aventurier a;
 		//Marche
 
-		a = new Ingenieure(0,"Ingenieure",Pion.ROUGE);
+		a = new Ingenieur(0,"Ingenieure",Pion.ROUGE);
 
 		joueursList.add(a);
 
