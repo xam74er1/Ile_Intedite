@@ -66,13 +66,7 @@ public class Controleur implements Observateur{
 
 
 	}
-
-
-
-
-
-
-
+	
 	@Override
 	public void traiterMessage(Message msg) {
 
@@ -388,11 +382,7 @@ public class Controleur implements Observateur{
 
 		}
 	}
-
-
-
-
-
+	
 	public void init() {
 		//creer les aventuriers
 		Aventurier a;
