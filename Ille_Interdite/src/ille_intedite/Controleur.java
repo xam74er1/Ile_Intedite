@@ -739,9 +739,17 @@ public class Controleur implements Observateur{
 		Aventurier a = getJoueurTour();
 
 		NomTresor  t = a.recupereTresor();
-
+		
+		boolean dejaPresent=false;
 		if(t!=null) {
-			tresorsRecuperes.add(t);
+			for(int i=0;i>tresorsRecuperes.size(); i++) {
+				if (!dejaPresent&&tresorsRecuperes.get(i)==t) {
+					dejaPresent=true;
+				}
+			}
+			if(!dejaPresent) {
+				tresorsRecuperes.add(t);
+			}
 			return true;
 		}else {
 			return false;
