@@ -116,30 +116,19 @@ public class Controleur implements Observateur{
 
 			case Clique_Deplace_Helico :
 				// A modifier
-				if (grille.getTuile(msg.getLocation()).getStatue() != 2 && grille.getTuile(msg.getLocation()).getStatue() != -1) {
-					Tuile t = grille.getTuile(msg.getLocation());
-					for(int i=0;i<t.getAventurie().size();i++) {
+				Tuile t = grille.getTuile(msg.getLocation());
 
-					}
-
+				for(Aventurier a : t.getAventurie()) {
+					deplacer(msg.getLocation(),a);
 				}
-				else {
-					ihm.addConsole("Vous ne pouvez pas utiliser l'hÃ©licoptÃ¨re sur cette case "+msg.getLocation());
-					//Pour ne pas fair perdre une action 
 
-				}
 				break;
 
 			case Clique_Asseche_SacDeSable :
-				System.out.println("Assecher");
-				if(grille.getTuile(msg.getLocation()).getStatue() == 1){
 					grille.getTuile(msg.getLocation()).assecher();
-					ihm.afichierConsole("Case assÃ©chÃ©e en "+msg.getLocation());
+					ihm.afichierConsole("Case asséchée en "+msg.getLocation());
+					grille.activateAll();
 					miseAJourGrille();
-				}else{
-					ihm.addConsole("Vous ne pouvez pas assÃ©cher en  "+msg.getLocation());
-					//Pour ne pas fair perdre une action
-				}
 				break;
 
 			case Clique_Asseche :
@@ -169,29 +158,50 @@ public class Controleur implements Observateur{
 			break;
 
 		case Clique_Send :
-			
+
 			switch(lastAction) {
 			case Defausse :
 				messageConsole = msg.getText();
-			defausserCarteMain(); break;
-			
+				defausserCarteMain(); break;
+
 			case Clique_DonneCarte: 
 				messageConsole = msg.getText();
 				break;
 			}
-			
+
 			break;
 		case Clique_RecupereTresort :
 			if(RecupereTresort()) {
 				getJoueurTour().actionJouer();
-				ihm.afichierConsole("Vous avez recupere un tresort");
+				ihm.afichierConsole("Vous avez récupéré le trésor");
 			}else {
-				ihm.afichierConsole("Imposible de  recupere un tresort");
+				ihm.afichierConsole("Impossible de récupérer le trésor");
 			}
 			break;
 		case Clique_DonneCarte :
 			aficherJoeurCase();
 			break;
+		case Clique_Asseche_SacDeSable :
+			ArrayList<Tuile> listAsseche = new ArrayList<Tuile>() ;
+			for(Tuile t : Grille.tuilesListe.values()) {
+				if (t.getStatue()==1) {
+					listAsseche.add(t);
+				}
+			}
+			ihm.afficherDep(listAsseche);
+			miseAJourGrille();
+			break;
+		case Clique_Deplace_Helico :
+			ArrayList<Tuile> listCaseAvent = new ArrayList<Tuile>() ;
+			for(Tuile t : Grille.tuilesListe.values()) {
+				if (t.getAventurie()!=null) {
+					listCaseAvent.add(t);
+				}
+			}
+			ihm.afficherDep(listCaseAvent);
+			miseAJourGrille();
+			break;
+
 		}
 
 
@@ -211,8 +221,8 @@ public class Controleur implements Observateur{
 		}
 
 	}
-	
-	
+
+
 
 	private void finDeTour() {
 		// TODO Auto-generated method stub
@@ -409,7 +419,7 @@ public class Controleur implements Observateur{
 
 
 	}
-	
+
 	private void deplacerUrgence() {
 
 		for(Tuile t : Grille.tuilesListe.values()) {
@@ -450,9 +460,9 @@ public class Controleur implements Observateur{
 
 	private boolean donneCarte(String str) {
 		// TODO - implement Controleur.donneCarte
-		
+
 		int num = Integer.parseInt(str);
-		
+
 		return  true;
 	}
 
@@ -635,11 +645,11 @@ public class Controleur implements Observateur{
 		}
 
 		//Condition(s) defaite
-		
+
 		if(noyade) {
 			return -1;
 		}
-		
+
 		if(grille.getTuile("Heliport").getStatue()==-2) {
 			return -1;												//Heliport coule
 		}
@@ -659,8 +669,8 @@ public class Controleur implements Observateur{
 			case 4: temple=-1;
 			}
 		}
-		
-		
+
+
 		for(String key : grille.getTuilesListe().keySet()) {
 			if(temple>-1 && grille.getTuilesListe().get(key).toString().toLowerCase().contains("temple") && grille.getTuilesListe().get(key).getStatue()==-2) {
 				temple++;
@@ -684,7 +694,7 @@ public class Controleur implements Observateur{
 		return 0;
 
 	}
-	
+
 	public void aficherJoeurCase() {
 		String str = "";
 		int nbr = getJoueurTour().getNum();
@@ -693,7 +703,7 @@ public class Controleur implements Observateur{
 				str += a.getNum()+" ";
 			}
 		}
-		
+
 		ihm.afichierConsole("Tappe dans la console le numereau des joeur disponible qui son : "+str);
 	}
 }
