@@ -635,19 +635,29 @@ public class Controleur implements Observateur{
 		}
 
 
-		//A COMPLETER SI TRESOR DEJA RECUP
 		int temple=0,caverne=0,palais=0,jardin=0;
+		for(int i=0;i<tresorsRecuperes.size(); i++) {
+			int numT=tresorsRecuperes.get(i).getNum();
+			switch (numT) {
+			case 1: caverne=-1;
+			case 2: palais=-1;
+			case 3: jardin=-1;
+			case 4: temple=-1;
+			}
+		}
+		
+		
 		for(String key : grille.getTuilesListe().keySet()) {
-			if(grille.getTuilesListe().get(key).toString().toLowerCase().contains("temple") && grille.getTuilesListe().get(key).getStatue()==-2) {
+			if(temple>-1 && grille.getTuilesListe().get(key).toString().toLowerCase().contains("temple") && grille.getTuilesListe().get(key).getStatue()==-2) {
 				temple++;
 			}
-			if(grille.getTuilesListe().get(key).toString().toLowerCase().contains("caverne") && grille.getTuilesListe().get(key).getStatue()==-2) {
+			if(caverne>-1 && grille.getTuilesListe().get(key).toString().toLowerCase().contains("caverne") && grille.getTuilesListe().get(key).getStatue()==-2) {
 				caverne++;
 			}
-			if(grille.getTuilesListe().get(key).toString().toLowerCase().contains("palais") && grille.getTuilesListe().get(key).getStatue()==-2) {
+			if(palais>-1 && grille.getTuilesListe().get(key).toString().toLowerCase().contains("palais") && grille.getTuilesListe().get(key).getStatue()==-2) {
 				palais++;
 			}
-			if(grille.getTuilesListe().get(key).toString().toLowerCase().contains("jardin") && grille.getTuilesListe().get(key).getStatue()==-2) {
+			if(jardin>-1 && grille.getTuilesListe().get(key).toString().toLowerCase().contains("jardin") && grille.getTuilesListe().get(key).getStatue()==-2) {
 				jardin++;
 			}
 		}
