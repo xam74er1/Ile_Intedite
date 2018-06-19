@@ -205,7 +205,7 @@ public class Controleur implements Observateur{
 
 				if(donneCarte(messageConsole)) {
 					getJoueurTour().actionJouer();
-					
+
 				}else {
 					msg.setMessage( TypeMessage.Defausse_NumCarte);
 					ihm.addConsole("Cette carte n'est pas disponible");
@@ -531,7 +531,7 @@ public class Controleur implements Observateur{
 
 		int num = Integer.parseInt(str)-1;
 
-	
+
 
 		int nbr = getJoueurTour().getNum();
 		for(Aventurier a : getJoueurTour().getJoueurTuile()) {
@@ -553,8 +553,8 @@ public class Controleur implements Observateur{
 		int num = Integer.parseInt(str);
 		num-=1;
 		if(givePlayer != null &&  getJoueurTour().getListeCarteJoueur().size()>num&&num>=0) {
-			
-			
+
+
 
 			Classique c =  getJoueurTour().getListeCarteJoueur().get(num);
 
@@ -585,10 +585,10 @@ public class Controleur implements Observateur{
 
 
 		if(str.equalsIgnoreCase("")) {
-			
+
 			return false;
 		}else {
-		ihm.addConsole("Joueur sur la meme case  : "+str+" \n Veiller entre le numerau du joeur selectione");
+			ihm.addConsole("Joueur sur la meme case  : "+str+" \n Veiller entre le numerau du joeur selectione");
 			return true;
 		}
 
@@ -810,51 +810,51 @@ public class Controleur implements Observateur{
 			return -1;												//Heliport coule
 		}
 
-			if(curseur.getNbCartesInond()==0) {
-				return -1;												//Curseur au niveau maximum
-			}
+		if(curseur.getNbCartesInond()==0) {
+			return -1;												//Curseur au niveau maximum
+		}
 
 
-			int temple=0,caverne=0,palais=0,jardin=0;
-			for(int i=0;i<tresorsRecuperes.size(); i++) {
-				int numT=tresorsRecuperes.get(i).getNum();
-				switch (numT) {
-				case 1: caverne=-1;
-				case 2: palais=-1;
-				case 3: jardin=-1;
-				case 4: temple=-1;
-				}
-			}
-
-
-
-			for(Tuile t : grille.getTuilesListe().values()) {
-
-					for(String key : grille.getTuilesListe().keySet()) {
-						if(temple>-1 && (t.getNum()==341 || t.getNum()==342) && t.getStatut()==2) {
-							temple++;
-						}
-						if(caverne>-1 && (t.getNum()==311 || t.getNum()==312) && t.getStatut()==2) {
-							caverne++;
-						}
-						if(palais>-1 && (t.getNum()==321 || t.getNum()==322) && t.getStatut()==2) {
-							palais++;
-						}
-						if(jardin>-1 && (t.getNum()==331 || t.getNum()==332) && t.getStatut()==2) {
-							jardin++;
-						}
-					}
-					if(temple==2||caverne==2||palais==2||jardin==2) {
-						return -1;												//Deux cases de rÃÂ©cupÃÂ©ration de trÃÂ©sor coulÃÂ©es
-					}
-
-					// A COMPLETER
-
-
-
-				}
+		int temple=0,caverne=0,palais=0,jardin=0;
+		for(int i=0;i<tresorsRecuperes.size(); i++) {
+			int numT=tresorsRecuperes.get(i).getNum();
+			switch (numT) {
+			case 1: caverne=-1;
+			case 2: palais=-1;
+			case 3: jardin=-1;
+			case 4: temple=-1;
 			}
 		}
+
+
+
+		for(Tuile t : grille.getTuilesListe().values()) {
+
+			for(String key : grille.getTuilesListe().keySet()) {
+				if(temple>-1 && (t.getNum()==341 || t.getNum()==342) && t.getStatut()==2) {
+					temple++;
+				}
+				if(caverne>-1 && (t.getNum()==311 || t.getNum()==312) && t.getStatut()==2) {
+					caverne++;
+				}
+				if(palais>-1 && (t.getNum()==321 || t.getNum()==322) && t.getStatut()==2) {
+					palais++;
+				}
+				if(jardin>-1 && (t.getNum()==331 || t.getNum()==332) && t.getStatut()==2) {
+					jardin++;
+				}
+			}
+			if(temple==2||caverne==2||palais==2||jardin==2) {
+				return -1;												//Deux cases de rÃÂ©cupÃÂ©ration de trÃÂ©sor coulÃÂ©es
+			}
+
+			// A COMPLETER
+
+
+
+		}
+
+
 		return 0;
 	}
 
