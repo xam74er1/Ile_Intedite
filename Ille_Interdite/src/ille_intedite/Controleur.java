@@ -35,7 +35,7 @@ public class Controleur implements Observateur{
 	public ArrayList<Classique> carteTresorsDefausse;
 	ArrayList<CarteInondation> inondationDeck;
 	public ArrayList<CarteInondation> inondationDefausse;
-	ArrayList<Aventurier> joueursList;
+	public static ArrayList<Aventurier> joueursList;
 	String messageConsole;
 	private int NBR_JOUEUR = 4;
 	// Dernere action effectuer 
