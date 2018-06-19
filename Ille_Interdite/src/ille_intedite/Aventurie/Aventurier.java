@@ -341,5 +341,12 @@ public abstract class Aventurier {
 
 		return getAssecher(this.tuile, listTuile);
 	}
+
+	public ArrayList<Aventurier> getJoueurTuile(){
+		
+		
+		return this.getTuile().getAventurie();
+	}
+
 }
 

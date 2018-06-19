@@ -110,7 +110,7 @@ private JLabel textCusor;
 		JPanel up = new JPanel();
 		aplication.add(up, BorderLayout.NORTH);
 
-		lblJoeurN = new JLabel("Joeur n \u00B0 X");
+		lblJoeurN = new JLabel(" ");
 		up.add(lblJoeurN);
 
 		JPanel Center = new JPanel();
@@ -121,7 +121,7 @@ private JLabel textCusor;
 		Plateau = new JPanel();
 		Plateau .setLayout(new GridLayout(6,6,10,10));
 		//fillPlataux();
-		Utils.debugln("plateau done");
+		//Utils.debugln("plateau done");
 
 		Center.add(Plateau);
 
@@ -189,7 +189,30 @@ private JLabel textCusor;
 		});
 		bouton.add(btnAction_1);
 
-		JButton btnAction_3 = new JButton("SacDeSable");
+		JPanel panelAction_3 = new JPanel(new GridLayout(1,2));
+		
+		JButton btnSacSable = new JButton("Sable");
+		btnSacSable.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Message m = new Message(TypeMessage.Clique_Asseche_SacDeSable);
+				notifierObservateur(m);
+			}
+		});
+		panelAction_3.add(btnSacSable);
+		
+		JButton btnHelico = new JButton("Helico");
+		btnHelico.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Message m = new Message(TypeMessage.Clique_Deplace_Helico);
+				
+				notifierObservateur(m);
+			}
+		});
+		panelAction_3.add(btnHelico);
+		
+		/*JButton btnAction_3 = new JButton("SacDeSable");
 		btnAction_3.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -200,7 +223,8 @@ private JLabel textCusor;
 				notifierObservateur(m);
 			}
 		});
-		bouton.add(btnAction_3);
+		bouton.add(btnAction_3);*/
+		bouton.add(panelAction_3);
 
 		JButton btnAction_2 = new JButton("Fin de Tour");
 		btnAction_2.addActionListener(new ActionListener() {
@@ -401,7 +425,7 @@ private JLabel textCusor;
 
 	public void miseAJourPlayer(int x,String str ,Color c) {
 		lblJoeurN.setForeground(c);
-		lblJoeurN.setText("Joeur nÂ° "+(x+1)+str);
+		lblJoeurN.setText("Joueur n° "+(x+1)+str);
 	}
 
 	public void updateGrille() {
@@ -410,7 +434,7 @@ private JLabel textCusor;
 	}
 
 	public void setLevelCursort(int i) {
-		 textCusor.setText("Niveau de leau "+i);
+		 textCusor.setText("Niveau de l'eau "+i);
 	}
 	
 }
