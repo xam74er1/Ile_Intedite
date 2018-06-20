@@ -288,8 +288,8 @@ public class Controleur implements Observateur{
 		//afficherListeCarteJoueur
 
 
-		//getJoueurTour().finTour();
-		System.out.println("Etat de la partie : "+verifierFinDePartie());
+		getJoueurTour().finTour();
+		//System.out.println("Etat de la partie : "+verifierFinDePartie());
 		numTour++;		
 		numTour%=joueursList.size();
 		afficherListeCarteJoueur();
