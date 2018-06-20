@@ -1,6 +1,7 @@
 package IHM;
 
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -16,6 +17,8 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+
+import javax.management.DescriptorKey;
 import javax.swing.Box;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -43,6 +46,7 @@ import javax.swing.JLabel;
 
 public class IHMV2 extends Observe{
 	//Com ref 2
+	JLabel msgHelp;
 	public JFrame frame;
 	private JTextArea console;
 	private JPanel Plateau ;
@@ -124,7 +128,7 @@ public class IHMV2 extends Observe{
 
 		JPanel CardPlayer = new JPanel();
 		CardPlayer.setBackground(new Color(139, 69, 19));
-		CardPlayer.setBounds(112, 13, 250, 597);
+		CardPlayer.setBounds(114, 31, 250, 597);
 		frame.getContentPane().add(CardPlayer);
 		CardPlayer.setLayout(null);
 		
@@ -170,7 +174,7 @@ public class IHMV2 extends Observe{
 
 		JPanel PanelSouth = new JPanel();
 		PanelSouth.setBackground(new Color(139, 69, 19));
-		PanelSouth.setBounds(97, 623, 1165, 50);
+		PanelSouth.setBounds(99, 641, 1165, 50);
 		frame.getContentPane().add(PanelSouth);
 		PanelSouth.setLayout(null);
 
@@ -198,14 +202,14 @@ public class IHMV2 extends Observe{
 		//PLATEAU ---------------------------
 		Plateau = new JPanel();
 		Plateau.setBackground(new Color(160, 82, 45));
-		Plateau.setBounds(374, 13, 597, 597);
+		Plateau.setBounds(376, 31, 597, 597);
 		Plateau .setLayout(new GridLayout(6,6,0,0));
 		frame.getContentPane().add(Plateau);
 		//--------------------------------
 
 		JPanel PanelEast = new JPanel();
 		PanelEast.setBackground(new Color(139, 69, 19));
-		PanelEast.setBounds(983, 13, 279, 597);
+		PanelEast.setBounds(985, 31, 279, 597);
 		frame.getContentPane().add(PanelEast);
 		PanelEast.setLayout(null);
 		//--------------------- 1 et principal -----------------------
@@ -342,6 +346,16 @@ public class IHMV2 extends Observe{
 		panel.setBackground(new Color(105, 105, 105));
 		panel.setBounds(0, 84, 279, 10);
 		PanelEast.add(panel);
+		
+		 msgHelp = new JLabel("");
+		msgHelp.setBackground(Color.BLUE);
+		msgHelp.setForeground(Color.red);
+		msgHelp.setFont(new Font("Serif", Font.BOLD, 25));
+		msgHelp.setHorizontalAlignment(JLabel.CENTER);
+		msgHelp.setVerticalAlignment(JLabel.CENTER);
+		msgHelp.setBounds(114, 0, 1150, 35);
+		
+		frame.getContentPane().add(msgHelp);
 		frame.setBounds(100, 100, 1280, 720);
 
 		//----------------
@@ -424,15 +438,19 @@ public class IHMV2 extends Observe{
 	}
 
 	//effece les message et ajoute un message 
+	@Deprecated
 	public void afichierConsole(String str){
+		setIndication(str);
 		//console.setText(str);
 	}
 
+	@Deprecated
 	//Ajoute une message en plus des message aficher
 	public void addConsole(String str) {
 		//console.setText(console.getText()+"\n"+str);
 	}
 
+	@Deprecated
 	public void print(String str){
 		//console.setText(str);
 	}
@@ -573,4 +591,9 @@ public void rool(Aventurier a  , ArrayList<Aventurier> listAvent) {
 		sliderImg.revalidate();
 	}
 	
+	public void setIndication(String str) {
+		
+	
+		msgHelp.setText(str);
+	}
 }
