@@ -277,7 +277,6 @@ public class Controleur implements Observateur{
 				}
 			}
 			ihm.afficherDep(listAsseche);
-			activateSpecialButton(getJoueurTour());
 			miseAJourGrille();
 
 
@@ -295,7 +294,6 @@ public class Controleur implements Observateur{
 				}
 			}
 			ihm.afficherDep(listCaseAvent);
-			activateSpecialButton(getJoueurTour());
 			miseAJourGrille();
 
 			break;
@@ -387,7 +385,6 @@ public class Controleur implements Observateur{
 
 			ihm.addConsole("Joueur "+numTour+" A vous de jouer");
 			ihm.miseAJourPlayer(numTour," ( "+getJoueurTour().getNom()+" )", getJoueurTour().getColor());
-			activateSpecialButton(getJoueurTour());
 			afficherCartes(getJoueurTour());
 			//	Utils.debugln("Fin de tour");
 			ihm.rool(getJoueurTour(), joueursList);
@@ -519,7 +516,6 @@ public class Controleur implements Observateur{
 		//		for(int j =0;j<5;j++) {
 		//			piocherInondation();
 		//		}
-		activateSpecialButton(getJoueurTour());
 		ihm.miseAJourPlayer(0," ( "+getJoueurTour().getNom()+" )", getJoueurTour().getColor());
 
 		ihm.rool(getJoueurTour(), joueursList);
@@ -739,23 +735,6 @@ public class Controleur implements Observateur{
 
 		//	Utils.debugln(" jouer n = "+i);
 		return joueursList.get(i);
-
-	}
-
-	public void activateSpecialButton(Aventurier a) {
-		boolean aHelico=false;
-		boolean aSacSable=false;
-
-		for(Classique c : a.getListeCarteJoueur()) {
-			if (c instanceof CarteHelicoptere) {
-				aHelico=true;
-			}
-			if(c instanceof CarteSacSable) {
-				aSacSable=true;
-			}
-		}
-
-		ihm.activateSpecialButton(aHelico, aSacSable);
 
 	}
 

@@ -59,8 +59,7 @@ public class IHMV2 extends Observe{
 
 	VueGrille vue;
 
-	private JButton btnSacSable;
-	private JButton btnHelico;
+
 	private ImageIcon imgPlayerIn1T,imgPlayerIn2T,imgPlayerIn3T,imgP1T,imgP2T,imgP3T;
 	JPanel PanelPlayerIn3T,PanelPlayerIn2T,PanelPlayerIn1T;
 	Image imP3T,imP2T,imP1T;
@@ -247,27 +246,6 @@ public class IHMV2 extends Observe{
 		panActionSpetiale.setBounds(501, 13, 218, 25);
 		PanelSouth.add(panActionSpetiale);
 		panActionSpetiale.setLayout(new GridLayout(0, 2, 0, 0));
-
-		btnSacSable = new JButton("Sac de Sable");
-		panActionSpetiale.add(btnSacSable);
-		btnSacSable.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Message m = new Message(TypeMessage.Clique_Asseche_SacDeSable);
-				notifierObservateur(m);
-			}
-		});
-
-		btnHelico = new JButton("Helicoptere");
-		panActionSpetiale.add(btnHelico);
-		btnHelico.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Message m = new Message(TypeMessage.Clique_Deplace_Helico);
-
-				notifierObservateur(m);
-			}
-		});
 
 
 
@@ -538,11 +516,6 @@ public class IHMV2 extends Observe{
 
 	public void setLevelCursort(int i) {
 		//		 textCusor.setText("Niveau de l'eau "+i);
-	}
-
-	public void activateSpecialButton(boolean he, boolean sa) {
-		btnHelico.setEnabled(he);
-		btnSacSable.setEnabled(sa);
 	}
 
 
