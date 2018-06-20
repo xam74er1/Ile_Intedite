@@ -413,27 +413,29 @@ public class Controleur implements Observateur{
 	}
 
 	public void piocherClassique(Aventurier a) {
-		if (carteTresorDeck.size() == 0) {
-			carteTresorDeck=carteTresorsDefausse;;
-			carteTresorsDefausse=null;
-		}
-		Classique cC = carteTresorDeck.get(0);
-		if(!(cC instanceof MonteeEaux)) {
-			a.getListeCarteJoueur().add(cC);	
-			carteTresorDeck.remove(cC);
-		}
-		else {
-			if (isInit) {
-				carteTresorsDefausse.add(cC);
-				curseur.monteeEaux();
-				carteTresorDeck.remove(cC);
-				ihm.setLevelCursort(curseur.getNbCartesInond());
-			}else {
-				melanger(carteTresorDeck);
-				piocherClassique(a);
+		if(carteTresorDeck.size()!=0) {
+			Classique cC = carteTresorDeck.get(0);
+			if(!(cC instanceof MonteeEaux)) {
+				a.getListeCarteJoueur().add(cC);	
+				carteTresorDeck.remove(0);
 			}
+			else {
+				if (isInit) {
+					carteTresorsDefausse.add(cC);
+					curseur.monteeEaux();
+					carteTresorDeck.remove(0);
+					ihm.setLevelCursort(curseur.getNbCartesInond());
+				}else {
+					carteTresorDeck.remove(0);
+					carteTresorDeck.add((int) (Math.random()*carteTresorDeck.size()),cC);
+					piocherClassique(a);
+				}
+			}
+		}else {
+			ArrayList<Classique> stamp = carteTresorDeck;
+			carteTresorDeck=carteTresorsDefausse;
+			carteTresorsDefausse=stamp;
 		}
-
 
 	}
 
@@ -441,13 +443,13 @@ public class Controleur implements Observateur{
 		//creer les aventuriers
 		Aventurier a;
 		//Marche
-int i = 0;
+		int i = 0;
 		a = new Ingenieur(i,"Ingenieur",Pion.ROUGE);
-i++;
+		i++;
 		joueursList.add(a);
 
 
-		a = new Plongeur(i,"Plongeur",Pion.VIOLET);
+		a = new Plongeur(i,"Plongeur",Pion.NOIR);
 
 		joueursList.add(a);
 
@@ -456,19 +458,19 @@ i++;
 
 		joueursList.add(a);
 		i++;
-		a = new Messager(i,"Messager",Pion.ORANGE);
+		a = new Messager(i,"Messager",Pion.GRIS);
 		joueursList.add(a);
 
 		i++;
-//		a = new Aviateur(2,"Aviateur",Pion.BLEU);
-//
-//		joueursList.add(a);
-//
-//		a = new Explorateur(1,"Explorateur",Pion.VERT);
-//
-//		joueursList.add(a);
+		//		a = new Aviateur(i,"Aviateur",Pion.BLEU);
+		//
+		//		joueursList.add(a);
+		//
+		//		a = new Explorateur(i,"Explorateur",Pion.VERT);
+		//
+		//		joueursList.add(a);
 
-		
+
 		Collections.shuffle(joueursList);
 
 
