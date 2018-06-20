@@ -8,8 +8,10 @@ import Carte.CarteTresor;
 import Carte.CarteSacSable;
 import Carte.MonteeEaux;
 import Carte.NomTresor;
+import IHM.FenetreStart;
 import IHM.IHM;
 import IHM.IHMV2;
+import IHM.MessageInit;
 import ille_intedite.Aventurie.Aventurier;
 import ille_intedite.Aventurie.Aviateur;
 import ille_intedite.Aventurie.Explorateur;
@@ -38,7 +40,7 @@ public class Controleur implements Observateur{
 	public ArrayList<CarteInondation> inondationDefausse;
 	public static ArrayList<Aventurier> joueursList;
 	private String messageConsole;
-	private int NBR_JOUEUR = 4;
+	private int nbJoueurs;
 	private  TypeMessage lastAction = TypeMessage.Clique_Send;
 	private int numTour;
 	private VueGrille vue;
@@ -59,7 +61,8 @@ public class Controleur implements Observateur{
 	IHMV2 ihm;
 
 
-	public Controleur(IHMV2 ihm,VueGrille vue) {
+	public Controleur(IHMV2 ihm,VueGrille vue,MessageInit msgInit) {
+		
 		this.ihm = ihm;
 		carteTresorDeck = new ArrayList<Classique>();
 		carteTresorsDefausse = new ArrayList<Classique>();
@@ -67,9 +70,9 @@ public class Controleur implements Observateur{
 		inondationDefausse = new ArrayList<CarteInondation>();
 		joueursList = new ArrayList<Aventurier>();
 		this.vue = vue;
-		init();
+		nbJoueurs = msgInit.nbJoueurs;
+		init(msgInit.listJoueurs);
 		numTour =0;
-		NBR_JOUEUR = joueursList.size();
 		//Utils.debugln("controleur start");
 
 
@@ -460,7 +463,6 @@ public class Controleur implements Observateur{
 					carteTresorsDefausse.add(cC);
 					curseur.monteeEaux();
 					carteTresorDeck.remove(0);
-					ihm.setLevelCursort(curseur.getNbCartesInond());
 				}else {
 					carteTresorDeck.remove(0);
 					carteTresorDeck.add((int) (Math.random()*carteTresorDeck.size()),cC);
@@ -475,40 +477,12 @@ public class Controleur implements Observateur{
 
 	}
 
-	public void init() {
+	public void init(ArrayList<Aventurier> listJoueurs) {
 		//creer les aventuriers
 		Aventurier a;
-
+		
 		//Marche cour vol et venge mois 
-		int i = 0;
-
-		a = new Ingenieur(i,"Ingenieur",Pion.ROUGE);
-		i++;
-		joueursList.add(a);
-
-
-		a = new Plongeur(i,"Plongeur",Pion.NOIR);
-
-		joueursList.add(a);
-
-		i++;
-		a = new Navigateur(i,"Navigateur",Pion.JAUNE);
-
-		joueursList.add(a);
-		i++;
-		a = new Messager(i,"Messager",Pion.GRIS);
-		joueursList.add(a);
-
-		i++;
-
-		//		a = new Aviateur(i,"Aviateur",Pion.BLEU);
-		//
-		//		joueursList.add(a);
-		//
-		//		a = new Explorateur(i,"Explorateur",Pion.VERT);
-
-		//
-		//		joueursList.add(a);
+		joueursList = listJoueurs;
 
 
 		Collections.shuffle(joueursList);
@@ -550,6 +524,7 @@ public class Controleur implements Observateur{
 		ihm.rool(getJoueurTour(), joueursList);
 
 		afficherCartes(getJoueurTour());
+		ihm.afficherNivCurseur(2);
 		isInit = true;
 
 		//test();

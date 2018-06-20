@@ -7,7 +7,7 @@ import ille_intedite.Aventurie.Aventurier;
 public class MessageInit {
 	
 	public int nbJoueurs;
-	public ArrayList<Aventurier> listJoueurs = new ArrayList();
+	public ArrayList<Aventurier> listJoueurs = new ArrayList<Aventurier>();
 	public int niveauEau;
 
 }

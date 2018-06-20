@@ -19,6 +19,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
+import ille_intedite.Controleur;
+import ille_intedite.VueGrille;
 import ille_intedite.Aventurie.Aventurier;
 import ille_intedite.Aventurie.Aviateur;
 import ille_intedite.Aventurie.Explorateur;
@@ -33,8 +35,17 @@ import utils.Utils.Pion;
 public class FenetreStart extends JFrame {
 	
 	private int nbJoueurs;
-	private HashMap<Integer,String> listJoueurs = new HashMap();
+	
+		private JFrame moi;
         
+		private JLabel labelExplo;
+		private JLabel labelInge;
+		private JLabel labelMessa;
+		private JLabel labelNavi;
+		private JLabel labelPilo;
+		private JLabel labelPlon;
+		
+		private JComboBox difficulte;
 		
 	
 	
@@ -50,7 +61,7 @@ public class FenetreStart extends JFrame {
         private boolean termine = false;
 
   public FenetreStart(){
-
+	moi = this;
     this.setTitle("Ile Interdite");
 
     this.setSize(800, 700);
@@ -104,7 +115,7 @@ public class FenetreStart extends JFrame {
     JLabel labelDifficulte = new JLabel("Choisir la difficulté du jeu :");
     labelDifficulte.setBackground(new Color(139,69,18));
 
-    JComboBox difficulte = new JComboBox();
+    difficulte = new JComboBox();
     difficulte.addItem("Novice");
     difficulte.addItem("Normal");
     difficulte.addItem("Elite");
@@ -148,12 +159,12 @@ public class FenetreStart extends JFrame {
     
     JPanel panChoixCarte = new JPanel();
     panChoixCarte.setBackground(new Color(139,69,18));
-    JLabel labelExplo = new JLabel();
-    JLabel labelInge = new JLabel();
-    JLabel labelMessa = new JLabel();
-    JLabel labelNavi = new JLabel();
-    JLabel labelPilo = new JLabel();
-    JLabel labelPlon = new JLabel();
+     labelExplo = new JLabel();
+     labelInge = new JLabel();
+     labelMessa = new JLabel();
+     labelNavi = new JLabel();
+     labelPilo = new JLabel();
+     labelPlon = new JLabel();
     
     ImageIcon imgIcon = new ImageIcon("images/persos/explorateur.png");
     ImageIcon imgIconS = new ImageIcon("images/persos/explorateurSelected.png");
@@ -656,17 +667,7 @@ public class FenetreStart extends JFrame {
                 termine = true;
                 MessageInit m = new MessageInit();
                 
-                m.nbJoueurs = nbJoueurs;
                 
-                if (difficulte.getSelectedItem() == "Novice"){
-                	m.niveauEau =0;
-                } else if  (difficulte.getSelectedItem() == "Normal"){
-                	m.niveauEau =2;
-                } else if  (difficulte.getSelectedItem() == "Epique") {
-                	m.niveauEau =5;
-                } else if  (difficulte.getSelectedItem() == "Légendaire") {
-                	m.niveauEau =7;
-                }
                  
                 
                 
@@ -720,6 +721,31 @@ public class FenetreStart extends JFrame {
         }
         
     });
+    btnCommencer.addActionListener(new ActionListener() {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			VueGrille vue = new VueGrille();
+	        IHMV2 ihm = new IHMV2(vue);
+	        Controleur ctrl = new Controleur(ihm,vue,createMessageInit());
+//	        ctrl.creeDeckInondation(); Debug en cours
+	        
+	        vue.setCtrl(ctrl);
+	        vue.setIhm(ihm);
+	        
+	        ihm.addObservateur(ctrl);
+	        
+	        vue.afficherGrille();
+	        
+	       ctrl.piocher5Inondation();
+	       //Comentaire de modification 
+	       moi.setVisible(false);
+	       //moi.dispose();
+	       
+	        
+		}
+    	
+    });
     
   }
 
@@ -727,6 +753,55 @@ public class FenetreStart extends JFrame {
 		return nbJoueurs;
 	}
         
+	
+	public MessageInit createMessageInit(){
+		MessageInit m = new MessageInit();
+		m.nbJoueurs = nbJoueurs;
+        
+        if (difficulte.getSelectedItem() == "Novice"){
+        	m.niveauEau =0;
+        } else if  (difficulte.getSelectedItem() == "Normal"){
+        	m.niveauEau =2;
+        } else if  (difficulte.getSelectedItem() == "Epique") {
+        	m.niveauEau =5;
+        } else if  (difficulte.getSelectedItem() == "Légendaire") {
+        	m.niveauEau =7;
+        }
+		
+        int j = 0;
+        for (JLabel i : joueurs){
+            Aventurier a;
+            i.setVisible(true);
+            if (i == labelExplo){
+            	a = new Explorateur(j,"Explorateur",Pion.VERT);
+            	m.listJoueurs.add(a);
+            	
+            } else if (i == labelInge) {
+            	a= new Ingenieur(j,"Ingenieur",Pion.ROUGE);
+            	m.listJoueurs.add(a);
+
+            } else if (i == labelMessa){
+            	a = new Messager(j,"Messager",Pion.ORANGE);
+            	m.listJoueurs.add(a);
+            	
+            } else if (i == labelNavi){
+            	a = new Navigateur(j,"Navigateur",Pion.JAUNE);
+            	m.listJoueurs.add(a);
+            	
+            } else if (i == labelPilo){
+            	a = new Aviateur(j,"Aviateur",Pion.BLEU);
+            	m.listJoueurs.add(a);
+            	
+            } else if (i == labelPlon){
+            	a = new Plongeur(j,"Plongeur",Pion.VIOLET);
+            	m.listJoueurs.add(a);
+            	
+            }
+             j = j +1;
+        }
+		
+		return m;
+	}
 	
 
 	public static void main(String[] args){

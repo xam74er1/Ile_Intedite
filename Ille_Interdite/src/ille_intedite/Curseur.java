@@ -38,5 +38,9 @@ public class Curseur {
 	public void monteeEaux() {
 		niveau++;
 	}
+	
+	public int getNiv() {
+		return niveau;
+	}
 
 }
