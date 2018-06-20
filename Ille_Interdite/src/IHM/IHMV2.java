@@ -102,6 +102,7 @@ public class IHMV2 extends Observe{
 		slider.setBounds(12, 86, 76, 574);
 		SliderPanel.add(slider);
 		slider.setOrientation(SwingConstants.VERTICAL);
+		slider.setEnabled(false);
 		
 		JPanel PanelHelp = new JPanel();
 		PanelHelp.setBounds(20, 13, 60, 60);
