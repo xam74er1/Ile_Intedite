@@ -56,22 +56,23 @@ public class PanelCarte extends JPanel{
 
 		g.setColor(Color.black);
 		g.drawRect(0, 0,  this.getWidth(),this.getHeight());
-		
+
 		try {
 			path = "images\\cartes\\"+carte.getNom().substring(1)+".png";
 		}catch(Exception e){
 			path = "images\\cartes\\Fond rouge.png";
 		}
-		
+
 		try {
+			System.out.println(path);
 			image = ImageIO.read(new File(path));
 			g.drawImage(image, 0, 0,this.getWidth(),this.getHeight(), null);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+
+
 	}
 
 	private MouseListener mouse() {
@@ -104,7 +105,7 @@ public class PanelCarte extends JPanel{
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				
+
 				Message m;
 				if (carte instanceof CarteHelicoptere) {
 					m = new Message(TypeMessage.Clique_Deplace_Helico);
@@ -141,7 +142,6 @@ public class PanelCarte extends JPanel{
 		}else {
 			activate();
 		}
-		carte.setPanel(this);
 	}
 
 }

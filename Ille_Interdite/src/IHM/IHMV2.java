@@ -26,6 +26,7 @@ import javax.swing.SwingConstants;
 import Carte.CarteHelicoptere;
 import Carte.CarteSacSable;
 import Carte.CarteTresor;
+import Carte.Classique;
 import Carte.NomTresor;
 import ille_intedite.Grille;
 import ille_intedite.Message;
@@ -51,6 +52,7 @@ public class IHMV2 extends Observe{
 
 	HashMap<String,JButton> listButton = new HashMap();
 	HashMap<String,JPanel> listPan = new HashMap();
+	HashMap<Integer,PanelCarte> listCartes = new HashMap<Integer,PanelCarte>();
 	private JTextField textField;
 
 	VueGrille vue;
@@ -127,39 +129,32 @@ public class IHMV2 extends Observe{
 		PanelCarte panelCarte1 = new PanelCarte(0,this);
 		panelCarte1.setBounds(12, 13, 100, 140);
 		CardPlayer.add(panelCarte1);
+		listCartes.put(0, panelCarte1);
 		panelCarte1.setLayout(null);
 
 		PanelCarte panelCarte2 = new PanelCarte(1,this);
 		panelCarte2.setBounds(138, 13, 100, 140);
 		CardPlayer.add(panelCarte2);
+		listCartes.put(1, panelCarte2);
 		panelCarte2.setLayout(null);
 
 		PanelCarte panelCarte3 = new PanelCarte(2,this);
 		panelCarte3.setBounds(12, 166, 100, 140);
 		CardPlayer.add(panelCarte3);
+		listCartes.put(2, panelCarte3);
 		panelCarte3.setLayout(null);
 
 		PanelCarte panelCarte4 = new PanelCarte(3,this);
 		panelCarte4.setBounds(138, 166, 100, 140);
 		CardPlayer.add(panelCarte4);
+		listCartes.put(3, panelCarte4);
 		panelCarte4.setLayout(null);
 
 		PanelCarte panelCarte5 = new PanelCarte(4,this);
 		panelCarte5.setBounds(75, 319, 100, 140);
 		CardPlayer.add(panelCarte5);
+		listCartes.put(4, panelCarte5);
 		panelCarte5.setLayout(null);
-
-		
-		JButton btnCarteIcon5 = new JButton("");
-		btnCarteIcon5.setForeground(new Color(139, 69, 19));
-		btnCarteIcon5.setBackground(new Color(139, 69, 19));
-		btnCarteIcon5.setBounds(0, 0, 100, 140);
-		panelCarte5.add(btnCarteIcon5);
-		ImageIcon imgCarte5 = new ImageIcon("images/cartes/Pierre.png");
-		Image im5 = imgCarte5.getImage();
-		im5 = im5.getScaledInstance(100, 140, Image.SCALE_DEFAULT);
-		ImageIcon img5 = new ImageIcon(im5);
-		btnCarteIcon5.setIcon(img5);
 		
 		lbIconJoueur = new JLabel("");
 
@@ -540,6 +535,13 @@ public class IHMV2 extends Observe{
 		btnSacSable.setEnabled(sa);
 	}
 
+	public void setCartePanel(int num, Classique c) {
+		PanelCarte p = listCartes.get(num);
+		p.setCarte(c);
+		p.repaint();
+		p.revalidate();
+	}
+	
 	public void rool(int joeurAsJouer , ArrayList<Aventurier> listAvent) {
 		int i = 1;
 		Aventurier a = listAvent.get(joeurAsJouer);

@@ -340,6 +340,7 @@ public class Controleur implements Observateur{
 			ihm.addConsole("Joueur "+numTour+" A vous de jouer");
 			ihm.miseAJourPlayer(numTour," ( "+getJoueurTour().getNom()+" )", getJoueurTour().getColor());
 			activateSpecialButton(getJoueurTour());
+			afficherCartes(getJoueurTour());
 			//	Utils.debugln("Fin de tour");
 			ihm.rool(getJoueurTour().getNum(), joueursList);
 			grille.activateAll();
@@ -374,7 +375,7 @@ public class Controleur implements Observateur{
 					break;
 				case 3:
 					// Statue
-					carteTresorDeck.add(new CarteTresor(j+"Zephir", NomTresor.StatueZephir));
+					carteTresorDeck.add(new CarteTresor(j+"Zephyr", NomTresor.StatueZephir));
 					break;
 				case 4:
 					// Pierre
@@ -750,6 +751,18 @@ public class Controleur implements Observateur{
 		vue.afficherGrille();
 
 	}	
+	
+	public void afficherCartes(Aventurier a) {
+		ArrayList<Classique> listCartes = a.getListeCarteJoueur();
+		for(int i=0;i<5;i++) {
+			try {
+				ihm.setCartePanel(i, listCartes.get(i));
+			}catch(Exception e) {
+				ihm.setCartePanel(i, null);
+			}
+		}
+		
+	}
 
 	public boolean RecupereTresort() {
 		// 
