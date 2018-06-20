@@ -47,11 +47,13 @@ public class Utils {
 
         private final String libelle ;
         private final Color couleur ;
+        
 
 
         Pion (String libelle, Color couleur) {
             this.libelle = libelle ;
             this.couleur = couleur ;
+           
         }
 
         @Override
