@@ -13,32 +13,18 @@ import java.util.HashMap;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
-import ille_intedite.Aventurie.Aventurier;
-import ille_intedite.Aventurie.Aviateur;
-import ille_intedite.Aventurie.Explorateur;
-import ille_intedite.Aventurie.Ingenieur;
-import ille_intedite.Aventurie.Messager;
-import ille_intedite.Aventurie.Navigateur;
-import ille_intedite.Aventurie.Plongeur;
-import utils.Utils.Pion;
-
  
 
-public class FenetreStart extends JFrame {
+public class Fenetre extends JFrame {
 	
 	private int nbJoueurs;
 	private HashMap<Integer,String> listJoueurs = new HashMap();
-        
-		
-	
-	
-		private ArrayList<JLabel> joueurs = new ArrayList<JLabel>();
+        private ArrayList<JLabel> joueurs = new ArrayList<JLabel>();
         private static int choixCourant = 0;
         private int choixAven;
         private boolean etatBoutonExplo = false;
@@ -49,7 +35,7 @@ public class FenetreStart extends JFrame {
         private boolean etatBoutonPlon = false;
         private boolean termine = false;
 
-  public FenetreStart(){
+  public Fenetre(){
 
     this.setTitle("Ile Interdite");
 
@@ -70,9 +56,10 @@ public class FenetreStart extends JFrame {
     
     
     JLabel labelTitre = new JLabel();
+    //labelTitre.setFont(Font.getFont());
     JPanel panTitre = new JPanel();
      
-    ImageIcon imgIconTitre = new ImageIcon("images/titre.png");
+    ImageIcon imgIconTitre = new ImageIcon("img/titre.png");
     labelTitre.setIcon(imgIconTitre);
     panTitre.add(labelTitre);
     panTitre.setBackground(new Color(139,69,18));
@@ -97,32 +84,11 @@ public class FenetreStart extends JFrame {
     panChoix.setBackground(new Color(139,69,18));
     panChoix.setBackground(new Color(139,69,18));
     
-    JPanel panChoixDifficult = new JPanel();
-    panChoixDifficult.setBackground(new Color(139,69,18));
-
-    
-    JLabel labelDifficulte = new JLabel("Choisir la difficulté du jeu :");
-    labelDifficulte.setBackground(new Color(139,69,18));
-
-    JComboBox difficulte = new JComboBox();
-    difficulte.addItem("Novice");
-    difficulte.addItem("Normal");
-    difficulte.addItem("Elite");
-    difficulte.addItem("Légendaire");
-
-    
-    panChoixDifficult.add(labelDifficulte);
-    panChoixDifficult.add(difficulte);
-
-    
-    
-    
     JPanel choixTout = new JPanel();
     choixTout.setBackground(new Color(139,69,18));
-    choixTout.setLayout(new GridLayout(4,1));
+    choixTout.setLayout(new GridLayout(3,1));
     choixTout.add(panChoixTexte);
     choixTout.add(panChoix);
-    choixTout.add(panChoixDifficult);
     
     choix.add(deuxJoueurs);
     choix.add(troisJoueurs);
@@ -155,44 +121,44 @@ public class FenetreStart extends JFrame {
     JLabel labelPilo = new JLabel();
     JLabel labelPlon = new JLabel();
     
-    ImageIcon imgIcon = new ImageIcon("images/persos/explorateur.png");
-    ImageIcon imgIconS = new ImageIcon("images/persos/explorateurSelected.png");
-    ImageIcon imgIconAS = new ImageIcon("images/persos/explorateurAlreadySelected.png");
+    ImageIcon imgIcon = new ImageIcon("img/persos/explorateur.png");
+    ImageIcon imgIconS = new ImageIcon("img/persos/explorateurSelected.png");
+    ImageIcon imgIconAS = new ImageIcon("img/persos/explorateurAlreadySelected.png");
 
     labelExplo.setIcon(imgIconAS);
     panChoixCarte.add(labelExplo);
     
-    ImageIcon imgIcon1 = new ImageIcon("images/persos/ingenieur.png");
-    ImageIcon imgIcon1S = new ImageIcon("images/persos/ingenieurSelected.png");
-    ImageIcon imgIcon1AS = new ImageIcon("images/persos/ingenieuralreadySelected.png");
+    ImageIcon imgIcon1 = new ImageIcon("img/persos/ingenieur.png");
+    ImageIcon imgIcon1S = new ImageIcon("img/persos/ingenieurSelected.png");
+    ImageIcon imgIcon1AS = new ImageIcon("img/persos/ingenieuralreadySelected.png");
     
     labelInge.setIcon(imgIcon1AS);
     panChoixCarte.add(labelInge);
     
-    ImageIcon imgIcon2 = new ImageIcon("images/persos/messager.png");
-    ImageIcon imgIcon2S = new ImageIcon("images/persos/messagerSelected.png");
-    ImageIcon imgIcon2AS = new ImageIcon("images/persos/messageralreadySelected.png");
+    ImageIcon imgIcon2 = new ImageIcon("img/persos/messager.png");
+    ImageIcon imgIcon2S = new ImageIcon("img/persos/messagerSelected.png");
+    ImageIcon imgIcon2AS = new ImageIcon("img/persos/messageralreadySelected.png");
     
     labelMessa.setIcon(imgIcon2AS);
     panChoixCarte.add(labelMessa);
     
-    ImageIcon imgIcon3 = new ImageIcon("images/persos/navigateur.png");
-    ImageIcon imgIcon3S = new ImageIcon("images/persos/navigateurSelected.png");
-    ImageIcon imgIcon3AS = new ImageIcon("images/persos/navigateuralreadySelected.png");
+    ImageIcon imgIcon3 = new ImageIcon("img/persos/navigateur.png");
+    ImageIcon imgIcon3S = new ImageIcon("img/persos/navigateurSelected.png");
+    ImageIcon imgIcon3AS = new ImageIcon("img/persos/navigateuralreadySelected.png");
     
     labelNavi.setIcon(imgIcon3AS);
     panChoixCarte.add(labelNavi);
     
-    ImageIcon imgIcon4 = new ImageIcon("images/persos/aviateur.png");
-    ImageIcon imgIcon4S = new ImageIcon("images/persos/piloteSelected.png");
-    ImageIcon imgIcon4AS = new ImageIcon("images/persos/pilotealreadySelected.png");
+    ImageIcon imgIcon4 = new ImageIcon("img/persos/pilote.png");
+    ImageIcon imgIcon4S = new ImageIcon("img/persos/piloteSelected.png");
+    ImageIcon imgIcon4AS = new ImageIcon("img/persos/pilotealreadySelected.png");
     
     labelPilo.setIcon(imgIcon4AS);
     panChoixCarte.add(labelPilo);
 
-    ImageIcon imgIcon5 = new ImageIcon("images/persos/plongeur.png");
-    ImageIcon imgIcon5S = new ImageIcon("images/persos/plongeurSelected.png");
-    ImageIcon imgIcon5AS = new ImageIcon("images/persos/plongeuralreadySelected.png");
+    ImageIcon imgIcon5 = new ImageIcon("img/persos/plongeur.png");
+    ImageIcon imgIcon5S = new ImageIcon("img/persos/plongeurSelected.png");
+    ImageIcon imgIcon5AS = new ImageIcon("img/persos/plongeuralreadySelected.png");
     
     labelPlon.setIcon(imgIcon5AS);
     panChoixCarte.add(labelPlon);
@@ -654,21 +620,6 @@ public class FenetreStart extends JFrame {
                 selectChoix.setVisible(false);
                 btnCommencer.setEnabled(true);
                 termine = true;
-                MessageInit m = new MessageInit();
-                
-                m.nbJoueurs = nbJoueurs;
-                
-                if (difficulte.getSelectedItem() == "Novice"){
-                	m.niveauEau =0;
-                } else if  (difficulte.getSelectedItem() == "Normal"){
-                	m.niveauEau =2;
-                } else if  (difficulte.getSelectedItem() == "Epique") {
-                	m.niveauEau =5;
-                } else if  (difficulte.getSelectedItem() == "Légendaire") {
-                	m.niveauEau =7;
-                }
-                 
-                
                 
                 labelExplo.setVisible(false);
                 labelInge.setVisible(false);
@@ -683,36 +634,10 @@ public class FenetreStart extends JFrame {
                 labelNavi.setIcon(imgIcon3);
                 labelPilo.setIcon(imgIcon4);
                 labelPlon.setIcon(imgIcon5);
-            	int j = 0;
+                
                 for (JLabel i : joueurs){
-                    Aventurier a;
+                    
                     i.setVisible(true);
-                    if (i == labelExplo){
-                    	a = new Explorateur(j,"Explorateur",Pion.VERT);
-                    	m.listJoueurs.add(a);
-                    	
-                    } else if (i == labelInge) {
-                    	a= new Ingenieur(j,"Ingenieur",Pion.ROUGE);
-                    	m.listJoueurs.add(a);
-
-                    } else if (i == labelMessa){
-                    	a = new Messager(j,"Messager",Pion.ORANGE);
-                    	m.listJoueurs.add(a);
-                    	
-                    } else if (i == labelNavi){
-                    	a = new Navigateur(j,"Navigateur",Pion.JAUNE);
-                    	m.listJoueurs.add(a);
-                    	
-                    } else if (i == labelPilo){
-                    	a = new Aviateur(j,"Aviateur",Pion.BLEU);
-                    	m.listJoueurs.add(a);
-                    	
-                    } else if (i == labelPlon){
-                    	a = new Plongeur(j,"Plongeur",Pion.VIOLET);
-                    	m.listJoueurs.add(a);
-                    	
-                    }
-                     j = j +1;
                 }
                 
             }
@@ -728,11 +653,7 @@ public class FenetreStart extends JFrame {
 	}
         
 	
-
-	public static void main(String[] args){
-		FenetreStart f = new FenetreStart();
-	}
-
+	
 
 
 }
