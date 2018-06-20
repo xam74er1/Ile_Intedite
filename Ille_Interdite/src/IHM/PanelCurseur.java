@@ -40,7 +40,7 @@ public class PanelCurseur extends JPanel {
 		}
 		
 		try {
-			image = ImageIO.read(new File("images\\curseur.png"));
+			image = ImageIO.read(new File("images\\Art\\curseur.png"));
 			g.drawImage(image, 0, 0,this.getWidth(),this.getHeight(), null);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
