@@ -9,6 +9,7 @@ import Carte.CarteSacSable;
 import Carte.MonteeEaux;
 import Carte.NomTresor;
 import IHM.IHM;
+import IHM.IHMV2;
 import ille_intedite.Aventurie.Aventurier;
 import ille_intedite.Aventurie.Aviateur;
 import ille_intedite.Aventurie.Explorateur;
@@ -48,9 +49,11 @@ public class Controleur implements Observateur{
 	private Aventurier urgence = null;
 	private boolean urg=false;
 
-	private IHM ihm;
 
-	public Controleur(IHM ihm,VueGrille vue) {
+	IHMV2 ihm;
+
+
+	public Controleur(IHMV2 ihm,VueGrille vue) {
 		this.ihm = ihm;
 		carteTresorDeck = new ArrayList<Classique>();
 		carteTresorsDefausse = new ArrayList<Classique>();
@@ -753,8 +756,12 @@ public class Controleur implements Observateur{
 			}
 			if(!dejaPresent) {
 				tresorsRecuperes.add(t);
+				for(int i=0;i<a.getListeCarteJoueur().size(); i++) {
+					if(a.getListeCarteJoueur().get(i).getNom()==t.getType().getNom()) {
+						a.getListeCarteJoueur().remove(i);
+					}
+				}
 			}
-			//TODO RETIRER LES CARTES TRESOR
 			return true;
 		}else {
 			return false;
@@ -836,9 +843,6 @@ public class Controleur implements Observateur{
 		if(temple==2||caverne==2||palais==2||jardin==2) {
 			return -1;												//Deux cases de recuperation de tresor coulees
 		}
-
-		// A COMPLETER
-
 
 		return 0;
 	}

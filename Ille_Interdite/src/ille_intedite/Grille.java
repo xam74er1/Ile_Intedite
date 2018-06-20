@@ -1,5 +1,6 @@
 package ille_intedite;
 import IHM.IHM;
+import IHM.IHMV2;
 import ille_intedite.Aventurie.Aventurier;
 import utils.Parameters;
 
@@ -8,7 +9,7 @@ import java.util.*;
 import javax.swing.JButton;
 
 public class Grille {
-	IHM ihm;
+	IHMV2 ihm;
 	public static HashMap<String, Tuile> tuilesListe;
 	private String[] nomTuiles = {"000Le Pont des Abimes",//00x = tuile normale 02x = tuile spawn 3xx = tuile tresor
 			"020La Porte de Bronze",//021 = spawn ingé
@@ -39,7 +40,7 @@ public class Grille {
 
 
 	//IHM pour metre en commun les bouton et les tuille 
-	public Grille(IHM ihm, ArrayList<Aventurier> aventuriers) {
+	public Grille(IHMV2 ihm, ArrayList<Aventurier> aventuriers) {
 		this.tuilesListe = new HashMap();
 		this.ihm = ihm;
 

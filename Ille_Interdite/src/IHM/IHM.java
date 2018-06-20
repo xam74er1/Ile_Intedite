@@ -166,8 +166,8 @@ private JLabel textCusor;
 		bouton_et_autre.add(bouton, BorderLayout.CENTER);
 		bouton.setLayout(new GridLayout(3, 2, 0, 0));
 
-		JButton btnAction = new JButton("Deplace");
-		btnAction.addActionListener(new ActionListener() {
+		JButton btDeplacer = new JButton("Deplace");
+		btDeplacer.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Message m = new Message(TypeMessage.Clique_Deplace);
@@ -177,10 +177,10 @@ private JLabel textCusor;
 				notifierObservateur(m);
 			}
 		});
-		bouton.add(btnAction);
+		bouton.add(btDeplacer);
 
-		JButton btnAction_1 = new JButton("Assecher");
-		btnAction_1.addActionListener(new ActionListener() {
+		JButton btAssecher = new JButton("Assecher");
+		btAssecher.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Message m = new Message(TypeMessage.Clique_Asseche);
@@ -190,7 +190,7 @@ private JLabel textCusor;
 				notifierObservateur(m);
 			}
 		});
-		bouton.add(btnAction_1);
+		bouton.add(btAssecher);
 
 		JPanel panelAction_3 = new JPanel(new GridLayout(1,2));
 		
@@ -229,8 +229,8 @@ private JLabel textCusor;
 		bouton.add(btnAction_3);*/
 		bouton.add(panelAction_3);
 
-		JButton btnAction_2 = new JButton("Fin de Tour");
-		btnAction_2.addActionListener(new ActionListener() {
+		JButton btFindeTour = new JButton("Fin de Tour");
+		btFindeTour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Message m = new Message(TypeMessage.Clique_Fin_Tour);
 
@@ -239,7 +239,7 @@ private JLabel textCusor;
 				notifierObservateur(m);
 			}
 		});
-		bouton.add(btnAction_2);
+		bouton.add(btFindeTour);
 
 		JPanel chamText = new JPanel();
 		bouton_et_autre.add(chamText, BorderLayout.NORTH);
@@ -259,8 +259,8 @@ private JLabel textCusor;
 		});
 		chamText.add(send, BorderLayout.EAST);
 		
-		JButton btnAction_4 = new JButton("Recupere tresort");
-		btnAction_4.addActionListener(new ActionListener() {
+		JButton btRecupereTresort = new JButton("Recupere tresort");
+		btRecupereTresort.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Message m = new Message(TypeMessage.Clique_RecupereTresort);
 
@@ -269,11 +269,11 @@ private JLabel textCusor;
 				notifierObservateur(m);
 			}
 		});
-		bouton.add(btnAction_4);
+		bouton.add(btRecupereTresort);
 		
 		
-		JButton btnAction_5 = new JButton("Donne carte");
-		btnAction_5.addActionListener(new ActionListener() {
+		JButton btDonneCarte = new JButton("Donne carte");
+		btDonneCarte.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Message m = new Message(TypeMessage.Clique_DonneCarte);
 
@@ -282,7 +282,7 @@ private JLabel textCusor;
 				notifierObservateur(m);
 			}
 		});
-		bouton.add(btnAction_5);
+		bouton.add(btDonneCarte);
 
 		frame.setVisible(true);
 	}
