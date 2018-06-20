@@ -45,6 +45,8 @@ public class Controleur implements Observateur{
 	private Aventurier givePlayer = null;
 	private boolean noyade=false;
 	private Tuile helicoTuileSelect;
+	private Aventurier urgence = null;
+	private boolean urg=false;
 
 	private IHM ihm;
 
@@ -90,6 +92,7 @@ public class Controleur implements Observateur{
 			break;
 
 		case Clique_Tuille :
+			System.out.println(lastAction);
 			switch(lastAction) {
 			case Clique_Deplace:
 
@@ -159,6 +162,23 @@ public class Controleur implements Observateur{
 				}
 				break;
 
+			case Clique_Fin_Tour :
+				deplacer(msg.getLocation(),urgence);
+				miseAJourGrille();
+				grille.activateAll();
+				lastAction=TypeMessage.Clique_Fin_Tour;
+				finDeTour();
+				
+				break;
+			case Clique_Tuille :
+				if (urg) {
+					deplacer(msg.getLocation(),urgence);
+					miseAJourGrille();
+					grille.activateAll();
+					lastAction=TypeMessage.Clique_Fin_Tour;
+					finDeTour();
+				}
+
 
 			}
 
@@ -166,6 +186,7 @@ public class Controleur implements Observateur{
 			break;
 
 		case Clique_Fin_Tour :
+			lastAction=TypeMessage.Clique_Deplace_Urgence;
 			finDeTour();
 			break;
 			//------------------------SEND---------------------------------
@@ -242,6 +263,8 @@ public class Controleur implements Observateur{
 			miseAJourGrille();
 			break;
 
+
+
 		}
 
 
@@ -264,42 +287,48 @@ public class Controleur implements Observateur{
 
 	private void finDeTour() {
 		// TODO Auto-generated method stub
-		ihm.afichierConsole("Fin du tour du joueur n°"+numTour);
+		if(!urg) {
+			ihm.afichierConsole("Fin du tour du joueur "+numTour);
 
 
-		for (int i=0;i<curseur.getNbCartesInond();i++) {
-			piocherInondation();
+			for (int i=0;i<curseur.getNbCartesInond();i++) {
+				piocherInondation();
+			}
 		}
-		deplacerUrgence();
-		piocherClassique();
-		piocherClassique();
+		urg=false;
+			deplacerUrgence();
+		
+		if(!urg) {
+
+			piocherClassique();
+			piocherClassique();
 
 
-		if (getJoueurTour().getListeCarteJoueur().size() > 5) {
-			lastAction = TypeMessage.Defausse_Joueur;
+			if (getJoueurTour().getListeCarteJoueur().size() > 5) {
+				lastAction = TypeMessage.Defausse_Joueur;
 
 
-			ihm.addConsole("Vous avez " + (getJoueurTour().getListeCarteJoueur().size()-5) + " cartes en trop dans votre main, choisir les cartes Ã  dÃ©fausser :");
+				ihm.addConsole("Vous avez " + (getJoueurTour().getListeCarteJoueur().size()-5) + " cartes en trop dans votre main, choisir les cartes Ã  dÃ©fausser :");
 
+			}
+
+
+
+			//afficherListeCarteJoueur
+
+
+			getJoueurTour().finTour();
+			numTour++;		
+			numTour%=joueursList.size();
+			afficherListeCarteJoueur();
+
+			ihm.addConsole("Joueur "+numTour+" A vous de jouer");
+			ihm.miseAJourPlayer(numTour," ( "+getJoueurTour().getNom()+" )", getJoueurTour().getColor());
+			activateSpecialButton(getJoueurTour());
+			//	Utils.debugln("Fin de tour");
+			grille.activateAll();
+			miseAJourGrille();
 		}
-
-
-
-		//afficherListeCarteJoueur
-
-
-		getJoueurTour().finTour();
-		numTour++;		
-		numTour%=joueursList.size();
-		afficherListeCarteJoueur();
-
-		ihm.addConsole("Joueur n°"+numTour+" A vous de jouer");
-		ihm.miseAJourPlayer(numTour," ( "+getJoueurTour().getNom()+" )", getJoueurTour().getColor());
-		activateSpecialButton(getJoueurTour());
-		//	Utils.debugln("Fin de tour");
-		grille.activateAll();
-		miseAJourGrille();
-
 	}
 
 	public void creeDeckInondation() {
@@ -446,7 +475,10 @@ public class Controleur implements Observateur{
 	private void deplacer2(Aventurier a) {
 
 		ArrayList<Tuile> tuilesDep = a.deplacer2();
-
+		if (tuilesDep==null && urg) {
+			noyade=true;
+			verifierFinDePartie();
+		}
 
 		ihm.afficherDep(tuilesDep);
 		miseAJourGrille();
@@ -455,21 +487,28 @@ public class Controleur implements Observateur{
 	}
 
 	private void deplacerUrgence() {
-
+		urgence=null;
+		urg=false;
 		for(Tuile t : Grille.tuilesListe.values()) {
 			if (t.getStatut()==2) {
 				Iterator<Aventurier> it = joueursList.iterator();
 				while(it.hasNext()) {
 					Aventurier a =it.next();
 					if(t.getAventurie().contains(a)) {
-						try {
+						ihm.print("Deplacez "+a.getNom()+" en urgence");
+						grille.activateAll();
+						urgence=a;
+						urg=true;
+						deplacer2(a);
+
+						/*try {
 							ArrayList<Tuile> tuilesDep =a.deplacer2();
 							Collections.shuffle(tuilesDep);
 							deplacer(tuilesDep.get(0).getxT()+":"+tuilesDep.get(0).getyT(),a);
 							miseAJourGrille();
 						}catch(Exception e) {
 							System.out.println("Perdu");
-						}
+						}*/
 					}
 				}
 			}
@@ -544,7 +583,7 @@ public class Controleur implements Observateur{
 		int nbr = getJoueurTour().getNum();
 		for(Aventurier a : getJoueurTour().getJoueurTuile()) {
 			if(nbr != a.getNum()) {
-				str +=a.getNom()+" ( n° "+(a.getNum()+1)+") \n";
+				str +=a.getNom()+"("+(a.getNum()+1)+") \n";
 			}
 		}
 
@@ -694,7 +733,7 @@ public class Controleur implements Observateur{
 		// TODO - implement Controleur.addDefausse
 		throw new UnsupportedOperationException();
 	}
- 
+
 	public void miseAJourGrille() {
 
 		//Provisoire 
@@ -708,7 +747,7 @@ public class Controleur implements Observateur{
 		Aventurier a = getJoueurTour();
 
 		NomTresor  t = a.recupereTresor();
-		
+
 		boolean dejaPresent=false;
 		if(t!=null) {
 			for(int i=0;i>tresorsRecuperes.size(); i++) {
@@ -754,8 +793,8 @@ public class Controleur implements Observateur{
 				aCarteHelicoptere) {
 			return 1;												//Partie gagnee et livraison de colis de bonbons
 		}															//De bonbons ? et pas de cookies ?
-																	//Et pourquoi pas les deux ??
-		
+		//Et pourquoi pas les deux ??
+
 		//Condition(s) defaite
 		if(noyade) {
 			return -1;
@@ -784,24 +823,24 @@ public class Controleur implements Observateur{
 
 
 		for(Tuile t : grille.getTuilesListe().values()) {
-				if(temple>-1 && (t.getNum()==341 || t.getNum()==342) && t.getStatut()==2) {
-					temple++;
-				}
-				if(caverne>-1 && (t.getNum()==311 || t.getNum()==312) && t.getStatut()==2) {
-					caverne++;
-				}
-				if(palais>-1 && (t.getNum()==321 || t.getNum()==322) && t.getStatut()==2) {
-					palais++;
-				}
-				if(jardin>-1 && (t.getNum()==331 || t.getNum()==332) && t.getStatut()==2) {
-					jardin++;
-				}
+			if(temple>-1 && (t.getNum()==341 || t.getNum()==342) && t.getStatut()==2) {
+				temple++;
 			}
-			if(temple==2||caverne==2||palais==2||jardin==2) {
-				return -1;												//Deux cases de recuperation de tresor coulees
+			if(caverne>-1 && (t.getNum()==311 || t.getNum()==312) && t.getStatut()==2) {
+				caverne++;
 			}
+			if(palais>-1 && (t.getNum()==321 || t.getNum()==322) && t.getStatut()==2) {
+				palais++;
+			}
+			if(jardin>-1 && (t.getNum()==331 || t.getNum()==332) && t.getStatut()==2) {
+				jardin++;
+			}
+		}
+		if(temple==2||caverne==2||palais==2||jardin==2) {
+			return -1;												//Deux cases de recuperation de tresor coulees
+		}
 
-			// A COMPLETER
+		// A COMPLETER
 
 
 		return 0;
