@@ -6,7 +6,12 @@ public class Navigateur extends Aventurier {
 
 	public Navigateur(int Num, String nom, Pion pion) {
 		super(Num, nom, pion);
-
+		this.setNbAction(4);
+	}
+	
+	@Override
+	public void finTour() {
+		this.setNbAction(4);
 	}
 
 }

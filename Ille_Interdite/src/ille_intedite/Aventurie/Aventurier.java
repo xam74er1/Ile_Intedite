@@ -343,8 +343,6 @@ public abstract class Aventurier {
 	}
 
 	public ArrayList<Aventurier> getJoueurTuile(){
-		
-		
 		return this.getTuile().getAventurie();
 	}
 

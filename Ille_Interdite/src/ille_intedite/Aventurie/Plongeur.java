@@ -111,7 +111,7 @@ public class Plongeur extends Aventurier {
 		
 		if (firstIter){
 			tuilesDep = new ArrayList<Tuile>();
-			firstIter=false;;
+			firstIter=false;
 		}
 
 		if (from.getStatut()==0 && from!=this.getTuile()) {
