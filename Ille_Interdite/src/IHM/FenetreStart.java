@@ -1,6 +1,7 @@
+package IHM;
+
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,7 +20,7 @@ import javax.swing.JRadioButton;
 
  
 
-public class Fenetre extends JFrame {
+public class FenetreStart extends JFrame {
 	
 	private int nbJoueurs;
 	private HashMap<Integer,String> listJoueurs = new HashMap();
@@ -34,7 +35,7 @@ public class Fenetre extends JFrame {
         private boolean etatBoutonPlon = false;
         private boolean termine = false;
 
-  public Fenetre(){
+  public FenetreStart(){
 
     this.setTitle("Ile Interdite");
 
@@ -58,7 +59,7 @@ public class Fenetre extends JFrame {
     //labelTitre.setFont(Font.getFont());
     JPanel panTitre = new JPanel();
      
-    ImageIcon imgIconTitre = new ImageIcon("img/titre.png");
+    ImageIcon imgIconTitre = new ImageIcon("images/titre.png");
     labelTitre.setIcon(imgIconTitre);
     panTitre.add(labelTitre);
     panTitre.setBackground(new Color(139,69,18));
@@ -120,44 +121,44 @@ public class Fenetre extends JFrame {
     JLabel labelPilo = new JLabel();
     JLabel labelPlon = new JLabel();
     
-    ImageIcon imgIcon = new ImageIcon("img/persos/explorateur.png");
-    ImageIcon imgIconS = new ImageIcon("img/persos/explorateurSelected.png");
-    ImageIcon imgIconAS = new ImageIcon("img/persos/explorateurAlreadySelected.png");
+    ImageIcon imgIcon = new ImageIcon("images/persos/explorateur.png");
+    ImageIcon imgIconS = new ImageIcon("images/persos/explorateurSelected.png");
+    ImageIcon imgIconAS = new ImageIcon("images/persos/explorateurAlreadySelected.png");
 
     labelExplo.setIcon(imgIconAS);
     panChoixCarte.add(labelExplo);
     
-    ImageIcon imgIcon1 = new ImageIcon("img/persos/ingenieur.png");
-    ImageIcon imgIcon1S = new ImageIcon("img/persos/ingenieurSelected.png");
-    ImageIcon imgIcon1AS = new ImageIcon("img/persos/ingenieuralreadySelected.png");
+    ImageIcon imgIcon1 = new ImageIcon("images/persos/ingenieur.png");
+    ImageIcon imgIcon1S = new ImageIcon("images/persos/ingenieurSelected.png");
+    ImageIcon imgIcon1AS = new ImageIcon("images/persos/ingenieuralreadySelected.png");
     
     labelInge.setIcon(imgIcon1AS);
     panChoixCarte.add(labelInge);
     
-    ImageIcon imgIcon2 = new ImageIcon("img/persos/messager.png");
-    ImageIcon imgIcon2S = new ImageIcon("img/persos/messagerSelected.png");
-    ImageIcon imgIcon2AS = new ImageIcon("img/persos/messageralreadySelected.png");
+    ImageIcon imgIcon2 = new ImageIcon("images/persos/messager.png");
+    ImageIcon imgIcon2S = new ImageIcon("images/persos/messagerSelected.png");
+    ImageIcon imgIcon2AS = new ImageIcon("images/persos/messageralreadySelected.png");
     
     labelMessa.setIcon(imgIcon2AS);
     panChoixCarte.add(labelMessa);
     
-    ImageIcon imgIcon3 = new ImageIcon("img/persos/navigateur.png");
-    ImageIcon imgIcon3S = new ImageIcon("img/persos/navigateurSelected.png");
-    ImageIcon imgIcon3AS = new ImageIcon("img/persos/navigateuralreadySelected.png");
+    ImageIcon imgIcon3 = new ImageIcon("images/persos/navigateur.png");
+    ImageIcon imgIcon3S = new ImageIcon("images/persos/navigateurSelected.png");
+    ImageIcon imgIcon3AS = new ImageIcon("images/persos/navigateuralreadySelected.png");
     
     labelNavi.setIcon(imgIcon3AS);
     panChoixCarte.add(labelNavi);
     
-    ImageIcon imgIcon4 = new ImageIcon("img/persos/pilote.png");
-    ImageIcon imgIcon4S = new ImageIcon("img/persos/piloteSelected.png");
-    ImageIcon imgIcon4AS = new ImageIcon("img/persos/pilotealreadySelected.png");
+    ImageIcon imgIcon4 = new ImageIcon("images/persos/pilote.png");
+    ImageIcon imgIcon4S = new ImageIcon("images/persos/piloteSelected.png");
+    ImageIcon imgIcon4AS = new ImageIcon("images/persos/pilotealreadySelected.png");
     
     labelPilo.setIcon(imgIcon4AS);
     panChoixCarte.add(labelPilo);
 
-    ImageIcon imgIcon5 = new ImageIcon("img/persos/plongeur.png");
-    ImageIcon imgIcon5S = new ImageIcon("img/persos/plongeurSelected.png");
-    ImageIcon imgIcon5AS = new ImageIcon("img/persos/plongeuralreadySelected.png");
+    ImageIcon imgIcon5 = new ImageIcon("images/persos/plongeur.png");
+    ImageIcon imgIcon5S = new ImageIcon("images/persos/plongeurSelected.png");
+    ImageIcon imgIcon5AS = new ImageIcon("images/persos/plongeuralreadySelected.png");
     
     labelPlon.setIcon(imgIcon5AS);
     panChoixCarte.add(labelPlon);
@@ -652,7 +653,11 @@ public class Fenetre extends JFrame {
 	}
         
 	
-	
+
+	public static void main(String[] args){
+		FenetreStart f = new FenetreStart();
+	}
+
 
 
 }
