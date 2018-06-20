@@ -324,7 +324,7 @@ public class Controleur implements Observateur{
 
 
 				ihm.addConsole("Vous avez " + (getJoueurTour().getListeCarteJoueur().size()-5) + " cartes en trop dans votre main, choisir les cartes Ã  dÃ©fausser :");
-
+				
 			}
 
 
@@ -341,6 +341,7 @@ public class Controleur implements Observateur{
 			ihm.miseAJourPlayer(numTour," ( "+getJoueurTour().getNom()+" )", getJoueurTour().getColor());
 			activateSpecialButton(getJoueurTour());
 			//	Utils.debugln("Fin de tour");
+			ihm.rool(getJoueurTour().getNum(), joueursList);
 			grille.activateAll();
 			miseAJourGrille();
 		}

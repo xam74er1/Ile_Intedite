@@ -33,6 +33,7 @@ import ille_intedite.Observe;
 import ille_intedite.Tuile;
 import ille_intedite.TypeMessage;
 import ille_intedite.VueGrille;
+import ille_intedite.Aventurie.Aventurier;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -47,6 +48,7 @@ public class IHMV2 extends Observe{
 	private JLabel textCusor;
 
 
+
 	HashMap<String,JButton> listButton = new HashMap();
 	HashMap<String,JPanel> listPan = new HashMap();
 	private JTextField textField;
@@ -55,6 +57,11 @@ public class IHMV2 extends Observe{
 
 	private JButton btnSacSable;
 	private JButton btnHelico;
+	private ImageIcon imgPlayerIn1T,imgPlayerIn2T,imgPlayerIn3T,imgP1T,imgP2T,imgP3T;
+	JPanel PanelPlayerIn3T,PanelPlayerIn2T,PanelPlayerIn1T;
+	Image imP3T,imP2T,imP1T;
+	JLabel lbIconJoueur;
+	JButton btnImgPlayerIn1T,btnImgPlayerIn2T,btnImgPlayerIn3T;
 
 	/**
 	 * Launch the application.
@@ -95,7 +102,7 @@ public class IHMV2 extends Observe{
 		slider.setBounds(12, 86, 76, 574);
 		SliderPanel.add(slider);
 		slider.setOrientation(SwingConstants.VERTICAL);
-
+		
 		JPanel PanelHelp = new JPanel();
 		PanelHelp.setBounds(20, 13, 60, 60);
 		SliderPanel.add(PanelHelp);
@@ -112,6 +119,7 @@ public class IHMV2 extends Observe{
 		btnHelp.setIcon(imgH);
 		PanelHelp.add(btnHelp);
 		
+
 		JPanel CardPlayer = new JPanel();
 		CardPlayer.setBackground(new Color(139, 69, 19));
 		CardPlayer.setBounds(112, 13, 250, 597);
@@ -124,23 +132,6 @@ public class IHMV2 extends Observe{
 		CardPlayer.add(panelCarte1);
 		panelCarte1.setLayout(null);
 		panelCarte1.setCarte(new CarteHelicoptere("1Helicoptere"));
-
-		/*JPanel panelCarte1 = new JPanel();
-		panelCarte1.setBackground(new Color(139, 69, 19));
-		panelCarte1.setBounds(12, 13, 100, 140);
-		CardPlayer.add(panelCarte1);
-		panelCarte1.setLayout(null);
-
-		JButton btnCarteIcon1 = new JButton("");
-		btnCarteIcon1.setForeground(new Color(139, 69, 19));
-		btnCarteIcon1.setBackground(new Color(139, 69, 19));
-		btnCarteIcon1.setBounds(0, 0, 100, 140);
-		ImageIcon imgCarte1 = new ImageIcon("images/cartes/Calice.png");
-		Image im = imgCarte1.getImage();
-		im = im.getScaledInstance(100, 140, Image.SCALE_DEFAULT);
-		ImageIcon img1 = new ImageIcon(im);
-		btnCarteIcon1.setIcon(img1);
-		panelCarte1.add(btnCarteIcon1);*/
 
 		JPanel panelCarte2 = new JPanel();
 		panelCarte2.setBackground(new Color(139, 69, 19));
@@ -210,13 +201,14 @@ public class IHMV2 extends Observe{
 		ImageIcon img5 = new ImageIcon(im5);
 		btnCarteIcon5.setIcon(img5);
 
-
-		JLabel lbIconJoueur = new JLabel("");
-
+		lbIconJoueur = new JLabel("Salut");
 		lbIconJoueur.setBounds(75, 472, 100, 100);
 		CardPlayer.add(lbIconJoueur);
-		Icon img = new ImageIcon("images/persos/explorateur.png");
-		lbIconJoueur.setIcon(img);
+		ImageIcon imgIconJoueur = new ImageIcon("images/persos/explorateur.png");
+		Image imPC = imgIconJoueur.getImage();
+		imPC = imPC.getScaledInstance(100, 100, Image.SCALE_DEFAULT);
+		ImageIcon imgPC = new ImageIcon(imPC);
+		lbIconJoueur.setIcon(imgPC);
 
 		JPanel PanelSouth = new JPanel();
 		PanelSouth.setBackground(new Color(139, 69, 19));
@@ -334,61 +326,86 @@ public class IHMV2 extends Observe{
 		frame.getContentPane().add(PanelEast);
 		PanelEast.setLayout(null);
 
-		JPanel PanelPlayerIn2T = new JPanel();
+		PanelPlayerIn2T = new JPanel();
 		PanelPlayerIn2T.setBackground(new Color(139, 69, 19));
 		PanelPlayerIn2T.setBounds(59, 264, 150, 150);
 		PanelEast.add(PanelPlayerIn2T);
 		PanelPlayerIn2T.setLayout(null);
 
-
-		JButton btnImgPlayerIn2T = new JButton("");
+		btnImgPlayerIn2T = new JButton("");
 		btnImgPlayerIn2T.setForeground(new Color(139, 69, 19));
 		btnImgPlayerIn2T.setBackground(new Color(139, 69, 19));
 		btnImgPlayerIn2T.setBounds(0, 0, 150, 150);
 		PanelPlayerIn2T.add(btnImgPlayerIn2T);
-		ImageIcon imgPlayerIn2T = new ImageIcon("images/persos/ingenieur.png");
-		Image imP2T = imgPlayerIn2T.getImage();
-		imP2T = imP2T.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
-		ImageIcon imgP2T = new ImageIcon(imP2T);
+
+
+		imgPlayerIn2T = new ImageIcon("images/persos/ingenieur.png");
+		imP2T = imgPlayerIn2T.getImage();
+		imP2T = imP2T.getScaledInstance(120, 150, Image.SCALE_DEFAULT);
+		imgP2T = new ImageIcon(imP2T);
+
 		btnImgPlayerIn2T.setIcon(imgP2T);
 		btnImgPlayerIn2T.setBorder(null);
 
 
-		JPanel PanelPlayerIn3T = new JPanel();
+		PanelPlayerIn3T = new JPanel();
 		PanelPlayerIn3T.setBackground(new Color(139, 69, 19));
 		PanelPlayerIn3T.setBounds(59, 95, 150, 150);
 		PanelEast.add(PanelPlayerIn3T);
 		PanelPlayerIn3T.setLayout(null);
 
-		JButton btnImgPlayerIn3T = new JButton("");
+		btnImgPlayerIn3T = new JButton("");
+
 		btnImgPlayerIn3T.setBackground(new Color(139, 69, 19));
 		btnImgPlayerIn3T.setForeground(new Color(139, 69, 19));
 		btnImgPlayerIn3T.setBounds(0, 0, 150, 150);
 		PanelPlayerIn3T.add(btnImgPlayerIn3T);
-		ImageIcon imgPlayerIn3T = new ImageIcon("images/persos/pilote.png");
-		Image imP3T = imgPlayerIn3T.getImage();
+		imgPlayerIn3T = new ImageIcon("images/persos/pilote.png");
+		imP3T = imgPlayerIn3T.getImage();
 		imP3T = imP3T.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
-		ImageIcon imgP3T = new ImageIcon(imP3T);
+		imgP3T = new ImageIcon(imP3T);
 		btnImgPlayerIn3T.setIcon(imgP3T);
 		btnImgPlayerIn3T.setBorder(null);
 
-		JPanel PanelPlayerIn1T = new JPanel();
+		PanelPlayerIn1T = new JPanel();
 		PanelPlayerIn1T.setBackground(new Color(139, 69, 19));
 		PanelPlayerIn1T.setBounds(59, 434, 150, 150);
 		PanelEast.add(PanelPlayerIn1T);
 		PanelPlayerIn1T.setLayout(null);
 
-		JButton btnImgPlayerIn1T = new JButton("");
+		btnImgPlayerIn1T = new JButton("");
 		btnImgPlayerIn1T.setForeground(new Color(139, 69, 19));
 		btnImgPlayerIn1T.setBackground(new Color(139, 69, 19));
 		btnImgPlayerIn1T.setBounds(0, 0, 150, 150);
 		PanelPlayerIn1T.add(btnImgPlayerIn1T);
-		ImageIcon imgPlayerIn1T = new ImageIcon("images/persos/plongeur.png");
-		Image imP1T = imgPlayerIn1T.getImage();
+		imgPlayerIn1T = new ImageIcon("images/persos/plongeur.png");
+		imP1T = imgPlayerIn1T.getImage();
 		imP1T = imP1T.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
-		ImageIcon imgP1T = new ImageIcon(imP1T);
+		imgP1T = new ImageIcon(imP1T);
 		btnImgPlayerIn1T.setIcon(imgP1T);
 		btnImgPlayerIn1T.setBorder(null);
+
+
+		//-----------------------HELP -----------------
+//		JPanel PanelHelp = new JPanel();
+//		PanelHelp.setBounds(207, 0, 60, 60);
+//		PanelEast.add(PanelHelp);
+//		PanelHelp.setLayout(null);
+//
+//		JButton btnHelp = new JButton("");
+//		btnHelp.setForeground(new Color(139, 69, 19));
+//		btnHelp.setBackground(new Color(139, 69, 19));
+//		btnHelp.setBounds(0, 0, 60, 60);
+//		PanelHelp.add(btnHelp);
+//		ImageIcon imgHelp = new ImageIcon("images/icones/iconHelp.png");
+//		Image imH = imgHelp.getImage();
+//		imH = imH.getScaledInstance(60, 60, Image.SCALE_DEFAULT);
+//		ImageIcon imgH = new ImageIcon(imH);
+//		btnHelp.setIcon(imgH);
+
+
+
+
 		
 		JPanel PanelTresor = new JPanel();
 		PanelTresor.setBackground(new Color(165, 42, 42));
@@ -560,5 +577,73 @@ public class IHMV2 extends Observe{
 	public void activateSpecialButton(boolean he, boolean sa) {
 		btnHelico.setEnabled(he);
 		btnSacSable.setEnabled(sa);
+	}
+
+	public void rool(int joeurAsJouer , ArrayList<Aventurier> listAvent) {
+		int i = 1;
+		Aventurier a = listAvent.get(joeurAsJouer);
+
+		String path = a.getNom().toLowerCase();
+		System.out.println(path);
+		i++;
+//		Icon img = new ImageIcon("images/persos/"+path+".png");
+//		lbIconJoueur.setIcon(img);
+		
+		
+		
+		ImageIcon imgIconJoueur = new ImageIcon("images/persos/"+path+".png");
+		Image imPC = imgIconJoueur.getImage();
+		imPC = imPC.getScaledInstance(100, 100, Image.SCALE_DEFAULT);
+		ImageIcon imgPC = new ImageIcon(imPC);
+		lbIconJoueur.setIcon(imgPC);
+		//images/persos/explorateur.png
+
+		int k = joeurAsJouer;
+		
+		k = (k+1)%listAvent.size();
+		a = listAvent.get(k);
+		path = a.getNom().toLowerCase();
+
+		i++;
+
+		imgPlayerIn1T = new ImageIcon("images/persos/"+path+".png");
+		imP1T = imgPlayerIn1T.getImage();
+		imP1T = imP1T.getScaledInstance(120, 120, Image.SCALE_DEFAULT);
+		imgP1T = new ImageIcon(imP1T);
+		btnImgPlayerIn1T.setIcon(imgP1T);
+		PanelPlayerIn1T.repaint();
+		
+		if(i<=listAvent.size()) {
+			
+			k = (k+1)%listAvent.size();
+			a = listAvent.get(k);
+			path = a.getNom().toLowerCase();
+			i++;
+			
+			imgPlayerIn2T = new ImageIcon("images/persos/"+path+".png");
+			imP2T = imgPlayerIn2T.getImage();
+			imP2T = imP2T.getScaledInstance(120, 120, Image.SCALE_DEFAULT);
+			imgP2T = new ImageIcon(imP2T);
+			btnImgPlayerIn2T.setIcon(imgP2T);
+			PanelPlayerIn2T.repaint();
+		}
+		
+		if(i<=listAvent.size()) {
+			
+			k = (k+1)%listAvent.size();
+			a = listAvent.get(k);
+			path = a.getNom().toLowerCase();
+			i++;
+			
+
+			imgPlayerIn3T = new ImageIcon("images/persos/"+path+".png");
+			imP3T = imgPlayerIn3T.getImage();
+			imP3T = imP3T.getScaledInstance(120, 120, Image.SCALE_DEFAULT);
+			imgP3T = new ImageIcon(imP3T);
+			btnImgPlayerIn3T.setIcon(imgP3T);
+			PanelPlayerIn3T.repaint();
+		}
+		
+		
 	}
 }
