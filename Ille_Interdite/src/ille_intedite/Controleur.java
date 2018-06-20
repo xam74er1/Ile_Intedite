@@ -47,6 +47,8 @@ public class Controleur implements Observateur{
 	private ArrayList<NomTresor> tresorsRecuperes = new ArrayList<>();
 	private Aventurier givePlayer = null;
 	private boolean noyade=false;
+	private boolean helicoCoule=false;
+	private boolean aCarteHelicoptere = false;
 	private Tuile helicoTuileSelect;
 	private Aventurier urgence = null;
 	private boolean urg=false;
@@ -62,7 +64,7 @@ public class Controleur implements Observateur{
 
 
 	public Controleur(IHMV2 ihm,VueGrille vue,MessageInit msgInit) {
-		
+
 		this.ihm = ihm;
 		carteTresorDeck = new ArrayList<Classique>();
 		carteTresorsDefausse = new ArrayList<Classique>();
@@ -95,7 +97,7 @@ public class Controleur implements Observateur{
 		switch(msg.getMessage()) {
 		case Clique_Deplace :
 			deplacer2(getJoueurTour());
-			
+
 			ihm.afichierConsole("Cliquez sur une case pour vous y deplacer");
 			break;
 
@@ -133,9 +135,11 @@ public class Controleur implements Observateur{
 				break;
 
 			case Clique_Deplace_Helico :
-				getJoueurTour().removeCarte(carteSpe);
-				carteTresorsDefausse.add(carteSpe);
 				if (helicoTuileSelect!=null) {
+					if (helicoTuileSelect.getNum()==22) {
+						aCarteHelicoptere=true;
+						verifierFinDePartie();
+					}
 					Tuile t = grille.getTuile(msg.getLocation());
 					for(Aventurier a : joueursList) {
 						if(a.getTuile().equals(helicoTuileSelect)) {
@@ -144,6 +148,8 @@ public class Controleur implements Observateur{
 							deplacer(msg.getLocation(),a);
 						}
 					}
+					getJoueurTour().removeCarte(carteSpe);
+					carteTresorsDefausse.add(carteSpe);
 					helicoTuileSelect=null;
 				}else {
 					ArrayList<Tuile> tuilesDep = new ArrayList<Tuile>();
@@ -172,7 +178,7 @@ public class Controleur implements Observateur{
 				afficherCartes(getJoueurTour());
 				break;
 
-				
+
 			case Clique_Asseche :
 				assecher(msg.getLocation());
 				ihm.updateGrille();
@@ -205,7 +211,7 @@ public class Controleur implements Observateur{
 					grille.activateAll();
 					lastAction=TypeMessage.Clique_Fin_Tour;
 					finDeTour();
-					
+
 				}
 
 
@@ -284,7 +290,7 @@ public class Controleur implements Observateur{
 
 			break;
 		case Clique_DonneCarte :
-			
+
 			ihm.setIndication("Clique sur la carte que vous voullez donne ");
 			break;
 		case Clique_Deplace_Helico :
@@ -301,17 +307,17 @@ public class Controleur implements Observateur{
 			break;
 
 		case Clique_Carte_Tresor :
-			
+
 			if(lastAction ==TypeMessage.Clique_DonneCarte) {
-				
+
 				numCarte = msg.getNum();
 				ihm.setIndication("Clique sur le joeur que as qui vous voullez donne la carte");
 			}
 			break;
 		case Clique_Joueur :
-			
+
 			if(lastAction == TypeMessage.Clique_Carte_Tresor && numCarte != -1&&getJoueurTour().getListeCarteJoueur().size()>numCarte&&msg.getNum()!=-1) {
-				
+
 				givePlayer = joueursList.get(msg.getNum()); 
 				Classique c =  getJoueurTour().getListeCarteJoueur().get(numCarte);
 
@@ -322,11 +328,11 @@ public class Controleur implements Observateur{
 					numCarte = -1;
 					ihm.setIndication("");
 				}
-				
 
-				
+
+
 			}
-			
+
 			break;
 
 		}
@@ -335,7 +341,7 @@ public class Controleur implements Observateur{
 
 
 		//Si la conditon au dessu est fausse elle continue 
-	
+
 		lastAction = msg.getMessage();
 		if (helicoTuileSelect!=null) {
 			lastAction=TypeMessage.Clique_Deplace_Helico;
@@ -481,7 +487,7 @@ public class Controleur implements Observateur{
 	public void init(ArrayList<Aventurier> listJoueurs) {
 		//creer les aventuriers
 		Aventurier a;
-		
+
 		//Marche cour vol et venge mois 
 		joueursList = listJoueurs;
 
@@ -590,7 +596,7 @@ public class Controleur implements Observateur{
 		// TODO - implement Controleur.donneCarte
 
 
-		
+
 
 
 
@@ -714,6 +720,11 @@ public class Controleur implements Observateur{
 		if(inondationDeck.size()!=0) {
 			CarteInondation cInP = inondationDeck.get(0);
 			cInP.getTuile().inonder();
+			if(cInP.getTuile().getNum()==22 && cInP.getTuile().getStatut()==2) {
+				helicoCoule=true;
+				verifierFinDePartie();
+			}
+
 			inondationDefausse.add(cInP);
 			inondationDeck.remove(cInP);
 		}
@@ -809,44 +820,16 @@ public class Controleur implements Observateur{
 
 	public int verifierFinDePartie() {
 
-		//Verification de si un joueur a une carte helicoptere
-		boolean aCarteHelicoptere = false;
-		for(int i=0; i<joueursList.size(); i++) {
-			for(int j=0; j<joueursList.get(i).getNbCarte();j++) {
-				if(joueursList.get(i).getCarte(j) instanceof CarteHelicoptere) {
-					aCarteHelicoptere=true;
-				}
-			}
-		}
-
-		int joueursPresentsHeliport=0;
-		boolean heliportCoule=false;
-		for(Tuile t : grille.getTuilesListe().values()) {
-			if(t.getNum()==22) {			//Si la tuile est l'heliport
-				joueursPresentsHeliport = t.getNbrAventurie();
-				heliportCoule = t.getStatut()==2;
-			}
-		}
-
-		//Condition victoire
-		if(	joueursPresentsHeliport==joueursList.size()&&
-				tresorsRecuperes.size()==4&&
-				aCarteHelicoptere) {
-			return 1;
-																	//Partie gagnee et livraison de colis de bonbons
-		}															//De bonbons ? et pas de cookies ?
-		//Et pourquoi pas les deux ??
-
 		//Condition(s) defaite
 		if(noyade) {
 			return -1;
 		}
 
-		if(heliportCoule) {
+		if(helicoCoule) {
 			return -1;												//Heliport coule
 		}
 
-		if(curseur.getNbCartesInond()==0) {
+		if(curseur.getNiv()==10) {
 			return -1;												//Curseur au niveau maximum
 		}
 
@@ -862,8 +845,6 @@ public class Controleur implements Observateur{
 			break;
 			}
 		}
-
-
 
 		for(Tuile t : grille.getTuilesListe().values()) {
 			if(temple>-1 && (t.getNum()==341 || t.getNum()==342) && t.getStatut()==2) {
@@ -884,6 +865,35 @@ public class Controleur implements Observateur{
 		if(temple==2||caverne==2||palais==2||jardin==2) {
 			return -1;												//Deux cases de recuperation de tresor coulees
 		}
+
+		//Condition victoire
+
+		//Verification de si un joueur a une carte helicoptere
+		aCarteHelicoptere = false;
+		for(int i=0; i<joueursList.size(); i++) {
+			for(int j=0; j<joueursList.get(i).getNbCarte();j++) {
+				if(joueursList.get(i).getCarte(j) instanceof CarteHelicoptere) {
+					aCarteHelicoptere=true;
+				}
+			}
+		}
+
+
+		int joueursPresentsHeliport=0;
+		for(Tuile t : grille.getTuilesListe().values()) {
+			if(t.getNum()==22) {			//Si la tuile est l'heliport
+				joueursPresentsHeliport = t.getNbrAventurie();
+			}
+		}
+
+
+		if(	joueursPresentsHeliport==joueursList.size()&&
+				tresorsRecuperes.size()==4&&
+				aCarteHelicoptere) {
+			return 1;
+		}
+
+		aCarteHelicoptere=false;
 
 		return 0;
 	}
