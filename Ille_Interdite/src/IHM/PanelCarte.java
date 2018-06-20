@@ -33,6 +33,8 @@ public class PanelCarte extends JPanel{
 	private Color c = new Color(204, 102, 0);
 	String path=" ";
 	private Classique carte;
+	private boolean blanc = false;
+	private JPanel moi ;
 
 	public PanelCarte(int num, Observe o) {
 
@@ -41,8 +43,9 @@ public class PanelCarte extends JPanel{
 
 
 		m=mouse();		
-		this.addMouseListener(m);
 		setLayout(new BorderLayout(0, 0));
+		moi = this;
+	
 
 	}
 
@@ -70,7 +73,11 @@ public class PanelCarte extends JPanel{
 			e.printStackTrace();
 		}
 
+		if(blanc) {
+			g.setColor(new Color(255,255,255,128));
 
+			g.fillRect(0, 0,  this.getWidth(),this.getHeight());
+		}
 	}
 
 	private MouseListener mouse() {
@@ -79,12 +86,15 @@ public class PanelCarte extends JPanel{
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-
+				blanc = false;
+				moi.repaint();
 			}
 
 			@Override
 			public void mousePressed(MouseEvent arg0) {
 				// TODO Auto-generated method stub
+				blanc = true;
+				moi.repaint();
 
 			}
 
@@ -103,7 +113,7 @@ public class PanelCarte extends JPanel{
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-
+				//System.out.println(" clique carte");
 				Message m;
 				if (carte instanceof CarteHelicoptere) {
 					m = new Message(TypeMessage.Clique_Deplace_Helico);
