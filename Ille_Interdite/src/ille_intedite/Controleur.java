@@ -497,19 +497,16 @@ public class Controleur implements Observateur{
 	private void deplacerUrgence() {
 		urgence=null;
 		urg=false;
-		for(Tuile t : Grille.tuilesListe.values()) {
-			if (t.getStatut()==2) {
-				Iterator<Aventurier> it = joueursList.iterator();
-				while(it.hasNext()) {
-					Aventurier a =it.next();
-					if(t.getAventurie().contains(a)) {
-						ihm.print("Deplacez "+a.getNom()+" en urgence");
-						grille.activateAll();
-						urgence=a;
-						urg=true;
-						deplacer2(a);
-					}
-				}
+		
+		Iterator<Aventurier> it = joueursList.iterator();
+		while(it.hasNext()) {
+			Aventurier a =it.next();
+			if(!urg && a.getTuile().getStatut()==2) {
+				ihm.print("Deplacez "+a.getNom()+" en urgence");
+				grille.activateAll();
+				urgence=a;
+				urg=true;
+				deplacer2(a);
 			}
 		}
 	}
