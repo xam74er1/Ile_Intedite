@@ -13,10 +13,20 @@ import java.util.HashMap;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+
+import ille_intedite.Aventurie.Aventurier;
+import ille_intedite.Aventurie.Aviateur;
+import ille_intedite.Aventurie.Explorateur;
+import ille_intedite.Aventurie.Ingenieur;
+import ille_intedite.Aventurie.Messager;
+import ille_intedite.Aventurie.Navigateur;
+import ille_intedite.Aventurie.Plongeur;
+import utils.Utils.Pion;
 
  
 
@@ -24,7 +34,11 @@ public class FenetreStart extends JFrame {
 	
 	private int nbJoueurs;
 	private HashMap<Integer,String> listJoueurs = new HashMap();
-        private ArrayList<JLabel> joueurs = new ArrayList<JLabel>();
+        
+		
+	
+	
+		private ArrayList<JLabel> joueurs = new ArrayList<JLabel>();
         private static int choixCourant = 0;
         private int choixAven;
         private boolean etatBoutonExplo = false;
@@ -56,7 +70,6 @@ public class FenetreStart extends JFrame {
     
     
     JLabel labelTitre = new JLabel();
-    //labelTitre.setFont(Font.getFont());
     JPanel panTitre = new JPanel();
      
     ImageIcon imgIconTitre = new ImageIcon("images/titre.png");
@@ -84,11 +97,32 @@ public class FenetreStart extends JFrame {
     panChoix.setBackground(new Color(139,69,18));
     panChoix.setBackground(new Color(139,69,18));
     
+    JPanel panChoixDifficult = new JPanel();
+    panChoixDifficult.setBackground(new Color(139,69,18));
+
+    
+    JLabel labelDifficulte = new JLabel("Choisir la difficulté du jeu :");
+    labelDifficulte.setBackground(new Color(139,69,18));
+
+    JComboBox difficulte = new JComboBox();
+    difficulte.addItem("Novice");
+    difficulte.addItem("Normal");
+    difficulte.addItem("Elite");
+    difficulte.addItem("Légendaire");
+
+    
+    panChoixDifficult.add(labelDifficulte);
+    panChoixDifficult.add(difficulte);
+
+    
+    
+    
     JPanel choixTout = new JPanel();
     choixTout.setBackground(new Color(139,69,18));
-    choixTout.setLayout(new GridLayout(3,1));
+    choixTout.setLayout(new GridLayout(4,1));
     choixTout.add(panChoixTexte);
     choixTout.add(panChoix);
+    choixTout.add(panChoixDifficult);
     
     choix.add(deuxJoueurs);
     choix.add(troisJoueurs);
@@ -149,7 +183,7 @@ public class FenetreStart extends JFrame {
     labelNavi.setIcon(imgIcon3AS);
     panChoixCarte.add(labelNavi);
     
-    ImageIcon imgIcon4 = new ImageIcon("images/persos/pilote.png");
+    ImageIcon imgIcon4 = new ImageIcon("images/persos/aviateur.png");
     ImageIcon imgIcon4S = new ImageIcon("images/persos/piloteSelected.png");
     ImageIcon imgIcon4AS = new ImageIcon("images/persos/pilotealreadySelected.png");
     
@@ -620,6 +654,21 @@ public class FenetreStart extends JFrame {
                 selectChoix.setVisible(false);
                 btnCommencer.setEnabled(true);
                 termine = true;
+                MessageInit m = new MessageInit();
+                
+                m.nbJoueurs = nbJoueurs;
+                
+                if (difficulte.getSelectedItem() == "Novice"){
+                	m.niveauEau =0;
+                } else if  (difficulte.getSelectedItem() == "Normal"){
+                	m.niveauEau =2;
+                } else if  (difficulte.getSelectedItem() == "Epique") {
+                	m.niveauEau =5;
+                } else if  (difficulte.getSelectedItem() == "Légendaire") {
+                	m.niveauEau =7;
+                }
+                 
+                
                 
                 labelExplo.setVisible(false);
                 labelInge.setVisible(false);
@@ -636,8 +685,35 @@ public class FenetreStart extends JFrame {
                 labelPlon.setIcon(imgIcon5);
                 
                 for (JLabel i : joueurs){
-                    
+                	int j = 0;
+                    Aventurier a;
                     i.setVisible(true);
+                    if (i == labelExplo){
+                    	a = new Explorateur(j,"Explorateur",Pion.VERT);
+                    	m.listJoueurs.add(a);
+                    	
+                    } else if (i == labelInge) {
+                    	a= new Ingenieur(j,"Ingenieur",Pion.ROUGE);
+                    	m.listJoueurs.add(a);
+
+                    } else if (i == labelMessa){
+                    	a = new Messager(j,"Messager",Pion.ORANGE);
+                    	m.listJoueurs.add(a);
+                    	
+                    } else if (i == labelNavi){
+                    	a = new Navigateur(j,"Navigateur",Pion.JAUNE);
+                    	m.listJoueurs.add(a);
+                    	
+                    } else if (i == labelPilo){
+                    	a = new Aviateur(j,"Aviateur",Pion.BLEU);
+                    	m.listJoueurs.add(a);
+                    	
+                    } else if (i == labelPlon){
+                    	a = new Plongeur(j,"Plongeur",Pion.VIOLET);
+                    	m.listJoueurs.add(a);
+                    	
+                    }
+                    
                 }
                 
             }
