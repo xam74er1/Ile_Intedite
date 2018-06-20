@@ -27,17 +27,17 @@ public class PanelCurseur extends JPanel {
 	
 	public void paintComponent(Graphics g){
 		
-		BufferedImage image;
-		
 		g.setColor(Color.white);
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
 		
-		g.setColor(Color.cyan);
+		g.setColor(new Color(0,0,128));
 		if(niv<10) {
 			g.fillRect(0, 620-(niv*58), 100,620);
 		}else {
 			g.fillRect(0, 0, 100, 640);
 		}
+		
+		BufferedImage image;
 		
 		try {
 			image = ImageIO.read(new File("images\\Art\\curseur.png"));
