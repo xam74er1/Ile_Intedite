@@ -14,14 +14,14 @@ public class Grille {
 	private String[] nomTuiles = {"000Le Pont des Abimes",//00x = tuile normale 02x = tuile spawn 3xx = tuile tresor
 			"020La Porte de Bronze",//021 = spawn ingé
 			"311La Caverne des Ombres",//31x = tresor brasier
-			"024La Porte de Fer",//025 = spawn plongeur
-			"025La Porte d'Or",//026 = spawn navigateur
+			"021La Porte de Fer",//025 = spawn plongeur
+			"022La Porte d'Or",//026 = spawn navigateur
 			"001Les Falaises de l'Oubli",
 			"321Le Palais de Corail",//32x = tresor calice
 			"023La Porte d'Argent",//024 = spawn messager
 			"002Les Dunes de l'Illusion",
-			"022Heliport",//023 = spawn pilote
-			"021La Porte de Cuivre",//022 = spawn explo
+			"024Heliport",//023 = spawn pilote
+			"025La Porte de Cuivre",//022 = spawn explo
 			"331Le Jardin des Hurlements",//33x = tresor statue
 			"003La Foret Pourpre",
 			"004Le Lagon Perdu",

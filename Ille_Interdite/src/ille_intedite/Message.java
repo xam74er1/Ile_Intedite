@@ -15,7 +15,7 @@ public class Message {
     TypeMessage message;
     String location;
     String text;
-    int num;
+    int num = -1;
     Classique carte;
     
    
