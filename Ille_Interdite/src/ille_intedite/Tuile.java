@@ -114,12 +114,7 @@ public class Tuile {
     public int getNbrAventurie() {
     	return AventuriesList.size();
     }
-
-    public NomTresor getTresort() {
-        // TODO - implement Tuile.getTresort
-        throw new UnsupportedOperationException();
-    }
-
+    
     @Override
     public String toString() {
         return "Tuile{" + "num=" + num + ", statut=" + statut + ", type=" + nom + ", xT=" + xT + ", yT=" + yT + '}';

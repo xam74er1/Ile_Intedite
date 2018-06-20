@@ -374,11 +374,11 @@ public class IHMV2 extends Observe{
 	public void fillPlataux2(Grille g){
 
 		CasePlateau c;
-		HashMap<String, Tuile> tuilesListe = g.getTuilesListe();
+		HashMap<String, Tuile> tuilesListe = Grille.tuilesListe;
 
 		//int i = 0;
 
-		Iterator<Tuile> it = g.getTuilesListe().values().iterator();
+		Iterator<Tuile> it = Grille.tuilesListe.values().iterator();
 		int k = 0;
 		String str;
 		for(int y =0;y<6;y++){
@@ -435,24 +435,6 @@ public class IHMV2 extends Observe{
 
 
 		}
-	}
-
-	//effece les message et ajoute un message 
-	@Deprecated
-	public void afichierConsole(String str){
-		setIndication(str);
-		//console.setText(str);
-	}
-
-	@Deprecated
-	//Ajoute une message en plus des message aficher
-	public void addConsole(String str) {
-		//console.setText(console.getText()+"\n"+str);
-	}
-
-	@Deprecated
-	public void print(String str){
-		//console.setText(str);
 	}
 
 	public  HashMap<String, PanelButton> getListButton() {

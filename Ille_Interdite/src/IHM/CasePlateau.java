@@ -154,13 +154,6 @@ public class CasePlateau extends JPanel  {
 
 		}
 		
-	
-
-
-	
-
-		
-		
 	}
 	
 	public MouseListener mouse() {
@@ -206,9 +199,6 @@ public class CasePlateau extends JPanel  {
 		};
 		
 	}
-
-
-
 	public void desactivate() {
 		this.removeMouseListener(m);
 		activated = false;
