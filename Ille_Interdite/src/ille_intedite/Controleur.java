@@ -437,20 +437,20 @@ public class Controleur implements Observateur{
 
 		joueursList.add(a);
 
-		a = new Plongeur(4,"Plongeur",Pion.VIOLET);
+		a = new Plongeur(1,"Plongeur",Pion.VIOLET);
 		joueursList.add(a);
 
-		a = new Navigateur(5,"Navigateur",Pion.JAUNE);
+		a = new Navigateur(2,"Navigateur",Pion.JAUNE);
 		joueursList.add(a);
 
 		a = new Messager(3,"Messager",Pion.ORANGE);
 		joueursList.add(a);
 
-//		a = new Aviateur(2,"Aviateur",Pion.BLEU);
+//		a = new Aviateur(4,"Aviateur",Pion.BLEU);
 //
 //		joueursList.add(a);
 //
-//		a = new Explorateur(1,"Explorateur",Pion.VERT);
+//		a = new Explorateur(5,"Explorateur",Pion.VERT);
 
 		joueursList.add(a);
 		
