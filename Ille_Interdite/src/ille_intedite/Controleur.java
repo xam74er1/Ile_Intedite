@@ -81,12 +81,12 @@ public class Controleur implements Observateur{
 		switch(msg.getMessage()) {
 		case Clique_Deplace :
 			deplacer2(getJoueurTour());
-			ihm.afichierConsole("Cliquez sur une case pour vous y déplacer");
+			ihm.afichierConsole("Cliquez sur une case pour vous y deplacer");
 			break;
 
 		case Clique_Asseche :
 			assecher2();
-			ihm.afichierConsole("Cliquez sur une case pour l'assécher");
+			ihm.afichierConsole("Cliquez sur une case pour l'assecher");
 			break;
 
 		case Clique_Tuille :
@@ -138,7 +138,7 @@ public class Controleur implements Observateur{
 
 			case Clique_Asseche_SacDeSable :
 				grille.getTuile(msg.getLocation()).assecher();
-				ihm.afichierConsole("Case asséchée en "+msg.getLocation());
+				ihm.afichierConsole("Case assechee en "+msg.getLocation());
 				grille.activateAll();
 				miseAJourGrille();
 				break;
@@ -212,9 +212,9 @@ public class Controleur implements Observateur{
 		case Clique_RecupereTresort :
 			if(RecupereTresort()) {
 				getJoueurTour().actionJouer();
-				ihm.afichierConsole("Vous avez récupéré le trésor");
+				ihm.afichierConsole("Vous avez recupere le tresor");
 			}else {
-				ihm.afichierConsole("Impossible de récupérer le trésor");
+				ihm.afichierConsole("Impossible de recuperer le tresor");
 			}
 			break;
 		case Clique_DonneCarte :
@@ -379,7 +379,7 @@ public class Controleur implements Observateur{
 		Aventurier a;
 		//Marche
 
-		a = new Ingenieur(0,"Ingénieur",Pion.ROUGE);
+		a = new Ingenieur(0,"Ingenieur",Pion.ROUGE);
 
 		joueursList.add(a);
 
