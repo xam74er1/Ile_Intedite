@@ -297,7 +297,7 @@ public class IHMV2 extends Observe{
 
 		imgPlayerIn2T = new ImageIcon("images/persos/ingenieur.png");
 		imP2T = imgPlayerIn2T.getImage();
-		imP2T = imP2T.getScaledInstance(120, 150, Image.SCALE_DEFAULT);
+		imP2T = imP2T.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
 		imgP2T = new ImageIcon(imP2T);
 
 		btnImgPlayerIn2T.setIcon(imgP2T);
@@ -316,7 +316,7 @@ public class IHMV2 extends Observe{
 		btnImgPlayerIn3T.setForeground(new Color(139, 69, 19));
 		btnImgPlayerIn3T.setBounds(0, 0, 150, 150);
 		PanelPlayerIn3T.add(btnImgPlayerIn3T);
-		imgPlayerIn3T = new ImageIcon("images/persos/pilote.png");
+		imgPlayerIn3T = new ImageIcon("images/persos/aviateur.png");
 		imP3T = imgPlayerIn3T.getImage();
 		imP3T = imP3T.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
 		imgP3T = new ImageIcon(imP3T);
@@ -571,7 +571,7 @@ public class IHMV2 extends Observe{
 
 		imgPlayerIn1T = new ImageIcon("images/persos/"+path+".png");
 		imP1T = imgPlayerIn1T.getImage();
-		imP1T = imP1T.getScaledInstance(120, 120, Image.SCALE_DEFAULT);
+		imP1T = imP1T.getScaledInstance(150,150, Image.SCALE_DEFAULT);
 		imgP1T = new ImageIcon(imP1T);
 		btnImgPlayerIn1T.setIcon(imgP1T);
 		PanelPlayerIn1T.repaint();
@@ -585,7 +585,7 @@ public class IHMV2 extends Observe{
 			
 			imgPlayerIn2T = new ImageIcon("images/persos/"+path+".png");
 			imP2T = imgPlayerIn2T.getImage();
-			imP2T = imP2T.getScaledInstance(120, 120, Image.SCALE_DEFAULT);
+			imP2T = imP2T.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
 			imgP2T = new ImageIcon(imP2T);
 			btnImgPlayerIn2T.setIcon(imgP2T);
 			PanelPlayerIn2T.repaint();
@@ -601,7 +601,7 @@ public class IHMV2 extends Observe{
 
 			imgPlayerIn3T = new ImageIcon("images/persos/"+path+".png");
 			imP3T = imgPlayerIn3T.getImage();
-			imP3T = imP3T.getScaledInstance(120, 120, Image.SCALE_DEFAULT);
+			imP3T = imP3T.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
 			imgP3T = new ImageIcon(imP3T);
 			btnImgPlayerIn3T.setIcon(imgP3T);
 			PanelPlayerIn3T.repaint();
