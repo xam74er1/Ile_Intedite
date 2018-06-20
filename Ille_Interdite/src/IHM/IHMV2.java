@@ -156,7 +156,7 @@ public class IHMV2 extends Observe{
 		listCartes.put(4, panelCarte5);
 		panelCarte5.setLayout(null);
 		
-		JLabel lbIconJoueur = new JLabel("");
+		lbIconJoueur = new JLabel("");
 
 		lbIconJoueur.setBounds(75, 472, 100, 100);
 		CardPlayer.add(lbIconJoueur);
