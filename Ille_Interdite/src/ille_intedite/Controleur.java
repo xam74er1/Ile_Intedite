@@ -780,7 +780,6 @@ public class Controleur implements Observateur{
 		int joueursPresentsHeliport=0;
 		boolean heliportCoule=false;
 		for(Tuile t : grille.getTuilesListe().values()) {
-			System.out.println(t.getNum());
 			if(t.getNum()==22) {			//Si la tuile est l'heliport
 				joueursPresentsHeliport = t.getNbrAventurie();
 				heliportCoule = t.getStatut()==-2;
@@ -826,6 +825,7 @@ public class Controleur implements Observateur{
 			if(temple>-1 && (t.getNum()==341 || t.getNum()==342) && t.getStatut()==2) {
 				temple++;
 			}
+
 			if(caverne>-1 && (t.getNum()==311 || t.getNum()==312) && t.getStatut()==2) {
 				caverne++;
 			}
@@ -836,6 +836,7 @@ public class Controleur implements Observateur{
 				jardin++;
 			}
 		}
+
 		if(temple==2||caverne==2||palais==2||jardin==2) {
 			return -1;												//Deux cases de recuperation de tresor coulees
 		}
