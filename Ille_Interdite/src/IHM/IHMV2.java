@@ -340,6 +340,15 @@ public class IHMV2 extends Observe{
 		imP1T = imP1T.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
 		imgP1T = new ImageIcon(imP1T);
 		btnImgPlayerIn1T.setIcon(imgP1T);
+		btnImgPlayerIn1T.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Message m = new Message(TypeMessage.Clique_RecupereTresort);
+
+				;
+
+				notifierObservateur(m);
+			}
+		});
 		btnImgPlayerIn1T.setBorder(null);
 
 
@@ -536,6 +545,7 @@ public class IHMV2 extends Observe{
 		btnSacSable.setEnabled(sa);
 	}
 
+
 	public void setCartePanel(int num, Classique c) {
 		PanelCarte p = listCartes.get(num);
 		p.setCarte(c);
@@ -543,12 +553,13 @@ public class IHMV2 extends Observe{
 		p.revalidate();
 	}
 	
-	public void rool(int joeurAsJouer , ArrayList<Aventurier> listAvent) {
+public void rool(Aventurier a  , ArrayList<Aventurier> listAvent) {
 		int i = 1;
-		Aventurier a = listAvent.get(joeurAsJouer);
-
+		int k = listAvent.indexOf(a);
+		
+		//System.out.println(" principal = "+a.getNom()+" k"+k);
 		String path = a.getNom().toLowerCase();
-		System.out.println(path);
+		
 		i++;
 //		Icon img = new ImageIcon("images/persos/"+path+".png");
 //		lbIconJoueur.setIcon(img);
@@ -562,9 +573,9 @@ public class IHMV2 extends Observe{
 		lbIconJoueur.setIcon(imgPC);
 		//images/persos/explorateur.png
 
-		int k = joeurAsJouer;
 		
-		k = (k+1)%listAvent.size();
+		k++;
+		k %=listAvent.size();
 		a = listAvent.get(k);
 		path = a.getNom().toLowerCase();
 
@@ -575,11 +586,13 @@ public class IHMV2 extends Observe{
 		imP1T = imP1T.getScaledInstance(150,150, Image.SCALE_DEFAULT);
 		imgP1T = new ImageIcon(imP1T);
 		btnImgPlayerIn1T.setIcon(imgP1T);
+		btnImgPlayerIn1T.setName(a.getNum()+"");
 		PanelPlayerIn1T.repaint();
+		//System.out.println(" 1 = "+a.getNom()+" k"+k);
 		
 		if(i<=listAvent.size()) {
-			
-			k = (k+1)%listAvent.size();
+			k++;
+			k %= listAvent.size();
 			a = listAvent.get(k);
 			path = a.getNom().toLowerCase();
 			i++;
@@ -589,12 +602,14 @@ public class IHMV2 extends Observe{
 			imP2T = imP2T.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
 			imgP2T = new ImageIcon(imP2T);
 			btnImgPlayerIn2T.setIcon(imgP2T);
+			btnImgPlayerIn1T.setName(a.getNum()+"");
 			PanelPlayerIn2T.repaint();
+			System.out.println(" 2 = "+a.getNom()+" k"+k);
 		}
 		
 		if(i<=listAvent.size()) {
-			
-			k = (k+1)%listAvent.size();
+			k++;
+			k %= listAvent.size();
 			a = listAvent.get(k);
 			path = a.getNom().toLowerCase();
 			i++;
@@ -605,7 +620,9 @@ public class IHMV2 extends Observe{
 			imP3T = imP3T.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
 			imgP3T = new ImageIcon(imP3T);
 			btnImgPlayerIn3T.setIcon(imgP3T);
+			btnImgPlayerIn1T.setName(a.getNum()+"");
 			PanelPlayerIn3T.repaint();
+			System.out.println(" 3 = "+a.getNom()+" k"+k);
 		}
 		
 		

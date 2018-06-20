@@ -351,7 +351,7 @@ public class Controleur implements Observateur{
 			activateSpecialButton(getJoueurTour());
 			afficherCartes(getJoueurTour());
 			//	Utils.debugln("Fin de tour");
-			ihm.rool(getJoueurTour().getNum(), joueursList);
+			ihm.rool(getJoueurTour(), joueursList);
 			grille.activateAll();
 			miseAJourGrille();
 		}
@@ -441,27 +441,36 @@ public class Controleur implements Observateur{
 		//creer les aventuriers
 		Aventurier a;
 		//Marche
+int i = 0;
+		a = new Ingenieur(i,"Ingenieur",Pion.ROUGE);
+i++;
+		joueursList.add(a);
 
-		a = new Ingenieur(0,"Ingenieur",Pion.ROUGE);
+
+		a = new Plongeur(i,"Plongeur",Pion.VIOLET);
 
 		joueursList.add(a);
 
-		a = new Plongeur(1,"Plongeur",Pion.VIOLET);
-		joueursList.add(a);
-
-		a = new Navigateur(2,"Navigateur",Pion.JAUNE);
-		joueursList.add(a);
-
-		a = new Messager(3,"Messager",Pion.ORANGE);
-		joueursList.add(a);
-
-		//		a = new Aviateur(4,"Aviateur",Pion.BLEU);
-		//
-		//		joueursList.add(a);
-		//
-		//		a = new Explorateur(5,"Explorateur",Pion.VERT);
+		i++;
+		a = new Navigateur(i,"Navigateur",Pion.JAUNE);
 
 		joueursList.add(a);
+		i++;
+		a = new Messager(i,"Messager",Pion.ORANGE);
+		joueursList.add(a);
+
+		i++;
+//		a = new Aviateur(2,"Aviateur",Pion.BLEU);
+//
+//		joueursList.add(a);
+//
+//		a = new Explorateur(1,"Explorateur",Pion.VERT);
+//
+//		joueursList.add(a);
+
+		
+		Collections.shuffle(joueursList);
+
 
 		melanger(joueursList);
 
@@ -861,6 +870,7 @@ public class Controleur implements Observateur{
 			case 2: palais=-1;
 			case 3: jardin=-1;
 			case 4: temple=-1;
+			break;
 			}
 		}
 

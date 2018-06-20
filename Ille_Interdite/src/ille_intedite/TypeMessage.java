@@ -23,6 +23,6 @@ public enum TypeMessage {
     Defausse_Joueur,
     Defausse_NumCarte,
     Clique_Deplace_Urgence,
-    Clique_Carte_Tresor;
+    Clique_Carte_Tresor, Clique_RecupereTresort;
     
 }
