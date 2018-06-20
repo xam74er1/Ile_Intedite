@@ -251,6 +251,15 @@ private JLabel textCusor;
 		PanelSouth.add(btRecupereTresort);
 		
 		JButton btFinDeTour = new JButton("Fin de tour");
+		btFinDeTour.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Message m = new Message(TypeMessage.Clique_Fin_Tour);
+
+				;
+
+				notifierObservateur(m);
+			}
+		});
 		btFinDeTour.setBounds(1056, 13, 97, 25);
 		PanelSouth.add(btFinDeTour);
 		
@@ -461,7 +470,7 @@ private JLabel textCusor;
 	}
 
 	public void print(String str){
-		console.setText(str);
+		//console.setText(str);
 	}
 
 	public  HashMap<String, JButton> getListButton() {

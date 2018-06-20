@@ -260,7 +260,9 @@ public class Controleur implements Observateur{
 				}
 			}
 			ihm.afficherDep(listAsseche);
+			activateSpecialButton(getJoueurTour());
 			miseAJourGrille();
+			
 			break;
 
 		case Clique_Deplace_Helico :
@@ -271,7 +273,9 @@ public class Controleur implements Observateur{
 				}
 			}
 			ihm.afficherDep(listCaseAvent);
+			activateSpecialButton(getJoueurTour());
 			miseAJourGrille();
+			
 			break;
 
 
@@ -439,6 +443,8 @@ public class Controleur implements Observateur{
 		a = new Explorateur(1,"Explorateur",Pion.VERT);
 
 		joueursList.add(a);
+		
+		Collections.shuffle(joueursList);
 
 
 
