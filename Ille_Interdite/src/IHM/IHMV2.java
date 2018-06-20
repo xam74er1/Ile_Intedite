@@ -62,10 +62,8 @@ private JLabel textCusor;
 	 * @param vue 
 	 */
 	public IHMV2(VueGrille vue) {
-
 		this.vue = vue;
 		initialize();
-		
 	}
 
 	/**
@@ -199,12 +197,12 @@ private JLabel textCusor;
 		ImageIcon img5 = new ImageIcon(im5);
 		btnCarteIcon5.setIcon(img5);
 		
-		JLabel lbIconJoueur = new JLabel("Salut");
+		JLabel lbIconJoueur = new JLabel("");
 		lbIconJoueur.setBounds(75, 472, 100, 100);
 		CardPlayer.add(lbIconJoueur);
 		ImageIcon imgIconJoueur = new ImageIcon("images/persos/explorateur.png");
 		Image imPC = imgIconJoueur.getImage();
-		imPC = imPC.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
+		imPC = imPC.getScaledInstance(100, 100, Image.SCALE_DEFAULT);
 		ImageIcon imgPC = new ImageIcon(imPC);
 		lbIconJoueur.setIcon(imgPC);
 
