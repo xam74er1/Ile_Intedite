@@ -40,6 +40,7 @@ public class IHMV2 extends Observe{
 	private JTextArea console;
 	private JPanel Plateau ;
 	private JLabel lblJoeurN;
+//	private JLabel
 private JLabel textCusor;
 
 	HashMap<String,JButton> listButton = new HashMap();
@@ -327,7 +328,7 @@ private JLabel textCusor;
 		
 		JPanel PanelPlayerIn2T = new JPanel();
 		PanelPlayerIn2T.setBackground(new Color(139, 69, 19));
-		PanelPlayerIn2T.setBounds(59, 271, 150, 150);
+		PanelPlayerIn2T.setBounds(59, 264, 150, 150);
 		PanelEast.add(PanelPlayerIn2T);
 		PanelPlayerIn2T.setLayout(null);
 		
@@ -383,12 +384,12 @@ private JLabel textCusor;
 		
 		
 		JPanel PanelTresor = new JPanel();
-		PanelTresor.setBackground(new Color(139, 69, 19));
+		PanelTresor.setBackground(new Color(165, 42, 42));
 		PanelTresor.setBounds(0, 0, 279, 84);
 		PanelEast.add(PanelTresor);
 		PanelTresor.setLayout(null);
 		
-		JLabel lbImgTresor1 = new JLabel("New label");
+		JLabel lbImgTresor1 = new JLabel("");
 		lbImgTresor1.setBounds(0, 0, 60, 82);
 		PanelTresor.add(lbImgTresor1);
 		ImageIcon ImgTresor1 = new ImageIcon("images/tresors/calice.png");
@@ -423,6 +424,11 @@ private JLabel textCusor;
 		imT4 = imT4.getScaledInstance(60, 82, Image.SCALE_DEFAULT);
 		ImageIcon imgT4 = new ImageIcon(imT4);
 		lbImgTresor4.setIcon(imgT4);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(105, 105, 105));
+		panel.setBounds(0, 84, 279, 10);
+		PanelEast.add(panel);
 		
 		
 		
