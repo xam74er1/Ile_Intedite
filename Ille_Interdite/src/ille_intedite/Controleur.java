@@ -95,6 +95,7 @@ public class Controleur implements Observateur{
 		switch(msg.getMessage()) {
 		case Clique_Deplace :
 			deplacer2(getJoueurTour());
+			
 			ihm.afichierConsole("Cliquez sur une case pour vous y deplacer");
 			break;
 
@@ -197,12 +198,14 @@ public class Controleur implements Observateur{
 
 				break;
 			case Clique_Tuile :
+				ihm.setIndication("");
 				if (urg) {
 					deplacer(msg.getLocation(),urgence);
 					miseAJourGrille();
 					grille.activateAll();
 					lastAction=TypeMessage.Clique_Fin_Tour;
 					finDeTour();
+					
 				}
 
 
@@ -284,7 +287,7 @@ public class Controleur implements Observateur{
 			break;
 		case Clique_DonneCarte :
 			
-
+			ihm.setIndication("Clique sur la carte que vous voullez donne ");
 			break;
 		case Clique_Deplace_Helico :
 			carteSpe=msg.getCarte();
@@ -303,8 +306,9 @@ public class Controleur implements Observateur{
 		case Clique_Carte_Tresor :
 			
 			if(lastAction ==TypeMessage.Clique_DonneCarte) {
-				System.out.println(" Donne clqiue carte tresort controleur ");
+				
 				numCarte = msg.getNum();
+				ihm.setIndication("Clique sur le joeur que as qui vous voullez donne la carte");
 			}
 			break;
 		case Clique_Joueur :
@@ -319,7 +323,7 @@ public class Controleur implements Observateur{
 					givePlayer.getListeCarteJoueur().add(c);
 					afficherCartes(getJoueurTour());
 					numCarte = -1;
-				
+					ihm.setIndication("");
 				}
 				
 
