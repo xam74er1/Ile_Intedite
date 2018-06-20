@@ -9,7 +9,7 @@ import Carte.CarteSacSable;
 import Carte.MonteeEaux;
 import Carte.NomTresor;
 import IHM.FenetreStart;
-import IHM.IHM;
+//import IHM.IHM;
 import IHM.IHMV2;
 import IHM.MessageInit;
 import ille_intedite.Aventurie.Aventurier;
@@ -278,7 +278,7 @@ public class Controleur implements Observateur{
 			//		int provi  = 1+1;
 			//			break;
 		case Clique_Asseche_SacDeSable :
-			carteSpe=msg.getCarte();
+			carteSpe=(Classique) msg.getCarte();
 			ArrayList<Tuile> listAsseche = new ArrayList<Tuile>() ;
 			for(Tuile t : Grille.tuilesListe.values()) {
 				if (t.getStatut()==1) {
@@ -294,7 +294,7 @@ public class Controleur implements Observateur{
 			ihm.setIndication("Clique sur la carte que vous voullez donne ");
 			break;
 		case Clique_Deplace_Helico :
-			carteSpe=msg.getCarte();
+			carteSpe=(Classique) msg.getCarte();
 			ArrayList<Tuile> listCaseAvent = new ArrayList<Tuile>() ;
 			for(Tuile t : Grille.tuilesListe.values()) {
 				if (t.getAventurie().size()!=0) {
@@ -311,7 +311,7 @@ public class Controleur implements Observateur{
 			if(lastAction ==TypeMessage.Clique_DonneCarte) {
 
 				numCarte = msg.getNum();
-				ihm.setIndication("Clique sur le joeur que as qui vous voullez donne la carte");
+				ihm.setIndication("Cliquez sur le joueur a qui vous voulez donner la carte");
 			}
 			break;
 		case Clique_Joueur :

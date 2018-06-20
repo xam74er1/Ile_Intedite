@@ -1,5 +1,5 @@
 package ille_intedite;
-import IHM.IHM;
+//import IHM.IHM;
 import IHM.IHMV2;
 import ille_intedite.Aventurie.Aventurier;
 import utils.Parameters;

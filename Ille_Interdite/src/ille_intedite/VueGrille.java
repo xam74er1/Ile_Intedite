@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
-import IHM.IHM;
+//import IHM.IHM;
 import IHM.IHMV2;
 import ille_intedite.Aventurie.Aventurier;
 

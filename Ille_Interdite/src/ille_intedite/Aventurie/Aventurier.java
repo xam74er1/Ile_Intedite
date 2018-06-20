@@ -4,7 +4,7 @@ import Carte.Carte;
 import Carte.Classique;
 import Carte.CarteTresor;
 import Carte.NomTresor;
-import IHM.IHM;
+//import IHM.IHM;
 import ille_intedite.Controleur;
 import ille_intedite.Grille;
 import ille_intedite.Tuile;
