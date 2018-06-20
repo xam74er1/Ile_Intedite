@@ -784,8 +784,6 @@ public class Controleur implements Observateur{
 
 
 		for(Tuile t : grille.getTuilesListe().values()) {
-
-			for(String key : grille.getTuilesListe().keySet()) {
 				if(temple>-1 && (t.getNum()==341 || t.getNum()==342) && t.getStatut()==2) {
 					temple++;
 				}
@@ -800,14 +798,10 @@ public class Controleur implements Observateur{
 				}
 			}
 			if(temple==2||caverne==2||palais==2||jardin==2) {
-				return -1;												//Deux cases de rÃÂ©cupÃÂ©ration de trÃÂ©sor coulÃÂ©es
+				return -1;												//Deux cases de recuperation de tresor coulees
 			}
 
 			// A COMPLETER
-
-
-
-		}
 
 
 		return 0;
