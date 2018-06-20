@@ -249,7 +249,7 @@ public class Controleur implements Observateur{
 
 			break;
 		case Clique_RecupereTresor :
-			if(RecupereTresort()) {
+			if(recupereTresor()) {
 				getJoueurTour().actionJouer();
 				ihm.afichierConsole("Vous avez recupere le tresor");
 			}else {
@@ -724,22 +724,6 @@ public class Controleur implements Observateur{
 
 	}
 
-	public boolean recupereTresort() {
-		// 
-
-		Aventurier a = getJoueurTour();
-
-		NomTresor  t = a.recupereTresor();
-
-		if(t!=null) {
-			tresorsRecuperes.add(t);
-			return true;
-		}else {
-			return false;
-		}
-
-	}
-
 	public void activateSpecialButton(Aventurier a) {
 		boolean aHelico=false;
 		boolean aSacSable=false;
@@ -795,7 +779,7 @@ public class Controleur implements Observateur{
 
 	}
 
-	public boolean RecupereTresort() {
+	public boolean recupereTresor() {
 		// 
 
 		Aventurier a = getJoueurTour();
