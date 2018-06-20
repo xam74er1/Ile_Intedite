@@ -79,14 +79,14 @@ public class CasePlateau extends JPanel  {
 
 			int min = Math.min(this.getWidth(),this.getHeight());
 
-
+			//Pour fair en sorte que le string sois de bonne taille 
 			name=	name.replace(" d", "D");
 			name=	name.replace(" ", "");
 			name = name.replace("’", "");
 			name = name.replace("'", "");
 
 
-
+			//On gere les image en fonction des donne 
 			try {
 				if(t.getStatut()<2) {
 
@@ -102,7 +102,7 @@ public class CasePlateau extends JPanel  {
 					g.drawImage(image, 0, 0,this.getWidth(),this.getHeight(), null);
 				}else {
 					path = "images\\watterTexture.jpg";
-					System.out.println("coule");
+					//System.out.println("coule");
 					image = ImageIO.read(new File(path));
 					//super.paintComponent(g);
 					g.drawImage(image, 0,0,this.getWidth(),this.getHeight(), null);

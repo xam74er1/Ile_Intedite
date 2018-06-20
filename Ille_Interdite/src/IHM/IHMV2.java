@@ -410,7 +410,7 @@ private JLabel textCusor;
 	}
 
 	public void print(String str){
-		console.setText(str);
+		//console.setText(str);
 	}
 
 	public  HashMap<String, JButton> getListButton() {
