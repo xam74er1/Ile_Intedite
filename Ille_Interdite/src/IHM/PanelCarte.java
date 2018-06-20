@@ -63,9 +63,7 @@ public class PanelCarte extends JPanel{
 			path = "images\\cartes\\Fond rouge.png";
 		}
 
-		try {
-			System.out.println(path);
-			image = ImageIO.read(new File(path));
+		try {			image = ImageIO.read(new File(path));
 			g.drawImage(image, 0, 0,this.getWidth(),this.getHeight(), null);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -115,6 +113,7 @@ public class PanelCarte extends JPanel{
 					m = new Message(TypeMessage.Clique_Carte_Tresor);				
 				}
 				m.setNum(num);
+				m.setCarte(carte);
 				o.notifierObservateur(m);
 			}
 		};

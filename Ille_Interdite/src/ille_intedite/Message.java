@@ -5,6 +5,8 @@
  */
 package ille_intedite;
 
+import Carte.Classique;
+
 /**
  *
  * @author clercma
@@ -14,8 +16,17 @@ public class Message {
     String location;
     String text;
     int num;
+    Classique carte;
     
    
+
+	public Classique getCarte() {
+		return carte;
+	}
+
+	public void setCarte(Classique carte) {
+		this.carte = carte;
+	}
 
 	public String getText() {
 		return text;
