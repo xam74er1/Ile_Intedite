@@ -96,24 +96,23 @@ private JLabel textCusor;
 		CardPlayer.setBounds(112, 13, 250, 597);
 		frame.getContentPane().add(CardPlayer);
 		CardPlayer.setLayout(null);
-		
-		ImageIcon imgCarte1 = new ImageIcon("images/cartes/Calice.png");
-		Image im = imgCarte1.getImage();
-		im = im.getScaledInstance(100, 140, Image.SCALE_DEFAULT);
-		ImageIcon img1 = new ImageIcon(im);
-		
+				
 		JPanel panelCarte1 = new JPanel();
 		panelCarte1.setBackground(new Color(139, 69, 19));
 		panelCarte1.setBounds(12, 13, 100, 140);
 		CardPlayer.add(panelCarte1);
 		panelCarte1.setLayout(null);
 		
-		JLabel lbCarteIcon1 = new JLabel("");
-		lbCarteIcon1.setBounds(0, 0, 100, 140);
-		panelCarte1.add(lbCarteIcon1);
-		lbCarteIcon1.setIcon(img1);
-		
-		
+		JButton btnCarteIcon1 = new JButton("");
+		btnCarteIcon1.setForeground(new Color(139, 69, 19));
+		btnCarteIcon1.setBackground(new Color(139, 69, 19));
+		btnCarteIcon1.setBounds(0, 0, 100, 140);
+		ImageIcon imgCarte1 = new ImageIcon("images/cartes/Calice.png");
+		Image im = imgCarte1.getImage();
+		im = im.getScaledInstance(100, 140, Image.SCALE_DEFAULT);
+		ImageIcon img1 = new ImageIcon(im);
+		btnCarteIcon1.setIcon(img1);
+		panelCarte1.add(btnCarteIcon1);
 		
 		JPanel panelCarte2 = new JPanel();
 		panelCarte2.setBackground(new Color(139, 69, 19));
@@ -121,15 +120,16 @@ private JLabel textCusor;
 		CardPlayer.add(panelCarte2);
 		panelCarte2.setLayout(null);
 		
-		JLabel lbCarteIcon2 = new JLabel("");
-		lbCarteIcon2.setBackground(new Color(139, 69, 19));
-		lbCarteIcon2.setBounds(0, 0, 100, 140);
-		panelCarte2.add(lbCarteIcon2);
-		Icon imgCarte2 = new ImageIcon("images/cartes/Calice.png");
-		Image im2 = imgCarte1.getImage();
+		JButton btnCarteIcon2 = new JButton("");
+		btnCarteIcon2.setForeground(new Color(139, 69, 19));
+		btnCarteIcon2.setBackground(new Color(139, 69, 19));
+		btnCarteIcon2.setBounds(0, 0, 100, 140);
+		panelCarte2.add(btnCarteIcon2);
+		ImageIcon imgCarte2 = new ImageIcon("images/cartes/SacsDeSable.png");
+		Image im2 = imgCarte2.getImage();
 		im2 = im2.getScaledInstance(100, 140, Image.SCALE_DEFAULT);
 		ImageIcon img2 = new ImageIcon(im2);
-		lbCarteIcon2.setIcon(img2);
+		btnCarteIcon2.setIcon(img2);
 		
 		JPanel panelCarte3 = new JPanel();
 		panelCarte3.setBackground(new Color(139, 69, 19));
@@ -137,14 +137,16 @@ private JLabel textCusor;
 		CardPlayer.add(panelCarte3);
 		panelCarte3.setLayout(null);
 		
-		JLabel lbCarteIcon3 = new JLabel("");
-		lbCarteIcon3.setBounds(0, 0, 100, 140);
-		panelCarte3.add(lbCarteIcon3);
-		Icon imgCarte3 = new ImageIcon("images/cartes/Calice.png");
-		Image im3 = imgCarte1.getImage();
+		JButton btnCarteIcon3 = new JButton("");
+		btnCarteIcon3.setForeground(new Color(139, 69, 19));
+		btnCarteIcon3.setBackground(new Color(139, 69, 19));
+		btnCarteIcon3.setBounds(0, 0, 100, 140);
+		panelCarte3.add(btnCarteIcon3);
+		ImageIcon imgCarte3 = new ImageIcon("images/cartes/Calice.png");
+		Image im3 = imgCarte3.getImage();
 		im3 = im3.getScaledInstance(100, 140, Image.SCALE_DEFAULT);
 		ImageIcon img3 = new ImageIcon(im3);
-		lbCarteIcon3.setIcon(img3);
+		btnCarteIcon3.setIcon(img3);
 		
 		JPanel panelCarte4 = new JPanel();
 		panelCarte4.setBackground(new Color(139, 69, 19));
@@ -152,15 +154,16 @@ private JLabel textCusor;
 		CardPlayer.add(panelCarte4);
 		panelCarte4.setLayout(null);
 		
-		JLabel lbCarteIcon4 = new JLabel("");
-		lbCarteIcon4.setBackground(new Color(139, 69, 19));
-		lbCarteIcon4.setBounds(0, 0, 100, 140);
-		panelCarte4.add(lbCarteIcon4);
-		Icon imgCarte4 = new ImageIcon("images/cartes/Calice.png");
-		Image im4 = imgCarte1.getImage();
+		JButton btnCarteIcon4 = new JButton("");
+		btnCarteIcon4.setForeground(new Color(139, 69, 19));
+		btnCarteIcon4.setBackground(new Color(139, 69, 19));
+		btnCarteIcon4.setBounds(0, 0, 100, 140);
+		panelCarte4.add(btnCarteIcon4);
+		ImageIcon imgCarte4 = new ImageIcon("images/cartes/Cristal.png");
+		Image im4 = imgCarte4.getImage();
 		im4 = im4.getScaledInstance(100, 140, Image.SCALE_DEFAULT);
 		ImageIcon img4 = new ImageIcon(im4);
-		lbCarteIcon4.setIcon(img4);
+		btnCarteIcon4.setIcon(img4);
 		
 		JPanel panelCarte5 = new JPanel();
 		panelCarte5.setBackground(new Color(139, 69, 19));
@@ -168,15 +171,16 @@ private JLabel textCusor;
 		CardPlayer.add(panelCarte5);
 		panelCarte5.setLayout(null);
 		
-		JLabel lbCarteIcon5 = new JLabel("");
-		lbCarteIcon5.setBackground(new Color(51, 0, 0));
-		lbCarteIcon5.setBounds(0, 0, 100, 140);
-		panelCarte5.add(lbCarteIcon5);
-		Icon imgCarte5 = new ImageIcon("images/cartes/Calice.png");
-		Image im5 = imgCarte1.getImage();
+		JButton btnCarteIcon5 = new JButton("");
+		btnCarteIcon5.setForeground(new Color(139, 69, 19));
+		btnCarteIcon5.setBackground(new Color(139, 69, 19));
+		btnCarteIcon5.setBounds(0, 0, 100, 140);
+		panelCarte5.add(btnCarteIcon5);
+		ImageIcon imgCarte5 = new ImageIcon("images/cartes/Pierre.png");
+		Image im5 = imgCarte5.getImage();
 		im5 = im5.getScaledInstance(100, 140, Image.SCALE_DEFAULT);
 		ImageIcon img5 = new ImageIcon(im5);
-		lbCarteIcon5.setIcon(img5);
+		btnCarteIcon5.setIcon(img5);
 		
 		JLabel lbIconJoueur = new JLabel("");
 		lbIconJoueur.setBounds(75, 472, 100, 100);
@@ -302,23 +306,79 @@ private JLabel textCusor;
 		PanelEast.setLayout(null);
 		
 		JPanel PanelPlayerIn2T = new JPanel();
-		PanelPlayerIn2T.setBounds(84, 284, 100, 100);
+		PanelPlayerIn2T.setBackground(new Color(139, 69, 19));
+		PanelPlayerIn2T.setBounds(59, 258, 150, 150);
 		PanelEast.add(PanelPlayerIn2T);
+		PanelPlayerIn2T.setLayout(null);
+		
+		
+		JButton btnImgPlayerIn2T = new JButton("");
+		btnImgPlayerIn2T.setForeground(new Color(139, 69, 19));
+		btnImgPlayerIn2T.setBackground(new Color(139, 69, 19));
+		btnImgPlayerIn2T.setBounds(0, 0, 150, 150);
+		PanelPlayerIn2T.add(btnImgPlayerIn2T);
+		ImageIcon imgPlayerIn2T = new ImageIcon("images/persos/ingenieur.png");
+		Image imP2T = imgPlayerIn2T.getImage();
+		imP2T = imP2T.getScaledInstance(120, 150, Image.SCALE_DEFAULT);
+		ImageIcon imgP2T = new ImageIcon(imP2T);
+		btnImgPlayerIn2T.setIcon(imgP2T);
+		btnImgPlayerIn2T.setBorder(null);
+		
 		
 		JPanel PanelPlayerIn3T = new JPanel();
-		PanelPlayerIn3T.setBounds(84, 84, 100, 100);
+		PanelPlayerIn3T.setBackground(new Color(139, 69, 19));
+		PanelPlayerIn3T.setBounds(59, 84, 150, 150);
 		PanelEast.add(PanelPlayerIn3T);
+		PanelPlayerIn3T.setLayout(null);
+		
+		JButton btnImgPlayerIn3T = new JButton("");
+		btnImgPlayerIn3T.setBackground(new Color(139, 69, 19));
+		btnImgPlayerIn3T.setForeground(new Color(139, 69, 19));
+		btnImgPlayerIn3T.setBounds(0, 0, 150, 150);
+		PanelPlayerIn3T.add(btnImgPlayerIn3T);
+		ImageIcon imgPlayerIn3T = new ImageIcon("images/persos/pilote.png");
+		Image imP3T = imgPlayerIn3T.getImage();
+		imP3T = imP3T.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
+		ImageIcon imgP3T = new ImageIcon(imP3T);
+		btnImgPlayerIn3T.setIcon(imgP3T);
+		btnImgPlayerIn3T.setBorder(null);
 		
 		JPanel PanelPlayerIn1T = new JPanel();
-		PanelPlayerIn1T.setBounds(84, 484, 100, 100);
+		PanelPlayerIn1T.setBackground(new Color(139, 69, 19));
+		PanelPlayerIn1T.setBounds(59, 434, 150, 150);
 		PanelEast.add(PanelPlayerIn1T);
+		PanelPlayerIn1T.setLayout(null);
+		
+		JButton btnImgPlayerIn1T = new JButton("");
+		btnImgPlayerIn1T.setForeground(new Color(139, 69, 19));
+		btnImgPlayerIn1T.setBackground(new Color(139, 69, 19));
+		btnImgPlayerIn1T.setBounds(0, 0, 150, 150);
+		PanelPlayerIn1T.add(btnImgPlayerIn1T);
+		ImageIcon imgPlayerIn1T = new ImageIcon("images/persos/plongeur.png");
+		Image imP1T = imgPlayerIn1T.getImage();
+		imP1T = imP1T.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
+		ImageIcon imgP1T = new ImageIcon(imP1T);
+		btnImgPlayerIn1T.setIcon(imgP1T);
+		btnImgPlayerIn1T.setBorder(null);
 		
 		JPanel PanelHelp = new JPanel();
-		PanelHelp.setBounds(0, 0, 267, 40);
+		PanelHelp.setBounds(207, 0, 60, 60);
 		PanelEast.add(PanelHelp);
+		PanelHelp.setLayout(null);
 		
-		JButton btAide = new JButton("Aide");
-		PanelHelp.add(btAide);
+		JButton btnHelp = new JButton("");
+		btnHelp.setForeground(new Color(139, 69, 19));
+		btnHelp.setBackground(new Color(139, 69, 19));
+		btnHelp.setBounds(0, 0, 60, 60);
+		PanelHelp.add(btnHelp);
+		ImageIcon imgHelp = new ImageIcon("images/icones/iconHelp.png");
+		Image imH = imgHelp.getImage();
+		imH = imH.getScaledInstance(60, 60, Image.SCALE_DEFAULT);
+		ImageIcon imgH = new ImageIcon(imH);
+		btnHelp.setIcon(imgH);
+		
+		
+		
 		frame.setBounds(100, 100, 1280, 720);
 		
 		//----------------
@@ -437,7 +497,7 @@ private JLabel textCusor;
 	}
 
 	public void setLevelCursort(int i) {
-		 textCusor.setText("Niveau de l'eau "+i);
+//		 textCusor.setText("Niveau de l'eau "+i);
 	}
 	
 	public void activateSpecialButton(boolean he, boolean sa) {
