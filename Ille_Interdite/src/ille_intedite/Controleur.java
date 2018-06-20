@@ -424,7 +424,6 @@ public class Controleur implements Observateur{
 					carteTresorsDefausse.add(cC);
 					curseur.monteeEaux();
 					carteTresorDeck.remove(0);
-					ihm.setLevelCursort(curseur.getNbCartesInond());
 				}else {
 					carteTresorDeck.remove(0);
 					carteTresorDeck.add((int) (Math.random()*carteTresorDeck.size()),cC);
@@ -509,6 +508,7 @@ public class Controleur implements Observateur{
 		activateSpecialButton(getJoueurTour());
 		ihm.miseAJourPlayer(0," ( "+getJoueurTour().getNom()+" )", getJoueurTour().getColor());
 		afficherCartes(getJoueurTour());
+		ihm.afficherNivCurseur(2);
 		isInit = true;
 		//test();
 	}

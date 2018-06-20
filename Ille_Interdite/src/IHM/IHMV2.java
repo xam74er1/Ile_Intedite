@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,12 +48,15 @@ public class IHMV2 extends Observe{
 	private JPanel Plateau ;
 	private JLabel lblJoeurN;
 	private JLabel textCusor;
+	JPanel sliderPanel;
+	PanelCurseur sliderImg;
 
 
 
 	HashMap<String,JButton> listButton = new HashMap();
 	HashMap<String,JPanel> listPan = new HashMap();
 	HashMap<Integer,PanelCarte> listCartes = new HashMap<Integer,PanelCarte>();
+	HashMap<Integer,JPanel> listCurseur = new HashMap<Integer,JPanel>();
 	private JTextField textField;
 
 	VueGrille vue;
@@ -86,27 +90,27 @@ public class IHMV2 extends Observe{
 		frame = new JFrame();
 		frame.getContentPane().setBackground(new Color(105, 105, 105));
 		frame.getContentPane().setLayout(null);
+		
+		sliderImg = new PanelCurseur(this);
+		sliderImg.setBounds(0, 60, 100, 673);
+		frame.getContentPane().add(sliderImg);
 
-		JPanel SliderPanel = new JPanel();
-		SliderPanel.setBackground(new Color(0, 0, 128));
-		SliderPanel.setBounds(0, 0, 100, 673);
-		frame.getContentPane().add(SliderPanel);
-		SliderPanel.setLayout(null);
-
-		JSlider slider = new JSlider();
-		slider.setMinorTickSpacing(1);
-		slider.setValue(5);
-		slider.setPaintTicks(true);
-		slider.setBackground(new Color(0, 0, 205));
-		slider.setMaximum(10);
-		slider.setBounds(12, 86, 76, 574);
-		SliderPanel.add(slider);
-		slider.setOrientation(SwingConstants.VERTICAL);
-		slider.setEnabled(false);
+		/*sliderPanel = new JPanel();
+		sliderPanel.setBounds(0, 60, 100, 610);
+		sliderPanel.setBackground(Color.WHITE);
+		frame.getContentPane().add(sliderPanel);
+		sliderPanel.setLayout(new GridLayout(11,1));*/
+		
+		/*for (int i=0;i<11;i++) {
+			JPanel panelCurseur = new JPanel();
+			panelCurseur.setBackground(Color.WHITE);
+			sliderPanel.add(panelCurseur);
+			listCurseur.put(i,panelCurseur);
+		}*/
 		
 		JPanel PanelHelp = new JPanel();
-		PanelHelp.setBounds(20, 13, 60, 60);
-		SliderPanel.add(PanelHelp);
+		PanelHelp.setBounds(0, 0, 60, 60);
+		frame.getContentPane().add(PanelHelp);
 		PanelHelp.setLayout(null);
 		
 		JButton btnHelp = new JButton("");
@@ -627,4 +631,11 @@ public void rool(Aventurier a  , ArrayList<Aventurier> listAvent) {
 		
 		
 	}
+
+	public void afficherNivCurseur(int niv) {
+		sliderImg.setNiv(niv);
+		sliderImg.repaint();
+		sliderImg.revalidate();
+	}
+	
 }
