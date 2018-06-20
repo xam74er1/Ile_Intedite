@@ -442,9 +442,9 @@ public class Controleur implements Observateur{
 		Aventurier a;
 		//Marche
 
-int i = 0;
+		int i = 0;
 		a = new Ingenieur(i,"Ingenieur",Pion.ROUGE);
-i++;
+		i++;
 		joueursList.add(a);
 
 
