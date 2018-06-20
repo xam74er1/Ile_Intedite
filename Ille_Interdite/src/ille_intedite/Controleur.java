@@ -375,7 +375,7 @@ public class Controleur implements Observateur{
 					break;
 				case 3:
 					// Statue
-					carteTresorDeck.add(new CarteTresor(j+"Zephir", NomTresor.StatueZephir));
+					carteTresorDeck.add(new CarteTresor(j+"Zephyr", NomTresor.StatueZephir));
 					break;
 				case 4:
 					// Pierre

@@ -64,6 +64,7 @@ public class PanelCarte extends JPanel{
 		}
 
 		try {
+			System.out.println(path);
 			image = ImageIO.read(new File(path));
 			g.drawImage(image, 0, 0,this.getWidth(),this.getHeight(), null);
 		} catch (IOException e) {
