@@ -196,7 +196,7 @@ public class CasePlateau extends JPanel  {
 				// TODO Auto-generated method stub
 				if(!blanc) {
 				
-				Message m = new Message(TypeMessage.Clique_Tuille);
+				Message m = new Message(TypeMessage.Clique_Tuile);
 				m.setLocation(location);
 				o.notifierObservateur(m);
 				}
@@ -209,7 +209,7 @@ public class CasePlateau extends JPanel  {
 
 
 
-	public void unActivated() {
+	public void desactivate() {
 		this.removeMouseListener(m);
 		activated = false;
 	}

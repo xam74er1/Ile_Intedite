@@ -13,6 +13,7 @@ public class Message {
     TypeMessage message;
     String location;
     String text;
+    int num;
     
    
 
@@ -44,6 +45,16 @@ public class Message {
 	public void setLocation(String location) {
 		this.location = location;
 	}
+
+	public int getNum() {
+		return num;
+	}
+
+	public void setNum(int num) {
+		this.num = num;
+	}
+	
+	
     
     
     //test

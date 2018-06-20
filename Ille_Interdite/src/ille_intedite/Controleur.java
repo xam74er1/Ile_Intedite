@@ -94,7 +94,7 @@ public class Controleur implements Observateur{
 			ihm.afichierConsole("Cliquez sur une case pour l'assecher");
 			break;
 
-		case Clique_Tuille :
+		case Clique_Tuile :
 			switch(lastAction) {
 			case Clique_Deplace:
 
@@ -181,7 +181,7 @@ public class Controleur implements Observateur{
 				finDeTour();
 
 				break;
-			case Clique_Tuille :
+			case Clique_Tuile :
 				if (urg) {
 					deplacer(msg.getLocation(),urgence);
 					miseAJourGrille();
@@ -241,7 +241,7 @@ public class Controleur implements Observateur{
 			}
 
 			break;
-		case Clique_RecupereTresort :
+		case Clique_RecupereTresor :
 			if(RecupereTresort()) {
 				getJoueurTour().actionJouer();
 				ihm.afichierConsole("Vous avez recupere le tresor");
@@ -324,7 +324,7 @@ public class Controleur implements Observateur{
 
 
 				ihm.addConsole("Vous avez " + (getJoueurTour().getListeCarteJoueur().size()-5) + " cartes en trop dans votre main, choisir les cartes Ã  dÃ©fausser :");
-
+				
 			}
 
 
@@ -341,6 +341,7 @@ public class Controleur implements Observateur{
 			ihm.miseAJourPlayer(numTour," ( "+getJoueurTour().getNom()+" )", getJoueurTour().getColor());
 			activateSpecialButton(getJoueurTour());
 			//	Utils.debugln("Fin de tour");
+			ihm.rool(getJoueurTour().getNum(), joueursList);
 			grille.activateAll();
 			miseAJourGrille();
 		}
@@ -365,34 +366,34 @@ public class Controleur implements Observateur{
 			for(int j=0;j<5;j++) {
 				switch (i) {
 				case 1:
-					carteTresorDeck.add(new CarteTresor("CristalArdent"+j, NomTresor.CristalArdent));
+					carteTresorDeck.add(new CarteTresor(j+"Cristal", NomTresor.CristalArdent));
 					break;
 				case 2:
 					// Calise
-					carteTresorDeck.add(new CarteTresor("CaliceOnde"+j, NomTresor.CaliceOnde));
+					carteTresorDeck.add(new CarteTresor(j+"Calice", NomTresor.CaliceOnde));
 					break;
 				case 3:
 					// Statue
-					carteTresorDeck.add(new CarteTresor("StatueZephir"+j, NomTresor.StatueZephir));
+					carteTresorDeck.add(new CarteTresor(j+"Zephir", NomTresor.StatueZephir));
 					break;
 				case 4:
 					// Pierre
-					carteTresorDeck.add(new CarteTresor("PierreSacree"+j, NomTresor.PierreSacree));
+					carteTresorDeck.add(new CarteTresor(j+"Pierre", NomTresor.PierreSacree));
 					break;
 				}
 			}
 
-			carteTresorDeck.add(new CarteSacSable("Sac de sable 1"));
-			carteTresorDeck.add(new CarteSacSable("Sac de sable 2"));
-			carteTresorDeck.add(new CarteSacSable("Sac de sable 3"));
+			carteTresorDeck.add(new CarteSacSable("1SacsDeSable"));
+			carteTresorDeck.add(new CarteSacSable("2SacsDeSable"));
+			carteTresorDeck.add(new CarteSacSable("3SacsDeSable"));
 
-			carteTresorDeck.add(new MonteeEaux("Montee des EAU 1"));
-			carteTresorDeck.add(new MonteeEaux("Montee des EAU 2"));
-			//carteTresorDeck.add(new MonteeEaux("Monte des EAU 3"));
+			carteTresorDeck.add(new MonteeEaux("1Montee des EAU"));
+			carteTresorDeck.add(new MonteeEaux("2Montee des EAU"));
+			//carteTresorDeck.add(new MonteeEaux("3Monte des EAU"));
 
-			carteTresorDeck.add(new CarteHelicoptere("Helico 1"));
-			carteTresorDeck.add(new CarteHelicoptere("Helico 2"));
-			carteTresorDeck.add(new CarteHelicoptere("Helico 3"));
+			carteTresorDeck.add(new CarteHelicoptere("1Helicoptere"));
+			carteTresorDeck.add(new CarteHelicoptere("2Helicoptere"));
+			carteTresorDeck.add(new CarteHelicoptere("3Helicoptere"));
 
 		}
 		if(Parameters.ALEAS) {
@@ -636,6 +637,10 @@ public class Controleur implements Observateur{
 		}
 
 
+	}
+	
+	private void defausser(String str, Aventurier a) {
+		a.removeCarte(a.getCarte(Integer.parseInt(str)));
 	}
 
 	public void defausserCarteMain() {
