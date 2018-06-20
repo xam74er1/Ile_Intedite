@@ -55,7 +55,7 @@ public class IHMV2 extends Observe{
 	JPanel sliderPanel;
 	PanelCurseur sliderImg;
 
-	HashMap<String,JButton> listButton = new HashMap();
+	HashMap<String,PanelButton> listButton = new HashMap();
 	HashMap<String,JPanel> listPan = new HashMap();
 	HashMap<Integer,PanelCarte> listCartes = new HashMap<Integer,PanelCarte>();
 	HashMap<Integer,JPanel> listCurseur = new HashMap<Integer,JPanel>();
@@ -178,79 +178,25 @@ public class IHMV2 extends Observe{
 		frame.getContentPane().add(PanelSouth);
 		PanelSouth.setLayout(null);
 
-		JButton Deplace = new JButton("Deplacer");
+		PanelButton Deplace = new PanelButton(this,"Deplacer",TypeMessage.Clique_Deplace);
 		Deplace.setBounds(12, 13, 97, 25);
 		PanelSouth.add(Deplace);
-		Deplace.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Message m = new Message(TypeMessage.Clique_Deplace);
 
-				;
-
-				notifierObservateur(m);
-			}
-		});
-
-		JButton btAssecher = new JButton("Assecher");
+		PanelButton btAssecher = new PanelButton(this,"Assecher",TypeMessage.Clique_Asseche);
 		btAssecher.setBounds(121, 13, 97, 25);
-
-		btAssecher.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Message m = new Message(TypeMessage.Clique_Asseche);
-
-				;
-
-				notifierObservateur(m);
-			}
-		});
 		PanelSouth.add(btAssecher);
 
-		JButton btDonneCarte = new JButton("Donne carte");
+		PanelButton btDonneCarte = new PanelButton(this,"DonnerCarte",TypeMessage.Clique_DonneCarte);
 		btDonneCarte.setBounds(230, 13, 97, 25);
-		btDonneCarte.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Message m = new Message(TypeMessage.Clique_DonneCarte);
-
-				;
-
-				notifierObservateur(m);
-			}
-		});
 		PanelSouth.add(btDonneCarte);
 
-		JButton btRecupereTresort = new JButton("Recupere Tresrot");
+		PanelButton btRecupereTresort = new PanelButton(this,"RecupererTresor",TypeMessage.Clique_RecupereTresor);
 		btRecupereTresort.setBounds(339, 13, 130, 25);
-		btRecupereTresort.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Message m = new Message(TypeMessage.Clique_RecupereTresor);
-
-				;
-
-				notifierObservateur(m);
-			}
-		});
 		PanelSouth.add(btRecupereTresort);
 
-		JButton btFinDeTour = new JButton("Fin de tour");
-		btFinDeTour.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Message m = new Message(TypeMessage.Clique_Fin_Tour);
-
-				;
-
-				notifierObservateur(m);
-			}
-		});
+		PanelButton btFinDeTour = new PanelButton(this,"FinDeTour",TypeMessage.Clique_Fin_Tour);
 		btFinDeTour.setBounds(1056, 13, 97, 25);
 		PanelSouth.add(btFinDeTour);
-
-		JPanel panActionSpetiale = new JPanel();
-		panActionSpetiale.setBounds(501, 13, 218, 25);
-		PanelSouth.add(panActionSpetiale);
-		panActionSpetiale.setLayout(new GridLayout(0, 2, 0, 0));
-
 
 
 		//PLATEAU ---------------------------
@@ -509,7 +455,7 @@ public class IHMV2 extends Observe{
 		//console.setText(str);
 	}
 
-	public  HashMap<String, JButton> getListButton() {
+	public  HashMap<String, PanelButton> getListButton() {
 		return listButton;
 	}
 

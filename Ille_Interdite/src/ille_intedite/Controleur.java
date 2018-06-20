@@ -282,7 +282,6 @@ public class Controleur implements Observateur{
 			ihm.afficherDep(listAsseche);
 			miseAJourGrille();
 
-
 			break;
 		case Clique_DonneCarte :
 			
@@ -814,7 +813,7 @@ public class Controleur implements Observateur{
 		boolean aCarteHelicoptere = false;
 		for(int i=0; i<joueursList.size(); i++) {
 			for(int j=0; j<joueursList.get(i).getNbCarte();j++) {
-				if(joueursList.get(i).getCarte(j).getClass().getName()=="CarteHelicoptere") {
+				if(joueursList.get(i).getCarte(j) instanceof CarteHelicoptere) {
 					aCarteHelicoptere=true;
 				}
 			}
@@ -825,15 +824,16 @@ public class Controleur implements Observateur{
 		for(Tuile t : grille.getTuilesListe().values()) {
 			if(t.getNum()==22) {			//Si la tuile est l'heliport
 				joueursPresentsHeliport = t.getNbrAventurie();
-				heliportCoule = t.getStatut()==-2;
+				heliportCoule = t.getStatut()==2;
 			}
 		}
 
 		//Condition victoire
-		if(	joueursPresentsHeliport>3&&
+		if(	joueursPresentsHeliport==joueursList.size()&&
 				tresorsRecuperes.size()==4&&
 				aCarteHelicoptere) {
-			return 1;												//Partie gagnee et livraison de colis de bonbons
+			return 1;
+																	//Partie gagnee et livraison de colis de bonbons
 		}															//De bonbons ? et pas de cookies ?
 		//Et pourquoi pas les deux ??
 
@@ -893,17 +893,20 @@ public class Controleur implements Observateur{
 	}
 
 	/*public void test() {
-
-
-		getJoueurTour().addCarte(new CarteTresor("test ", NomTresor.CaliceOnde));
-		getJoueurTour().addCarte(new CarteTresor("test ", NomTresor.CaliceOnde));
-		getJoueurTour().addCarte(new CarteTresor("test ", NomTresor.CaliceOnde));
-		getJoueurTour().addCarte(new CarteTresor("test ", NomTresor.CaliceOnde));
-		getJoueurTour().addCarte(new CarteTresor("test ", NomTresor.CaliceOnde));
-
-
-
-
+		//Forcer les conditions de victoire
+		for(Tuile t : grille.getTuilesListe().values()) {
+			if(t.getNum()==22) {			//Si la tuile est l'heliport
+				for(Aventurier a : joueursList) {
+					a.deplacer(t);
+				}
+			}
+		}
+		tresorsRecuperes.add(NomTresor.CaliceOnde);
+		tresorsRecuperes.add(NomTresor.CaliceOnde);
+		tresorsRecuperes.add(NomTresor.CaliceOnde);
+		tresorsRecuperes.add(NomTresor.CaliceOnde);
+		getJoueurTour().addCarte(new CarteHelicoptere("ble"));
+		verifierFinDePartie();
 
 	}*/
 
