@@ -42,7 +42,7 @@ import javax.swing.JLabel;
 
 public class IHMV2 extends Observe{
 	//Com ref 2
-	private JFrame frame;
+	public JFrame frame;
 	private JTextArea console;
 	private JPanel Plateau ;
 	private JLabel lblJoeurN;
