@@ -92,7 +92,6 @@ public class Controleur implements Observateur{
 			break;
 
 		case Clique_Tuille :
-			System.out.println(lastAction);
 			switch(lastAction) {
 			case Clique_Deplace:
 
@@ -107,6 +106,15 @@ public class Controleur implements Observateur{
 				if(getJoueurTour() instanceof Ingenieur) {
 					Ingenieur i = (Ingenieur) getJoueurTour();
 					i.setDerniereActionAssecher(false);
+				}
+
+				if(getJoueurTour() instanceof Aviateur) {
+					Aviateur a = (Aviateur) getJoueurTour();
+					Tuile from = a.getFrom();
+					Tuile to = grille.getTuile(msg.getLocation());
+					if(!(to.getxT()-from.getxT()==0 && Math.abs(to.getyT()-from.getyT())==1 || to.getyT()-from.getyT()==0 && Math.abs(to.getxT()-from.getxT())==1)) {
+						a.tp();
+					}
 				}
 
 				break;
@@ -168,7 +176,7 @@ public class Controleur implements Observateur{
 				grille.activateAll();
 				lastAction=TypeMessage.Clique_Fin_Tour;
 				finDeTour();
-				
+
 				break;
 			case Clique_Tuille :
 				if (urg) {
@@ -296,8 +304,8 @@ public class Controleur implements Observateur{
 			}
 		}
 		urg=false;
-			deplacerUrgence();
-		
+		deplacerUrgence();
+
 		if(!urg) {
 
 			piocherClassique();
@@ -475,7 +483,7 @@ public class Controleur implements Observateur{
 	private void deplacer2(Aventurier a) {
 
 		ArrayList<Tuile> tuilesDep = a.deplacer2();
-		if (tuilesDep==null && urg) {
+		if (tuilesDep.size()==0 && urg) {
 			noyade=true;
 			verifierFinDePartie();
 		}
@@ -500,15 +508,6 @@ public class Controleur implements Observateur{
 						urgence=a;
 						urg=true;
 						deplacer2(a);
-
-						/*try {
-							ArrayList<Tuile> tuilesDep =a.deplacer2();
-							Collections.shuffle(tuilesDep);
-							deplacer(tuilesDep.get(0).getxT()+":"+tuilesDep.get(0).getyT(),a);
-							miseAJourGrille();
-						}catch(Exception e) {
-							System.out.println("Perdu");
-						}*/
 					}
 				}
 			}
