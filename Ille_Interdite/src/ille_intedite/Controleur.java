@@ -742,7 +742,7 @@ public class Controleur implements Observateur{
 		boolean heliportCoule=false;
 		for(Tuile t : grille.getTuilesListe().values()) {
 			System.out.println(t.getNum());
-			if(t.getNum()==22) {			//Si la tuile est l'héliport
+			if(t.getNum()==22) {			//Si la tuile est l'heliport
 				joueursPresentsHeliport = t.getNbrAventurie();
 				heliportCoule = t.getStatut()==-2;
 			}
@@ -755,8 +755,8 @@ public class Controleur implements Observateur{
 			return 1;												//Partie gagnee et livraison de colis de bonbons
 		}															//De bonbons ? et pas de cookies ?
 																	//Et pourquoi pas les deux ??
+		
 		//Condition(s) defaite
-
 		if(noyade) {
 			return -1;
 		}
