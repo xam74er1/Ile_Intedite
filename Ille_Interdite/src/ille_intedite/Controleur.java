@@ -288,8 +288,8 @@ public class Controleur implements Observateur{
 		//afficherListeCarteJoueur
 
 
-		getJoueurTour().finTour();
-		//System.out.println("Etat de la partie : "+verifierFinDePartie());
+		//getJoueurTour().finTour();
+		System.out.println("Etat de la partie : "+verifierFinDePartie());
 		numTour++;		
 		numTour%=joueursList.size();
 		afficherListeCarteJoueur();
@@ -742,7 +742,6 @@ public class Controleur implements Observateur{
 		int joueursPresentsHeliport=0;
 		boolean heliportCoule=false;
 		for(Tuile t : grille.getTuilesListe().values()) {
-			System.out.println(t.getNum());
 			if(t.getNum()==22) {			//Si la tuile est l'heliport
 				joueursPresentsHeliport = t.getNbrAventurie();
 				heliportCoule = t.getStatut()==-2;
