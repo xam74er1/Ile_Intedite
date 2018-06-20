@@ -33,7 +33,7 @@ public class CasePlateau extends JPanel  {
 	String path=" ";
 
 	public CasePlateau(String str,String location, Observe o,Tuile t) {
-
+//com ref
 		this.str = str;
 		this.o = o;
 		this.t = t;
