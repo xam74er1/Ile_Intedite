@@ -8,6 +8,7 @@ package ille_intedite;
 import IHM.FenetreStart;
 import IHM.IHM;
 import IHM.IHMV2;
+import IHM.PlaySound;
 //Com ref
 /**
  *
@@ -15,6 +16,7 @@ import IHM.IHMV2;
  */
 public class Main {
     public static void main(String [] args) {
+    	//PlaySound.play("C:\\Users\\xam74\\Documents\\ille_interdit\\old\\Weeee.wav");
     	FenetreStart f = new FenetreStart();
         
    }    
