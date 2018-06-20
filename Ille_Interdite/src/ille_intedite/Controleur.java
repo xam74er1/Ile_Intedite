@@ -756,8 +756,12 @@ public class Controleur implements Observateur{
 			}
 			if(!dejaPresent) {
 				tresorsRecuperes.add(t);
+				for(int i=0;i<a.getListeCarteJoueur().size(); i++) {
+					if(a.getListeCarteJoueur().get(i).getNom()==t.getType().getNom()) {
+						a.getListeCarteJoueur().remove(i);
+					}
+				}
 			}
-			//TODO RETIRER LES CARTES TRESOR
 			return true;
 		}else {
 			return false;
@@ -839,9 +843,6 @@ public class Controleur implements Observateur{
 		if(temple==2||caverne==2||palais==2||jardin==2) {
 			return -1;												//Deux cases de recuperation de tresor coulees
 		}
-
-		// A COMPLETER
-
 
 		return 0;
 	}
