@@ -75,10 +75,8 @@ public class IHMV2 extends Observe{
 	 * @param vue 
 	 */
 	public IHMV2(VueGrille vue) {
-
 		this.vue = vue;
 		initialize();
-
 	}
 
 	/**
@@ -158,7 +156,20 @@ public class IHMV2 extends Observe{
 		listCartes.put(4, panelCarte5);
 		panelCarte5.setLayout(null);
 
-		lbIconJoueur = new JLabel("Salut");
+		
+		JButton btnCarteIcon5 = new JButton("");
+		btnCarteIcon5.setForeground(new Color(139, 69, 19));
+		btnCarteIcon5.setBackground(new Color(139, 69, 19));
+		btnCarteIcon5.setBounds(0, 0, 100, 140);
+		panelCarte5.add(btnCarteIcon5);
+		ImageIcon imgCarte5 = new ImageIcon("images/cartes/Pierre.png");
+		Image im5 = imgCarte5.getImage();
+		im5 = im5.getScaledInstance(100, 140, Image.SCALE_DEFAULT);
+		ImageIcon img5 = new ImageIcon(im5);
+		btnCarteIcon5.setIcon(img5);
+		
+		JLabel lbIconJoueur = new JLabel("");
+
 		lbIconJoueur.setBounds(75, 472, 100, 100);
 		CardPlayer.add(lbIconJoueur);
 		ImageIcon imgIconJoueur = new ImageIcon("images/persos/explorateur.png");
