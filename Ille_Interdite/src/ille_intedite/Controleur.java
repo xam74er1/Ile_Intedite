@@ -857,6 +857,7 @@ i++;
 			case 2: palais=-1;
 			case 3: jardin=-1;
 			case 4: temple=-1;
+			break;
 			}
 		}
 
