@@ -45,6 +45,7 @@ public class PanelAfficheCarte extends JPanel {
 			pane.setBounds(0, 0,80, 112);
 			if(i%16==15) this.add(new JPanel());
 		}
+		this.setVisible(true);
 	}
 
 	

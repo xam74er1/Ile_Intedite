@@ -14,7 +14,7 @@ import utils.Utils.Pion;
 
 public abstract class Aventurier {
 	//Com de debug
-	ArrayList<Classique> listeCarteJoueur;
+	ArrayList<Carte> listeCarteJoueur;
 
 
 	private Tuile tuile;
@@ -30,7 +30,7 @@ public abstract class Aventurier {
 		this.nom = nom;
 		this.tuile = null;
 		this.pion = pion;
-		listeCarteJoueur = new ArrayList<Classique>();
+		listeCarteJoueur = new ArrayList<Carte>();
 	}
 
 	public Tuile getPosition() {
@@ -44,11 +44,11 @@ public abstract class Aventurier {
 	 * @param yG
 	 */
 
-	public ArrayList<Classique> getListeCarteJoueur() {
+	public ArrayList<Carte> getListeCarteJoueur() {
 		return listeCarteJoueur;
 	}
 
-	public void setListeCarteJoueur(ArrayList<Classique> listeCarteJoueur) {
+	public void setListeCarteJoueur(ArrayList<Carte> listeCarteJoueur) {
 		this.listeCarteJoueur = listeCarteJoueur;
 	}
 
@@ -132,7 +132,7 @@ public abstract class Aventurier {
 	 */
 	public Classique getCarte(int numCarte) {
 		// TODO - implement Aventurier.getCarte
-		return listeCarteJoueur.get(numCarte);
+		return (Classique) listeCarteJoueur.get(numCarte);
 	}
 
 	public Color getColor(){

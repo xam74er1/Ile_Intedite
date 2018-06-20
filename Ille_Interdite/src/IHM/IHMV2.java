@@ -77,6 +77,8 @@ public class IHMV2 extends Observe{
 		frame.getContentPane().setBackground(new Color(105, 105, 105));
 		frame.getContentPane().setLayout(null);
 		
+		panelDefausse=new PanelAfficheCarte(this, frame);
+		
 		sliderImg = new PanelCurseur(this);
 		sliderImg.setBounds(0, 60, 100, 673);
 		frame.getContentPane().add(sliderImg);
@@ -562,8 +564,10 @@ public void rool(Aventurier a  , ArrayList<Aventurier> listAvent) {
 	}
 	
 	public void setIndication(String str) {
-		
-	
 		msgHelp.setText(str);
+	}
+	
+	public void afficherDefausse(Aventurier a) {
+		panelDefausse.setListCarte(a.getListeCarteJoueur());
 	}
 }

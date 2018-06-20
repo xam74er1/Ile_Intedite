@@ -319,7 +319,7 @@ public class Controleur implements Observateur{
 			if(lastAction == TypeMessage.Clique_Carte_Tresor && numCarte != -1&&getJoueurTour().getListeCarteJoueur().size()>numCarte&&msg.getNum()!=-1) {
 
 				givePlayer = joueursList.get(msg.getNum()); 
-				Classique c =  getJoueurTour().getListeCarteJoueur().get(numCarte);
+				Classique c =  (Classique) getJoueurTour().getListeCarteJoueur().get(numCarte);
 
 				if(donneCarteJoeur(msg.getNum())) {
 					getJoueurTour().getListeCarteJoueur().remove(c);
@@ -526,6 +526,8 @@ public class Controleur implements Observateur{
 		afficherCartes(getJoueurTour());
 		//ihm.afficherNivCurseur(2);
 		isInit = true;
+		
+		ihm.afficherDefausse(getJoueurTour());
 
 		//test();
 	}
@@ -616,7 +618,7 @@ public class Controleur implements Observateur{
 
 
 
-			Classique c =  getJoueurTour().getListeCarteJoueur().get(num);
+			Classique c =  (Classique) getJoueurTour().getListeCarteJoueur().get(num);
 
 			getJoueurTour().getListeCarteJoueur().remove(c);
 
@@ -665,7 +667,7 @@ public class Controleur implements Observateur{
 	public void afficherListeCarteJoueur() {
 		ihm.setIndication("Main du joueur : " + getJoueurTour().getNom());
 		int i = 1;
-		for (Classique c : getJoueurTour().getListeCarteJoueur()){
+		for (Carte c : getJoueurTour().getListeCarteJoueur()){
 			ihm.setIndication(i +" : " + c.getNom());
 			i = i+1;
 		}
@@ -686,7 +688,7 @@ public class Controleur implements Observateur{
 		if (getJoueurTour().getListeCarteJoueur().size() > 5) {
 
 			int numCarte = Integer.parseInt(messageConsole) -1;
-			this.carteTresorsDefausse.add(getJoueurTour().getListeCarteJoueur().get(numCarte));
+			this.carteTresorsDefausse.add((Classique) getJoueurTour().getListeCarteJoueur().get(numCarte));
 			getJoueurTour().getListeCarteJoueur().remove(numCarte);
 
 		}
@@ -746,10 +748,10 @@ public class Controleur implements Observateur{
 	}	
 
 	public void afficherCartes(Aventurier a) {
-		ArrayList<Classique> listCartes = a.getListeCarteJoueur();
+		ArrayList<Carte> listCartes = a.getListeCarteJoueur();
 		for(int i=0;i<5;i++) {
 			try {
-				ihm.setCartePanel(i, listCartes.get(i));
+				ihm.setCartePanel(i, (Classique) listCartes.get(i));
 			}catch(Exception e) {
 				ihm.setCartePanel(i, null);
 			}
