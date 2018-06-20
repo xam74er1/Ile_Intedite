@@ -42,7 +42,9 @@ public class IHMV2 extends Observe{
 	private JPanel Plateau ;
 	private JLabel lblJoeurN;
 
+
 	private JLabel textCusor;
+
 
 
 	HashMap<String,JButton> listButton = new HashMap();
@@ -99,6 +101,22 @@ public class IHMV2 extends Observe{
 		SliderPanel.add(slider);
 		slider.setOrientation(SwingConstants.VERTICAL);
 //-------Import ---------------
+
+//<<<<<<< HEAD
+//		JButton btnHelp = new JButton("");
+//		btnHelp.setBounds(0, 0, 60, 60);
+//		btnHelp.setForeground(new Color(0, 0, 205));
+//		btnHelp.setBackground(new Color(0, 0, 205));
+//		ImageIcon imgHelp = new ImageIcon("images/icones/iconHelp.png");
+//		Image imH = imgHelp.getImage();
+//		imH = imH.getScaledInstance(60, 60, Image.SCALE_DEFAULT);
+//		ImageIcon imgH = new ImageIcon(imH);
+//		btnHelp.setIcon(imgH);
+//		PanelHelp.add(btnHelp);
+//		
+//
+//=======
+		
 		JPanel PanelHelp = new JPanel();
 		PanelHelp.setBounds(20, 13, 60, 60);
 		SliderPanel.add(PanelHelp);
@@ -208,11 +226,10 @@ public class IHMV2 extends Observe{
 		btnCarteIcon5.setIcon(img5);
 
 		
-		 lbIconJoueur = new JLabel("Salut");
 
+		 lbIconJoueur = new JLabel("Salut");
 		lbIconJoueur.setBounds(75, 472, 100, 100);
 		CardPlayer.add(lbIconJoueur);
-
 		ImageIcon imgIconJoueur = new ImageIcon("images/persos/explorateur.png");
 		Image imPC = imgIconJoueur.getImage();
 		imPC = imPC.getScaledInstance(100, 100, Image.SCALE_DEFAULT);
@@ -352,6 +369,7 @@ public class IHMV2 extends Observe{
 		btnImgPlayerIn2T.setBackground(new Color(139, 69, 19));
 		btnImgPlayerIn2T.setBounds(0, 0, 150, 150);
 		PanelPlayerIn2T.add(btnImgPlayerIn2T);
+
 
 		imgPlayerIn2T = new ImageIcon("images/persos/ingenieur.png");
 		imP2T = imgPlayerIn2T.getImage();
