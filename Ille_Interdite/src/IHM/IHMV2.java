@@ -410,7 +410,7 @@ private JLabel textCusor;
 	}
 
 	public void print(String str){
-		console.setText(str);
+		//console.setText(str);
 	}
 
 	public  HashMap<String, JButton> getListButton() {
@@ -437,7 +437,7 @@ private JLabel textCusor;
 	}
 
 	public void setLevelCursort(int i) {
-		 textCusor.setText("Niveau de l'eau "+i);
+		 //textCusor.setText("Niveau de l'eau "+i);
 	}
 	
 	public void activateSpecialButton(boolean he, boolean sa) {
