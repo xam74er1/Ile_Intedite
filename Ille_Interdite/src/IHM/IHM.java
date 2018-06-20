@@ -262,7 +262,7 @@ private JLabel textCusor;
 		JButton btRecupereTresort = new JButton("Recupere tresort");
 		btRecupereTresort.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Message m = new Message(TypeMessage.Clique_RecupereTresort);
+				Message m = new Message(TypeMessage.Clique_RecupereTresor);
 
 				;
 
@@ -341,7 +341,7 @@ private JLabel textCusor;
 				}
 
 				if( g.getTuile(x, y).getNum()==-1) {
-					c.unActivated();
+					c.desactivate();
 				}
 
 				listPan.put(x+":"+y, c);
@@ -361,7 +361,7 @@ private JLabel textCusor;
 	private ActionListener actionBoutonPlatau(){
 		return new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				Message m = new Message(TypeMessage.Clique_Tuille);
+				Message m = new Message(TypeMessage.Clique_Tuile);
 
 				JButton bt = (JButton) e.getSource();
 				m.setLocation(bt.getName());

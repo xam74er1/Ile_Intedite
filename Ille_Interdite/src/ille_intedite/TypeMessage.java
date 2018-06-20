@@ -11,7 +11,7 @@ package ille_intedite;
  */
 public enum TypeMessage {
     
-    Clique_Tuille,
+    Clique_Tuile,
     Clique_Deplace,
     Clique_DonneCarte,
     Clique_Asseche,
@@ -19,9 +19,10 @@ public enum TypeMessage {
     Clique_Fin_Tour, 
     Clique_Deplace_Helico, 
     Clique_Asseche_SacDeSable,
-    Clique_RecupereTresort,
+    Clique_RecupereTresor,
     Defausse_Joueur,
     Defausse_NumCarte,
-    Clique_Deplace_Urgence;
+    Clique_Deplace_Urgence,
+    Clique_Carte_Tresor, Clique_RecupereTresort;
     
 }

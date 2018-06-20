@@ -194,7 +194,7 @@ public abstract class Aventurier {
 	 *
 	 * @param numCarte
 	 */
-	public Carte getCarte(int numCarte) {
+	public Classique getCarte(int numCarte) {
 		// TODO - implement Aventurier.getCarte
 		return listeCarteJoueur.get(numCarte);
 	}

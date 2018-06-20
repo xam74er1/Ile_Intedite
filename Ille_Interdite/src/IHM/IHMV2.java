@@ -23,6 +23,11 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import Carte.CarteHelicoptere;
+import Carte.CarteSacSable;
+import Carte.CarteTresor;
+import Carte.Classique;
+import Carte.NomTresor;
 import ille_intedite.Grille;
 import ille_intedite.Message;
 import ille_intedite.Observe;
@@ -41,14 +46,13 @@ public class IHMV2 extends Observe{
 	private JTextArea console;
 	private JPanel Plateau ;
 	private JLabel lblJoeurN;
-
-
 	private JLabel textCusor;
 
 
 
 	HashMap<String,JButton> listButton = new HashMap();
 	HashMap<String,JPanel> listPan = new HashMap();
+	HashMap<Integer,PanelCarte> listCartes = new HashMap<Integer,PanelCarte>();
 	private JTextField textField;
 
 	VueGrille vue;
@@ -71,10 +75,8 @@ public class IHMV2 extends Observe{
 	 * @param vue 
 	 */
 	public IHMV2(VueGrille vue) {
-
 		this.vue = vue;
 		initialize();
-
 	}
 
 	/**
@@ -100,22 +102,6 @@ public class IHMV2 extends Observe{
 		slider.setBounds(12, 86, 76, 574);
 		SliderPanel.add(slider);
 		slider.setOrientation(SwingConstants.VERTICAL);
-//-------Import ---------------
-
-//<<<<<<< HEAD
-//		JButton btnHelp = new JButton("");
-//		btnHelp.setBounds(0, 0, 60, 60);
-//		btnHelp.setForeground(new Color(0, 0, 205));
-//		btnHelp.setBackground(new Color(0, 0, 205));
-//		ImageIcon imgHelp = new ImageIcon("images/icones/iconHelp.png");
-//		Image imH = imgHelp.getImage();
-//		imH = imH.getScaledInstance(60, 60, Image.SCALE_DEFAULT);
-//		ImageIcon imgH = new ImageIcon(imH);
-//		btnHelp.setIcon(imgH);
-//		PanelHelp.add(btnHelp);
-//		
-//
-//=======
 		
 		JPanel PanelHelp = new JPanel();
 		PanelHelp.setBounds(20, 13, 60, 60);
@@ -139,95 +125,39 @@ public class IHMV2 extends Observe{
 		CardPlayer.setBounds(112, 13, 250, 597);
 		frame.getContentPane().add(CardPlayer);
 		CardPlayer.setLayout(null);
-
-		JPanel panelCarte1 = new JPanel();
-		panelCarte1.setBackground(new Color(139, 69, 19));
+		
+		PanelCarte panelCarte1 = new PanelCarte(0,this);
 		panelCarte1.setBounds(12, 13, 100, 140);
 		CardPlayer.add(panelCarte1);
+		listCartes.put(0, panelCarte1);
 		panelCarte1.setLayout(null);
 
-		JButton btnCarteIcon1 = new JButton("");
-		btnCarteIcon1.setForeground(new Color(139, 69, 19));
-		btnCarteIcon1.setBackground(new Color(139, 69, 19));
-		btnCarteIcon1.setBounds(0, 0, 100, 140);
-		ImageIcon imgCarte1 = new ImageIcon("images/cartes/Calice.png");
-		Image im = imgCarte1.getImage();
-		im = im.getScaledInstance(100, 140, Image.SCALE_DEFAULT);
-		ImageIcon img1 = new ImageIcon(im);
-		btnCarteIcon1.setIcon(img1);
-		panelCarte1.add(btnCarteIcon1);
-
-		JPanel panelCarte2 = new JPanel();
-		panelCarte2.setBackground(new Color(139, 69, 19));
+		PanelCarte panelCarte2 = new PanelCarte(1,this);
 		panelCarte2.setBounds(138, 13, 100, 140);
 		CardPlayer.add(panelCarte2);
+		listCartes.put(1, panelCarte2);
 		panelCarte2.setLayout(null);
 
-		JButton btnCarteIcon2 = new JButton("");
-		btnCarteIcon2.setForeground(new Color(139, 69, 19));
-		btnCarteIcon2.setBackground(new Color(139, 69, 19));
-		btnCarteIcon2.setBounds(0, 0, 100, 140);
-		panelCarte2.add(btnCarteIcon2);
-		ImageIcon imgCarte2 = new ImageIcon("images/cartes/SacsDeSable.png");
-		Image im2 = imgCarte2.getImage();
-		im2 = im2.getScaledInstance(100, 140, Image.SCALE_DEFAULT);
-		ImageIcon img2 = new ImageIcon(im2);
-		btnCarteIcon2.setIcon(img2);
-
-		JPanel panelCarte3 = new JPanel();
-		panelCarte3.setBackground(new Color(139, 69, 19));
+		PanelCarte panelCarte3 = new PanelCarte(2,this);
 		panelCarte3.setBounds(12, 166, 100, 140);
 		CardPlayer.add(panelCarte3);
+		listCartes.put(2, panelCarte3);
 		panelCarte3.setLayout(null);
 
-		JButton btnCarteIcon3 = new JButton("");
-		btnCarteIcon3.setForeground(new Color(139, 69, 19));
-		btnCarteIcon3.setBackground(new Color(139, 69, 19));
-		btnCarteIcon3.setBounds(0, 0, 100, 140);
-		panelCarte3.add(btnCarteIcon3);
-		ImageIcon imgCarte3 = new ImageIcon("images/cartes/Calice.png");
-		Image im3 = imgCarte3.getImage();
-		im3 = im3.getScaledInstance(100, 140, Image.SCALE_DEFAULT);
-		ImageIcon img3 = new ImageIcon(im3);
-		btnCarteIcon3.setIcon(img3);
-
-		JPanel panelCarte4 = new JPanel();
-		panelCarte4.setBackground(new Color(139, 69, 19));
+		PanelCarte panelCarte4 = new PanelCarte(3,this);
 		panelCarte4.setBounds(138, 166, 100, 140);
 		CardPlayer.add(panelCarte4);
+		listCartes.put(3, panelCarte4);
 		panelCarte4.setLayout(null);
 
-		JButton btnCarteIcon4 = new JButton("");
-		btnCarteIcon4.setForeground(new Color(139, 69, 19));
-		btnCarteIcon4.setBackground(new Color(139, 69, 19));
-		btnCarteIcon4.setBounds(0, 0, 100, 140);
-		panelCarte4.add(btnCarteIcon4);
-		ImageIcon imgCarte4 = new ImageIcon("images/cartes/Cristal.png");
-		Image im4 = imgCarte4.getImage();
-		im4 = im4.getScaledInstance(100, 140, Image.SCALE_DEFAULT);
-		ImageIcon img4 = new ImageIcon(im4);
-		btnCarteIcon4.setIcon(img4);
-
-		JPanel panelCarte5 = new JPanel();
-		panelCarte5.setBackground(new Color(139, 69, 19));
+		PanelCarte panelCarte5 = new PanelCarte(4,this);
 		panelCarte5.setBounds(75, 319, 100, 140);
 		CardPlayer.add(panelCarte5);
+		listCartes.put(4, panelCarte5);
 		panelCarte5.setLayout(null);
-
-		JButton btnCarteIcon5 = new JButton("");
-		btnCarteIcon5.setForeground(new Color(139, 69, 19));
-		btnCarteIcon5.setBackground(new Color(139, 69, 19));
-		btnCarteIcon5.setBounds(0, 0, 100, 140);
-		panelCarte5.add(btnCarteIcon5);
-		ImageIcon imgCarte5 = new ImageIcon("images/cartes/Pierre.png");
-		Image im5 = imgCarte5.getImage();
-		im5 = im5.getScaledInstance(100, 140, Image.SCALE_DEFAULT);
-		ImageIcon img5 = new ImageIcon(im5);
-		btnCarteIcon5.setIcon(img5);
-
 		
+		lbIconJoueur = new JLabel("");
 
-		 lbIconJoueur = new JLabel("Salut");
 		lbIconJoueur.setBounds(75, 472, 100, 100);
 		CardPlayer.add(lbIconJoueur);
 		ImageIcon imgIconJoueur = new ImageIcon("images/persos/explorateur.png");
@@ -235,9 +165,6 @@ public class IHMV2 extends Observe{
 		imPC = imPC.getScaledInstance(100, 100, Image.SCALE_DEFAULT);
 		ImageIcon imgPC = new ImageIcon(imPC);
 		lbIconJoueur.setIcon(imgPC);
-
-		
-		
 
 		JPanel PanelSouth = new JPanel();
 		PanelSouth.setBackground(new Color(139, 69, 19));
@@ -291,7 +218,7 @@ public class IHMV2 extends Observe{
 		btRecupereTresort.setBounds(339, 13, 130, 25);
 		btRecupereTresort.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Message m = new Message(TypeMessage.Clique_RecupereTresort);
+				Message m = new Message(TypeMessage.Clique_RecupereTresor);
 
 				;
 
@@ -355,14 +282,11 @@ public class IHMV2 extends Observe{
 		frame.getContentPane().add(PanelEast);
 		PanelEast.setLayout(null);
 
-		//--------------------Joeur -------
-
 		PanelPlayerIn2T = new JPanel();
 		PanelPlayerIn2T.setBackground(new Color(139, 69, 19));
 		PanelPlayerIn2T.setBounds(59, 264, 150, 150);
 		PanelEast.add(PanelPlayerIn2T);
 		PanelPlayerIn2T.setLayout(null);
-
 
 		btnImgPlayerIn2T = new JButton("");
 		btnImgPlayerIn2T.setForeground(new Color(139, 69, 19));
@@ -373,7 +297,7 @@ public class IHMV2 extends Observe{
 
 		imgPlayerIn2T = new ImageIcon("images/persos/ingenieur.png");
 		imP2T = imgPlayerIn2T.getImage();
-		imP2T = imP2T.getScaledInstance(120, 150, Image.SCALE_DEFAULT);
+		imP2T = imP2T.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
 		imgP2T = new ImageIcon(imP2T);
 
 		btnImgPlayerIn2T.setIcon(imgP2T);
@@ -387,11 +311,12 @@ public class IHMV2 extends Observe{
 		PanelPlayerIn3T.setLayout(null);
 
 		btnImgPlayerIn3T = new JButton("");
+
 		btnImgPlayerIn3T.setBackground(new Color(139, 69, 19));
 		btnImgPlayerIn3T.setForeground(new Color(139, 69, 19));
 		btnImgPlayerIn3T.setBounds(0, 0, 150, 150);
 		PanelPlayerIn3T.add(btnImgPlayerIn3T);
-		imgPlayerIn3T = new ImageIcon("images/persos/pilote.png");
+		imgPlayerIn3T = new ImageIcon("images/persos/aviateur.png");
 		imP3T = imgPlayerIn3T.getImage();
 		imP3T = imP3T.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
 		imgP3T = new ImageIcon(imP3T);
@@ -447,7 +372,6 @@ public class IHMV2 extends Observe{
 
 
 		
-		
 		JPanel PanelTresor = new JPanel();
 		PanelTresor.setBackground(new Color(165, 42, 42));
 		PanelTresor.setBounds(0, 0, 279, 84);
@@ -494,10 +418,6 @@ public class IHMV2 extends Observe{
 		panel.setBackground(new Color(105, 105, 105));
 		panel.setBounds(0, 84, 279, 10);
 		PanelEast.add(panel);
-		
-		
-		
-
 		frame.setBounds(100, 100, 1280, 720);
 
 		//----------------
@@ -536,7 +456,7 @@ public class IHMV2 extends Observe{
 				}
 
 				if( g.getTuile(x, y).getNum()==-1) {
-					c.unActivated();
+					c.desactivate();
 				}
 
 				listPan.put(x+":"+y, c);
@@ -624,7 +544,15 @@ public class IHMV2 extends Observe{
 		btnSacSable.setEnabled(sa);
 	}
 
-	public void rool(Aventurier a  , ArrayList<Aventurier> listAvent) {
+
+	public void setCartePanel(int num, Classique c) {
+		PanelCarte p = listCartes.get(num);
+		p.setCarte(c);
+		p.repaint();
+		p.revalidate();
+	}
+	
+public void rool(Aventurier a  , ArrayList<Aventurier> listAvent) {
 		int i = 1;
 		int k = listAvent.indexOf(a);
 		
@@ -654,7 +582,7 @@ public class IHMV2 extends Observe{
 
 		imgPlayerIn1T = new ImageIcon("images/persos/"+path+".png");
 		imP1T = imgPlayerIn1T.getImage();
-		imP1T = imP1T.getScaledInstance(120, 120, Image.SCALE_DEFAULT);
+		imP1T = imP1T.getScaledInstance(150,150, Image.SCALE_DEFAULT);
 		imgP1T = new ImageIcon(imP1T);
 		btnImgPlayerIn1T.setIcon(imgP1T);
 		btnImgPlayerIn1T.setName(a.getNum()+"");
@@ -670,7 +598,7 @@ public class IHMV2 extends Observe{
 			
 			imgPlayerIn2T = new ImageIcon("images/persos/"+path+".png");
 			imP2T = imgPlayerIn2T.getImage();
-			imP2T = imP2T.getScaledInstance(120, 120, Image.SCALE_DEFAULT);
+			imP2T = imP2T.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
 			imgP2T = new ImageIcon(imP2T);
 			btnImgPlayerIn2T.setIcon(imgP2T);
 			btnImgPlayerIn1T.setName(a.getNum()+"");
@@ -688,7 +616,7 @@ public class IHMV2 extends Observe{
 
 			imgPlayerIn3T = new ImageIcon("images/persos/"+path+".png");
 			imP3T = imgPlayerIn3T.getImage();
-			imP3T = imP3T.getScaledInstance(120, 120, Image.SCALE_DEFAULT);
+			imP3T = imP3T.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
 			imgP3T = new ImageIcon(imP3T);
 			btnImgPlayerIn3T.setIcon(imgP3T);
 			btnImgPlayerIn1T.setName(a.getNum()+"");
