@@ -51,8 +51,6 @@ public class IHMV2 extends Observe{
 	JPanel sliderPanel;
 	PanelCurseur sliderImg;
 
-
-
 	HashMap<String,JButton> listButton = new HashMap();
 	HashMap<String,JPanel> listPan = new HashMap();
 	HashMap<Integer,PanelCarte> listCartes = new HashMap<Integer,PanelCarte>();

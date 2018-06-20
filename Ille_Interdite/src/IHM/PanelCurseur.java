@@ -18,49 +18,39 @@ public class PanelCurseur extends JPanel {
 	
 	private Observe o;
 	private HashMap<Integer,JPanel> listCurseur = new HashMap<Integer,JPanel>();
-	private int niv = 0;
-	
-	public PanelCurseur(Observe o) {
+	private int niv = 1;
 
-		this.o = o;
-		this.setLayout(new GridLayout(11,1));
-		for (int i=0;i<11;i++) {
-			listCurseur.put(i,new JPanel());
-		}
-		
-
+	public PanelCurseur (Observe o) {
+		super();
+		this.o=o;
 	}
-
+	
 	public void paintComponent(Graphics g){
 		
-		for (int i=0;i<11;i++) {
-			JPanel p = listCurseur.get(i);
-			if (i<niv) {
-				p.setBackground(new Color(255,255,255));
-			}else {
-				p.setBackground(new Color(0,0,128));
-			}
-		}
-
 		BufferedImage image;
-
-		g.setColor(Color.black);
-		g.drawRect(0, 0,  this.getWidth(),this.getHeight());
+		
+		g.setColor(Color.white);
+		g.fillRect(0, 0, this.getWidth(), this.getHeight());
+		
+		g.setColor(Color.cyan);
+		if(niv<10) {
+			g.fillRect(0, 620-(niv*58), 100,620);
+		}else {
+			g.fillRect(0, 0, 100, 640);
+		}
 		
 		try {
-			image=ImageIO.read(new File("images\\curseur.png"));
-			g.drawImage(image, 0, 0, this.getWidth(), this.getHeight(),null);
+			image = ImageIO.read(new File("images\\curseur.png"));
+			g.drawImage(image, 0, 0,this.getWidth(),this.getHeight(), null);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			System.out.println("marche pas");
 			e.printStackTrace();
 		}
-
+		
 	}
 	
 	public void setNiv(int niv) {
 		this.niv = niv;
-		if (niv==9) niv=10;
 	}
 	
 }
