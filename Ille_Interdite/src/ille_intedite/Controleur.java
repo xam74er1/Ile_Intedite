@@ -289,6 +289,7 @@ public class Controleur implements Observateur{
 
 
 		getJoueurTour().finTour();
+		//System.out.println("Etat de la partie : "+verifierFinDePartie());
 		numTour++;		
 		numTour%=joueursList.size();
 		afficherListeCarteJoueur();
@@ -797,9 +798,9 @@ public class Controleur implements Observateur{
 					jardin++;
 				}
 			}
-			if(temple==2||caverne==2||palais==2||jardin==2) {
-				return -1;												//Deux cases de recuperation de tresor coulees
-			}
+		if(temple==2||caverne==2||palais==2||jardin==2) {
+			return -1;												//Deux cases de recuperation de tresor coulees
+		}
 
 			// A COMPLETER
 
