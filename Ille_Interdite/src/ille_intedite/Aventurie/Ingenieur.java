@@ -15,16 +15,6 @@ public class Ingenieur extends Aventurier {
     }
     
     @Override
-    public void donneCarteJoueur(Aventurier joueur) {
-		// TODO - implement Aventurier.donneCarteJoeur
-    	if(getDerniereActionAssecher()) {
-			super.actionJouer();
-			setDerniereActionAssecher(false);
-		}
-		throw new UnsupportedOperationException();
-	}
-    
-    @Override
     public NomTresor recupereTresor() {
 		// TODO - implement Aventurier.RecupereTresort
     	if(getDerniereActionAssecher()) {
