@@ -433,7 +433,7 @@ public class Controleur implements Observateur{
 		Aventurier a;
 		//Marche
 
-		a = new Ingenieur(0,"Ingenieur",Pion.ROUGE);
+		 a= new Ingenieur(0,"Ingenieur",Pion.ROUGE);
 
 		joueursList.add(a);
 
