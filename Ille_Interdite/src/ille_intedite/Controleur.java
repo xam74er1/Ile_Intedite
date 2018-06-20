@@ -443,7 +443,9 @@ public class Controleur implements Observateur{
 		//creer les aventuriers
 		Aventurier a;
 		//Marche
+
 		int i = 0;
+
 		a = new Ingenieur(i,"Ingenieur",Pion.ROUGE);
 		i++;
 		joueursList.add(a);
