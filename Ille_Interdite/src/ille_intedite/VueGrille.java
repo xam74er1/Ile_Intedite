@@ -16,7 +16,7 @@ public class VueGrille {
 	public void afficherGrille() {
 
 
-		HashMap<String, Tuile> hmTuille =  ctrl.grille.getTuilesListe();
+		HashMap<String, Tuile> hmTuille =  Grille.tuilesListe;
 
 		Iterator<Entry<String, Tuile>> it = hmTuille.entrySet().iterator();
 
