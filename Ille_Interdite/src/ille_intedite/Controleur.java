@@ -341,7 +341,7 @@ public class Controleur implements Observateur{
 			ihm.miseAJourPlayer(numTour," ( "+getJoueurTour().getNom()+" )", getJoueurTour().getColor());
 			activateSpecialButton(getJoueurTour());
 			//	Utils.debugln("Fin de tour");
-			ihm.rool(getJoueurTour().getNum(), joueursList);
+			ihm.rool(getJoueurTour(), joueursList);
 			grille.activateAll();
 			miseAJourGrille();
 		}
@@ -423,27 +423,27 @@ public class Controleur implements Observateur{
 		//creer les aventuriers
 		Aventurier a;
 		//Marche
-
-		a = new Ingenieur(0,"Ingenieur",Pion.ROUGE);
-
+int i = 0;
+		a = new Ingenieur(i,"Ingenieur",Pion.ROUGE);
+i++;
 		joueursList.add(a);
 
-		a = new Plongeur(4,"Plongeur",Pion.VIOLET);
+		a = new Plongeur(i,"Plongeur",Pion.VIOLET);
 		joueursList.add(a);
-
-		a = new Navigateur(5,"Navigateur",Pion.JAUNE);
+		i++;
+		a = new Navigateur(i,"Navigateur",Pion.JAUNE);
 		joueursList.add(a);
-
-		a = new Messager(3,"Messager",Pion.ORANGE);
+		i++;
+		a = new Messager(i,"Messager",Pion.ORANGE);
 		joueursList.add(a);
-
-		a = new Aviateur(2,"Aviateur",Pion.BLEU);
-
-		joueursList.add(a);
-
-		a = new Explorateur(1,"Explorateur",Pion.VERT);
-
-		joueursList.add(a);
+		i++;
+//		a = new Aviateur(2,"Aviateur",Pion.BLEU);
+//
+//		joueursList.add(a);
+//
+//		a = new Explorateur(1,"Explorateur",Pion.VERT);
+//
+//		joueursList.add(a);
 		
 		Collections.shuffle(joueursList);
 
