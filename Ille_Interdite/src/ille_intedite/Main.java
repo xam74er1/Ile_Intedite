@@ -6,6 +6,7 @@
 package ille_intedite;
 
 import IHM.IHM;
+import IHM.IHMV2;
 
 /**
  *
@@ -14,7 +15,7 @@ import IHM.IHM;
 public class Main {
     public static void main(String [] args) {
     	VueGrille vue = new VueGrille();
-        IHM ihm = new IHM(vue);
+        IHMV2 ihm = new IHMV2(vue);
         Controleur ctrl = new Controleur(ihm,vue);
 //        ctrl.creeDeckInondation(); Debug en cours
         

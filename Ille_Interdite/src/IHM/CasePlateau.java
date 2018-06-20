@@ -61,7 +61,7 @@ public class CasePlateau extends JPanel  {
 		int s = x;
 		int xa = x;
 		int ya = y;
-		
+
 		BufferedImage image;
 		
 		if(activated) {
@@ -99,7 +99,7 @@ public class CasePlateau extends JPanel  {
 
 					image = ImageIO.read(new File(path));
 					//super.paintComponent(g);
-					g.drawImage(image, min, 0,min,min, null);
+					g.drawImage(image, 0, 0,this.getWidth(),this.getHeight(), null);
 				}else {
 					path = "images\\watterTexture.jpg";
 					System.out.println("coule");
@@ -141,7 +141,7 @@ public class CasePlateau extends JPanel  {
 			try {
 				image = ImageIO.read(new File(path));
 				//super.paintComponent(g);
-				g.drawImage(image, xa, ya, 10*s, 10*s, null);
+				g.drawImage(image, xa, ya, 4*s, 4*s, null);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				//System.out.println(new File().exists());

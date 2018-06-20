@@ -1,8 +1,14 @@
 package IHM;
 
 import java.awt.EventQueue;
+import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -13,35 +19,52 @@ import javax.swing.Box;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JSlider;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
+import ille_intedite.Grille;
+import ille_intedite.Message;
+import ille_intedite.Observe;
+import ille_intedite.Tuile;
+import ille_intedite.TypeMessage;
+import ille_intedite.VueGrille;
+
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 
-public class IHMV2 {
+public class IHMV2 extends Observe{
 
 	private JFrame frame;
+	private JTextArea console;
+	private JPanel Plateau ;
+	private JLabel lblJoeurN;
+private JLabel textCusor;
+
+	HashMap<String,JButton> listButton = new HashMap();
+	HashMap<String,JPanel> listPan = new HashMap();
+	private JTextField textField;
+	
+	VueGrille vue;
+	
+	private JButton btnSacSable;
+	private JButton btnHelico;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					IHMV2 window = new IHMV2();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
 
 	/**
 	 * Create the application.
+	 * @param vue 
 	 */
-	public IHMV2() {
+	public IHMV2(VueGrille vue) {
+
+		this.vue = vue;
 		initialize();
+		
 	}
 
 	/**
@@ -168,30 +191,100 @@ public class IHMV2 {
 		frame.getContentPane().add(PanelSouth);
 		PanelSouth.setLayout(null);
 		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.setBounds(12, 13, 97, 25);
-		PanelSouth.add(btnNewButton);
+		JButton Deplace = new JButton("Deplacer");
+		Deplace.setBounds(12, 13, 97, 25);
+		PanelSouth.add(Deplace);
+		Deplace.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Message m = new Message(TypeMessage.Clique_Deplace);
+
+				;
+
+				notifierObservateur(m);
+			}
+		});
 		
-		JButton btnNewButton_1 = new JButton("New button");
-		btnNewButton_1.setBounds(121, 13, 97, 25);
-		PanelSouth.add(btnNewButton_1);
+		JButton btAssecher = new JButton("Assecher");
+		btAssecher.setBounds(121, 13, 97, 25);
 		
-		JButton btnNewButton_2 = new JButton("New button");
-		btnNewButton_2.setBounds(230, 13, 97, 25);
-		PanelSouth.add(btnNewButton_2);
+		btAssecher.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Message m = new Message(TypeMessage.Clique_Asseche);
+
+				;
+
+				notifierObservateur(m);
+			}
+		});
+		PanelSouth.add(btAssecher);
 		
-		JButton btnNewButton_3 = new JButton("New button");
-		btnNewButton_3.setBounds(339, 13, 97, 25);
-		PanelSouth.add(btnNewButton_3);
+		JButton btDonneCarte = new JButton("Donne carte");
+		btDonneCarte.setBounds(230, 13, 97, 25);
+		btDonneCarte.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Message m = new Message(TypeMessage.Clique_DonneCarte);
+
+				;
+
+				notifierObservateur(m);
+			}
+		});
+		PanelSouth.add(btDonneCarte);
 		
-		JButton btnNewButton_4 = new JButton("New button");
-		btnNewButton_4.setBounds(1056, 13, 97, 25);
-		PanelSouth.add(btnNewButton_4);
+		JButton btRecupereTresort = new JButton("Recupere Tresrot");
+		btRecupereTresort.setBounds(339, 13, 130, 25);
+		btRecupereTresort.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Message m = new Message(TypeMessage.Clique_RecupereTresort);
+
+				;
+
+				notifierObservateur(m);
+			}
+		});
+		PanelSouth.add(btRecupereTresort);
 		
-		JPanel PanelGrid = new JPanel();
-		PanelGrid.setBackground(new Color(160, 82, 45));
-		PanelGrid.setBounds(374, 13, 597, 597);
-		frame.getContentPane().add(PanelGrid);
+		JButton btFinDeTour = new JButton("Fin de tour");
+		btFinDeTour.setBounds(1056, 13, 97, 25);
+		PanelSouth.add(btFinDeTour);
+		
+		JPanel panActionSpetiale = new JPanel();
+		panActionSpetiale.setBounds(501, 13, 218, 25);
+		PanelSouth.add(panActionSpetiale);
+		panActionSpetiale.setLayout(new GridLayout(0, 2, 0, 0));
+		
+		 btnSacSable = new JButton("Sac de Sable");
+		panActionSpetiale.add(btnSacSable);
+		btnSacSable.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Message m = new Message(TypeMessage.Clique_Asseche_SacDeSable);
+				notifierObservateur(m);
+			}
+		});
+		
+		 btnHelico = new JButton("Helicoptere");
+		panActionSpetiale.add(btnHelico);
+		btnHelico.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Message m = new Message(TypeMessage.Clique_Deplace_Helico);
+				
+				notifierObservateur(m);
+			}
+		});
+		
+		
+		
+		//PLATEAU ---------------------------
+		 Plateau = new JPanel();
+		Plateau.setBackground(new Color(160, 82, 45));
+		Plateau.setBounds(374, 13, 597, 597);
+		Plateau .setLayout(new GridLayout(6,6,0,0));
+		frame.getContentPane().add(Plateau);
+		//--------------------------------
 		
 		JPanel PanelEast = new JPanel();
 		PanelEast.setBackground(new Color(139, 69, 19));
@@ -218,6 +311,128 @@ public class IHMV2 {
 		JButton btAide = new JButton("Aide");
 		PanelHelp.add(btAide);
 		frame.setBounds(100, 100, 1280, 720);
+		
+		//----------------
+		//PROVISOIRE 
+		//--------------
+	
+		lblJoeurN = new JLabel();
+		
+		 System.out.println("Fin IHM generation");
+		 frame.setVisible(true);
+		 frame.setResizable(false);
+		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+	
+	public void fillPlataux2(Grille g){
+
+		CasePlateau c;
+		HashMap<String, Tuile> tuilesListe = g.getTuilesListe();
+
+		//int i = 0;
+
+		Iterator<Tuile> it = g.getTuilesListe().values().iterator();
+		int k = 0;
+		String str;
+		for(int y =0;y<6;y++){
+			for(int x =0;x<6 ;x++){
+
+
+				str = g.getTuile(x, y).getNom();
+				c= new CasePlateau(str,x+":"+y,this, g.getTuile(x, y));
+				if(k%2==0) {
+					c.setBackground(Color.red);
+				}else {
+					c.setBackground(Color.BLUE);
+				}
+
+				if( g.getTuile(x, y).getNum()==-1) {
+					c.unActivated();
+				}
+
+				listPan.put(x+":"+y, c);
+
+				Plateau.add(c); 
+				k++;
+			}
+		}
+
+		Plateau.revalidate();
+//Fin fill plateau
+
+	}
+
+
+	public void afficherDep(ArrayList<Tuile> listDep) {
+		
+		for(Tuile t : Grille.tuilesListe.values()) {
+			if (!listDep.contains(t)) {
+				t.getCase().setBlanc();
+			}else {
+				t.getCase().removeBlanc();
+			}
+			
+			
+		}
+		
+	}
+	
+	public void afficherDepUrg(ArrayList<Tuile> listDep) {
+		for(Tuile t : Grille.tuilesListe.values()) {
+			if (!listDep.contains(t)) {
+				t.getCase().setBlanc();
+			}else {
+				t.getCase().removeBlanc();
+			}
+			
+			
+		}
+	}
+
+	//effece les message et ajoute un message 
+	public void afichierConsole(String str){
+		//console.setText(str);
+	}
+
+	//Ajoute une message en plus des message aficher
+	public void addConsole(String str) {
+		//console.setText(console.getText()+"\n"+str);
+	}
+
+	public void print(String str){
+		console.setText(str);
+	}
+
+	public  HashMap<String, JButton> getListButton() {
+		return listButton;
+	}
+
+	//	public JButton getButonPlateau(String str){
+	//		return listButton.get(str);
+	//	}
+
+	public CasePlateau getButonPlateau(String str){
+		return (CasePlateau) listPan.get(str);
+	}
+
+
+	public void miseAJourPlayer(int x,String str ,Color c) {
+		lblJoeurN.setForeground(c);
+		lblJoeurN.setText("Joueur n° "+(x+1)+str);
+	}
+
+	public void updateGrille() {
+		Plateau.repaint();
+		//Plateau.revalidate();
+	}
+
+	public void setLevelCursort(int i) {
+		 textCusor.setText("Niveau de l'eau "+i);
+	}
+	
+	public void activateSpecialButton(boolean he, boolean sa) {
+		btnHelico.setEnabled(he);
+		btnSacSable.setEnabled(sa);
 	}
 }

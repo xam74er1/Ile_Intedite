@@ -6,12 +6,13 @@ import java.util.Iterator;
 import java.util.Map.Entry;
 
 import IHM.IHM;
+import IHM.IHMV2;
 import ille_intedite.Aventurie.Aventurier;
 
 public class VueGrille {
 
 	Controleur ctrl;
-	IHM ihm;
+	IHMV2 ihm;
 
 	public void afficherGrille() {
 
@@ -52,8 +53,9 @@ public class VueGrille {
 
 			}
 
-			ihm.updateGrille();
+			
 		}
+		ihm.updateGrille();
 	}
 
 	public void ensabler() {
@@ -70,12 +72,12 @@ public class VueGrille {
 
 	}
 
-	public IHM getIhm() {
+	public IHMV2 getIhm() {
 		return ihm;
 	}
 
-	public void setIhm(IHM ihm) {
-		this.ihm = ihm;
+	public void setIhm(IHMV2 ihm2) {
+		this.ihm = ihm2;
 	}
 
 

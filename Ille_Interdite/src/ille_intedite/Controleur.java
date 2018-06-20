@@ -9,6 +9,7 @@ import Carte.CarteSacSable;
 import Carte.MonteeEaux;
 import Carte.NomTresor;
 import IHM.IHM;
+import IHM.IHMV2;
 import ille_intedite.Aventurie.Aventurier;
 import ille_intedite.Aventurie.Aviateur;
 import ille_intedite.Aventurie.Explorateur;
@@ -47,9 +48,9 @@ public class Controleur implements Observateur{
 	private boolean noyade=false;
 	private Tuile helicoTuileSelect;
 
-	IHM ihm;
+	IHMV2 ihm;
 
-	public Controleur(IHM ihm,VueGrille vue) {
+	public Controleur(IHMV2 ihm,VueGrille vue) {
 		this.ihm = ihm;
 		carteTresorDeck = new ArrayList<Classique>();
 		carteTresorsDefausse = new ArrayList<Classique>();
