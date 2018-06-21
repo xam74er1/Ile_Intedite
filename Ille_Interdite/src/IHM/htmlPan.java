@@ -24,7 +24,7 @@ public class htmlPan extends JPanel {
 		text.setText(str);
 		
 		this.img = img;
-		//text.setHorizontalAlignment(JLabel.CENTER);
+		text.setHorizontalAlignment(JLabel.CENTER);
 		text.setVerticalAlignment(JLabel.CENTER);
 		this.add(text,BorderLayout.CENTER);
 		
