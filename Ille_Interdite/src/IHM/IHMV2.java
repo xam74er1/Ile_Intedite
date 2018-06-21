@@ -681,13 +681,13 @@ public class IHMV2 extends Observe{
 
 	public void afficherDefausse(Aventurier a) {
 		setPanelEnabled(false);
+		panelDefausse.removeAll();
 		panelDefausse.setListCarte(a.getListeCarteJoueur());
 		panelDefausse.repaint();
 		panelDefausse.setVisible(true);
 	}
 
 	public void afficherPioche(ArrayList<Carte> listCartes) {
-
 		setPanelEnabled(false);
 		panelCartePiochee.removeAll();
 		panelCartePiochee.setListCarte(listCartes);
@@ -704,11 +704,20 @@ public class IHMV2 extends Observe{
 		PanelTresor.setEnabled(b);
 		sliderImg.setEnabled(b);
 		CardPlayer.setEnabled(b);
-		btAsseche.setEnabled(b);
-		btDeplace.setEnabled(b);
-		btDonneCarte.setEnabled(b);
-		btFinDeTour.setEnabled(b);
-		btRecupereTresor.setEnabled(b);
+		if(b) {
+			btAsseche.activate();
+			btDeplace.activate();
+			btDonneCarte.activate();
+			btFinDeTour.activate();
+			btRecupereTresor.activate();
+		}else {
+			btAsseche.desactivate();
+			btDeplace.desactivate();
+			btDonneCarte.desactivate();
+			btFinDeTour.desactivate();
+			btRecupereTresor.desactivate();
+		}
+		
 		panelCarte1.setEnabled(b);
 		panelCarte2.setEnabled(b);
 		panelCarte3.setEnabled(b);
