@@ -323,7 +323,7 @@ public class Controleur implements Observateur{
 				givePlayer = joueursList.get(msg.getNum()); 
 				Classique c =  (Classique) getJoueurTour().getListeCarteJoueur().get(numCarte);
 
-				if(donneCarteJoeur(msg.getNum())) {
+				if(donnerCarteJoueur(msg.getNum())) {
 					getJoueurTour().getListeCarteJoueur().remove(c);
 					givePlayer.getListeCarteJoueur().add(c);
 					afficherCartes(getJoueurTour());
@@ -432,7 +432,7 @@ public class Controleur implements Observateur{
 		ihm.afficherPioche(listPioche);
 	}
 
-	public void creeDeckInondation() {
+	public void creerDeckInondation() {
 		for(Tuile t :Grille.tuilesListe.values()){
 			if(t.getNum()!=-1) {
 				inondationDeck.add(new CarteInondation(t.getNom(),t));
@@ -446,7 +446,7 @@ public class Controleur implements Observateur{
 
 	}
 
-	public void creeDeckClassique() {
+	public void creerDeckClassique() {
 		for(int i=0;i<4;i++) {
 			for(int j=0;j<5;j++) {
 				switch (i) {
@@ -532,8 +532,8 @@ public class Controleur implements Observateur{
 
 		ihm.fillPlataux2(grille);
 
-		creeDeckInondation();
-		creeDeckClassique();
+		creerDeckInondation();
+		creerDeckClassique();
 
 		for(Aventurier av : joueursList) {
 			piocherClassique(av);
@@ -608,7 +608,7 @@ public class Controleur implements Observateur{
 		miseAJourGrille();
 	}
 
-	private boolean donneCarteJoeur(int num) {
+	private boolean donnerCarteJoueur(int num) {
 		// TODO - implement Controleur.donneCarte
 
 
