@@ -19,6 +19,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import Carte.Classique;
+import Carte.NomTresor;
 import ille_intedite.Grille;
 import ille_intedite.Message;
 import ille_intedite.Observe;
@@ -37,6 +38,10 @@ public class IHMV2 extends Observe{
 	private JLabel textCusor,msgHelp;
 	JPanel sliderPanel;
 	private PanelCurseur sliderImg;
+	JLabel lbImgTresor1 = new JLabel("");
+	JLabel lbImgTresor2 = new JLabel("");
+	JLabel lbImgTresor3 = new JLabel("");
+	JLabel lbImgTresor4 = new JLabel("");
 
 	HashMap<String,PanelButton> listButton = new HashMap();
 	HashMap<String,JPanel> listPan = new HashMap();
@@ -55,6 +60,9 @@ public class IHMV2 extends Observe{
 	VueGrille vue;
 
 	PanelAfficheCarte panelDefausse;
+	PanelAfficheCarte panelCarteJoueur;
+	PanelAfficheCarte panelCarteInondations;
+	PanelAfficheCarte panelCartePiochee;
 
 
 	private ImageIcon imgPlayerIn1T,imgPlayerIn2T,imgPlayerIn3T,imgP1T,imgP2T,imgP3T;
@@ -103,6 +111,22 @@ public class IHMV2 extends Observe{
 
 		panelDefausse=new PanelAfficheCarte(this, frame);
 
+		panelDefausse.setBounds(0, 0, 1280, 680);
+		frame.getContentPane().add(panelDefausse);
+		
+		panelCarteInondations=new PanelAfficheCarte(this, frame);
+		panelCarteInondations.setBounds(0, 0, 1280, 680);
+		frame.getContentPane().add(panelCarteInondations);
+		
+		panelCarteJoueur=new PanelAfficheCarte(this, frame);
+		panelCarteJoueur.setBounds(0, 0, 1280, 680);
+		frame.getContentPane().add(panelCarteJoueur);
+		
+		panelCartePiochee=new PanelAfficheCarte(this, frame);
+		panelCartePiochee.setBounds(0, 0, 1280, 680);
+		frame.getContentPane().add(panelCartePiochee);
+
+
 
 		sliderImg = new PanelCurseur(this);
 		sliderImg.setBounds(0, 59, 100, 685);
@@ -130,9 +154,23 @@ public class IHMV2 extends Observe{
 		btnHelp.setBounds(0, 0, 100, 60);
 		btnHelp.setForeground(new Color(0, 0, 205));
 		btnHelp.setBackground(new Color(0, 0, 205));
+
+		btnHelp.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				new FrameHtml();
+			}
+			
+		});
+		//BOUTON HELP
+		
 		ImageIcon imgHelp = new ImageIcon("images/Art/btnAide.png");
 		Image imH = imgHelp.getImage();
+
 		imH = imH.getScaledInstance(100, 60, Image.SCALE_DEFAULT);
+
 		ImageIcon imgH = new ImageIcon(imH);
 		btnHelp.setIcon(imgH);
 		btnHelp.setBorder(null);
@@ -322,7 +360,7 @@ public class IHMV2 extends Observe{
 		PanelEast.add(PanelTresor);
 		PanelTresor.setLayout(null);
 
-		JLabel lbImgTresor1 = new JLabel("");
+
 		lbImgTresor1.setBounds(0, 0, 60, 82);
 		PanelTresor.add(lbImgTresor1);
 		ImageIcon ImgTresor1 = new ImageIcon("images/tresors/calice.png");
@@ -330,8 +368,9 @@ public class IHMV2 extends Observe{
 		imT1 = imT1.getScaledInstance(60, 82, Image.SCALE_DEFAULT);
 		ImageIcon imgT1 = new ImageIcon(imT1);
 		lbImgTresor1.setIcon(imgT1);
+		lbImgTresor1.setEnabled(false);
 
-		JLabel lbImgTresor2 = new JLabel("");
+
 		lbImgTresor2.setBounds(72, 0, 60, 82);
 		PanelTresor.add(lbImgTresor2);
 		ImageIcon ImgTresor2 = new ImageIcon("images/tresors/cristal.png");
@@ -339,8 +378,9 @@ public class IHMV2 extends Observe{
 		imT2 = imT2.getScaledInstance(60, 82, Image.SCALE_DEFAULT);
 		ImageIcon imgT2 = new ImageIcon(imT2);
 		lbImgTresor2.setIcon(imgT2);
+		lbImgTresor2.setEnabled(false);
 
-		JLabel lbImgTresor3 = new JLabel("");
+
 		lbImgTresor3.setBounds(144, 0, 60, 82);
 		PanelTresor.add(lbImgTresor3);
 		ImageIcon ImgTresor3 = new ImageIcon("images/tresors/pierre.png");
@@ -348,8 +388,9 @@ public class IHMV2 extends Observe{
 		imT3 = imT3.getScaledInstance(60, 82, Image.SCALE_DEFAULT);
 		ImageIcon imgT3 = new ImageIcon(imT3);
 		lbImgTresor3.setIcon(imgT3);
+		lbImgTresor3.setEnabled(false);
 
-		JLabel lbImgTresor4 = new JLabel("");
+
 		lbImgTresor4.setBounds(219, 0, 60, 82);
 		PanelTresor.add(lbImgTresor4);
 		ImageIcon ImgTresor4 = new ImageIcon("images/tresors/zephyr.png");
@@ -357,6 +398,7 @@ public class IHMV2 extends Observe{
 		imT4 = imT4.getScaledInstance(60, 82, Image.SCALE_DEFAULT);
 		ImageIcon imgT4 = new ImageIcon(imT4);
 		lbImgTresor4.setIcon(imgT4);
+		lbImgTresor4.setEnabled(false);
 
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(105, 105, 105));
@@ -467,6 +509,16 @@ public class IHMV2 extends Observe{
 		frame.setResizable(false);
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+	
+	public void setTresorEnabled(NomTresor nomTresor) {
+		switch (nomTresor) {
+		case CaliceOnde:lbImgTresor1.setEnabled(true);
+		case CristalArdent:lbImgTresor2.setEnabled(true);
+		case PierreSacree:lbImgTresor3.setEnabled(true);
+		case StatueZephir:lbImgTresor4.setEnabled(true);
+			break;
+		}
 	}
 
 	public void fillPlataux2(Grille g){
