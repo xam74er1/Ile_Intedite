@@ -56,7 +56,7 @@ public class PanelAfficheCarte extends JPanel {
 
 
 		}
-		for (int i=listCarte.size();i<30-(2*(listCarte.size()/8+1));i++) {
+		for (int i=listCarte.size();i<29-(2*(listCarte.size()/8+1));i++) {
 			this.add(new PanelNoir());
 		}
 		PanelNoir pane = new PanelNoir();
@@ -66,8 +66,7 @@ public class PanelAfficheCarte extends JPanel {
 		}
 		pane.add(new PanelOk(o));
 		this.add(pane);
+		this.add(new PanelNoir());
 	}
-
-
 
 }
