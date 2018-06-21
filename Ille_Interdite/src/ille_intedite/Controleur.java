@@ -405,6 +405,7 @@ public class Controleur implements Observateur{
 		melanger(carteTresorDeck);
 		listPioche.add(piocherClassique(getJoueurTour()));
 		listPioche.add(piocherClassique(getJoueurTour()));
+		System.out.println(listPioche.size());
 		ihm.afficherPioche(listPioche);
 	}
 	
