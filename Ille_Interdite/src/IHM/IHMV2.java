@@ -26,17 +26,17 @@ import ille_intedite.Tuile;
 import ille_intedite.TypeMessage;
 import ille_intedite.VueGrille;
 import ille_intedite.Aventurie.Aventurier;
+import java.awt.BorderLayout;
 
 public class IHMV2 extends Observe{
-	//Com ref 2
-	JLabel msgHelp;
 	public JFrame frame;
 	private JTextArea console;
 	private JPanel Plateau ;
-	private JLabel lblJoeurN;
-	private JLabel textCusor;
+	 private JLabel lblJoeurN;
+	private JPanel panHelp;
+	private JLabel textCusor,msgHelp;
 	JPanel sliderPanel;
-	PanelCurseur sliderImg;
+	private PanelCurseur sliderImg;
 
 	HashMap<String,PanelButton> listButton = new HashMap();
 	HashMap<String,JPanel> listPan = new HashMap();
@@ -337,15 +337,19 @@ public class IHMV2 extends Observe{
 		panel.setBounds(0, 84, 279, 10);
 		PanelEast.add(panel);
 		
-		 msgHelp = new JLabel("");
-		msgHelp.setBackground(Color.BLUE);
-		msgHelp.setForeground(Color.red);
-		msgHelp.setFont(new Font("Serif", Font.BOLD, 25));
-		msgHelp.setHorizontalAlignment(JLabel.CENTER);
-		msgHelp.setVerticalAlignment(JLabel.CENTER);
-		msgHelp.setBounds(114, 0, 1150, 35);
+		 panHelp = new JPanel();
+		 panHelp.setBackground(new Color(144, 158, 181));
+		panHelp.setBounds(114, 0, 1150, 32);
+		frame.getContentPane().add(panHelp);
+		panHelp.setLayout(new BorderLayout(0, 0));
 		
-		frame.getContentPane().add(msgHelp);
+		 msgHelp = new JLabel("");
+		 msgHelp.setForeground(Color.red);
+			msgHelp.setFont(new Font("Serif", Font.BOLD, 25));
+			msgHelp.setHorizontalAlignment(JLabel.CENTER);
+			msgHelp.setVerticalAlignment(JLabel.CENTER);
+		
+		panHelp.add(msgHelp, BorderLayout.CENTER);
 		frame.setBounds(100, 100, 1280, 720);
 
 		//----------------
