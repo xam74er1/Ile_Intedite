@@ -75,6 +75,7 @@ public class Controleur implements Observateur{
 		nbJoueurs = msgInit.nbJoueurs;
 		init(msgInit.listJoueurs);
 		numTour =0;
+		ihm.afficherNivCurseur(msgInit.niveauEau);
 		//Utils.debugln("controleur start");
 
 
@@ -500,7 +501,6 @@ public class Controleur implements Observateur{
 		ihm.rool(getJoueurTour(), joueursList);
 
 		afficherCartes(getJoueurTour());
-		//ihm.afficherNivCurseur(2);
 		isInit = true;
 
 		ihm.afficherDefausse(getJoueurTour());

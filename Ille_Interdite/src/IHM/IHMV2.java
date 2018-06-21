@@ -41,6 +41,9 @@ public class IHMV2 extends Observe{
 	HashMap<String,PanelButton> listButton = new HashMap();
 	HashMap<String,JPanel> listPan = new HashMap();
 	HashMap<Integer,PanelCarte> listCartes = new HashMap<Integer,PanelCarte>();
+	HashMap<Integer, PanelCarte> listeCartes3T = new HashMap<Integer,PanelCarte>();
+	HashMap<Integer, PanelCarte> listeCartes2T = new HashMap<Integer,PanelCarte>();
+	HashMap<Integer, PanelCarte> listeCartes1T = new HashMap<Integer,PanelCarte>();
 	HashMap<Integer,JPanel> listCurseur = new HashMap<Integer,JPanel>();
 	private JTextField textField;
 	JPanel PanelHelp;
@@ -59,6 +62,21 @@ public class IHMV2 extends Observe{
 	Image imP3T,imP2T,imP1T;
 	JLabel lbIconJoueur;
 	JButton btnImgPlayerIn1T,btnImgPlayerIn2T,btnImgPlayerIn3T;
+	private JPanel panelCarte3T2;
+	private JPanel panelCarte3T1;
+	private JPanel panelCarte3T3;
+	private JPanel panelCarte3T4;
+	private JPanel panelCarte3T5;
+	private JPanel panelCarte2T1;
+	private JPanel panelCarte2T2;
+	private JPanel panelCarte2T3;
+	private JPanel panelCarte2T4;
+	private JPanel panelCarte2T5;
+	private JPanel panelCarte1T1;
+	private JPanel panelCarte1T2;
+	private JPanel panelCarte1T3;
+	private JPanel panelCarte1T4;
+	private JPanel panelCarte1T5;
 
 	/**
 	 * 
@@ -104,19 +122,20 @@ public class IHMV2 extends Observe{
 		}*/
 
 		PanelHelp = new JPanel();
-		PanelHelp.setBounds(0, 0, 60, 60);
+		PanelHelp.setBounds(0, 0, 100, 60);
 		frame.getContentPane().add(PanelHelp);
 		PanelHelp.setLayout(null);
 
 		JButton btnHelp = new JButton("");
-		btnHelp.setBounds(0, 0, 60, 60);
+		btnHelp.setBounds(0, 0, 100, 60);
 		btnHelp.setForeground(new Color(0, 0, 205));
 		btnHelp.setBackground(new Color(0, 0, 205));
-		ImageIcon imgHelp = new ImageIcon("images/icones/iconHelp.png");
+		ImageIcon imgHelp = new ImageIcon("images/Art/btnAide.png");
 		Image imH = imgHelp.getImage();
-		imH = imH.getScaledInstance(60, 60, Image.SCALE_DEFAULT);
+		imH = imH.getScaledInstance(100, 60, Image.SCALE_DEFAULT);
 		ImageIcon imgH = new ImageIcon(imH);
 		btnHelp.setIcon(imgH);
+		btnHelp.setBorder(null);
 		PanelHelp.add(btnHelp);
 
 
@@ -209,7 +228,7 @@ public class IHMV2 extends Observe{
 		//--------------------- 1 et principal -----------------------
 		PanelPlayerIn1T = new JPanel();
 		PanelPlayerIn1T.setBackground(new Color(139, 69, 19));
-		PanelPlayerIn1T.setBounds(59, 434, 150, 150);
+		PanelPlayerIn1T.setBounds(23, 434, 150, 150);
 		PanelEast.add(PanelPlayerIn1T);
 		PanelPlayerIn1T.setLayout(null);
 
@@ -230,7 +249,7 @@ public class IHMV2 extends Observe{
 
 		PanelPlayerIn2T = new JPanel();
 		PanelPlayerIn2T.setBackground(new Color(139, 69, 19));
-		PanelPlayerIn2T.setBounds(59, 264, 150, 150);
+		PanelPlayerIn2T.setBounds(23, 264, 150, 150);
 		PanelEast.add(PanelPlayerIn2T);
 		PanelPlayerIn2T.setLayout(null);
 
@@ -255,7 +274,7 @@ public class IHMV2 extends Observe{
 
 		PanelPlayerIn3T = new JPanel();
 		PanelPlayerIn3T.setBackground(new Color(139, 69, 19));
-		PanelPlayerIn3T.setBounds(59, 95, 150, 150);
+		PanelPlayerIn3T.setBounds(23, 101, 150, 150);
 		PanelEast.add(PanelPlayerIn3T);
 		PanelPlayerIn3T.setLayout(null);
 
@@ -343,6 +362,82 @@ public class IHMV2 extends Observe{
 		panel.setBackground(new Color(105, 105, 105));
 		panel.setBounds(0, 84, 279, 10);
 		PanelEast.add(panel);
+		
+		
+		panelCarte3T1 = new PanelCarte(0,this,true);
+		panelCarte3T1.setBounds(185, 101, 25, 35);
+		PanelEast.add(panelCarte3T1);
+		listeCartes3T.put(0, (PanelCarte) panelCarte3T1);
+		
+		panelCarte3T2 = new PanelCarte(1,this,true);
+		panelCarte3T2.setBounds(230, 101, 25, 35);
+		PanelEast.add(panelCarte3T2);
+		listeCartes3T.put(1, (PanelCarte) panelCarte3T2);
+		
+		panelCarte3T3 = new PanelCarte(2,this,true);
+		panelCarte3T3.setBounds(185, 149, 25, 35);
+		PanelEast.add(panelCarte3T3);
+		listeCartes3T.put(2, (PanelCarte) panelCarte3T3);
+		
+		panelCarte3T4 = new PanelCarte(3,this,true);
+		panelCarte3T4.setBounds(230, 149, 25, 35);
+		PanelEast.add(panelCarte3T4);
+		listeCartes3T.put(3, (PanelCarte) panelCarte3T4);
+		
+		panelCarte3T5 = new PanelCarte(4,this,true);
+		panelCarte3T5.setBounds(208, 197, 25, 35);
+		PanelEast.add(panelCarte3T5);
+		listeCartes3T.put(4, (PanelCarte) panelCarte3T5);
+		
+		panelCarte2T1 = new PanelCarte(0,this,true);
+		panelCarte2T1.setBounds(185, 264, 25, 35);
+		PanelEast.add(panelCarte2T1);
+		listeCartes2T.put(0, (PanelCarte) panelCarte3T4);
+		
+		panelCarte2T2 = new PanelCarte(1,this,true);
+		panelCarte2T2.setBounds(230, 264, 25, 35);
+		PanelEast.add(panelCarte2T2);
+		listeCartes2T.put(1, (PanelCarte) panelCarte3T4);
+		
+		panelCarte2T3 = new PanelCarte(2,this,true);
+		panelCarte2T3.setBounds(185, 312, 25, 35);
+		PanelEast.add(panelCarte2T3);
+		listeCartes2T.put(2, (PanelCarte) panelCarte3T4);
+		
+		panelCarte2T4 = new PanelCarte(3,this,true);
+		panelCarte2T4.setBounds(230, 312, 25, 35);
+		PanelEast.add(panelCarte2T4);
+		listeCartes2T.put(3, (PanelCarte) panelCarte3T4);
+		
+		panelCarte2T5 = new PanelCarte(4,this,true);
+		panelCarte2T5.setBounds(208, 360, 25, 35);
+		PanelEast.add(panelCarte2T5);
+		listeCartes2T.put(4, (PanelCarte) panelCarte3T4);
+		
+		panelCarte1T1 = new PanelCarte(0,this,true);
+		panelCarte1T1.setBounds(185, 434, 25, 35);
+		PanelEast.add(panelCarte1T1);
+		listeCartes1T.put(0, (PanelCarte) panelCarte3T4);
+		
+		panelCarte1T2 = new PanelCarte(1,this,true);
+		panelCarte1T2.setBounds(230, 434, 25, 35);
+		PanelEast.add(panelCarte1T2);
+		listeCartes1T.put(1, (PanelCarte) panelCarte3T4);
+		
+		panelCarte1T3 = new PanelCarte(2,this,true);
+		panelCarte1T3.setBounds(185, 482, 25, 35);
+		PanelEast.add(panelCarte1T3);
+		listeCartes1T.put(2, (PanelCarte) panelCarte3T4);
+		
+		panelCarte1T4 = new PanelCarte(3,this,true);
+		panelCarte1T4.setBounds(230, 482, 25, 35);
+		PanelEast.add(panelCarte1T4);
+		listeCartes1T.put(3, (PanelCarte) panelCarte3T4);
+		
+		panelCarte1T5 = new PanelCarte(4,this,true);
+		panelCarte1T5.setBounds(208, 530, 25, 35);
+		PanelEast.add(panelCarte1T5);
+		listeCartes1T.put(4, (PanelCarte) panelCarte3T4);
 
 		panHelp = new JPanel();
 		panHelp.setBackground(new Color(144, 158, 181));

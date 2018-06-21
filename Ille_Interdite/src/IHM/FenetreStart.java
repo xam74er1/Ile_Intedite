@@ -781,13 +781,13 @@ public class FenetreStart extends JFrame {
 		m.nbJoueurs = nbJoueurs;
         
         if (difficulte.getSelectedItem() == "Novice"){
-        	m.niveauEau =0;
+        	m.niveauEau =1;
         } else if  (difficulte.getSelectedItem() == "Normal"){
         	m.niveauEau =2;
         } else if  (difficulte.getSelectedItem() == "Epique") {
-        	m.niveauEau =5;
+        	m.niveauEau =3;
         } else if  (difficulte.getSelectedItem() == "Legendaire") {
-        	m.niveauEau =7;
+        	m.niveauEau =4;
         }
 		
         int j = 0;
