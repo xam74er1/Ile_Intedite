@@ -23,13 +23,14 @@ public class PanelAfficheCarte extends JPanel {
 		this.o=o;
 		this.frame=frame;
 		this.setBounds(0, 0, this.frame.getWidth(), this.frame.getHeight());
-		listCarte=new ArrayList();
-		this.setBackground(new Color(0,0,0,128));
+		listCarte=new ArrayList<Carte>();
+		this.setBackground(new Color(255,255,255,128));
 	}
 	
 	@Override
 	public void paintComponent(Graphics g){
-
+		g.setColor(new Color(0,0,0,128));
+		g.fillRect(0, 0, this.getWidth(), this.getHeight());
 	}
 
 	public void setListCarte(ArrayList<Carte> listCarte) {
@@ -44,7 +45,6 @@ public class PanelAfficheCarte extends JPanel {
 			pane.setBounds(0, 0,80, 112);
 			if(i%16==15) this.add(new JPanel());
 		}
-		this.setVisible(true);
 	}
 
 	
