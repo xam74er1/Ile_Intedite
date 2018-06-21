@@ -171,7 +171,7 @@ public class IHMV2 extends Observe{
 		PanelHelp.add(btnHelp);
 
 
-		CardPlayer = new PanelFont(0, this, true);
+		CardPlayer = new PanelFont(0,true);
 		CardPlayer.setBackground(new Color(139, 69, 19));
 		CardPlayer.setBounds(114, 31, 250, 597);
 		frame.getContentPane().add(CardPlayer);

@@ -29,6 +29,7 @@ import ille_intedite.Aventurie.Messager;
 import ille_intedite.Aventurie.Navigateur;
 import ille_intedite.Aventurie.Plongeur;
 import utils.Utils.Pion;
+import javax.swing.SwingConstants;
 
  
 
@@ -63,6 +64,34 @@ public class FenetreStart extends JFrame {
         private boolean termine = false;
 
   public FenetreStart(){
+	  
+	  	// images explorateur
+	  	ImageIcon imgIcon = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/explorateur.png");
+	    ImageIcon imgIconS = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/explorateurSelected.png");
+	    ImageIcon imgIconAS = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/explorateurAlreadySelected.png");
+	    
+	    // images ingenieur
+	    ImageIcon imgIcon1 = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/ingenieur.png");
+	    ImageIcon imgIcon1S = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/ingenieurSelected.png");
+	    ImageIcon imgIcon1AS = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/ingenieuralreadySelected.png");
+	    
+	    ImageIcon imgIcon2 = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/messager.png");
+	    ImageIcon imgIcon2S = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/messagerSelected.png");
+	    ImageIcon imgIcon2AS = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/messageralreadySelected.png");
+	    
+	    ImageIcon imgIcon3 = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/navigateur.png");
+	    ImageIcon imgIcon3S = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/navigateurSelected.png");
+	    ImageIcon imgIcon3AS = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/navigateuralreadySelected.png");
+	    
+	    ImageIcon imgIcon4 = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/aviateur.png");
+	    ImageIcon imgIcon4S = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/piloteSelected.png");
+	    ImageIcon imgIcon4AS = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/pilotealreadySelected.png");
+	    
+	    ImageIcon imgIcon5 = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/plongeur.png");
+	    ImageIcon imgIcon5S = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/plongeurSelected.png");
+	    ImageIcon imgIcon5AS = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/plongeuralreadySelected.png");
+	    
+	    
 	moi = this;
     this.setTitle("Ile Interdite");
 
@@ -77,93 +106,209 @@ public class FenetreStart extends JFrame {
     this.setResizable(false);
     setBackground(new Color(139,69,18));
     
-    JPanel pan = new JPanel();
+    JButton btnCommencer = new JButton("Commencer");
+    
+    JRadioButton deuxJoueurs = new JRadioButton("2 joueurs");
+    
+    JRadioButton troisJoueurs = new JRadioButton("3 joueurs");
+    
+    JRadioButton quatreJoueurs = new JRadioButton("4 joueurs");
+    
+   
+    
+    PanelFont pan = new PanelFont(1,true);
     pan.setBackground(new Color(139,69,18));
-    pan.setLayout(new GridLayout(4,1));
     
+    JButton btnRegle = new JButton("Regles");
+    btnRegle.setBounds(200, 511, 110, 25);
+    pan.add(btnRegle);
+    btnRegle.addActionListener(new ActionListener(){
+    	
     
-    JLabel labelTitre = new JLabel();
-    JPanel panTitre = new JPanel();
+
+@Override
+public void actionPerformed(ActionEvent arg0) {
+	new FrameHtml();
+	
+}
+});
      
     ImageIcon imgIconTitre = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/titre.png");
-    labelTitre.setIcon(imgIconTitre);
-    panTitre.add(labelTitre);
-    panTitre.setBackground(new Color(139,69,18));
-    JLabel labelChoix = new JLabel("Nombre de joueurs");
     Font font = new Font("Serif", Font.BOLD, 25);
-    labelChoix.setFont(font);
-    JPanel panChoixTexte = new JPanel();
-    panChoixTexte.setBackground(new Color(139,69,18));
-    panChoixTexte.add(labelChoix);
 
     
     ButtonGroup choix = new ButtonGroup();
-    JRadioButton deuxJoueurs = new JRadioButton("2 joueurs");
-    deuxJoueurs.setBackground(new Color(139,69,18));
-    deuxJoueurs.setSelected(true);
-    JRadioButton troisJoueurs = new JRadioButton("3 joueurs");
-    troisJoueurs.setBackground(new Color(139,69,18));
-    JRadioButton quatreJoueurs = new JRadioButton("4 joueurs");
-    quatreJoueurs.setBackground(new Color(139,69,18));
+    pan.setLayout(null);
+    
+    
+    JLabel labelTitre = new JLabel();
+    labelTitre.setHorizontalAlignment(SwingConstants.CENTER);
+    labelTitre.setText("fuuuuuuuuuuuuuuuu");
+    labelTitre.setBounds(350, 13, 100, 100);
+    pan.add(labelTitre);
+    labelTitre.setIcon(imgIconTitre);
+    JLabel labelChoix = new JLabel("Nombre de joueurs");
+    labelChoix.setHorizontalAlignment(SwingConstants.CENTER);
+    labelChoix.setBounds(295, 105, 210, 33);
+    pan.add(labelChoix);
+    labelChoix.setFont(font);
+        JLabel labelJoueurCourrant = new JLabel("");
+        labelJoueurCourrant.setBounds(0, 0, 0, 0);
+        pan.add(labelJoueurCourrant);
+        JButton selectChoix = new JButton("Confirmer");
+        selectChoix.setBounds(350, 263, 100, 25);
+        pan.add(selectChoix);
+        
+        
+        selectChoix.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+                if ("Confirmer".equals(selectChoix.getText())){
 
-    JPanel panChoix = new JPanel();
-    panChoix.setBackground(new Color(139,69,18));
-    panChoix.setBackground(new Color(139,69,18));
-    
-    JPanel panChoixDifficult = new JPanel();
-    panChoixDifficult.setBackground(new Color(139,69,18));
+                    if (deuxJoueurs.isSelected()) {
+                        nbJoueurs = 2;
+                    } else if (troisJoueurs.isSelected()){
+                        nbJoueurs = 3;
+                    } else if (quatreJoueurs.isSelected()){
+                        nbJoueurs = 4;
+                    }
+                    deuxJoueurs.setEnabled(false);
+                    troisJoueurs.setEnabled(false);
+                    quatreJoueurs.setEnabled(false);
+                    choixCourant = choixCourant+1;
+                    labelJoueurCourrant.setText("Joueur " + choixCourant);
+                    selectChoix.setText("Valider");
+                    selectChoix.setEnabled(false);
 
-    
-    JLabel labelDifficulte = new JLabel("Choisir la difficulte du jeu :");
-    labelDifficulte.setBackground(new Color(139,69,18));
 
-    difficulte = new JComboBox();
-    difficulte.addItem("Novice");
-    difficulte.addItem("Normal");
-    difficulte.addItem("Elite");
-    difficulte.addItem("Legendaire");
+                    labelExplo.setIcon(imgIcon);
+                    labelInge.setIcon(imgIcon1);
+                    labelMessa.setIcon(imgIcon2);
+                    labelNavi.setIcon(imgIcon3);
+                    labelPilo.setIcon(imgIcon4);
+                    labelPlon.setIcon(imgIcon5);
+                    etatBoutonExplo = true;
+                    etatBoutonInge = true;
+                    etatBoutonMessa = true;
+                    etatBoutonNavi = true;
+                    etatBoutonPilo = true;
+                    etatBoutonPlon = true;
+                    
+                } else {
+                    
+                    choixCourant = choixCourant+1;
+                    labelJoueurCourrant.setText("Joueur " + choixCourant);
+                    selectChoix.setText("Valider");
+                    
+                    switch (choixAven) {
+                        case 0:
+                            labelExplo.setIcon(imgIconAS);
+                            etatBoutonExplo = false;
+                            joueurs.add(labelExplo);
+                            break;
+                        case 1:
+                            labelInge.setIcon(imgIcon1AS);
+                            etatBoutonInge = false;
+                            joueurs.add(labelInge);
+                            break;
+                        case 2:
+                            labelMessa.setIcon(imgIcon2AS);
+                            etatBoutonMessa = false;
+                            joueurs.add(labelMessa);
+                            break;
+                        case 3:
+                            labelNavi.setIcon(imgIcon3AS);
+                            etatBoutonNavi = false;
+                            joueurs.add(labelNavi);
+                            break;
+                        case 4:
+                            labelPilo.setIcon(imgIcon4AS);
+                            etatBoutonPilo = false;
+                            joueurs.add(labelPilo);
+                            break;
+                        case 5:
+                            labelPlon.setIcon(imgIcon5AS);
+                            etatBoutonPlon = false;
+                            joueurs.add(labelPlon);
+                            break;               
+                        default:
+                            break;
+                            
+                            
+                    }
+                    selectChoix.setEnabled(false);
+                } 
+                
+                if (choixCourant>nbJoueurs){
+                    selectChoix.setEnabled(false);
+                    selectChoix.setVisible(false);
+                    btnCommencer.setEnabled(true);
+                    labelJoueurCourrant.setText("");
+                    termine = true;
+                    MessageInit m = new MessageInit();
+                    
+                    
+                     
+                    
+                    
+                    labelExplo.setVisible(false);
+                    labelInge.setVisible(false);
+                    labelMessa.setVisible(false);
+                    labelNavi.setVisible(false);
+                    labelPilo.setVisible(false);
+                    labelPlon.setVisible(false);
+                    
+                    labelExplo.setIcon(imgIcon);
+                    labelInge.setIcon(imgIcon1);
+                    labelMessa.setIcon(imgIcon2);
+                    labelNavi.setIcon(imgIcon3);
+                    labelPilo.setIcon(imgIcon4);
+                    labelPlon.setIcon(imgIcon5);
+                	int j = 0;
+                    for (JLabel i : joueurs){
+                        Aventurier a;
+                        i.setVisible(true);
+                        if (i == labelExplo){
+                        	a = new Explorateur(j,"Explorateur",Pion.VERT);
+                        	m.listJoueurs.add(a);
+                        	
+                        } else if (i == labelInge) {
+                        	a= new Ingenieur(j,"Ingenieur",Pion.ROUGE);
+                        	m.listJoueurs.add(a);
 
-    
-    panChoixDifficult.add(labelDifficulte);
-    panChoixDifficult.add(difficulte);
-
-    
-    
-    
-    JPanel choixTout = new JPanel();
-    choixTout.setBackground(new Color(139,69,18));
-    choixTout.setLayout(new GridLayout(4,1));
-    choixTout.add(panChoixTexte);
-    choixTout.add(panChoix);
-    choixTout.add(panChoixDifficult);
-    
-    choix.add(deuxJoueurs);
-    choix.add(troisJoueurs);
-    choix.add(quatreJoueurs);
-    
-    pan.add(panTitre);
-    pan.add(choixTout);
-    panChoix.add(deuxJoueurs);
-    panChoix.add(troisJoueurs);
-    panChoix.add(quatreJoueurs);
-    JPanel panSelectChoix = new JPanel();
-    JButton selectChoix = new JButton("Confirmer");
-    JLabel labelJoueurCourrant = new JLabel("");
-    JPanel panComfirmer = new JPanel();
-    panComfirmer.add(labelJoueurCourrant);
-    panComfirmer.add(selectChoix);
-   
-    panComfirmer.setBackground(new Color(139,69,18));
-    panSelectChoix.setBackground(new Color(139,69,18));
-    panSelectChoix.add(panComfirmer);
-    
-    choixTout.add(panSelectChoix);
+                        } else if (i == labelMessa){
+                        	a = new Messager(j,"Messager",Pion.ORANGE);
+                        	m.listJoueurs.add(a);
+                        	
+                        } else if (i == labelNavi){
+                        	a = new Navigateur(j,"Navigateur",Pion.JAUNE);
+                        	m.listJoueurs.add(a);
+                        	
+                        } else if (i == labelPilo){
+                        	a = new Aviateur(j,"Aviateur",Pion.BLEU);
+                        	m.listJoueurs.add(a);
+                        	
+                        } else if (i == labelPlon){
+                        	a = new Plongeur(j,"Plongeur",Pion.VIOLET);
+                        	m.listJoueurs.add(a);
+                        	
+                        }
+                         j = j +1;
+                    }
+                    
+                }
+                
+            }
+            
+        });
     
     
 
     
     
     JPanel panChoixCarte = new JPanel();
+    panChoixCarte.setBounds(38, 332, 700, 160);
     panChoixCarte.setBackground(new Color(139,69,18));
      labelExplo = new JLabel();
      labelInge = new JLabel();
@@ -172,44 +317,32 @@ public class FenetreStart extends JFrame {
      labelPilo = new JLabel();
      labelPlon = new JLabel();
     
-    ImageIcon imgIcon = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/explorateur.png");
-    ImageIcon imgIconS = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/explorateurSelected.png");
-    ImageIcon imgIconAS = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/explorateurAlreadySelected.png");
+    
 
     labelExplo.setIcon(imgIconAS);
     panChoixCarte.add(labelExplo);
     
-    ImageIcon imgIcon1 = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/ingenieur.png");
-    ImageIcon imgIcon1S = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/ingenieurSelected.png");
-    ImageIcon imgIcon1AS = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/ingenieuralreadySelected.png");
+    
     
     labelInge.setIcon(imgIcon1AS);
     panChoixCarte.add(labelInge);
     
-    ImageIcon imgIcon2 = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/messager.png");
-    ImageIcon imgIcon2S = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/messagerSelected.png");
-    ImageIcon imgIcon2AS = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/messageralreadySelected.png");
+    
     
     labelMessa.setIcon(imgIcon2AS);
     panChoixCarte.add(labelMessa);
     
-    ImageIcon imgIcon3 = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/navigateur.png");
-    ImageIcon imgIcon3S = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/navigateurSelected.png");
-    ImageIcon imgIcon3AS = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/navigateuralreadySelected.png");
+    
     
     labelNavi.setIcon(imgIcon3AS);
     panChoixCarte.add(labelNavi);
     
-    ImageIcon imgIcon4 = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/aviateur.png");
-    ImageIcon imgIcon4S = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/piloteSelected.png");
-    ImageIcon imgIcon4AS = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/pilotealreadySelected.png");
+    
     
     labelPilo.setIcon(imgIcon4AS);
     panChoixCarte.add(labelPilo);
 
-    ImageIcon imgIcon5 = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/plongeur.png");
-    ImageIcon imgIcon5S = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/plongeurSelected.png");
-    ImageIcon imgIcon5AS = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/plongeuralreadySelected.png");
+    
     
     labelPlon.setIcon(imgIcon5AS);
     panChoixCarte.add(labelPlon);
@@ -582,178 +715,55 @@ public class FenetreStart extends JFrame {
     
     
     pan.add(panChoixCarte);
-    
-
-    JButton btnRegle = new JButton("Regles");
-    btnRegle.addActionListener(new ActionListener(){
-    	
-    
-		
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			new FrameHtml();
-			
-		}
-	});
-    JButton btnCommencer = new JButton("Commencer");
-    
-    JPanel panBas = new JPanel();
-    panBas.setBackground(new Color(139,69,18));
-    panBas.add(btnRegle);
-    panBas.add(btnCommencer);
-    
-    pan.add(panBas);
 
     
     this.setContentPane(pan);
     this.setVisible(true);
     
-    btnCommencer.setEnabled(false);
+    JPanel panel = new JPanel();
+    panel.setBounds(200, 150, 400, 100);
+    pan.add(panel);
+    panel.setLayout(null);
     
+    deuxJoueurs.setBounds(46, 12, 100, 25);
+    panel.add(deuxJoueurs);
+    deuxJoueurs.setBackground(new Color(139,69,18));
+    deuxJoueurs.setSelected(true);
     
-    selectChoix.addActionListener(new ActionListener(){
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            
-            if ("Confirmer".equals(selectChoix.getText())){
-
-                if (deuxJoueurs.isSelected()) {
-                    nbJoueurs = 2;
-                } else if (troisJoueurs.isSelected()){
-                    nbJoueurs = 3;
-                } else if (quatreJoueurs.isSelected()){
-                    nbJoueurs = 4;
-                }
-                deuxJoueurs.setEnabled(false);
-                troisJoueurs.setEnabled(false);
-                quatreJoueurs.setEnabled(false);
-                choixCourant = choixCourant+1;
-                labelJoueurCourrant.setText("Joueur " + choixCourant);
-                selectChoix.setText("Valider");
-                selectChoix.setEnabled(false);
-
-
-                labelExplo.setIcon(imgIcon);
-                labelInge.setIcon(imgIcon1);
-                labelMessa.setIcon(imgIcon2);
-                labelNavi.setIcon(imgIcon3);
-                labelPilo.setIcon(imgIcon4);
-                labelPlon.setIcon(imgIcon5);
-                etatBoutonExplo = true;
-                etatBoutonInge = true;
-                etatBoutonMessa = true;
-                etatBoutonNavi = true;
-                etatBoutonPilo = true;
-                etatBoutonPlon = true;
-                
-            } else {
-                
-                choixCourant = choixCourant+1;
-                labelJoueurCourrant.setText("Joueur " + choixCourant);
-                selectChoix.setText("Valider");
-                
-                switch (choixAven) {
-                    case 0:
-                        labelExplo.setIcon(imgIconAS);
-                        etatBoutonExplo = false;
-                        joueurs.add(labelExplo);
-                        break;
-                    case 1:
-                        labelInge.setIcon(imgIcon1AS);
-                        etatBoutonInge = false;
-                        joueurs.add(labelInge);
-                        break;
-                    case 2:
-                        labelMessa.setIcon(imgIcon2AS);
-                        etatBoutonMessa = false;
-                        joueurs.add(labelMessa);
-                        break;
-                    case 3:
-                        labelNavi.setIcon(imgIcon3AS);
-                        etatBoutonNavi = false;
-                        joueurs.add(labelNavi);
-                        break;
-                    case 4:
-                        labelPilo.setIcon(imgIcon4AS);
-                        etatBoutonPilo = false;
-                        joueurs.add(labelPilo);
-                        break;
-                    case 5:
-                        labelPlon.setIcon(imgIcon5AS);
-                        etatBoutonPlon = false;
-                        joueurs.add(labelPlon);
-                        break;               
-                    default:
-                        break;
-                        
-                        
-                }
-                selectChoix.setEnabled(false);
-            } 
-            
-            if (choixCourant>nbJoueurs){
-                selectChoix.setEnabled(false);
-                selectChoix.setVisible(false);
-                btnCommencer.setEnabled(true);
-                labelJoueurCourrant.setText("");
-                termine = true;
-                MessageInit m = new MessageInit();
-                
-                
-                 
-                
-                
-                labelExplo.setVisible(false);
-                labelInge.setVisible(false);
-                labelMessa.setVisible(false);
-                labelNavi.setVisible(false);
-                labelPilo.setVisible(false);
-                labelPlon.setVisible(false);
-                
-                labelExplo.setIcon(imgIcon);
-                labelInge.setIcon(imgIcon1);
-                labelMessa.setIcon(imgIcon2);
-                labelNavi.setIcon(imgIcon3);
-                labelPilo.setIcon(imgIcon4);
-                labelPlon.setIcon(imgIcon5);
-            	int j = 0;
-                for (JLabel i : joueurs){
-                    Aventurier a;
-                    i.setVisible(true);
-                    if (i == labelExplo){
-                    	a = new Explorateur(j,"Explorateur",Pion.VERT);
-                    	m.listJoueurs.add(a);
-                    	
-                    } else if (i == labelInge) {
-                    	a= new Ingenieur(j,"Ingenieur",Pion.ROUGE);
-                    	m.listJoueurs.add(a);
-
-                    } else if (i == labelMessa){
-                    	a = new Messager(j,"Messager",Pion.ORANGE);
-                    	m.listJoueurs.add(a);
-                    	
-                    } else if (i == labelNavi){
-                    	a = new Navigateur(j,"Navigateur",Pion.JAUNE);
-                    	m.listJoueurs.add(a);
-                    	
-                    } else if (i == labelPilo){
-                    	a = new Aviateur(j,"Aviateur",Pion.BLEU);
-                    	m.listJoueurs.add(a);
-                    	
-                    } else if (i == labelPlon){
-                    	a = new Plongeur(j,"Plongeur",Pion.VIOLET);
-                    	m.listJoueurs.add(a);
-                    	
-                    }
-                     j = j +1;
-                }
-                
-            }
-            
-        }
+    choix.add(deuxJoueurs);
+    
+    troisJoueurs.setBounds(150, 12, 100, 25);
+    panel.add(troisJoueurs);
+    troisJoueurs.setBackground(new Color(139,69,18));
+    choix.add(troisJoueurs);
+    
+    quatreJoueurs.setBounds(254, 12, 100, 25);
+    panel.add(quatreJoueurs);
+    quatreJoueurs.setBackground(new Color(139,69,18));
+    choix.add(quatreJoueurs);
+    
+        difficulte = new JComboBox();
+        difficulte.setBounds(264, 46, 90, 22);
+        panel.add(difficulte);
+        difficulte.addItem("Novice");
+        difficulte.addItem("Normal");
+        difficulte.addItem("Elite");
+        difficulte.addItem("Legendaire");
         
-    });
-    btnCommencer.addActionListener(new ActionListener() {
+            
+            JLabel labelDifficulte = new JLabel("Choisir la difficulte du jeu :");
+            labelDifficulte.setBounds(96, 49, 154, 16);
+            panel.add(labelDifficulte);
+            labelDifficulte.setBackground(new Color(139,69,18));
+            
+
+            
+            
+            btnCommencer.setBounds(490, 511, 110, 25);
+            pan.add(btnCommencer);
+            
+            btnCommencer.setEnabled(false);
+            btnCommencer.addActionListener(new ActionListener() {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -776,8 +786,9 @@ public class FenetreStart extends JFrame {
 	       
 	        
 		}
-    	
-    });
+            	
+            });
+            
     
   }
 
@@ -839,7 +850,4 @@ public class FenetreStart extends JFrame {
 	public static void main(String[] args){
 		FenetreStart f = new FenetreStart();
 	}
-
-
-
 }
