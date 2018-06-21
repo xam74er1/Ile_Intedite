@@ -25,8 +25,6 @@ public class PanelAfficheCarte extends JPanel {
 		this.setBounds(0, 0, this.frame.getWidth(), this.frame.getHeight());
 		listCarte=new ArrayList();
 		this.setBackground(new Color(0,0,0,128));
-		
-		
 	}
 	
 	@Override
@@ -36,7 +34,7 @@ public class PanelAfficheCarte extends JPanel {
 
 	public void setListCarte(ArrayList<Carte> listCarte) {
 		this.listCarte = listCarte;
-		this.setLayout(new GridLayout((this.listCarte.size()/16)+1, 7*(this.listCarte.size()%16),10,10));
+		this.setLayout(new GridLayout((this.listCarte.size()/16)+1, 7*(this.listCarte.size()%16),0,0));
 		for (int i=0;i<this.listCarte.size();i++) {
 			if(i%16==0) this.add(new JPanel());
 			Carte c = this.listCarte.get(i);

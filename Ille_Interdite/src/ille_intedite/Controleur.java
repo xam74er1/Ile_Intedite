@@ -137,11 +137,13 @@ public class Controleur implements Observateur{
 			case Clique_Deplace_Helico :
 				
 				if (helicoTuileSelect!=null) {
+
 					
 					if (helicoTuileSelect.getNum()==22) {
 						aCarteHelicoptere=true;
 						verifierFinDePartie();
 					}
+
 					Tuile t = grille.getTuile(msg.getLocation());
 					for(Aventurier a : joueursList) {
 						if(a.getTuile().equals(helicoTuileSelect)) {
@@ -154,8 +156,15 @@ public class Controleur implements Observateur{
 					carteTresorsDefausse.add(carteSpe);
 					helicoTuileSelect=null;
 				}else {
+
 					ihm.setIndication("Clique sur une case pour vous deplace");
 					
+
+					if (grille.getTuile(msg.getLocation()).getNum()==22) {
+						aCarteHelicoptere=true;
+						verifierFinDePartie();
+					}
+
 					ArrayList<Tuile> tuilesDep = new ArrayList<Tuile>();
 					for(Tuile t : Grille.tuilesListe.values()) {
 						if(t.getStatut()!=2 && t.getNum()!=-1 && !(t.equals(grille.getTuile(msg.getLocation())))) {
@@ -396,20 +405,22 @@ public class Controleur implements Observateur{
 					break;
 				}
 			}
-
-			carteTresorDeck.add(new CarteSacSable("1SacsDeSable"));
-			carteTresorDeck.add(new CarteSacSable("2SacsDeSable"));
-			carteTresorDeck.add(new CarteSacSable("3SacsDeSable"));
-
-			carteTresorDeck.add(new MonteeEaux("1Montee des EAU"));
-			carteTresorDeck.add(new MonteeEaux("2Montee des EAU"));
-			//carteTresorDeck.add(new MonteeEaux("3Monte des EAU"));
-
-			carteTresorDeck.add(new CarteHelicoptere("1Helicoptere"));
-			carteTresorDeck.add(new CarteHelicoptere("2Helicoptere"));
-			carteTresorDeck.add(new CarteHelicoptere("3Helicoptere"));
-
 		}
+
+		carteTresorDeck.add(new CarteSacSable("1SacsDeSable"));
+		carteTresorDeck.add(new CarteSacSable("2SacsDeSable"));
+		carteTresorDeck.add(new CarteSacSable("3SacsDeSable"));
+
+		carteTresorDeck.add(new MonteeEaux("1Montee des EAU"));
+		carteTresorDeck.add(new MonteeEaux("2Montee des EAU"));
+		//carteTresorDeck.add(new MonteeEaux("3Monte des EAU"));
+
+		carteTresorDeck.add(new CarteHelicoptere("1Helicoptere"));
+		carteTresorDeck.add(new CarteHelicoptere("2Helicoptere"));
+		carteTresorDeck.add(new CarteHelicoptere("3Helicoptere"));
+
+
+
 		if(Parameters.ALEAS) {
 			melanger(carteTresorDeck);
 		}
@@ -491,7 +502,7 @@ public class Controleur implements Observateur{
 		afficherCartes(getJoueurTour());
 		//ihm.afficherNivCurseur(2);
 		isInit = true;
-		
+
 		ihm.afficherDefausse(getJoueurTour());
 
 		//test();
