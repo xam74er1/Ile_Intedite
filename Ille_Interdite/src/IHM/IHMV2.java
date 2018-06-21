@@ -61,6 +61,7 @@ public class IHMV2 extends Observe{
 	JButton btnImgPlayerIn1T,btnImgPlayerIn2T,btnImgPlayerIn3T;
 
 	/**
+	 * 
 	 * Launch the application.
 	 */
 
@@ -86,7 +87,7 @@ public class IHMV2 extends Observe{
 
 
 		sliderImg = new PanelCurseur(this);
-		sliderImg.setBounds(0, 59, 100, 674);
+		sliderImg.setBounds(0, 59, 100, 685);
 		frame.getContentPane().add(sliderImg);
 
 		/*sliderPanel = new JPanel();
@@ -184,7 +185,7 @@ public class IHMV2 extends Observe{
 		PanelSouth.add(btDonneCarte);
 
 		PanelButton btRecupereTresort = new PanelButton(this,"RecupererTresor",TypeMessage.Clique_RecupereTresor);
-		btRecupereTresort.setBounds(454, 9, 130, 25);
+		btRecupereTresort.setBounds(454, 5, 156, 34);
 		PanelSouth.add(btRecupereTresort);
 
 		PanelButton btFinDeTour = new PanelButton(this,"FinDeTour",TypeMessage.Clique_Fin_Tour);
