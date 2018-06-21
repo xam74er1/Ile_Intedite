@@ -455,10 +455,7 @@ public class Controleur implements Observateur{
 	}
 
 	public void init(ArrayList<Aventurier> listJoueurs) {
-		//creer les aventuriers
-		Aventurier a;
 
-		//Marche cour vol et venge mois 
 		joueursList = listJoueurs;
 
 
@@ -477,33 +474,16 @@ public class Controleur implements Observateur{
 		curseur = new Curseur(0);
 
 		ihm.fillPlataux2(grille);
-		//Metre les tuille de depare 
-
-		//Provisoire pour les test 
-
-		//Je met sur 0 0 pour les test 
 
 		creeDeckInondation();
 		creeDeckClassique();
 
-		for(Aventurier av : joueursList) {
-			piocherClassique(av);
-			piocherClassique(av);
-		}
-
-
-		//		for(int j =0;j<5;j++) {
-		//			piocherInondation();
-		//		}
 		ihm.miseAJourPlayer(0," ( "+getJoueurTour().getNom()+" )", getJoueurTour().getColor());
 
 		ihm.rool(getJoueurTour(), joueursList);
 
 		afficherCartes(getJoueurTour());
-		//ihm.afficherNivCurseur(2);
 		isInit = true;
-
-		ihm.afficherDefausse(getJoueurTour());
 
 		//test();
 	}

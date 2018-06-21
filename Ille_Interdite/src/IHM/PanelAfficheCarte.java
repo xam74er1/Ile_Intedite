@@ -27,6 +27,7 @@ public class PanelAfficheCarte extends JPanel {
 		listCarte=new ArrayList<Carte>();
 		this.setBackground(new Color(0,0,0));
 		me=this;
+		this.setVisible(false);
 	}
 	
 	@Override

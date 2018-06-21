@@ -52,6 +52,9 @@ public class IHMV2 extends Observe{
 	VueGrille vue;
 
 	PanelAfficheCarte panelDefausse;
+	PanelAfficheCarte panelCarteJoueur;
+	PanelAfficheCarte panelCarteInondations;
+	PanelAfficheCarte panelCartePiochee;
 
 
 	private ImageIcon imgPlayerIn1T,imgPlayerIn2T,imgPlayerIn3T,imgP1T,imgP2T,imgP3T;
@@ -85,6 +88,18 @@ public class IHMV2 extends Observe{
 		panelDefausse=new PanelAfficheCarte(this, frame);
 		panelDefausse.setBounds(0, 0, 1280, 680);
 		frame.getContentPane().add(panelDefausse);
+		
+		panelCarteInondations=new PanelAfficheCarte(this, frame);
+		panelCarteInondations.setBounds(0, 0, 1280, 680);
+		frame.getContentPane().add(panelCarteInondations);
+		
+		panelCarteJoueur=new PanelAfficheCarte(this, frame);
+		panelCarteJoueur.setBounds(0, 0, 1280, 680);
+		frame.getContentPane().add(panelCarteJoueur);
+		
+		panelCartePiochee=new PanelAfficheCarte(this, frame);
+		panelCartePiochee.setBounds(0, 0, 1280, 680);
+		frame.getContentPane().add(panelCartePiochee);
 
 
 		sliderImg = new PanelCurseur(this);
