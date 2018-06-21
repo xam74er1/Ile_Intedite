@@ -28,7 +28,8 @@ public class PanelAfficheCarte extends JPanel {
 		
 		
 	}
-
+	
+	@Override
 	public void paintComponent(Graphics g){
 
 	}
