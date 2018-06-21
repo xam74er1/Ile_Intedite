@@ -21,6 +21,7 @@ import javax.swing.JTextField;
 
 import Carte.Carte;
 import Carte.Classique;
+import Carte.NomTresor;
 import ille_intedite.Grille;
 import ille_intedite.Message;
 import ille_intedite.Observe;
@@ -39,10 +40,17 @@ public class IHMV2 extends Observe{
 	private JLabel textCusor,msgHelp;
 	JPanel sliderPanel;
 	private PanelCurseur sliderImg;
+	JLabel lbImgTresor1 = new JLabel("");
+	JLabel lbImgTresor2 = new JLabel("");
+	JLabel lbImgTresor3 = new JLabel("");
+	JLabel lbImgTresor4 = new JLabel("");
 
 	HashMap<String,PanelButton> listButton = new HashMap();
 	HashMap<String,JPanel> listPan = new HashMap();
 	HashMap<Integer,PanelCarte> listCartes = new HashMap<Integer,PanelCarte>();
+	HashMap<Integer, PanelCarte> listeCartes3T = new HashMap<Integer,PanelCarte>();
+	HashMap<Integer, PanelCarte> listeCartes2T = new HashMap<Integer,PanelCarte>();
+	HashMap<Integer, PanelCarte> listeCartes1T = new HashMap<Integer,PanelCarte>();
 	HashMap<Integer,JPanel> listCurseur = new HashMap<Integer,JPanel>();
 	private JTextField textField;
 	JPanel PanelHelp;
@@ -68,8 +76,24 @@ public class IHMV2 extends Observe{
 	Image imP3T,imP2T,imP1T;
 	JLabel lbIconJoueur;
 	JButton btnImgPlayerIn1T,btnImgPlayerIn2T,btnImgPlayerIn3T;
+	private JPanel panelCarte3T2;
+	private JPanel panelCarte3T1;
+	private JPanel panelCarte3T3;
+	private JPanel panelCarte3T4;
+	private JPanel panelCarte3T5;
+	private JPanel panelCarte2T1;
+	private JPanel panelCarte2T2;
+	private JPanel panelCarte2T3;
+	private JPanel panelCarte2T4;
+	private JPanel panelCarte2T5;
+	private JPanel panelCarte1T1;
+	private JPanel panelCarte1T2;
+	private JPanel panelCarte1T3;
+	private JPanel panelCarte1T4;
+	private JPanel panelCarte1T5;
 
 	/**
+	 * 
 	 * Launch the application.
 	 */
 
@@ -92,6 +116,7 @@ public class IHMV2 extends Observe{
 		frame.getContentPane().setLayout(null);
 
 		panelDefausse=new PanelAfficheCarte(this, frame);
+
 		panelDefausse.setBounds(0, 0, 1280, 680);
 		frame.getContentPane().add(panelDefausse);
 		
@@ -104,24 +129,42 @@ public class IHMV2 extends Observe{
 		frame.getContentPane().add(panelCartePiochee);
 
 
+
 		sliderImg = new PanelCurseur(this);
-		sliderImg.setBounds(0, 59, 100, 674);
+		sliderImg.setBounds(0, 59, 100, 685);
 		frame.getContentPane().add(sliderImg);
 
 		PanelHelp = new JPanel();
-		PanelHelp.setBounds(0, 0, 60, 60);
+		PanelHelp.setBounds(0, 0, 100, 60);
 		frame.getContentPane().add(PanelHelp);
 		PanelHelp.setLayout(null);
 
 		JButton btnHelp = new JButton("");
-		btnHelp.setBounds(0, 0, 60, 60);
+		btnHelp.setBounds(0, 0, 100, 60);
 		btnHelp.setForeground(new Color(0, 0, 205));
 		btnHelp.setBackground(new Color(0, 0, 205));
-		ImageIcon imgHelp = new ImageIcon("images/icones/iconHelp.png");
+
+		btnHelp.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				new FrameHtml();
+			}
+			
+		});
+		//BOUTON HELP
+		
+
+		ImageIcon imgHelp = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/icones/iconHelp.png");
+
 		Image imH = imgHelp.getImage();
-		imH = imH.getScaledInstance(60, 60, Image.SCALE_DEFAULT);
+
+		imH = imH.getScaledInstance(100, 60, Image.SCALE_DEFAULT);
+
 		ImageIcon imgH = new ImageIcon(imH);
 		btnHelp.setIcon(imgH);
+		btnHelp.setBorder(null);
 		PanelHelp.add(btnHelp);
 
 
@@ -165,7 +208,7 @@ public class IHMV2 extends Observe{
 
 		lbIconJoueur.setBounds(75, 472, 100, 100);
 		CardPlayer.add(lbIconJoueur);
-		ImageIcon imgIconJoueur = new ImageIcon("images/persos/explorateur.png");
+		ImageIcon imgIconJoueur = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/explorateur.png");
 		Image imPC = imgIconJoueur.getImage();
 		imPC = imPC.getScaledInstance(100, 100, Image.SCALE_DEFAULT);
 		ImageIcon imgPC = new ImageIcon(imPC);
@@ -189,9 +232,10 @@ public class IHMV2 extends Observe{
 		btDonneCarte.setBounds(270, 5, 110, 34);
 		PanelSouth.add(btDonneCarte);
 
-		btRecupereTresor = new PanelButton(this,"RecupererTresor",TypeMessage.Clique_RecupereTresor);
-		btRecupereTresor.setBounds(454, 9, 130, 25);
-		PanelSouth.add(btRecupereTresor);
+		PanelButton btRecupereTresort = new PanelButton(this,"RecupererTresor",TypeMessage.Clique_RecupereTresor);
+		btRecupereTresort.setBounds(454, 5, 156, 34);
+		PanelSouth.add(btRecupereTresort);
+
 
 		btFinDeTour = new PanelButton(this,"FinDeTour",TypeMessage.Clique_Fin_Tour);
 		btFinDeTour.setBounds(1030, 5, 110, 34);
@@ -214,7 +258,7 @@ public class IHMV2 extends Observe{
 		//--------------------- 1 et principal -----------------------
 		PanelPlayerIn1T = new JPanel();
 		PanelPlayerIn1T.setBackground(new Color(139, 69, 19));
-		PanelPlayerIn1T.setBounds(59, 434, 150, 150);
+		PanelPlayerIn1T.setBounds(23, 434, 150, 150);
 		PanelEast.add(PanelPlayerIn1T);
 		PanelPlayerIn1T.setLayout(null);
 
@@ -229,7 +273,7 @@ public class IHMV2 extends Observe{
 
 		PanelPlayerIn2T = new JPanel();
 		PanelPlayerIn2T.setBackground(new Color(139, 69, 19));
-		PanelPlayerIn2T.setBounds(59, 264, 150, 150);
+		PanelPlayerIn2T.setBounds(23, 264, 150, 150);
 		PanelEast.add(PanelPlayerIn2T);
 		PanelPlayerIn2T.setLayout(null);
 
@@ -244,7 +288,7 @@ public class IHMV2 extends Observe{
 
 		PanelPlayerIn3T = new JPanel();
 		PanelPlayerIn3T.setBackground(new Color(139, 69, 19));
-		PanelPlayerIn3T.setBounds(59, 95, 150, 150);
+		PanelPlayerIn3T.setBounds(23, 101, 150, 150);
 		PanelEast.add(PanelPlayerIn3T);
 		PanelPlayerIn3T.setLayout(null);
 
@@ -256,52 +300,133 @@ public class IHMV2 extends Observe{
 		PanelPlayerIn3T.add(btnImgPlayerIn3T);
 		btnImgPlayerIn3T.setBorder(null);
 
+
 		PanelTresor = new JPanel();
 		PanelTresor.setBackground(new Color(165, 42, 42));
 		PanelTresor.setBounds(0, 0, 279, 84);
 		PanelEast.add(PanelTresor);
 		PanelTresor.setLayout(null);
 
-		JLabel lbImgTresor1 = new JLabel("");
+
 		lbImgTresor1.setBounds(0, 0, 60, 82);
 		PanelTresor.add(lbImgTresor1);
-		ImageIcon ImgTresor1 = new ImageIcon("images/tresors/calice.png");
+		ImageIcon ImgTresor1 = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/tresors/calice.png");
 		Image imT1 = ImgTresor1.getImage();
 		imT1 = imT1.getScaledInstance(60, 82, Image.SCALE_DEFAULT);
 		ImageIcon imgT1 = new ImageIcon(imT1);
 		lbImgTresor1.setIcon(imgT1);
+		lbImgTresor1.setEnabled(false);
 
-		JLabel lbImgTresor2 = new JLabel("");
+
 		lbImgTresor2.setBounds(72, 0, 60, 82);
 		PanelTresor.add(lbImgTresor2);
-		ImageIcon ImgTresor2 = new ImageIcon("images/tresors/cristal.png");
+		ImageIcon ImgTresor2 = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/tresors/cristal.png");
 		Image imT2 = ImgTresor2.getImage();
 		imT2 = imT2.getScaledInstance(60, 82, Image.SCALE_DEFAULT);
 		ImageIcon imgT2 = new ImageIcon(imT2);
 		lbImgTresor2.setIcon(imgT2);
+		lbImgTresor2.setEnabled(false);
 
-		JLabel lbImgTresor3 = new JLabel("");
+
 		lbImgTresor3.setBounds(144, 0, 60, 82);
 		PanelTresor.add(lbImgTresor3);
-		ImageIcon ImgTresor3 = new ImageIcon("images/tresors/pierre.png");
+		ImageIcon ImgTresor3 = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/tresors/pierre.png");
 		Image imT3 = ImgTresor3.getImage();
 		imT3 = imT3.getScaledInstance(60, 82, Image.SCALE_DEFAULT);
 		ImageIcon imgT3 = new ImageIcon(imT3);
 		lbImgTresor3.setIcon(imgT3);
+		lbImgTresor3.setEnabled(false);
 
-		JLabel lbImgTresor4 = new JLabel("");
+
 		lbImgTresor4.setBounds(219, 0, 60, 82);
 		PanelTresor.add(lbImgTresor4);
-		ImageIcon ImgTresor4 = new ImageIcon("images/tresors/zephyr.png");
+		ImageIcon ImgTresor4 = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/tresors/zephyr.png");
 		Image imT4 = ImgTresor4.getImage();
 		imT4 = imT4.getScaledInstance(60, 82, Image.SCALE_DEFAULT);
 		ImageIcon imgT4 = new ImageIcon(imT4);
 		lbImgTresor4.setIcon(imgT4);
+		lbImgTresor4.setEnabled(false);
 
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(105, 105, 105));
 		panel.setBounds(0, 84, 279, 10);
 		PanelEast.add(panel);
+		
+		
+		panelCarte3T1 = new PanelCarte(0,this,true);
+		panelCarte3T1.setBounds(185, 101, 25, 35);
+		PanelEast.add(panelCarte3T1);
+		listeCartes3T.put(0, (PanelCarte) panelCarte3T1);
+		
+		panelCarte3T2 = new PanelCarte(1,this,true);
+		panelCarte3T2.setBounds(230, 101, 25, 35);
+		PanelEast.add(panelCarte3T2);
+		listeCartes3T.put(1, (PanelCarte) panelCarte3T2);
+		
+		panelCarte3T3 = new PanelCarte(2,this,true);
+		panelCarte3T3.setBounds(185, 149, 25, 35);
+		PanelEast.add(panelCarte3T3);
+		listeCartes3T.put(2, (PanelCarte) panelCarte3T3);
+		
+		panelCarte3T4 = new PanelCarte(3,this,true);
+		panelCarte3T4.setBounds(230, 149, 25, 35);
+		PanelEast.add(panelCarte3T4);
+		listeCartes3T.put(3, (PanelCarte) panelCarte3T4);
+		
+		panelCarte3T5 = new PanelCarte(4,this,true);
+		panelCarte3T5.setBounds(208, 197, 25, 35);
+		PanelEast.add(panelCarte3T5);
+		listeCartes3T.put(4, (PanelCarte) panelCarte3T5);
+		
+		panelCarte2T1 = new PanelCarte(0,this,true);
+		panelCarte2T1.setBounds(185, 264, 25, 35);
+		PanelEast.add(panelCarte2T1);
+		listeCartes2T.put(0, (PanelCarte) panelCarte3T4);
+		
+		panelCarte2T2 = new PanelCarte(1,this,true);
+		panelCarte2T2.setBounds(230, 264, 25, 35);
+		PanelEast.add(panelCarte2T2);
+		listeCartes2T.put(1, (PanelCarte) panelCarte3T4);
+		
+		panelCarte2T3 = new PanelCarte(2,this,true);
+		panelCarte2T3.setBounds(185, 312, 25, 35);
+		PanelEast.add(panelCarte2T3);
+		listeCartes2T.put(2, (PanelCarte) panelCarte3T4);
+		
+		panelCarte2T4 = new PanelCarte(3,this,true);
+		panelCarte2T4.setBounds(230, 312, 25, 35);
+		PanelEast.add(panelCarte2T4);
+		listeCartes2T.put(3, (PanelCarte) panelCarte3T4);
+		
+		panelCarte2T5 = new PanelCarte(4,this,true);
+		panelCarte2T5.setBounds(208, 360, 25, 35);
+		PanelEast.add(panelCarte2T5);
+		listeCartes2T.put(4, (PanelCarte) panelCarte3T4);
+		
+		panelCarte1T1 = new PanelCarte(0,this,true);
+		panelCarte1T1.setBounds(185, 434, 25, 35);
+		PanelEast.add(panelCarte1T1);
+		listeCartes1T.put(0, (PanelCarte) panelCarte3T4);
+		
+		panelCarte1T2 = new PanelCarte(1,this,true);
+		panelCarte1T2.setBounds(230, 434, 25, 35);
+		PanelEast.add(panelCarte1T2);
+		listeCartes1T.put(1, (PanelCarte) panelCarte3T4);
+		
+		panelCarte1T3 = new PanelCarte(2,this,true);
+		panelCarte1T3.setBounds(185, 482, 25, 35);
+		PanelEast.add(panelCarte1T3);
+		listeCartes1T.put(2, (PanelCarte) panelCarte3T4);
+		
+		panelCarte1T4 = new PanelCarte(3,this,true);
+		panelCarte1T4.setBounds(230, 482, 25, 35);
+		PanelEast.add(panelCarte1T4);
+		listeCartes1T.put(3, (PanelCarte) panelCarte3T4);
+		
+		panelCarte1T5 = new PanelCarte(4,this,true);
+		panelCarte1T5.setBounds(208, 530, 25, 35);
+		PanelEast.add(panelCarte1T5);
+		listeCartes1T.put(4, (PanelCarte) panelCarte3T4);
 
 		panHelp = new JPanel();
 		panHelp.setBackground(new Color(144, 158, 181));
@@ -321,6 +446,8 @@ public class IHMV2 extends Observe{
 		//----------------
 		//PROVISOIRE 
 		//--------------
+		
+		frame.getContentPane().add(panelDefausse);
 
 		lblJoeurN = new JLabel();
 
@@ -329,6 +456,19 @@ public class IHMV2 extends Observe{
 		frame.setResizable(false);
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+	
+	public void setTresorEnabled(NomTresor nomTresor) {
+		switch (nomTresor) {
+		case CaliceOnde:lbImgTresor1.setEnabled(true);
+			break;
+		case CristalArdent:lbImgTresor2.setEnabled(true);
+			break;
+		case PierreSacree:lbImgTresor3.setEnabled(true);
+			break;
+		case StatueZephir:lbImgTresor4.setEnabled(true);
+			break;
+		}
 	}
 
 	public void fillPlataux2(Grille g){
@@ -457,12 +597,12 @@ public class IHMV2 extends Observe{
 		String path = a.getNom().toLowerCase();
 
 		i++;
-		//		Icon img = new ImageIcon("images/persos/"+path+".png");
+		//		Icon img = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/"+path+".png");
 		//		lbIconJoueur.setIcon(img);
 
 
 
-		ImageIcon imgIconJoueur = new ImageIcon("images/persos/"+path+".png");
+		ImageIcon imgIconJoueur = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/"+path+".png");
 		Image imPC = imgIconJoueur.getImage();
 		imPC = imPC.getScaledInstance(100, 100, Image.SCALE_DEFAULT);
 		ImageIcon imgPC = new ImageIcon(imPC);
@@ -477,7 +617,7 @@ public class IHMV2 extends Observe{
 
 		i++;
 
-		imgPlayerIn1T = new ImageIcon("images/persos/"+path+".png");
+		imgPlayerIn1T = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/"+path+".png");
 		imP1T = imgPlayerIn1T.getImage();
 		imP1T = imP1T.getScaledInstance(150,150, Image.SCALE_DEFAULT);
 		imgP1T = new ImageIcon(imP1T);
@@ -494,7 +634,7 @@ public class IHMV2 extends Observe{
 			path = a.getNom().toLowerCase();
 			i++;
 
-			imgPlayerIn2T = new ImageIcon("images/persos/"+path+".png");
+			imgPlayerIn2T = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/"+path+".png");
 			imP2T = imgPlayerIn2T.getImage();
 			imP2T = imP2T.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
 			imgP2T = new ImageIcon(imP2T);
@@ -512,7 +652,7 @@ public class IHMV2 extends Observe{
 			i++;
 
 
-			imgPlayerIn3T = new ImageIcon("images/persos/"+path+".png");
+			imgPlayerIn3T = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/"+path+".png");
 			imP3T = imgPlayerIn3T.getImage();
 			imP3T = imP3T.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
 			imgP3T = new ImageIcon(imP3T);
@@ -536,7 +676,7 @@ public class IHMV2 extends Observe{
 	}
 
 	public void afficherDefausse(Aventurier a) {
-		setPanelEnabled(false);
+		//setPanelVisible(false);
 		panelDefausse.setListCarte(a.getListeCarteJoueur());
 		panelDefausse.repaint();
 		panelDefausse.setVisible(true);
@@ -550,10 +690,15 @@ public class IHMV2 extends Observe{
 	}
 
 	public void setPanelEnabled(boolean b) {
+		PanelEast.setVisible(b);
+		PanelHelp.setVisible(b);
+		panHelp.setVisible(b);
+		PanelSouth.setVisible(b);
+		Plateau.setVisible(b);
+		PanelTresor.setVisible(b);
+		sliderImg.setVisible(b);
+		CardPlayer.setVisible(b);
 		PanelEast.setEnabled(b);
-		btnImgPlayerIn1T.setEnabled(b);
-		btnImgPlayerIn2T.setEnabled(b);
-		btnImgPlayerIn3T.setEnabled(b);
 		PanelHelp.setEnabled(b);
 		panHelp.setEnabled(b);
 		PanelSouth.setEnabled(b);
