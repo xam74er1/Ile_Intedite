@@ -47,7 +47,7 @@ public class IHMV2 extends Observe{
 	JLabel lbImgTresor4 = new JLabel("");
 
 	HashMap<String,PanelButton> listButton = new HashMap();
-	HashMap<String,JPanel> listPan = new HashMap();
+	HashMap<String,CasePlateau> listPan = new HashMap();
 	HashMap<Integer,PanelCarte> listCartes = new HashMap<Integer,PanelCarte>();
 	HashMap<Integer, PanelCarte> listeCartes3T = new HashMap<Integer,PanelCarte>();
 	HashMap<Integer, PanelCarte> listeCartes2T = new HashMap<Integer,PanelCarte>();
@@ -843,6 +843,10 @@ public class IHMV2 extends Observe{
 		}
 		for (JPanel j : listPan.values()) {
 			j.setEnabled(b);
+		}
+		
+		for(CasePlateau c : listPan.values()) {
+			c.setEnabled(b);
 		}
 
 	}
