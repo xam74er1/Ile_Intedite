@@ -415,8 +415,11 @@ public class IHMV2 extends Observe{
 	public void setTresorEnabled(NomTresor nomTresor) {
 		switch (nomTresor) {
 		case CaliceOnde:lbImgTresor1.setEnabled(true);
+			break;
 		case CristalArdent:lbImgTresor2.setEnabled(true);
+			break;
 		case PierreSacree:lbImgTresor3.setEnabled(true);
+			break;
 		case StatueZephir:lbImgTresor4.setEnabled(true);
 			break;
 		}
