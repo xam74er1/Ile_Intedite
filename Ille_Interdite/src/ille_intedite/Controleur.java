@@ -378,6 +378,7 @@ public class Controleur implements Observateur{
 		melanger(carteTresorDeck);
 		listPioche.add(piocherClassique(getJoueurTour()));
 		listPioche.add(piocherClassique(getJoueurTour()));
+		ihm.afficherPioche(listPioche);
 	}
 
 	public void creeDeckInondation() {

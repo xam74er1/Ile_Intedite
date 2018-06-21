@@ -1,6 +1,8 @@
 package IHM;
 
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -8,7 +10,9 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import ille_intedite.Message;
 import ille_intedite.Observe;
+import ille_intedite.TypeMessage;
 
 public class PanelOk extends JPanel {
 	
@@ -17,6 +21,38 @@ public class PanelOk extends JPanel {
 	PanelOk(Observe o){
 		super();
 		this.o=o;
+		this.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				Message m = new Message(TypeMessage.Clique_Ok);
+				o.notifierObservateur(m);
+			}
+		});
 	}
 	
 	@Override
@@ -24,7 +60,7 @@ public class PanelOk extends JPanel {
 		BufferedImage img;
 		
 		try {
-			img = ImageIO.read(new File(System.getProperty("user.dir")+"\\src\\"+"images\\"));
+			img = ImageIO.read(new File(System.getProperty("user.dir")+"\\src\\"+"images\\Art\\btnOk.png"));
 			g.drawImage(img, 0, 0,this.getWidth(),this.getHeight(), null);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

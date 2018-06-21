@@ -57,7 +57,13 @@ public class PanelAfficheCarte extends JPanel {
 		for (int i=listCarte.size();i<30-(2*(listCarte.size()/10+1));i++) {
 			me.add(new PanelNoir());
 		}
-		me.add(new PanelNoir());
+		PanelNoir pane = new PanelNoir();
+		pane.setLayout(new GridLayout(4,1));
+		for (int i=0;i<3;i++) {
+			pane.add(new PanelNoir());
+		}
+		pane.add(new PanelOk(o));
+		me.add(pane);
 	}
 
 

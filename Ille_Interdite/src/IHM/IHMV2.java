@@ -232,9 +232,9 @@ public class IHMV2 extends Observe{
 		btDonneCarte.setBounds(270, 5, 110, 34);
 		PanelSouth.add(btDonneCarte);
 
-		PanelButton btRecupereTresort = new PanelButton(this,"RecupererTresor",TypeMessage.Clique_RecupereTresor);
-		btRecupereTresort.setBounds(454, 5, 156, 34);
-		PanelSouth.add(btRecupereTresort);
+		btRecupereTresor = new PanelButton(this,"RecupererTresor",TypeMessage.Clique_RecupereTresor);
+		btRecupereTresor.setBounds(454, 5, 156, 34);
+		PanelSouth.add(btRecupereTresor);
 
 
 		btFinDeTour = new PanelButton(this,"FinDeTour",TypeMessage.Clique_Fin_Tour);
@@ -683,7 +683,7 @@ public class IHMV2 extends Observe{
 	}
 	
 	public void afficherPioche(ArrayList<Carte> listCartes) {
-		setPanelEnabled(false);
+		//setPanelEnabled(false);
 		panelCartePiochee.setListCarte(listCartes);
 		panelCartePiochee.repaint();
 		panelCartePiochee.setVisible(true);		
