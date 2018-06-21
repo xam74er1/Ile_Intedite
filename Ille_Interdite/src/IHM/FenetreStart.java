@@ -836,9 +836,7 @@ public class FenetreStart extends JFrame {
 	}
 	
 
-	public static void main(String[] args){
-		FenetreStart f = new FenetreStart();
-	}
+	
 
 
 
