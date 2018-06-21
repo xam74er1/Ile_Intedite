@@ -26,17 +26,17 @@ import ille_intedite.Tuile;
 import ille_intedite.TypeMessage;
 import ille_intedite.VueGrille;
 import ille_intedite.Aventurie.Aventurier;
+import java.awt.BorderLayout;
 
 public class IHMV2 extends Observe{
-	//Com ref 2
-	JLabel msgHelp;
 	public JFrame frame;
 	private JTextArea console;
 	private JPanel Plateau ;
-	private JLabel lblJoeurN;
-	private JLabel textCusor;
+	 private JLabel lblJoeurN;
+	private JPanel panHelp;
+	private JLabel textCusor,msgHelp;
 	JPanel sliderPanel;
-	PanelCurseur sliderImg;
+	private PanelCurseur sliderImg;
 
 	HashMap<String,PanelButton> listButton = new HashMap();
 	HashMap<String,JPanel> listPan = new HashMap();
@@ -78,6 +78,7 @@ public class IHMV2 extends Observe{
 		frame.getContentPane().setLayout(null);
 		
 		panelDefausse=new PanelAfficheCarte(this, frame);
+		
 		
 		sliderImg = new PanelCurseur(this);
 		sliderImg.setBounds(0, 60, 100, 673);
@@ -166,23 +167,23 @@ public class IHMV2 extends Observe{
 		PanelSouth.setLayout(null);
 
 		PanelButton Deplace = new PanelButton(this,"Deplacer",TypeMessage.Clique_Deplace);
-		Deplace.setBounds(12, 13, 97, 25);
+		Deplace.setBounds(10, 5, 110, 34);
 		PanelSouth.add(Deplace);
 
 		PanelButton btAssecher = new PanelButton(this,"Assecher",TypeMessage.Clique_Asseche);
-		btAssecher.setBounds(121, 13, 97, 25);
+		btAssecher.setBounds(140, 5, 110, 34);
 		PanelSouth.add(btAssecher);
 
 		PanelButton btDonneCarte = new PanelButton(this,"DonnerCarte",TypeMessage.Clique_DonneCarte);
-		btDonneCarte.setBounds(230, 13, 97, 25);
+		btDonneCarte.setBounds(270, 5, 110, 34);
 		PanelSouth.add(btDonneCarte);
 
 		PanelButton btRecupereTresort = new PanelButton(this,"RecupererTresor",TypeMessage.Clique_RecupereTresor);
-		btRecupereTresort.setBounds(339, 13, 130, 25);
+		btRecupereTresort.setBounds(454, 9, 130, 25);
 		PanelSouth.add(btRecupereTresort);
 
 		PanelButton btFinDeTour = new PanelButton(this,"FinDeTour",TypeMessage.Clique_Fin_Tour);
-		btFinDeTour.setBounds(1056, 13, 97, 25);
+		btFinDeTour.setBounds(1030, 5, 110, 34);
 		PanelSouth.add(btFinDeTour);
 
 
@@ -337,20 +338,26 @@ public class IHMV2 extends Observe{
 		panel.setBounds(0, 84, 279, 10);
 		PanelEast.add(panel);
 		
-		 msgHelp = new JLabel("");
-		msgHelp.setBackground(Color.BLUE);
-		msgHelp.setForeground(Color.red);
-		msgHelp.setFont(new Font("Serif", Font.BOLD, 25));
-		msgHelp.setHorizontalAlignment(JLabel.CENTER);
-		msgHelp.setVerticalAlignment(JLabel.CENTER);
-		msgHelp.setBounds(114, 0, 1150, 35);
+		 panHelp = new JPanel();
+		 panHelp.setBackground(new Color(144, 158, 181));
+		panHelp.setBounds(114, 0, 1150, 32);
+		frame.getContentPane().add(panHelp);
+		panHelp.setLayout(new BorderLayout(0, 0));
 		
-		frame.getContentPane().add(msgHelp);
+		 msgHelp = new JLabel("");
+		 msgHelp.setForeground(Color.red);
+			msgHelp.setFont(new Font("Serif", Font.BOLD, 25));
+			msgHelp.setHorizontalAlignment(JLabel.CENTER);
+			msgHelp.setVerticalAlignment(JLabel.CENTER);
+		
+		panHelp.add(msgHelp, BorderLayout.CENTER);
 		frame.setBounds(100, 100, 1280, 720);
 
 		//----------------
 		//PROVISOIRE 
 		//--------------
+		
+		frame.add(panelDefausse);
 
 		lblJoeurN = new JLabel();
 
