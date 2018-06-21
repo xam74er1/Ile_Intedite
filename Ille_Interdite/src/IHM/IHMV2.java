@@ -676,7 +676,7 @@ public class IHMV2 extends Observe{
 	}
 
 	public void afficherDefausse(Aventurier a) {
-		//setPanelVisible(false);
+		setPanelEnabled(false);
 		panelDefausse.setListCarte(a.getListeCarteJoueur());
 		panelDefausse.repaint();
 		panelDefausse.setVisible(true);
@@ -690,14 +690,6 @@ public class IHMV2 extends Observe{
 	}
 
 	public void setPanelEnabled(boolean b) {
-		PanelEast.setVisible(b);
-		PanelHelp.setVisible(b);
-		panHelp.setVisible(b);
-		PanelSouth.setVisible(b);
-		Plateau.setVisible(b);
-		PanelTresor.setVisible(b);
-		sliderImg.setVisible(b);
-		CardPlayer.setVisible(b);
 		PanelEast.setEnabled(b);
 		PanelHelp.setEnabled(b);
 		panHelp.setEnabled(b);
