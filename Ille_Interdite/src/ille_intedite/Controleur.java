@@ -731,6 +731,7 @@ public class Controleur implements Observateur{
 			}
 			if(!dejaPresent) {
 				tresorsRecuperes.add(t);
+				ihm.setTresorEnabled(t.getType());
 				for(int i=0;i<a.getListeCarteJoueur().size(); i++) {
 					if(a.getListeCarteJoueur().get(i).getNom()==t.getType().getNom()) {
 						a.getListeCarteJoueur().remove(i);
