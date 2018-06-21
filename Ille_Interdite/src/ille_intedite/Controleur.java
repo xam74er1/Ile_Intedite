@@ -199,8 +199,6 @@ public class Controleur implements Observateur{
 
 				break;
 
-				/* -------------------------FIN CLIQUE SUR UNE TUILLE ----------------------------------------------- */
-				//Actoin lors du clique sur un sac de sable (carte ) 
 			case Clique_Asseche_SacDeSable :
 				grille.getTuile(msg.getLocation()).assecher();
 				ihm.setIndication("Case assechee en "+msg.getLocation());
@@ -216,6 +214,7 @@ public class Controleur implements Observateur{
 				assecher(msg.getLocation());
 				ihm.updateGrille();
 				getJoueurTour().actionJouer();
+				PlaySound.play(System.getProperty("user.dir")+"\\src\\"+"sound\\Sac_de_Sable.wav");
 
 				if(getJoueurTour() instanceof Ingenieur) {
 					Ingenieur i = (Ingenieur) getJoueurTour();
@@ -227,7 +226,7 @@ public class Controleur implements Observateur{
 					i.setDerniereActionAssecher(!i.getDerniereActionAssecher());
 				}
 				break;
-				//Action lors du bouton fin de tour 
+				
 			case Clique_Fin_Tour :
 				deplacer(msg.getLocation(),urgence);
 				miseAJourGrille();
@@ -415,12 +414,13 @@ public class Controleur implements Observateur{
 
 	private void afficherDefausseFinTour() {
 		defausse=true;
-		//if (getJoueurTour().getListeCarteJoueur().size() > 5) {
-		lastAction = TypeMessage.Defausse_Joueur;
-		ihm.afficherPioche(getJoueurTour().getListeCarteJoueur());;
-		ihm.setIndication("Vous avez " + (getJoueurTour().getListeCarteJoueur().size()-5) + " cartes en trop dans votre main, choisir une carte a defausser :");
+	if (getJoueurTour().getListeCarteJoueur().size() > 5) {
+			lastAction = TypeMessage.Defausse_Joueur;
+			ihm.afficherDefausse(getJoueurTour());
+			ihm.setIndication("Vous avez " + (getJoueurTour().getListeCarteJoueur().size()-5) + " cartes en trop dans votre main, choisir les cartes a defausser :");
 
-		//}
+
+		}
 	}
 
 	private void afficherPiocheInondation(){
@@ -618,14 +618,16 @@ public class Controleur implements Observateur{
 
 		int nbr = getJoueurTour().getNum();
 		for(Aventurier a : getJoueurTour().getJoueurTuile()) {
-			System.out.println(" k = "+a.getNum()+" nbr "+nbr);
+		//	System.out.println(" k = "+a.getNum()+" nbr "+nbr);
 			if(nbr != a.getNum()&&num==a.getNum()) {
 				givePlayer = a;
 				return true;
 			}
 
-
+		
 		}
+		
+	
 
 		return  false;
 	}
@@ -669,7 +671,7 @@ public class Controleur implements Observateur{
 
 			return false;
 		}else {
-			ihm.setIndication("Joueur sur la meme case  : "+str+" \n Veiller entre le numerau du joeur selectione");
+			ihm.setIndication("Joueur sur la meme case  : "+str+" \n Entrez le numero du joueur selectionne");
 			return true;
 		}
 	}
@@ -903,6 +905,9 @@ public class Controleur implements Observateur{
 
 	}*/
 
+	public static int getnbJoueur() {
+		return joueursList.size();
+	}
 
 }
 

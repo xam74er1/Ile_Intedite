@@ -12,7 +12,7 @@ public class Grille {
 	IHMV2 ihm;
 	public static HashMap<String, Tuile> tuilesListe;
 	private String[] nomTuiles = {"000Le Pont des Abimes",//00x = tuile normale 02x = tuile spawn 3xx = tuile tresor
-			"020La Porte de Bronze",//021 = spawn ingé
+			"020La Porte de Bronze",//021 = spawn ingenieur
 			"311La Caverne des Ombres",//31x = tresor brasier
 			"021La Porte de Fer",//025 = spawn plongeur
 			"022La Porte d'Or",//026 = spawn navigateur
