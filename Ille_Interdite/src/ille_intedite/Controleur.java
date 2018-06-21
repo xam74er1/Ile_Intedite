@@ -25,6 +25,7 @@ import Carte.CarteHelicoptere;
 import java.awt.Color;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.concurrent.TimeUnit;
 
 import utils.Parameters;
 import utils.Utils;
@@ -53,6 +54,8 @@ public class Controleur implements Observateur{
 	private Aventurier urgence = null;
 	private boolean urg=false;
 	private Classique carteSpe;
+	private ArrayList<Carte> listPioche;
+	private boolean finTour=false;
 
 	private int numCarte = -1;
 
@@ -332,6 +335,30 @@ public class Controleur implements Observateur{
 
 	private void finDeTour() {
 		// TODO Auto-generated method stub
+		finTour=true;
+		listPioche=new ArrayList();
+		
+		listPioche.add(piocherClassique(getJoueurTour()));
+		listPioche.add(piocherClassique(getJoueurTour()));
+		
+		try {
+			ihm.afficherPioche(listPioche);
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ihm.afficherPlateau();
+
+		if (getJoueurTour().getListeCarteJoueur().size() > 5) {
+			lastAction = TypeMessage.Defausse_Joueur;
+			ihm.afficherDefausse(getJoueurTour());
+
+
+			ihm.setIndication("Vous avez " + (getJoueurTour().getListeCarteJoueur().size()-5) + " cartes en trop dans votre main, choisir les cartes Ã  dÃ©fausser :");
+
+		}
+		
 		if(!urg) {
 			ihm.setIndication("Fin du tour du joueur "+numTour);
 
@@ -345,18 +372,6 @@ public class Controleur implements Observateur{
 
 		if(!urg) {
 
-			piocherClassique(getJoueurTour());
-			piocherClassique(getJoueurTour());
-
-
-			if (getJoueurTour().getListeCarteJoueur().size() > 5) {
-				lastAction = TypeMessage.Defausse_Joueur;
-
-
-				ihm.setIndication("Vous avez " + (getJoueurTour().getListeCarteJoueur().size()-5) + " cartes en trop dans votre main, choisir les cartes Ã  dÃ©fausser :");
-
-			}
-
 
 			getJoueurTour().finTour();
 			numTour++;		
@@ -364,7 +379,6 @@ public class Controleur implements Observateur{
 			ihm.setIndication("Joueur "+numTour+" A vous de jouer");
 			ihm.miseAJourPlayer(numTour," ( "+getJoueurTour().getNom()+" )", getJoueurTour().getColor());
 			afficherCartes(getJoueurTour());
-			//	Utils.debugln("Fin de tour");
 			ihm.rool(getJoueurTour(), joueursList);
 			grille.activateAll();
 			miseAJourGrille();
@@ -412,8 +426,8 @@ public class Controleur implements Observateur{
 		carteTresorDeck.add(new CarteSacSable("2SacsDeSable"));
 		carteTresorDeck.add(new CarteSacSable("3SacsDeSable"));
 
-		carteTresorDeck.add(new MonteeEaux("1Montee des EAU"));
-		carteTresorDeck.add(new MonteeEaux("2Montee des EAU"));
+		carteTresorDeck.add(new MonteeEaux("1MonteeDesEaux"));
+		carteTresorDeck.add(new MonteeEaux("2MonteeDesEaux"));
 		//carteTresorDeck.add(new MonteeEaux("3Monte des EAU"));
 
 		carteTresorDeck.add(new CarteHelicoptere("1Helicoptere"));
@@ -428,7 +442,7 @@ public class Controleur implements Observateur{
 
 	}
 
-	public void piocherClassique(Aventurier a) {
+	public Carte piocherClassique(Aventurier a) {
 		if(carteTresorDeck.size()!=0) {
 			Classique cC = carteTresorDeck.get(0);
 			if(!(cC instanceof MonteeEaux)) {
@@ -444,13 +458,15 @@ public class Controleur implements Observateur{
 				}else {
 					carteTresorDeck.remove(0);
 					carteTresorDeck.add((int) (Math.random()*carteTresorDeck.size()),cC);
-					piocherClassique(a);
+					return piocherClassique(a);
 				}
 			}
+			return cC;
 		}else {
 			ArrayList<Classique> stamp = carteTresorDeck;
 			carteTresorDeck=carteTresorsDefausse;
 			carteTresorsDefausse=stamp;
+			return null;
 		}
 
 	}
@@ -462,14 +478,7 @@ public class Controleur implements Observateur{
 
 		Collections.shuffle(joueursList);
 
-
 		melanger(joueursList);
-
-		for(Aventurier av : joueursList) {
-			piocherClassique(av);
-			piocherClassique(av);
-		}
-
 		grille = new Grille(ihm,joueursList);
 
 		curseur = new Curseur(0);
@@ -478,6 +487,11 @@ public class Controleur implements Observateur{
 
 		creeDeckInondation();
 		creeDeckClassique();
+		
+		for(Aventurier av : joueursList) {
+			piocherClassique(av);
+			piocherClassique(av);
+		}
 
 		ihm.miseAJourPlayer(0," ( "+getJoueurTour().getNom()+" )", getJoueurTour().getColor());
 
