@@ -136,10 +136,6 @@ public class Controleur implements Observateur{
 
 			case Clique_Deplace_Helico :
 				if (helicoTuileSelect!=null) {
-					if (helicoTuileSelect.getNum()==22) {
-						aCarteHelicoptere=true;
-						verifierFinDePartie();
-					}
 					Tuile t = grille.getTuile(msg.getLocation());
 					for(Aventurier a : joueursList) {
 						if(a.getTuile().equals(helicoTuileSelect)) {
@@ -152,6 +148,10 @@ public class Controleur implements Observateur{
 					carteTresorsDefausse.add(carteSpe);
 					helicoTuileSelect=null;
 				}else {
+					if (grille.getTuile(msg.getLocation()).getNum()==22) {
+						aCarteHelicoptere=true;
+						verifierFinDePartie();
+					}
 					ArrayList<Tuile> tuilesDep = new ArrayList<Tuile>();
 					for(Tuile t : Grille.tuilesListe.values()) {
 						if(t.getStatut()!=2 && t.getNum()!=-1 && !(t.equals(grille.getTuile(msg.getLocation())))) {
