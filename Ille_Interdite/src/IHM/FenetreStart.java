@@ -698,11 +698,7 @@ public class FenetreStart extends JFrame {
                 labelJoueurCourrant.setText("");
                 termine = true;
                 MessageInit m = new MessageInit();
-                
-                
-                 
-                
-                
+
                 labelExplo.setVisible(false);
                 labelInge.setVisible(false);
                 labelMessa.setVisible(false);
@@ -796,7 +792,7 @@ public class FenetreStart extends JFrame {
         	m.niveauEau =2;
         } else if  (difficulte.getSelectedItem() == "Epique") {
         	m.niveauEau =3;
-        } else if  (difficulte.getSelectedItem() == "Legendaire") {
+        } else {
         	m.niveauEau =4;
         }
 		
