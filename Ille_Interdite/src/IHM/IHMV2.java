@@ -218,7 +218,7 @@ public class IHMV2 extends Observe{
 		btnImgPlayerIn1T.setIcon(imgP1T);
 		btnImgPlayerIn1T.addActionListener(actionBoutonJoueur());
 		btnImgPlayerIn1T.setBorder(null);
-		btnImgPlayerIn1T.setEnabled(false);
+		//btnImgPlayerIn1T.setEnabled(false);
 			//------------- 2 -----------------------
 
 		PanelPlayerIn2T = new JPanel();
@@ -243,7 +243,7 @@ public class IHMV2 extends Observe{
 
 		btnImgPlayerIn2T.setIcon(imgP2T);*/
 		btnImgPlayerIn2T.setBorder(null);
-		btnImgPlayerIn2T.setEnabled(false);
+		//btnImgPlayerIn2T.setEnabled(false);
 
 
 		PanelPlayerIn3T = new JPanel();
@@ -265,7 +265,7 @@ public class IHMV2 extends Observe{
 		btnImgPlayerIn3T.addActionListener(actionBoutonJoueur());
 		btnImgPlayerIn3T.setIcon(imgP3T);*/
 		btnImgPlayerIn3T.setBorder(null);
-		btnImgPlayerIn3T.setEnabled(false);
+		//btnImgPlayerIn3T.setEnabled(false);
 
 		
 
