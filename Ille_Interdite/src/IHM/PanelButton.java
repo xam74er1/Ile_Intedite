@@ -20,6 +20,8 @@ public class PanelButton extends JPanel{
 	private Observe o;
 	private String name;
 	private MouseListener m;
+	private boolean blanc = false;
+	
 
 	public PanelButton (Observe o,String name,TypeMessage type) {
 		super();
@@ -44,6 +46,11 @@ public class PanelButton extends JPanel{
 			e.printStackTrace();
 		}
 
+		if(blanc) {
+			g.setColor(new Color(0,0,0,128));
+			g.fillRect(0, 0,this.getWidth(),this.getHeight());
+		}
+		
 	}
 	
 	private MouseListener mouse(TypeMessage type) {
@@ -52,13 +59,16 @@ public class PanelButton extends JPanel{
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
 				// TODO Auto-generated method stub
+				blanc = false;
+				repaint();
 				
 			}
 			
 			@Override
 			public void mousePressed(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				
+				blanc = true;
+				repaint();
 			}
 			
 			@Override

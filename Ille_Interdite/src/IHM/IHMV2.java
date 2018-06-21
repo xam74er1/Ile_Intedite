@@ -26,17 +26,17 @@ import ille_intedite.Tuile;
 import ille_intedite.TypeMessage;
 import ille_intedite.VueGrille;
 import ille_intedite.Aventurie.Aventurier;
+import java.awt.BorderLayout;
 
 public class IHMV2 extends Observe{
-	//Com ref 2
-	JLabel msgHelp;
 	public JFrame frame;
 	private JTextArea console;
 	private JPanel Plateau ;
-	private JLabel lblJoeurN;
-	private JLabel textCusor;
+	 private JLabel lblJoeurN;
+	private JPanel panHelp;
+	private JLabel textCusor,msgHelp;
 	JPanel sliderPanel;
-	PanelCurseur sliderImg;
+	private PanelCurseur sliderImg;
 
 	HashMap<String,PanelButton> listButton = new HashMap();
 	HashMap<String,JPanel> listPan = new HashMap();
@@ -172,23 +172,29 @@ public class IHMV2 extends Observe{
 		PanelSouth.setLayout(null);
 
 		PanelButton Deplace = new PanelButton(this,"Deplacer",TypeMessage.Clique_Deplace);
-		Deplace.setBounds(12, 13, 97, 25);
+		Deplace.setBounds(10, 5, 110, 34);
 		PanelSouth.add(Deplace);
 
 		PanelButton btAssecher = new PanelButton(this,"Assecher",TypeMessage.Clique_Asseche);
-		btAssecher.setBounds(121, 13, 97, 25);
+		btAssecher.setBounds(140, 5, 110, 34);
 		PanelSouth.add(btAssecher);
 
 		PanelButton btDonneCarte = new PanelButton(this,"DonnerCarte",TypeMessage.Clique_DonneCarte);
-		btDonneCarte.setBounds(230, 13, 97, 25);
+		btDonneCarte.setBounds(270, 5, 110, 34);
 		PanelSouth.add(btDonneCarte);
 
+<<<<<<< HEAD
 		/*PanelButton btRecupereTresort = new PanelButton(this,"RecupererTresor",TypeMessage.Clique_RecupereTresor);
 		btRecupereTresort.setBounds(339, 13, 130, 25);
 		PanelSouth.add(btRecupereTresort);*/
+=======
+		PanelButton btRecupereTresort = new PanelButton(this,"RecupererTresor",TypeMessage.Clique_RecupereTresor);
+		btRecupereTresort.setBounds(454, 9, 130, 25);
+		PanelSouth.add(btRecupereTresort);
+>>>>>>> branch 'master' of https://github.com/xam74er1/Ile_Intedite.git
 
 		PanelButton btFinDeTour = new PanelButton(this,"FinDeTour",TypeMessage.Clique_Fin_Tour);
-		btFinDeTour.setBounds(1056, 13, 97, 25);
+		btFinDeTour.setBounds(1030, 5, 110, 34);
 		PanelSouth.add(btFinDeTour);
 
 
@@ -342,6 +348,7 @@ public class IHMV2 extends Observe{
 		panel.setBackground(new Color(105, 105, 105));
 		panel.setBounds(0, 84, 279, 10);
 		PanelEast.add(panel);
+<<<<<<< HEAD
 
 		msgHelp = new JLabel("");
 		msgHelp.setBackground(Color.BLUE);
@@ -352,6 +359,22 @@ public class IHMV2 extends Observe{
 		msgHelp.setBounds(114, 0, 1150, 35);
 
 		frame.getContentPane().add(msgHelp);
+=======
+		
+		 panHelp = new JPanel();
+		 panHelp.setBackground(new Color(144, 158, 181));
+		panHelp.setBounds(114, 0, 1150, 32);
+		frame.getContentPane().add(panHelp);
+		panHelp.setLayout(new BorderLayout(0, 0));
+		
+		 msgHelp = new JLabel("");
+		 msgHelp.setForeground(Color.red);
+			msgHelp.setFont(new Font("Serif", Font.BOLD, 25));
+			msgHelp.setHorizontalAlignment(JLabel.CENTER);
+			msgHelp.setVerticalAlignment(JLabel.CENTER);
+		
+		panHelp.add(msgHelp, BorderLayout.CENTER);
+>>>>>>> branch 'master' of https://github.com/xam74er1/Ile_Intedite.git
 		frame.setBounds(100, 100, 1280, 720);
 
 		//----------------

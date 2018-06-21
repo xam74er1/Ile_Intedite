@@ -135,7 +135,15 @@ public class Controleur implements Observateur{
 				break;
 
 			case Clique_Deplace_Helico :
+				
 				if (helicoTuileSelect!=null) {
+
+					
+					if (helicoTuileSelect.getNum()==22) {
+						aCarteHelicoptere=true;
+						verifierFinDePartie();
+					}
+
 					Tuile t = grille.getTuile(msg.getLocation());
 					for(Aventurier a : joueursList) {
 						if(a.getTuile().equals(helicoTuileSelect)) {
@@ -148,10 +156,15 @@ public class Controleur implements Observateur{
 					carteTresorsDefausse.add(carteSpe);
 					helicoTuileSelect=null;
 				}else {
+
+					ihm.setIndication("Clique sur une case pour vous deplace");
+					
+
 					if (grille.getTuile(msg.getLocation()).getNum()==22) {
 						aCarteHelicoptere=true;
 						verifierFinDePartie();
 					}
+
 					ArrayList<Tuile> tuilesDep = new ArrayList<Tuile>();
 					for(Tuile t : Grille.tuilesListe.values()) {
 						if(t.getStatut()!=2 && t.getNum()!=-1 && !(t.equals(grille.getTuile(msg.getLocation())))) {
@@ -163,7 +176,7 @@ public class Controleur implements Observateur{
 				}
 				afficherCartes(getJoueurTour());
 				miseAJourGrille();
-
+	
 
 
 				break;
@@ -174,6 +187,7 @@ public class Controleur implements Observateur{
 				getJoueurTour().removeCarte(carteSpe);
 				carteTresorsDefausse.add(carteSpe);
 				grille.activateAll();
+				ihm.setIndication("Clique sur une case pour l'assecher");
 				miseAJourGrille();
 				afficherCartes(getJoueurTour());
 				break;
@@ -214,7 +228,7 @@ public class Controleur implements Observateur{
 
 				}
 
-
+			//-------------FIN DES CLIQUE TUILE ----------------------------
 			}
 
 
@@ -224,48 +238,7 @@ public class Controleur implements Observateur{
 			lastAction=TypeMessage.Clique_Deplace_Urgence;
 			finDeTour();
 			break;
-			//------------------------SEND---------------------------------
-			//		case Clique_Send :
-			//
-			//			messageConsole = msg.getText();
-			//
-			//
-			//
-			//			switch(lastAction) {
-			//
-			//			case Defausse_Joueur :
-			//
-			//
-			//				defausserCarteMain(); break;
-			//
-			//			case Clique_DonneCarte: 
-			//
-			//				if(donneCarteJoeur(messageConsole)) {
-			//					afficherListeCarteJoueur();
-			//					msg.setMessage( TypeMessage.Defausse_NumCarte);
-			//					ihm.addConsole("Choisire le numero : ");
-			//				}else {
-			//					ihm.setIndication(" Ce joeur n'est pas dans la liste , merci de recomencer  ");
-			//					msg.setMessage( TypeMessage.Clique_DonneCarte);
-			//					aficherJoeurCase();
-			//				}
-			//				break;
-			//			case Defausse_NumCarte :
-			//
-			//				if(donneCarte(messageConsole)) {
-			//					getJoueurTour().actionJouer();
-			//
-			//				}else {
-			//					msg.setMessage( TypeMessage.Defausse_NumCarte);
-			//					ihm.addConsole("Cette carte n'est pas disponible");
-			//				}
-			//
-			//				break;
-			//				//------------------------ FIN SEND---------------------------------
-			//			}
-
-
-
+	
 		case Clique_RecupereTresor :
 			if(recupereTresor()) {
 				getJoueurTour().actionJouer();
@@ -294,6 +267,7 @@ public class Controleur implements Observateur{
 			ihm.setIndication("Clique sur la carte que vous voullez donne ");
 			break;
 		case Clique_Deplace_Helico :
+			ihm.setIndication("Clique sur le joeur que vous voullez deplace");
 			carteSpe=(Classique) msg.getCarte();
 			ArrayList<Tuile> listCaseAvent = new ArrayList<Tuile>() ;
 			for(Tuile t : Grille.tuilesListe.values()) {

@@ -36,20 +36,22 @@ public class FenetreStart extends JFrame {
 	
 	private int nbJoueurs;
 	
-		private JFrame moi;
+	private JFrame moi;
         
-		private JLabel labelExplo;
-		private JLabel labelInge;
-		private JLabel labelMessa;
-		private JLabel labelNavi;
-		private JLabel labelPilo;
-		private JLabel labelPlon;
+	private JLabel labelExplo;
+	private JLabel labelInge;
+	private JLabel labelMessa;
+	private JLabel labelNavi;
+	private JLabel labelPilo;
+	private JLabel labelPlon;
+        
+        private boolean choisis = false;
 		
-		private JComboBox difficulte;
+	private JComboBox difficulte;
 		
 	
 	
-		private ArrayList<JLabel> joueurs = new ArrayList<JLabel>();
+	private ArrayList<JLabel> joueurs = new ArrayList<JLabel>();
         private static int choixCourant = 0;
         private int choixAven;
         private boolean etatBoutonExplo = false;
@@ -112,14 +114,14 @@ public class FenetreStart extends JFrame {
     panChoixDifficult.setBackground(new Color(139,69,18));
 
     
-    JLabel labelDifficulte = new JLabel("Choisir la difficulté du jeu :");
+    JLabel labelDifficulte = new JLabel("Choisir la difficulte du jeu :");
     labelDifficulte.setBackground(new Color(139,69,18));
 
     difficulte = new JComboBox();
     difficulte.addItem("Novice");
     difficulte.addItem("Normal");
     difficulte.addItem("Elite");
-    difficulte.addItem("Légendaire");
+    difficulte.addItem("Legendaire");
 
     
     panChoixDifficult.add(labelDifficulte);
@@ -146,10 +148,14 @@ public class FenetreStart extends JFrame {
     panChoix.add(quatreJoueurs);
     JPanel panSelectChoix = new JPanel();
     JButton selectChoix = new JButton("Comfirmer");
-    
-    
+    JLabel labelJoueurCourrant = new JLabel("");
+    JPanel panComfirmer = new JPanel();
+    panComfirmer.add(labelJoueurCourrant);
+    panComfirmer.add(selectChoix);
+   
+    panComfirmer.setBackground(new Color(139,69,18));
     panSelectChoix.setBackground(new Color(139,69,18));
-    panSelectChoix.add(selectChoix);
+    panSelectChoix.add(panComfirmer);
     
     choixTout.add(panSelectChoix);
     
@@ -215,6 +221,7 @@ public class FenetreStart extends JFrame {
                 if (termine == false){
                 if (etatBoutonInge){    
                     labelInge.setIcon(imgIcon1);
+                    
                 }
                 
                 if (etatBoutonMessa){   
@@ -237,6 +244,7 @@ public class FenetreStart extends JFrame {
                     if (etatBoutonExplo){
                         labelExplo.setIcon(imgIconS);
                         choixAven = 0;
+                        selectChoix.setEnabled(true);
                     }
                 }
                         
@@ -297,7 +305,7 @@ public class FenetreStart extends JFrame {
                     if (etatBoutonInge){
                         labelInge.setIcon(imgIcon1S);
                         choixAven = 1;
-                    }
+                        selectChoix.setEnabled(true);                    }
                 }
                     
 		}
@@ -357,6 +365,7 @@ public class FenetreStart extends JFrame {
                     if (etatBoutonMessa){
                         labelMessa.setIcon(imgIcon2S);
                         choixAven = 2;
+                        selectChoix.setEnabled(true);
                     }
                 }
 		
@@ -416,6 +425,7 @@ public class FenetreStart extends JFrame {
                     if (etatBoutonNavi){
                         labelNavi.setIcon(imgIcon3S);
                         choixAven = 3;
+                        selectChoix.setEnabled(true);
                     }
                 }
 		}
@@ -475,6 +485,7 @@ public class FenetreStart extends JFrame {
                     if (etatBoutonPilo){
                         labelPilo.setIcon(imgIcon4S);
                         choixAven = 4;
+                        selectChoix.setEnabled(true);
                     }
                 }
 		
@@ -535,6 +546,7 @@ public class FenetreStart extends JFrame {
                     if (etatBoutonPlon){
                         labelPlon.setIcon(imgIcon5S);
                         choixAven = 5;
+                        selectChoix.setEnabled(true);
                         
                     }
                 }
@@ -588,6 +600,7 @@ public class FenetreStart extends JFrame {
     
     btnCommencer.setEnabled(false);
     
+    
     selectChoix.addActionListener(new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -605,8 +618,11 @@ public class FenetreStart extends JFrame {
                 troisJoueurs.setEnabled(false);
                 quatreJoueurs.setEnabled(false);
                 choixCourant = choixCourant+1;
-                selectChoix.setText("Choix joueur " + choixCourant);
-                
+                labelJoueurCourrant.setText("Joueur " + choixCourant);
+                selectChoix.setText("Valider");
+                selectChoix.setEnabled(false);
+
+
                 labelExplo.setIcon(imgIcon);
                 labelInge.setIcon(imgIcon1);
                 labelMessa.setIcon(imgIcon2);
@@ -621,8 +637,10 @@ public class FenetreStart extends JFrame {
                 etatBoutonPlon = true;
                 
             } else {
+                
                 choixCourant = choixCourant+1;
-                selectChoix.setText("Choix joueur " +choixCourant);
+                labelJoueurCourrant.setText("Joueur " + choixCourant);
+                selectChoix.setText("Valider");
                 
                 switch (choixAven) {
                     case 0:
@@ -657,13 +675,17 @@ public class FenetreStart extends JFrame {
                         break;               
                     default:
                         break;
+                        
+                        
                 }
+                selectChoix.setEnabled(false);
             } 
             
             if (choixCourant>nbJoueurs){
                 selectChoix.setEnabled(false);
                 selectChoix.setVisible(false);
                 btnCommencer.setEnabled(true);
+                labelJoueurCourrant.setText("");
                 termine = true;
                 MessageInit m = new MessageInit();
                 
@@ -764,7 +786,7 @@ public class FenetreStart extends JFrame {
         	m.niveauEau =2;
         } else if  (difficulte.getSelectedItem() == "Epique") {
         	m.niveauEau =5;
-        } else if  (difficulte.getSelectedItem() == "Légendaire") {
+        } else if  (difficulte.getSelectedItem() == "Legendaire") {
         	m.niveauEau =7;
         }
 		
