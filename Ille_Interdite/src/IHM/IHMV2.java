@@ -83,6 +83,8 @@ public class IHMV2 extends Observe{
 		frame.getContentPane().setLayout(null);
 
 		panelDefausse=new PanelAfficheCarte(this, frame);
+		panelDefausse.setBounds(0, 0, 1280, 680);
+		frame.getContentPane().add(panelDefausse);
 
 
 		sliderImg = new PanelCurseur(this);
@@ -362,8 +364,6 @@ public class IHMV2 extends Observe{
 		//PROVISOIRE 
 		//--------------
 
-		frame.add(panelDefausse);
-
 		lblJoeurN = new JLabel();
 
 		System.out.println("Fin IHM generation");
@@ -578,22 +578,17 @@ public class IHMV2 extends Observe{
 	}
 
 	public void afficherDefausse(Aventurier a) {
-		//setPanelVisible(false);
+		setPanelEnabled(false);
 		panelDefausse.setListCarte(a.getListeCarteJoueur());
 		panelDefausse.repaint();
 		panelDefausse.setVisible(true);
 	}
 
-	public void setPanelVisible(boolean b) {
-		PanelEast.setVisible(b);
-		PanelHelp.setVisible(b);
-		panHelp.setVisible(b);
-		PanelSouth.setVisible(b);
-		Plateau.setVisible(b);
-		PanelTresor.setVisible(b);
-		sliderImg.setVisible(b);
-		CardPlayer.setVisible(b);
+	public void setPanelEnabled(boolean b) {
 		PanelEast.setEnabled(b);
+		btnImgPlayerIn1T.setEnabled(b);
+		btnImgPlayerIn2T.setEnabled(b);
+		btnImgPlayerIn3T.setEnabled(b);
 		PanelHelp.setEnabled(b);
 		panHelp.setEnabled(b);
 		PanelSouth.setEnabled(b);
@@ -601,5 +596,18 @@ public class IHMV2 extends Observe{
 		PanelTresor.setEnabled(b);
 		sliderImg.setEnabled(b);
 		CardPlayer.setEnabled(b);
+		for (PanelButton j : listButton.values()) {
+			j.setEnabled(b);
+		}
+		for (PanelCarte j : listCartes.values()) {
+			j.setEnabled(b);
+		}
+		for (JPanel j : listCurseur.values()) {
+			j.setEnabled(b);
+		}
+		for (JPanel j : listPan.values()) {
+			j.setEnabled(b);
+		}
+		
 	}
 }
