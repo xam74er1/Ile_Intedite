@@ -24,7 +24,7 @@ public class PanelAfficheCarte extends JPanel {
 		this.frame=frame;
 		this.setBounds(0, 0, this.frame.getWidth(), this.frame.getHeight());
 		listCarte=new ArrayList<Carte>();
-		this.setBackground(new Color(0,0,0,128));
+		this.setBackground(new Color(255,255,255,128));
 	}
 	
 	@Override

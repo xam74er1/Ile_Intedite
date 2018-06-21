@@ -32,7 +32,7 @@ public class IHMV2 extends Observe{
 	public JFrame frame;
 	private JTextArea console;
 	private JPanel Plateau ;
-	 private JLabel lblJoeurN;
+	private JLabel lblJoeurN;
 	private JPanel panHelp;
 	private JLabel textCusor,msgHelp;
 	JPanel sliderPanel;
@@ -183,15 +183,9 @@ public class IHMV2 extends Observe{
 		btDonneCarte.setBounds(270, 5, 110, 34);
 		PanelSouth.add(btDonneCarte);
 
-<<<<<<< HEAD
-		/*PanelButton btRecupereTresort = new PanelButton(this,"RecupererTresor",TypeMessage.Clique_RecupereTresor);
-		btRecupereTresort.setBounds(339, 13, 130, 25);
-		PanelSouth.add(btRecupereTresort);*/
-=======
 		PanelButton btRecupereTresort = new PanelButton(this,"RecupererTresor",TypeMessage.Clique_RecupereTresor);
 		btRecupereTresort.setBounds(454, 9, 130, 25);
 		PanelSouth.add(btRecupereTresort);
->>>>>>> branch 'master' of https://github.com/xam74er1/Ile_Intedite.git
 
 		PanelButton btFinDeTour = new PanelButton(this,"FinDeTour",TypeMessage.Clique_Fin_Tour);
 		btFinDeTour.setBounds(1030, 5, 110, 34);
@@ -348,33 +342,20 @@ public class IHMV2 extends Observe{
 		panel.setBackground(new Color(105, 105, 105));
 		panel.setBounds(0, 84, 279, 10);
 		PanelEast.add(panel);
-<<<<<<< HEAD
+
+		panHelp = new JPanel();
+		panHelp.setBackground(new Color(144, 158, 181));
+		panHelp.setBounds(114, 0, 1150, 32);
+		frame.getContentPane().add(panHelp);
+		panHelp.setLayout(new BorderLayout(0, 0));
 
 		msgHelp = new JLabel("");
-		msgHelp.setBackground(Color.BLUE);
 		msgHelp.setForeground(Color.red);
 		msgHelp.setFont(new Font("Serif", Font.BOLD, 25));
 		msgHelp.setHorizontalAlignment(JLabel.CENTER);
 		msgHelp.setVerticalAlignment(JLabel.CENTER);
-		msgHelp.setBounds(114, 0, 1150, 35);
 
-		frame.getContentPane().add(msgHelp);
-=======
-		
-		 panHelp = new JPanel();
-		 panHelp.setBackground(new Color(144, 158, 181));
-		panHelp.setBounds(114, 0, 1150, 32);
-		frame.getContentPane().add(panHelp);
-		panHelp.setLayout(new BorderLayout(0, 0));
-		
-		 msgHelp = new JLabel("");
-		 msgHelp.setForeground(Color.red);
-			msgHelp.setFont(new Font("Serif", Font.BOLD, 25));
-			msgHelp.setHorizontalAlignment(JLabel.CENTER);
-			msgHelp.setVerticalAlignment(JLabel.CENTER);
-		
 		panHelp.add(msgHelp, BorderLayout.CENTER);
->>>>>>> branch 'master' of https://github.com/xam74er1/Ile_Intedite.git
 		frame.setBounds(100, 100, 1280, 720);
 
 		//----------------
@@ -597,7 +578,7 @@ public class IHMV2 extends Observe{
 	}
 
 	public void afficherDefausse(Aventurier a) {
-		setPanelVisible(false);
+		//setPanelVisible(false);
 		panelDefausse.setListCarte(a.getListeCarteJoueur());
 		panelDefausse.repaint();
 		panelDefausse.setVisible(true);
@@ -606,10 +587,19 @@ public class IHMV2 extends Observe{
 	public void setPanelVisible(boolean b) {
 		PanelEast.setVisible(b);
 		PanelHelp.setVisible(b);
+		panHelp.setVisible(b);
 		PanelSouth.setVisible(b);
 		Plateau.setVisible(b);
 		PanelTresor.setVisible(b);
 		sliderImg.setVisible(b);
 		CardPlayer.setVisible(b);
+		PanelEast.setEnabled(b);
+		PanelHelp.setEnabled(b);
+		panHelp.setEnabled(b);
+		PanelSouth.setEnabled(b);
+		Plateau.setEnabled(b);
+		PanelTresor.setEnabled(b);
+		sliderImg.setEnabled(b);
+		CardPlayer.setEnabled(b);
 	}
 }
