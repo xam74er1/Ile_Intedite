@@ -8,9 +8,11 @@ import Carte.CarteTresor;
 import Carte.CarteSacSable;
 import Carte.MonteeEaux;
 import Carte.NomTresor;
+import IHM.FenetreFin;
 import IHM.FenetreStart;
 //import IHM.IHM;
 import IHM.IHMV2;
+import IHM.MessageFinPartie;
 import IHM.MessageInit;
 import ille_intedite.Aventurie.Aventurier;
 import ille_intedite.Aventurie.Aviateur;
@@ -518,6 +520,9 @@ public class Controleur implements Observateur{
 		if (tuilesDep.size()==0 && urg) {
 			noyade=true;
 			verifierFinDePartie();
+				
+			
+			
 		}
 
 		ihm.afficherDep(tuilesDep);
@@ -759,19 +764,25 @@ public class Controleur implements Observateur{
 		}
 	}
 
-	public int verifierFinDePartie() {
-
+	public void verifierFinDePartie() {
+		MessageFinPartie msg = new MessageFinPartie();
 		//Condition(s) defaite
 		if(noyade) {
-			return -1;
-		}
+			msg.setVictoire(false);
+			msg.setTypeDefaite("Un des aventuriers s'est noyé..");
+			new FenetreFin(msg);
+					}
 
 		if(helicoCoule) {
-			return -1;												//Heliport coule
+			msg.setVictoire(false);
+			msg.setTypeDefaite("L'héliport a coulé..");
+			new FenetreFin(msg);												//Heliport coule
 		}
 
 		if(curseur.getNiv()==10) {
-			return -1;												//Curseur au niveau maximum
+			msg.setVictoire(false);
+			msg.setTypeDefaite("L'île a sombré complètement..");
+			new FenetreFin(msg);												//Curseur au niveau maximum
 		}
 
 
@@ -804,8 +815,11 @@ public class Controleur implements Observateur{
 		}
 
 		if(temple==2||caverne==2||palais==2||jardin==2) {
-			return -1;												//Deux cases de recuperation de tresor coulees
+			
+			msg.setTypeDefaite("Tout les trésors ont coulés..");
+			new FenetreFin(msg);												//Deux cases de recuperation de tresor coulees
 		}
+		
 
 		//Condition victoire
 
@@ -831,12 +845,13 @@ public class Controleur implements Observateur{
 		if(	joueursPresentsHeliport==joueursList.size()&&
 				tresorsRecuperes.size()==4&&
 				aCarteHelicoptere) {
-			return 1;
+			msg.setVictoire(true);
+			new FenetreFin(msg);
 		}
 
 		aCarteHelicoptere=false;
 
-		return 0;
+		
 	}
 
 	private void melanger(ArrayList a) {
