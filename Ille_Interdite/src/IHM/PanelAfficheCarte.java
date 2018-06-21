@@ -39,6 +39,9 @@ public class PanelAfficheCarte extends JPanel {
 	public void setListCarte(ArrayList<Carte> listCarte) {
 		me.listCarte = listCarte;
 		me.setLayout(new GridLayout(4, 10,10,10));
+		for(int i=0;i<10;i++) {
+			me.add(new PanelNoir());
+		}
 		for (int i=0;i<me.listCarte.size();i++) {
 			if(i%10==0) me.add(new PanelNoir());
 			Carte c = me.listCarte.get(i);
@@ -48,7 +51,7 @@ public class PanelAfficheCarte extends JPanel {
 			pane.setBounds(0, 0,80, 112);
 			if(i%10==9) me.add(new PanelNoir());
 		}
-		for (int i=listCarte.size();i<40-(2*(listCarte.size()/10+1));i++) {
+		for (int i=listCarte.size();i<30-(2*(listCarte.size()/10+1));i++) {
 			me.add(new PanelNoir());
 		}
 		me.add(new PanelNoir());

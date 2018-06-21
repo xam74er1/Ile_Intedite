@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -18,6 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import Carte.Carte;
 import Carte.Classique;
 import ille_intedite.Grille;
 import ille_intedite.Message;
@@ -48,11 +50,15 @@ public class IHMV2 extends Observe{
 	JPanel PanelSouth;
 	JPanel PanelEast;
 	JPanel PanelTresor;
+	PanelButton btDeplace;
+	PanelButton btAsseche;
+	PanelButton btDonneCarte;
+	PanelButton btRecupereTresor;
+	PanelButton btFinDeTour;
 
 	VueGrille vue;
 
 	PanelAfficheCarte panelDefausse;
-	PanelAfficheCarte panelCarteJoueur;
 	PanelAfficheCarte panelCarteInondations;
 	PanelAfficheCarte panelCartePiochee;
 
@@ -93,10 +99,6 @@ public class IHMV2 extends Observe{
 		panelCarteInondations.setBounds(0, 0, 1280, 680);
 		frame.getContentPane().add(panelCarteInondations);
 		
-		panelCarteJoueur=new PanelAfficheCarte(this, frame);
-		panelCarteJoueur.setBounds(0, 0, 1280, 680);
-		frame.getContentPane().add(panelCarteJoueur);
-		
 		panelCartePiochee=new PanelAfficheCarte(this, frame);
 		panelCartePiochee.setBounds(0, 0, 1280, 680);
 		frame.getContentPane().add(panelCartePiochee);
@@ -105,19 +107,6 @@ public class IHMV2 extends Observe{
 		sliderImg = new PanelCurseur(this);
 		sliderImg.setBounds(0, 59, 100, 674);
 		frame.getContentPane().add(sliderImg);
-
-		/*sliderPanel = new JPanel();
-		sliderPanel.setBounds(0, 60, 100, 610);
-		sliderPanel.setBackground(Color.WHITE);
-		frame.getContentPane().add(sliderPanel);
-		sliderPanel.setLayout(new GridLayout(11,1));*/
-
-		/*for (int i=0;i<11;i++) {
-			JPanel panelCurseur = new JPanel();
-			panelCurseur.setBackground(Color.WHITE);
-			sliderPanel.add(panelCurseur);
-			listCurseur.put(i,panelCurseur);
-		}*/
 
 		PanelHelp = new JPanel();
 		PanelHelp.setBounds(0, 0, 60, 60);
@@ -188,23 +177,23 @@ public class IHMV2 extends Observe{
 		frame.getContentPane().add(PanelSouth);
 		PanelSouth.setLayout(null);
 
-		PanelButton Deplace = new PanelButton(this,"Deplacer",TypeMessage.Clique_Deplace);
-		Deplace.setBounds(10, 5, 110, 34);
-		PanelSouth.add(Deplace);
+		btDeplace = new PanelButton(this,"Deplacer",TypeMessage.Clique_Deplace);
+		btDeplace.setBounds(10, 5, 110, 34);
+		PanelSouth.add(btDeplace);
 
-		PanelButton btAssecher = new PanelButton(this,"Assecher",TypeMessage.Clique_Asseche);
-		btAssecher.setBounds(140, 5, 110, 34);
-		PanelSouth.add(btAssecher);
+		btAsseche = new PanelButton(this,"Assecher",TypeMessage.Clique_Asseche);
+		btAsseche.setBounds(140, 5, 110, 34);
+		PanelSouth.add(btAsseche);
 
-		PanelButton btDonneCarte = new PanelButton(this,"DonnerCarte",TypeMessage.Clique_DonneCarte);
+		btDonneCarte = new PanelButton(this,"DonnerCarte",TypeMessage.Clique_DonneCarte);
 		btDonneCarte.setBounds(270, 5, 110, 34);
 		PanelSouth.add(btDonneCarte);
 
-		PanelButton btRecupereTresort = new PanelButton(this,"RecupererTresor",TypeMessage.Clique_RecupereTresor);
-		btRecupereTresort.setBounds(454, 9, 130, 25);
-		PanelSouth.add(btRecupereTresort);
+		btRecupereTresor = new PanelButton(this,"RecupererTresor",TypeMessage.Clique_RecupereTresor);
+		btRecupereTresor.setBounds(454, 9, 130, 25);
+		PanelSouth.add(btRecupereTresor);
 
-		PanelButton btFinDeTour = new PanelButton(this,"FinDeTour",TypeMessage.Clique_Fin_Tour);
+		btFinDeTour = new PanelButton(this,"FinDeTour",TypeMessage.Clique_Fin_Tour);
 		btFinDeTour.setBounds(1030, 5, 110, 34);
 		PanelSouth.add(btFinDeTour);
 
@@ -234,15 +223,9 @@ public class IHMV2 extends Observe{
 		btnImgPlayerIn1T.setBackground(new Color(139, 69, 19));
 		btnImgPlayerIn1T.setBounds(0, 0, 150, 150);
 		PanelPlayerIn1T.add(btnImgPlayerIn1T);
-		imgPlayerIn1T = new ImageIcon("images/persos/plongeur.png");
-		imP1T = imgPlayerIn1T.getImage();
-		imP1T = imP1T.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
-		imgP1T = new ImageIcon(imP1T);
 		btnImgPlayerIn1T.setIcon(imgP1T);
 		btnImgPlayerIn1T.addActionListener(actionBoutonJoueur());
 		btnImgPlayerIn1T.setBorder(null);
-		//btnImgPlayerIn1T.setEnabled(false);
-		//------------- 2 -----------------------
 
 		PanelPlayerIn2T = new JPanel();
 		PanelPlayerIn2T.setBackground(new Color(139, 69, 19));
@@ -256,17 +239,7 @@ public class IHMV2 extends Observe{
 		btnImgPlayerIn2T.setBounds(0, 0, 150, 150);
 		btnImgPlayerIn2T.addActionListener(actionBoutonJoueur());
 		PanelPlayerIn2T.add(btnImgPlayerIn2T);
-
-
-
-		/*imgPlayerIn2T = new ImageIcon("images/persos/ingenieur.png");
-		imP2T = imgPlayerIn2T.getImage();
-		imP2T = imP2T.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
-		imgP2T = new ImageIcon(imP2T);
-
-		btnImgPlayerIn2T.setIcon(imgP2T);*/
 		btnImgPlayerIn2T.setBorder(null);
-		//btnImgPlayerIn2T.setEnabled(false);
 
 
 		PanelPlayerIn3T = new JPanel();
@@ -281,37 +254,7 @@ public class IHMV2 extends Observe{
 		btnImgPlayerIn3T.setForeground(new Color(139, 69, 19));
 		btnImgPlayerIn3T.setBounds(0, 0, 150, 150);
 		PanelPlayerIn3T.add(btnImgPlayerIn3T);
-		/*imgPlayerIn3T = new ImageIcon("images/persos/aviateur.png");
-		imP3T = imgPlayerIn3T.getImage();
-		imP3T = imP3T.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
-		imgP3T = new ImageIcon(imP3T);
-		btnImgPlayerIn3T.addActionListener(actionBoutonJoueur());
-		btnImgPlayerIn3T.setIcon(imgP3T);*/
 		btnImgPlayerIn3T.setBorder(null);
-		//btnImgPlayerIn3T.setEnabled(false);
-
-
-
-		//-----------------------HELP -----------------
-		//		JPanel PanelHelp = new JPanel();
-		//		PanelHelp.setBounds(207, 0, 60, 60);
-		//		PanelEast.add(PanelHelp);
-		//		PanelHelp.setLayout(null);
-		//
-		//		JButton btnHelp = new JButton("");
-		//		btnHelp.setForeground(new Color(139, 69, 19));
-		//		btnHelp.setBackground(new Color(139, 69, 19));
-		//		btnHelp.setBounds(0, 0, 60, 60);
-		//		PanelHelp.add(btnHelp);
-		//		ImageIcon imgHelp = new ImageIcon("images/icones/iconHelp.png");
-		//		Image imH = imgHelp.getImage();
-		//		imH = imH.getScaledInstance(60, 60, Image.SCALE_DEFAULT);
-		//		ImageIcon imgH = new ImageIcon(imH);
-		//		btnHelp.setIcon(imgH);
-
-
-
-
 
 		PanelTresor = new JPanel();
 		PanelTresor.setBackground(new Color(165, 42, 42));
@@ -598,6 +541,13 @@ public class IHMV2 extends Observe{
 		panelDefausse.repaint();
 		panelDefausse.setVisible(true);
 	}
+	
+	public void afficherPioche(ArrayList<Carte> listCartes) {
+		setPanelEnabled(false);
+		panelCartePiochee.setListCarte(listCartes);
+		panelCartePiochee.repaint();
+		panelCartePiochee.setVisible(true);		
+	}
 
 	public void setPanelEnabled(boolean b) {
 		PanelEast.setEnabled(b);
@@ -611,6 +561,11 @@ public class IHMV2 extends Observe{
 		PanelTresor.setEnabled(b);
 		sliderImg.setEnabled(b);
 		CardPlayer.setEnabled(b);
+		btAsseche.setEnabled(b);
+		btDeplace.setEnabled(b);
+		btDonneCarte.setEnabled(b);
+		btFinDeTour.setEnabled(b);
+		btRecupereTresor.setEnabled(b);
 		for (PanelButton j : listButton.values()) {
 			j.setEnabled(b);
 		}
@@ -624,5 +579,13 @@ public class IHMV2 extends Observe{
 			j.setEnabled(b);
 		}
 		
+		
+	}
+	
+	public void afficherPlateau() {
+		setPanelEnabled(true);
+		panelCartePiochee.setVisible(false);
+		panelCarteInondations.setVisible(false);
+		panelDefausse.setVisible(false);
 	}
 }
