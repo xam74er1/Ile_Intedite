@@ -431,20 +431,22 @@ public class Controleur implements Observateur{
 					break;
 				}
 			}
-
-			carteTresorDeck.add(new CarteSacSable("1SacsDeSable"));
-			carteTresorDeck.add(new CarteSacSable("2SacsDeSable"));
-			carteTresorDeck.add(new CarteSacSable("3SacsDeSable"));
-
-			carteTresorDeck.add(new MonteeEaux("1Montee des EAU"));
-			carteTresorDeck.add(new MonteeEaux("2Montee des EAU"));
-			//carteTresorDeck.add(new MonteeEaux("3Monte des EAU"));
-
-			carteTresorDeck.add(new CarteHelicoptere("1Helicoptere"));
-			carteTresorDeck.add(new CarteHelicoptere("2Helicoptere"));
-			carteTresorDeck.add(new CarteHelicoptere("3Helicoptere"));
-
 		}
+
+		carteTresorDeck.add(new CarteSacSable("1SacsDeSable"));
+		carteTresorDeck.add(new CarteSacSable("2SacsDeSable"));
+		carteTresorDeck.add(new CarteSacSable("3SacsDeSable"));
+
+		carteTresorDeck.add(new MonteeEaux("1Montee des EAU"));
+		carteTresorDeck.add(new MonteeEaux("2Montee des EAU"));
+		//carteTresorDeck.add(new MonteeEaux("3Monte des EAU"));
+
+		carteTresorDeck.add(new CarteHelicoptere("1Helicoptere"));
+		carteTresorDeck.add(new CarteHelicoptere("2Helicoptere"));
+		carteTresorDeck.add(new CarteHelicoptere("3Helicoptere"));
+
+
+
 		if(Parameters.ALEAS) {
 			melanger(carteTresorDeck);
 		}
@@ -526,7 +528,7 @@ public class Controleur implements Observateur{
 		afficherCartes(getJoueurTour());
 		//ihm.afficherNivCurseur(2);
 		isInit = true;
-		
+
 		ihm.afficherDefausse(getJoueurTour());
 
 		//test();
