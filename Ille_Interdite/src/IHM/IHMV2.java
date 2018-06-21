@@ -683,7 +683,7 @@ public class IHMV2 extends Observe{
 	}
 	
 	public void afficherPioche(ArrayList<Carte> listCartes) {
-		//setPanelEnabled(false);
+		setPanelEnabled(false);
 		panelCartePiochee.setListCarte(listCartes);
 		panelCartePiochee.repaint();
 		panelCartePiochee.setVisible(true);		
