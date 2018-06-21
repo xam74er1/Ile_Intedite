@@ -1,5 +1,5 @@
 package ille_intedite;
-import IHM.IHM;
+//import IHM.IHM;
 import IHM.IHMV2;
 import ille_intedite.Aventurie.Aventurier;
 import utils.Parameters;
@@ -103,21 +103,6 @@ public class Grille {
 
 	}
 
-	/**
-	 * 
-	 * @param t1
-	 * @param t2
-	 */
-	public boolean assechePossible(Tuile t1, Tuile t2) {
-		// TODO - implement Grille.assechePossible
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param xG
-	 * @param yG
-	 */
 	public Tuile getTuile(int x, int y) {
 		// TODO - implement Grille.getTuile
 
@@ -127,19 +112,6 @@ public class Grille {
 	public Tuile getTuile(String str) {
 		// TODO - implement Grille.getTuile
 		return tuilesListe.get(str);
-	}
-
-	/**
-	 * 
-	 * @param a
-	 */
-	public void getDepPossible(Aventurier a) {
-		// TODO - implement Grille.getDepPossible
-		throw new UnsupportedOperationException();
-	}
-
-	public HashMap<String, Tuile> getTuilesListe() {
-		return tuilesListe;
 	}
 
 	public void activateAll() {

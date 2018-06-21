@@ -4,7 +4,7 @@ import Carte.Carte;
 import Carte.Classique;
 import Carte.CarteTresor;
 import Carte.NomTresor;
-import IHM.IHM;
+//import IHM.IHM;
 import ille_intedite.Controleur;
 import ille_intedite.Grille;
 import ille_intedite.Tuile;
@@ -14,7 +14,7 @@ import utils.Utils.Pion;
 
 public abstract class Aventurier {
 	//Com de debug
-	ArrayList<Classique> listeCarteJoueur;
+	ArrayList<Carte> listeCarteJoueur;
 
 
 	private Tuile tuile;
@@ -30,7 +30,7 @@ public abstract class Aventurier {
 		this.nom = nom;
 		this.tuile = null;
 		this.pion = pion;
-		listeCarteJoueur = new ArrayList<Classique>();
+		listeCarteJoueur = new ArrayList<Carte>();
 	}
 
 	public Tuile getPosition() {
@@ -44,11 +44,11 @@ public abstract class Aventurier {
 	 * @param yG
 	 */
 
-	public ArrayList<Classique> getListeCarteJoueur() {
+	public ArrayList<Carte> getListeCarteJoueur() {
 		return listeCarteJoueur;
 	}
 
-	public void setListeCarteJoueur(ArrayList<Classique> listeCarteJoueur) {
+	public void setListeCarteJoueur(ArrayList<Carte> listeCarteJoueur) {
 		this.listeCarteJoueur = listeCarteJoueur;
 	}
 
@@ -72,70 +72,6 @@ public abstract class Aventurier {
 		setPosition(t);
 
 	}
-
-	public boolean assecher(Tuile t){
-
-		if(assecherPossible(getTuile(), t)){
-			t.assecher();
-			return true;
-		}
-		return false;
-
-	}
-
-	public boolean assecherPossible(Tuile from, Tuile to) {
-		int x = Math.abs(from.getxT() - to.getxT());
-		int y = Math.abs(from.getyT() - to.getyT());
-		// Si il ce deplace sois a 1 case en X ou 1 case en Y et que la case de destination n'as pas couler
-		return ((x == 1 & y == 0) || (x == 0 & y == 1)) || (x==0 & y==0) & (to.getStatut() ==1);
-
-	}
-
-
-
-	/**
-	 *
-	 * @param t1.
-	 * @param t2
-	 */
-	public boolean deplacementPossible(Tuile from, Tuile to) {
-		System.out.println("to = "+to+" from = "+from);
-		int x = Math.abs(from.getxT() - to.getxT());
-		int y = Math.abs(from.getyT() - to.getyT());
-		// Si il ce deplace sois a 1 case en X ou 1 case en Y et que la case de destination n'as pas couler
-		return ((x == 1 & y == 0) || (x == 0 & y == 1)) & (to.getStatut() < 2)&to.getNum()!=-1;
-	}
-
-	/**
-	 *
-	 * @param joueur
-	 */
-	public void donneCarteJoueur(Aventurier joueur) {
-		// TODO - implement Aventurier.donneCarteJoeur
-		throw new UnsupportedOperationException();
-	}
-
-
-	/**
-	 *
-	 * @param numCarte
-	 */
-
-
-	public void defausse() {
-		// TODO - implement Aventurier.Defausse
-		throw new UnsupportedOperationException();
-	}
-
-
-	/**
-	 *
-	 * @param main
-	 * @return 
-	 */
-
-
-
 
 	public NomTresor recupereTresor() {
 		int num = getTuile().getNum();
@@ -196,7 +132,7 @@ public abstract class Aventurier {
 	 */
 	public Classique getCarte(int numCarte) {
 		// TODO - implement Aventurier.getCarte
-		return listeCarteJoueur.get(numCarte);
+		return (Classique) listeCarteJoueur.get(numCarte);
 	}
 
 	public Color getColor(){
@@ -228,18 +164,10 @@ public abstract class Aventurier {
 		return nom;
 	}
 
-	public void addDefausePerso(CarteTresor c) {
-		// TODO - implement Aventurier.addDefausePerso
-		throw new UnsupportedOperationException();
-	}
-
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-	public void restoreMain(ArrayList<Classique> main) {
-		// TODO - implement Aventurier.restoreMain
-		throw new UnsupportedOperationException();
-	}
+	
 	public NomTresor getType() {
 		return type;
 	}

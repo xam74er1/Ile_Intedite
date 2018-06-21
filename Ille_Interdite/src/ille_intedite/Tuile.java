@@ -25,9 +25,9 @@ public class Tuile {
      * @param type
      */
     
-    public Tuile(int num, String nom, int xT, int yT) {
+    public Tuile(int num, String i, int xT, int yT) {
         this.num = num;
-        this.nom = nom;
+        this.nom = i;
         this.xT = xT;
         this.yT = yT;
         statut =0;
@@ -114,12 +114,7 @@ public class Tuile {
     public int getNbrAventurie() {
     	return AventuriesList.size();
     }
-
-    public NomTresor getTresort() {
-        // TODO - implement Tuile.getTresort
-        throw new UnsupportedOperationException();
-    }
-
+    
     @Override
     public String toString() {
         return "Tuile{" + "num=" + num + ", statut=" + statut + ", type=" + nom + ", xT=" + xT + ", yT=" + yT + '}';

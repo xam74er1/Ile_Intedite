@@ -8,8 +8,10 @@ import Carte.CarteTresor;
 import Carte.CarteSacSable;
 import Carte.MonteeEaux;
 import Carte.NomTresor;
-import IHM.IHM;
+import IHM.FenetreStart;
+//import IHM.IHM;
 import IHM.IHMV2;
+import IHM.MessageInit;
 import ille_intedite.Aventurie.Aventurier;
 import ille_intedite.Aventurie.Aviateur;
 import ille_intedite.Aventurie.Explorateur;
@@ -38,13 +40,15 @@ public class Controleur implements Observateur{
 	public ArrayList<CarteInondation> inondationDefausse;
 	public static ArrayList<Aventurier> joueursList;
 	private String messageConsole;
-	private int NBR_JOUEUR = 4;
+	private int nbJoueurs;
 	private  TypeMessage lastAction = TypeMessage.Clique_Send;
 	private int numTour;
 	private VueGrille vue;
 	private ArrayList<NomTresor> tresorsRecuperes = new ArrayList<>();
 	private Aventurier givePlayer = null;
 	private boolean noyade=false;
+	private boolean helicoCoule=false;
+	private boolean aCarteHelicoptere = false;
 	private Tuile helicoTuileSelect;
 	private Aventurier urgence = null;
 	private boolean urg=false;
@@ -59,7 +63,8 @@ public class Controleur implements Observateur{
 	IHMV2 ihm;
 
 
-	public Controleur(IHMV2 ihm,VueGrille vue) {
+	public Controleur(IHMV2 ihm,VueGrille vue,MessageInit msgInit) {
+
 		this.ihm = ihm;
 		carteTresorDeck = new ArrayList<Classique>();
 		carteTresorsDefausse = new ArrayList<Classique>();
@@ -67,9 +72,9 @@ public class Controleur implements Observateur{
 		inondationDefausse = new ArrayList<CarteInondation>();
 		joueursList = new ArrayList<Aventurier>();
 		this.vue = vue;
-		init();
+		nbJoueurs = msgInit.nbJoueurs;
+		init(msgInit.listJoueurs);
 		numTour =0;
-		NBR_JOUEUR = joueursList.size();
 		//Utils.debugln("controleur start");
 
 
@@ -92,12 +97,13 @@ public class Controleur implements Observateur{
 		switch(msg.getMessage()) {
 		case Clique_Deplace :
 			deplacer2(getJoueurTour());
-			ihm.afichierConsole("Cliquez sur une case pour vous y deplacer");
+
+			ihm.setIndication("Cliquez sur une case pour vous y deplacer");
 			break;
 
 		case Clique_Asseche :
 			assecher2();
-			ihm.afichierConsole("Cliquez sur une case pour l'assecher");
+			ihm.setIndication("Cliquez sur une case pour l'assecher");
 			break;
 
 		case Clique_Tuile :
@@ -129,9 +135,11 @@ public class Controleur implements Observateur{
 				break;
 
 			case Clique_Deplace_Helico :
-				getJoueurTour().removeCarte(carteSpe);
-				carteTresorsDefausse.add(carteSpe);
 				if (helicoTuileSelect!=null) {
+					if (helicoTuileSelect.getNum()==22) {
+						aCarteHelicoptere=true;
+						verifierFinDePartie();
+					}
 					Tuile t = grille.getTuile(msg.getLocation());
 					for(Aventurier a : joueursList) {
 						if(a.getTuile().equals(helicoTuileSelect)) {
@@ -140,6 +148,8 @@ public class Controleur implements Observateur{
 							deplacer(msg.getLocation(),a);
 						}
 					}
+					getJoueurTour().removeCarte(carteSpe);
+					carteTresorsDefausse.add(carteSpe);
 					helicoTuileSelect=null;
 				}else {
 					ArrayList<Tuile> tuilesDep = new ArrayList<Tuile>();
@@ -160,7 +170,7 @@ public class Controleur implements Observateur{
 
 			case Clique_Asseche_SacDeSable :
 				grille.getTuile(msg.getLocation()).assecher();
-				ihm.afichierConsole("Case assechee en "+msg.getLocation());
+				ihm.setIndication("Case assechee en "+msg.getLocation());
 				getJoueurTour().removeCarte(carteSpe);
 				carteTresorsDefausse.add(carteSpe);
 				grille.activateAll();
@@ -168,7 +178,7 @@ public class Controleur implements Observateur{
 				afficherCartes(getJoueurTour());
 				break;
 
-				
+
 			case Clique_Asseche :
 				assecher(msg.getLocation());
 				ihm.updateGrille();
@@ -194,12 +204,14 @@ public class Controleur implements Observateur{
 
 				break;
 			case Clique_Tuile :
+				ihm.setIndication("");
 				if (urg) {
 					deplacer(msg.getLocation(),urgence);
 					miseAJourGrille();
 					grille.activateAll();
 					lastAction=TypeMessage.Clique_Fin_Tour;
 					finDeTour();
+
 				}
 
 
@@ -233,7 +245,7 @@ public class Controleur implements Observateur{
 			//					msg.setMessage( TypeMessage.Defausse_NumCarte);
 			//					ihm.addConsole("Choisire le numero : ");
 			//				}else {
-			//					ihm.afichierConsole(" Ce joeur n'est pas dans la liste , merci de recomencer  ");
+			//					ihm.setIndication(" Ce joeur n'est pas dans la liste , merci de recomencer  ");
 			//					msg.setMessage( TypeMessage.Clique_DonneCarte);
 			//					aficherJoeurCase();
 			//				}
@@ -257,16 +269,16 @@ public class Controleur implements Observateur{
 		case Clique_RecupereTresor :
 			if(recupereTresor()) {
 				getJoueurTour().actionJouer();
-				ihm.afichierConsole("Vous avez recupere le tresor");
+				ihm.setIndication("Vous avez recupere le tresor");
 			}else {
-				ihm.afichierConsole("Impossible de recuperer le tresor");
+				ihm.setIndication("Impossible de recuperer le tresor");
 			}
 			break;
 			//		case Clique_DonneCarte :
 			//		int provi  = 1+1;
 			//			break;
 		case Clique_Asseche_SacDeSable :
-			carteSpe=msg.getCarte();
+			carteSpe=(Classique) msg.getCarte();
 			ArrayList<Tuile> listAsseche = new ArrayList<Tuile>() ;
 			for(Tuile t : Grille.tuilesListe.values()) {
 				if (t.getStatut()==1) {
@@ -274,17 +286,15 @@ public class Controleur implements Observateur{
 				}
 			}
 			ihm.afficherDep(listAsseche);
-			activateSpecialButton(getJoueurTour());
 			miseAJourGrille();
-
 
 			break;
 		case Clique_DonneCarte :
-			
 
+			ihm.setIndication("Clique sur la carte que vous voullez donne ");
 			break;
 		case Clique_Deplace_Helico :
-			carteSpe=msg.getCarte();
+			carteSpe=(Classique) msg.getCarte();
 			ArrayList<Tuile> listCaseAvent = new ArrayList<Tuile>() ;
 			for(Tuile t : Grille.tuilesListe.values()) {
 				if (t.getAventurie().size()!=0) {
@@ -292,37 +302,37 @@ public class Controleur implements Observateur{
 				}
 			}
 			ihm.afficherDep(listCaseAvent);
-			activateSpecialButton(getJoueurTour());
 			miseAJourGrille();
 
 			break;
 
 		case Clique_Carte_Tresor :
-			
+
 			if(lastAction ==TypeMessage.Clique_DonneCarte) {
-				System.out.println(" Donne clqiue carte tresort controleur ");
+
 				numCarte = msg.getNum();
+				ihm.setIndication("Cliquez sur le joueur a qui vous voulez donner la carte");
 			}
 			break;
 		case Clique_Joueur :
-			
+
 			if(lastAction == TypeMessage.Clique_Carte_Tresor && numCarte != -1&&getJoueurTour().getListeCarteJoueur().size()>numCarte&&msg.getNum()!=-1) {
-				
+
 				givePlayer = joueursList.get(msg.getNum()); 
-				Classique c =  getJoueurTour().getListeCarteJoueur().get(numCarte);
+				Classique c =  (Classique) getJoueurTour().getListeCarteJoueur().get(numCarte);
 
 				if(donneCarteJoeur(msg.getNum())) {
 					getJoueurTour().getListeCarteJoueur().remove(c);
 					givePlayer.getListeCarteJoueur().add(c);
 					afficherCartes(getJoueurTour());
 					numCarte = -1;
-				
+					ihm.setIndication("");
 				}
-				
 
-				
+
+
 			}
-			
+
 			break;
 
 		}
@@ -331,7 +341,7 @@ public class Controleur implements Observateur{
 
 
 		//Si la conditon au dessu est fausse elle continue 
-	
+
 		lastAction = msg.getMessage();
 		if (helicoTuileSelect!=null) {
 			lastAction=TypeMessage.Clique_Deplace_Helico;
@@ -348,7 +358,7 @@ public class Controleur implements Observateur{
 	private void finDeTour() {
 		// TODO Auto-generated method stub
 		if(!urg) {
-			ihm.afichierConsole("Fin du tour du joueur "+numTour);
+			ihm.setIndication("Fin du tour du joueur "+numTour);
 
 
 			for (int i=0;i<curseur.getNbCartesInond();i++) {
@@ -368,23 +378,16 @@ public class Controleur implements Observateur{
 				lastAction = TypeMessage.Defausse_Joueur;
 
 
-				ihm.addConsole("Vous avez " + (getJoueurTour().getListeCarteJoueur().size()-5) + " cartes en trop dans votre main, choisir les cartes Ã  dÃ©fausser :");
+				ihm.setIndication("Vous avez " + (getJoueurTour().getListeCarteJoueur().size()-5) + " cartes en trop dans votre main, choisir les cartes Ã  dÃ©fausser :");
 
 			}
-
-
-
-			//afficherListeCarteJoueur
 
 
 			getJoueurTour().finTour();
 			numTour++;		
 			numTour%=joueursList.size();
-			afficherListeCarteJoueur();
-
-			ihm.addConsole("Joueur "+numTour+" A vous de jouer");
+			ihm.setIndication("Joueur "+numTour+" A vous de jouer");
 			ihm.miseAJourPlayer(numTour," ( "+getJoueurTour().getNom()+" )", getJoueurTour().getColor());
-			activateSpecialButton(getJoueurTour());
 			afficherCartes(getJoueurTour());
 			//	Utils.debugln("Fin de tour");
 			ihm.rool(getJoueurTour(), joueursList);
@@ -394,7 +397,7 @@ public class Controleur implements Observateur{
 	}
 
 	public void creeDeckInondation() {
-		for(Tuile t :grille.getTuilesListe().values()){
+		for(Tuile t :Grille.tuilesListe.values()){
 			if(t.getNum()!=-1) {
 				inondationDeck.add(new CarteInondation(t.getNom(),t));
 			}
@@ -459,8 +462,8 @@ public class Controleur implements Observateur{
 				if (isInit) {
 					carteTresorsDefausse.add(cC);
 					curseur.monteeEaux();
+					ihm.afficherNivCurseur(curseur.getNiv());
 					carteTresorDeck.remove(0);
-					ihm.setLevelCursort(curseur.getNbCartesInond());
 				}else {
 					carteTresorDeck.remove(0);
 					carteTresorDeck.add((int) (Math.random()*carteTresorDeck.size()),cC);
@@ -475,40 +478,12 @@ public class Controleur implements Observateur{
 
 	}
 
-	public void init() {
+	public void init(ArrayList<Aventurier> listJoueurs) {
 		//creer les aventuriers
 		Aventurier a;
 
 		//Marche cour vol et venge mois 
-		int i = 0;
-
-		a = new Ingenieur(i,"Ingenieur",Pion.ROUGE);
-		i++;
-		joueursList.add(a);
-
-
-		a = new Plongeur(i,"Plongeur",Pion.NOIR);
-
-		joueursList.add(a);
-
-		i++;
-		a = new Navigateur(i,"Navigateur",Pion.JAUNE);
-
-		joueursList.add(a);
-		i++;
-		a = new Messager(i,"Messager",Pion.GRIS);
-		joueursList.add(a);
-
-		i++;
-
-		//		a = new Aviateur(i,"Aviateur",Pion.BLEU);
-		//
-		//		joueursList.add(a);
-		//
-		//		a = new Explorateur(i,"Explorateur",Pion.VERT);
-
-		//
-		//		joueursList.add(a);
+		joueursList = listJoueurs;
 
 
 		Collections.shuffle(joueursList);
@@ -544,13 +519,15 @@ public class Controleur implements Observateur{
 		//		for(int j =0;j<5;j++) {
 		//			piocherInondation();
 		//		}
-		activateSpecialButton(getJoueurTour());
 		ihm.miseAJourPlayer(0," ( "+getJoueurTour().getNom()+" )", getJoueurTour().getColor());
 
 		ihm.rool(getJoueurTour(), joueursList);
 
 		afficherCartes(getJoueurTour());
+		//ihm.afficherNivCurseur(2);
 		isInit = true;
+		
+		ihm.afficherDefausse(getJoueurTour());
 
 		//test();
 	}
@@ -586,7 +563,7 @@ public class Controleur implements Observateur{
 		while(it.hasNext()) {
 			Aventurier a =it.next();
 			if(!urg && a.getTuile().getStatut()==2) {
-				ihm.print("Deplacez "+a.getNom()+" en urgence");
+				ihm.setIndication("Deplacez "+a.getNom()+" en urgence");
 				grille.activateAll();
 				urgence=a;
 				urg=true;
@@ -615,7 +592,7 @@ public class Controleur implements Observateur{
 		// TODO - implement Controleur.donneCarte
 
 
-		
+
 
 
 
@@ -641,13 +618,13 @@ public class Controleur implements Observateur{
 
 
 
-			Classique c =  getJoueurTour().getListeCarteJoueur().get(num);
+			Classique c =  (Classique) getJoueurTour().getListeCarteJoueur().get(num);
 
 			getJoueurTour().getListeCarteJoueur().remove(c);
 
 			givePlayer.getListeCarteJoueur().add(c);
 
-			ihm.addConsole("Carte donne");
+			ihm.setIndication("Carte donne");
 			givePlayer = null;
 			return true;
 		}else {
@@ -672,19 +649,9 @@ public class Controleur implements Observateur{
 
 			return false;
 		}else {
-			ihm.addConsole("Joueur sur la meme case  : "+str+" \n Veiller entre le numerau du joeur selectione");
+			ihm.setIndication("Joueur sur la meme case  : "+str+" \n Veiller entre le numerau du joeur selectione");
 			return true;
 		}
-
-
-
-
-
-	}
-
-	private void actSpeciale() {
-		// TODO - implement Controleur.actSpeciale
-		throw new UnsupportedOperationException();
 	}
 
 	private void piocherTresor() {
@@ -698,16 +665,16 @@ public class Controleur implements Observateur{
 
 	@Deprecated
 	public void afficherListeCarteJoueur() {
-		ihm.afichierConsole("Main du joueur :" + getJoueurTour().getNom());
+		ihm.setIndication("Main du joueur : " + getJoueurTour().getNom());
 		int i = 1;
-		for (Classique c : getJoueurTour().getListeCarteJoueur()){
-			ihm.addConsole(i +" : " + c.getNom());
+		for (Carte c : getJoueurTour().getListeCarteJoueur()){
+			ihm.setIndication(i +" : " + c.getNom());
 			i = i+1;
 		}
 
 		if (getJoueurTour().getListeCarteJoueur().size() > 5) {
 			lastAction = TypeMessage.Defausse_Joueur;
-			ihm.addConsole("Vous avez " + (getJoueurTour().getListeCarteJoueur().size()-5) + " cartes en trop dans votre main, choisir les cartes ÃÂ  dÃÂ©fausser :");
+			ihm.setIndication("Vous avez " + (getJoueurTour().getListeCarteJoueur().size()-5) + " cartes en trop dans votre main, choisir les cartes ÃÂ  dÃÂ©fausser :");
 		}
 
 
@@ -721,10 +688,8 @@ public class Controleur implements Observateur{
 		if (getJoueurTour().getListeCarteJoueur().size() > 5) {
 
 			int numCarte = Integer.parseInt(messageConsole) -1;
-			this.carteTresorsDefausse.add(getJoueurTour().getListeCarteJoueur().get(numCarte));
+			this.carteTresorsDefausse.add((Classique) getJoueurTour().getListeCarteJoueur().get(numCarte));
 			getJoueurTour().getListeCarteJoueur().remove(numCarte);
-			afficherListeCarteJoueur();
-
 
 		}
 	}
@@ -739,6 +704,11 @@ public class Controleur implements Observateur{
 		if(inondationDeck.size()!=0) {
 			CarteInondation cInP = inondationDeck.get(0);
 			cInP.getTuile().inonder();
+			if(cInP.getTuile().getNum()==22 && cInP.getTuile().getStatut()==2) {
+				helicoCoule=true;
+				verifierFinDePartie();
+			}
+
 			inondationDefausse.add(cInP);
 			inondationDeck.remove(cInP);
 		}
@@ -766,40 +736,8 @@ public class Controleur implements Observateur{
 
 	}
 
-	public void activateSpecialButton(Aventurier a) {
-		boolean aHelico=false;
-		boolean aSacSable=false;
-
-		for(Classique c : a.getListeCarteJoueur()) {
-			if (c instanceof CarteHelicoptere) {
-				aHelico=true;
-			}
-			if(c instanceof CarteSacSable) {
-				aSacSable=true;
-			}
-		}
-
-		ihm.activateSpecialButton(aHelico, aSacSable);
-
-	}
-
-	public void getAventurie(int numJoeur) {
-		// TODO - implement Controleur.getAventurie
-		throw new UnsupportedOperationException();
-	}
-
-	public void DonneCarte() {
-		// TODO - implement Controleur.DonneCarte
-		throw new UnsupportedOperationException();
-	}
-
 	public String getMessageConsole() {
 		return messageConsole;
-	}
-
-	public void addDefausse(ArrayList<Carte> main) {
-		// TODO - implement Controleur.addDefausse
-		throw new UnsupportedOperationException();
 	}
 
 	public void miseAJourGrille() {
@@ -810,10 +748,10 @@ public class Controleur implements Observateur{
 	}	
 
 	public void afficherCartes(Aventurier a) {
-		ArrayList<Classique> listCartes = a.getListeCarteJoueur();
+		ArrayList<Carte> listCartes = a.getListeCarteJoueur();
 		for(int i=0;i<5;i++) {
 			try {
-				ihm.setCartePanel(i, listCartes.get(i));
+				ihm.setCartePanel(i, (Classique) listCartes.get(i));
 			}catch(Exception e) {
 				ihm.setCartePanel(i, null);
 			}
@@ -851,43 +789,16 @@ public class Controleur implements Observateur{
 
 	public int verifierFinDePartie() {
 
-		//Verification de si un joueur a une carte helicoptere
-		boolean aCarteHelicoptere = false;
-		for(int i=0; i<joueursList.size(); i++) {
-			for(int j=0; j<joueursList.get(i).getNbCarte();j++) {
-				if(joueursList.get(i).getCarte(j).getClass().getName()=="CarteHelicoptere") {
-					aCarteHelicoptere=true;
-				}
-			}
-		}
-
-		int joueursPresentsHeliport=0;
-		boolean heliportCoule=false;
-		for(Tuile t : grille.getTuilesListe().values()) {
-			if(t.getNum()==22) {			//Si la tuile est l'heliport
-				joueursPresentsHeliport = t.getNbrAventurie();
-				heliportCoule = t.getStatut()==-2;
-			}
-		}
-
-		//Condition victoire
-		if(	joueursPresentsHeliport>3&&
-				tresorsRecuperes.size()==4&&
-				aCarteHelicoptere) {
-			return 1;												//Partie gagnee et livraison de colis de bonbons
-		}															//De bonbons ? et pas de cookies ?
-		//Et pourquoi pas les deux ??
-
 		//Condition(s) defaite
 		if(noyade) {
 			return -1;
 		}
 
-		if(heliportCoule) {
+		if(helicoCoule) {
 			return -1;												//Heliport coule
 		}
 
-		if(curseur.getNbCartesInond()==0) {
+		if(curseur.getNiv()==10) {
 			return -1;												//Curseur au niveau maximum
 		}
 
@@ -904,9 +815,7 @@ public class Controleur implements Observateur{
 			}
 		}
 
-
-
-		for(Tuile t : grille.getTuilesListe().values()) {
+		for(Tuile t : Grille.tuilesListe.values()) {
 			if(temple>-1 && (t.getNum()==341 || t.getNum()==342) && t.getStatut()==2) {
 				temple++;
 			}
@@ -926,6 +835,35 @@ public class Controleur implements Observateur{
 			return -1;												//Deux cases de recuperation de tresor coulees
 		}
 
+		//Condition victoire
+
+		//Verification de si un joueur a une carte helicoptere
+		aCarteHelicoptere = false;
+		for(int i=0; i<joueursList.size(); i++) {
+			for(int j=0; j<joueursList.get(i).getNbCarte();j++) {
+				if(joueursList.get(i).getCarte(j) instanceof CarteHelicoptere) {
+					aCarteHelicoptere=true;
+				}
+			}
+		}
+
+
+		int joueursPresentsHeliport=0;
+		for(Tuile t : Grille.tuilesListe.values()) {
+			if(t.getNum()==22) {			//Si la tuile est l'heliport
+				joueursPresentsHeliport = t.getNbrAventurie();
+			}
+		}
+
+
+		if(	joueursPresentsHeliport==joueursList.size()&&
+				tresorsRecuperes.size()==4&&
+				aCarteHelicoptere) {
+			return 1;
+		}
+
+		aCarteHelicoptere=false;
+
 		return 0;
 	}
 
@@ -934,17 +872,20 @@ public class Controleur implements Observateur{
 	}
 
 	/*public void test() {
-
-
-		getJoueurTour().addCarte(new CarteTresor("test ", NomTresor.CaliceOnde));
-		getJoueurTour().addCarte(new CarteTresor("test ", NomTresor.CaliceOnde));
-		getJoueurTour().addCarte(new CarteTresor("test ", NomTresor.CaliceOnde));
-		getJoueurTour().addCarte(new CarteTresor("test ", NomTresor.CaliceOnde));
-		getJoueurTour().addCarte(new CarteTresor("test ", NomTresor.CaliceOnde));
-
-
-
-
+		//Forcer les conditions de victoire
+		for(Tuile t : grille.getTuilesListe().values()) {
+			if(t.getNum()==22) {			//Si la tuile est l'heliport
+				for(Aventurier a : joueursList) {
+					a.deplacer(t);
+				}
+			}
+		}
+		tresorsRecuperes.add(NomTresor.CaliceOnde);
+		tresorsRecuperes.add(NomTresor.CaliceOnde);
+		tresorsRecuperes.add(NomTresor.CaliceOnde);
+		tresorsRecuperes.add(NomTresor.CaliceOnde);
+		getJoueurTour().addCarte(new CarteHelicoptere("ble"));
+		verifierFinDePartie();
 
 	}*/
 

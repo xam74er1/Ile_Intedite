@@ -16,16 +16,6 @@ public class Aviateur extends Aventurier {
 		super(Num, nom,pion);
 	}
 
-
-	@Override
-	public boolean deplacementPossible(Tuile from, Tuile to) {
-		System.out.println("to = "+to+" from = "+from);
-		int x = Math.abs(from.getxT() - to.getxT());
-		int y = Math.abs(from.getyT() - to.getyT());
-		// Si il ce deplace sois a 1 case en X ou 1 case en Y et que la case de destination n'as pas couler
-		return ((to.getStatut() < 2)&to.getNum()!=-1);
-	}
-
 	@Override
 	public ArrayList<Tuile> getAdjacent(Tuile from, ArrayList<Tuile> listTuile){
 		tFrom=from;

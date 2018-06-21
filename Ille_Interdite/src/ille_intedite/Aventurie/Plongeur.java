@@ -67,21 +67,6 @@ public class Plongeur extends Aventurier {
 		return adjacent;
 	}
 	
-	@Override
-	public boolean deplacementPossible(Tuile from, Tuile to) {
-		
-		ArrayList<Tuile> listTuile = new ArrayList<Tuile>();
-		Iterator<Tuile> it = Grille.tuilesListe.values().iterator();
-		while(it.hasNext()) {
-			listTuile.add(it.next());
-		}
-		
-		ArrayList<Tuile> listdep = deplacementPossible(from, listTuile);
-		
-		//return listdep.contains(to);
-		return listdep.contains(to);
-	}
-	
 
 	@Override
 	public ArrayList<Tuile> deplacer2(){

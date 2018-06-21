@@ -1,33 +1,24 @@
 package IHM;
 
-import java.awt.EventQueue;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import javax.swing.Box;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JSlider;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 
-import Carte.CarteHelicoptere;
-import Carte.CarteSacSable;
-import Carte.CarteTresor;
 import Carte.Classique;
-import Carte.NomTresor;
 import ille_intedite.Grille;
 import ille_intedite.Message;
 import ille_intedite.Observe;
@@ -36,29 +27,28 @@ import ille_intedite.TypeMessage;
 import ille_intedite.VueGrille;
 import ille_intedite.Aventurie.Aventurier;
 
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-
 public class IHMV2 extends Observe{
 	//Com ref 2
+	JLabel msgHelp;
 	public JFrame frame;
 	private JTextArea console;
 	private JPanel Plateau ;
 	private JLabel lblJoeurN;
 	private JLabel textCusor;
+	JPanel sliderPanel;
+	PanelCurseur sliderImg;
 
-
-
-	HashMap<String,JButton> listButton = new HashMap();
+	HashMap<String,PanelButton> listButton = new HashMap();
 	HashMap<String,JPanel> listPan = new HashMap();
 	HashMap<Integer,PanelCarte> listCartes = new HashMap<Integer,PanelCarte>();
+	HashMap<Integer,JPanel> listCurseur = new HashMap<Integer,JPanel>();
 	private JTextField textField;
 
 	VueGrille vue;
+	
+	PanelAfficheCarte panelDefausse;
 
-	private JButton btnSacSable;
-	private JButton btnHelico;
+
 	private ImageIcon imgPlayerIn1T,imgPlayerIn2T,imgPlayerIn3T,imgP1T,imgP2T,imgP3T;
 	JPanel PanelPlayerIn3T,PanelPlayerIn2T,PanelPlayerIn1T;
 	Image imP3T,imP2T,imP1T;
@@ -86,27 +76,29 @@ public class IHMV2 extends Observe{
 		frame = new JFrame();
 		frame.getContentPane().setBackground(new Color(105, 105, 105));
 		frame.getContentPane().setLayout(null);
+		
+		panelDefausse=new PanelAfficheCarte(this, frame);
+		
+		sliderImg = new PanelCurseur(this);
+		sliderImg.setBounds(0, 60, 100, 673);
+		frame.getContentPane().add(sliderImg);
 
-		JPanel SliderPanel = new JPanel();
-		SliderPanel.setBackground(new Color(0, 0, 128));
-		SliderPanel.setBounds(0, 0, 100, 673);
-		frame.getContentPane().add(SliderPanel);
-		SliderPanel.setLayout(null);
-
-		JSlider slider = new JSlider();
-		slider.setMinorTickSpacing(1);
-		slider.setValue(5);
-		slider.setPaintTicks(true);
-		slider.setBackground(new Color(0, 0, 205));
-		slider.setMaximum(10);
-		slider.setBounds(12, 86, 76, 574);
-		SliderPanel.add(slider);
-		slider.setOrientation(SwingConstants.VERTICAL);
-		slider.setEnabled(false);
+		/*sliderPanel = new JPanel();
+		sliderPanel.setBounds(0, 60, 100, 610);
+		sliderPanel.setBackground(Color.WHITE);
+		frame.getContentPane().add(sliderPanel);
+		sliderPanel.setLayout(new GridLayout(11,1));*/
+		
+		/*for (int i=0;i<11;i++) {
+			JPanel panelCurseur = new JPanel();
+			panelCurseur.setBackground(Color.WHITE);
+			sliderPanel.add(panelCurseur);
+			listCurseur.put(i,panelCurseur);
+		}*/
 		
 		JPanel PanelHelp = new JPanel();
-		PanelHelp.setBounds(20, 13, 60, 60);
-		SliderPanel.add(PanelHelp);
+		PanelHelp.setBounds(0, 0, 60, 60);
+		frame.getContentPane().add(PanelHelp);
 		PanelHelp.setLayout(null);
 		
 		JButton btnHelp = new JButton("");
@@ -123,35 +115,35 @@ public class IHMV2 extends Observe{
 
 		JPanel CardPlayer = new JPanel();
 		CardPlayer.setBackground(new Color(139, 69, 19));
-		CardPlayer.setBounds(112, 13, 250, 597);
+		CardPlayer.setBounds(114, 31, 250, 597);
 		frame.getContentPane().add(CardPlayer);
 		CardPlayer.setLayout(null);
 		
-		PanelCarte panelCarte1 = new PanelCarte(0,this);
+		PanelCarte panelCarte1 = new PanelCarte(0,this,true);
 		panelCarte1.setBounds(12, 13, 100, 140);
 		CardPlayer.add(panelCarte1);
 		listCartes.put(0, panelCarte1);
 		panelCarte1.setLayout(null);
 
-		PanelCarte panelCarte2 = new PanelCarte(1,this);
+		PanelCarte panelCarte2 = new PanelCarte(1,this,true);
 		panelCarte2.setBounds(138, 13, 100, 140);
 		CardPlayer.add(panelCarte2);
 		listCartes.put(1, panelCarte2);
 		panelCarte2.setLayout(null);
 
-		PanelCarte panelCarte3 = new PanelCarte(2,this);
+		PanelCarte panelCarte3 = new PanelCarte(2,this,true);
 		panelCarte3.setBounds(12, 166, 100, 140);
 		CardPlayer.add(panelCarte3);
 		listCartes.put(2, panelCarte3);
 		panelCarte3.setLayout(null);
 
-		PanelCarte panelCarte4 = new PanelCarte(3,this);
+		PanelCarte panelCarte4 = new PanelCarte(3,this,true);
 		panelCarte4.setBounds(138, 166, 100, 140);
 		CardPlayer.add(panelCarte4);
 		listCartes.put(3, panelCarte4);
 		panelCarte4.setLayout(null);
 
-		PanelCarte panelCarte5 = new PanelCarte(4,this);
+		PanelCarte panelCarte5 = new PanelCarte(4,this,true);
 		panelCarte5.setBounds(75, 319, 100, 140);
 		CardPlayer.add(panelCarte5);
 		listCartes.put(4, panelCarte5);
@@ -169,117 +161,42 @@ public class IHMV2 extends Observe{
 
 		JPanel PanelSouth = new JPanel();
 		PanelSouth.setBackground(new Color(139, 69, 19));
-		PanelSouth.setBounds(97, 623, 1165, 50);
+		PanelSouth.setBounds(99, 641, 1165, 50);
 		frame.getContentPane().add(PanelSouth);
 		PanelSouth.setLayout(null);
 
-		JButton Deplace = new JButton("Deplacer");
+		PanelButton Deplace = new PanelButton(this,"Deplacer",TypeMessage.Clique_Deplace);
 		Deplace.setBounds(12, 13, 97, 25);
 		PanelSouth.add(Deplace);
-		Deplace.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Message m = new Message(TypeMessage.Clique_Deplace);
 
-				;
-
-				notifierObservateur(m);
-			}
-		});
-
-		JButton btAssecher = new JButton("Assecher");
+		PanelButton btAssecher = new PanelButton(this,"Assecher",TypeMessage.Clique_Asseche);
 		btAssecher.setBounds(121, 13, 97, 25);
-
-		btAssecher.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Message m = new Message(TypeMessage.Clique_Asseche);
-
-				;
-
-				notifierObservateur(m);
-			}
-		});
 		PanelSouth.add(btAssecher);
 
-		JButton btDonneCarte = new JButton("Donne carte");
+		PanelButton btDonneCarte = new PanelButton(this,"DonnerCarte",TypeMessage.Clique_DonneCarte);
 		btDonneCarte.setBounds(230, 13, 97, 25);
-		btDonneCarte.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Message m = new Message(TypeMessage.Clique_DonneCarte);
-
-				;
-
-				notifierObservateur(m);
-			}
-		});
 		PanelSouth.add(btDonneCarte);
 
-		JButton btRecupereTresort = new JButton("Recupere Tresrot");
+		PanelButton btRecupereTresort = new PanelButton(this,"RecupererTresor",TypeMessage.Clique_RecupereTresor);
 		btRecupereTresort.setBounds(339, 13, 130, 25);
-		btRecupereTresort.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Message m = new Message(TypeMessage.Clique_RecupereTresor);
-
-				;
-
-				notifierObservateur(m);
-			}
-		});
 		PanelSouth.add(btRecupereTresort);
 
-		JButton btFinDeTour = new JButton("Fin de tour");
-		btFinDeTour.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Message m = new Message(TypeMessage.Clique_Fin_Tour);
-
-				;
-
-				notifierObservateur(m);
-			}
-		});
+		PanelButton btFinDeTour = new PanelButton(this,"FinDeTour",TypeMessage.Clique_Fin_Tour);
 		btFinDeTour.setBounds(1056, 13, 97, 25);
 		PanelSouth.add(btFinDeTour);
-
-		JPanel panActionSpetiale = new JPanel();
-		panActionSpetiale.setBounds(501, 13, 218, 25);
-		PanelSouth.add(panActionSpetiale);
-		panActionSpetiale.setLayout(new GridLayout(0, 2, 0, 0));
-
-		btnSacSable = new JButton("Sac de Sable");
-		panActionSpetiale.add(btnSacSable);
-		btnSacSable.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Message m = new Message(TypeMessage.Clique_Asseche_SacDeSable);
-				notifierObservateur(m);
-			}
-		});
-
-		btnHelico = new JButton("Helicoptere");
-		panActionSpetiale.add(btnHelico);
-		btnHelico.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Message m = new Message(TypeMessage.Clique_Deplace_Helico);
-
-				notifierObservateur(m);
-			}
-		});
-
 
 
 		//PLATEAU ---------------------------
 		Plateau = new JPanel();
 		Plateau.setBackground(new Color(160, 82, 45));
-		Plateau.setBounds(374, 13, 597, 597);
+		Plateau.setBounds(376, 31, 597, 597);
 		Plateau .setLayout(new GridLayout(6,6,0,0));
 		frame.getContentPane().add(Plateau);
 		//--------------------------------
 
 		JPanel PanelEast = new JPanel();
 		PanelEast.setBackground(new Color(139, 69, 19));
-		PanelEast.setBounds(983, 13, 279, 597);
+		PanelEast.setBounds(985, 31, 279, 597);
 		frame.getContentPane().add(PanelEast);
 		PanelEast.setLayout(null);
 		//--------------------- 1 et principal -----------------------
@@ -301,6 +218,7 @@ public class IHMV2 extends Observe{
 		btnImgPlayerIn1T.setIcon(imgP1T);
 		btnImgPlayerIn1T.addActionListener(actionBoutonJoueur());
 		btnImgPlayerIn1T.setBorder(null);
+		//btnImgPlayerIn1T.setEnabled(false);
 			//------------- 2 -----------------------
 
 		PanelPlayerIn2T = new JPanel();
@@ -318,13 +236,14 @@ public class IHMV2 extends Observe{
 
 		
 
-		imgPlayerIn2T = new ImageIcon("images/persos/ingenieur.png");
+		/*imgPlayerIn2T = new ImageIcon("images/persos/ingenieur.png");
 		imP2T = imgPlayerIn2T.getImage();
 		imP2T = imP2T.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
 		imgP2T = new ImageIcon(imP2T);
 
-		btnImgPlayerIn2T.setIcon(imgP2T);
+		btnImgPlayerIn2T.setIcon(imgP2T);*/
 		btnImgPlayerIn2T.setBorder(null);
+		//btnImgPlayerIn2T.setEnabled(false);
 
 
 		PanelPlayerIn3T = new JPanel();
@@ -339,13 +258,14 @@ public class IHMV2 extends Observe{
 		btnImgPlayerIn3T.setForeground(new Color(139, 69, 19));
 		btnImgPlayerIn3T.setBounds(0, 0, 150, 150);
 		PanelPlayerIn3T.add(btnImgPlayerIn3T);
-		imgPlayerIn3T = new ImageIcon("images/persos/aviateur.png");
+		/*imgPlayerIn3T = new ImageIcon("images/persos/aviateur.png");
 		imP3T = imgPlayerIn3T.getImage();
 		imP3T = imP3T.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
 		imgP3T = new ImageIcon(imP3T);
 		btnImgPlayerIn3T.addActionListener(actionBoutonJoueur());
-		btnImgPlayerIn3T.setIcon(imgP3T);
+		btnImgPlayerIn3T.setIcon(imgP3T);*/
 		btnImgPlayerIn3T.setBorder(null);
+		//btnImgPlayerIn3T.setEnabled(false);
 
 		
 
@@ -416,6 +336,16 @@ public class IHMV2 extends Observe{
 		panel.setBackground(new Color(105, 105, 105));
 		panel.setBounds(0, 84, 279, 10);
 		PanelEast.add(panel);
+		
+		 msgHelp = new JLabel("");
+		msgHelp.setBackground(Color.BLUE);
+		msgHelp.setForeground(Color.red);
+		msgHelp.setFont(new Font("Serif", Font.BOLD, 25));
+		msgHelp.setHorizontalAlignment(JLabel.CENTER);
+		msgHelp.setVerticalAlignment(JLabel.CENTER);
+		msgHelp.setBounds(114, 0, 1150, 35);
+		
+		frame.getContentPane().add(msgHelp);
 		frame.setBounds(100, 100, 1280, 720);
 
 		//----------------
@@ -434,11 +364,11 @@ public class IHMV2 extends Observe{
 	public void fillPlataux2(Grille g){
 
 		CasePlateau c;
-		HashMap<String, Tuile> tuilesListe = g.getTuilesListe();
+		HashMap<String, Tuile> tuilesListe = Grille.tuilesListe;
 
 		//int i = 0;
 
-		Iterator<Tuile> it = g.getTuilesListe().values().iterator();
+		Iterator<Tuile> it = Grille.tuilesListe.values().iterator();
 		int k = 0;
 		String str;
 		for(int y =0;y<6;y++){
@@ -497,21 +427,7 @@ public class IHMV2 extends Observe{
 		}
 	}
 
-	//effece les message et ajoute un message 
-	public void afichierConsole(String str){
-		//console.setText(str);
-	}
-
-	//Ajoute une message en plus des message aficher
-	public void addConsole(String str) {
-		//console.setText(console.getText()+"\n"+str);
-	}
-
-	public void print(String str){
-		//console.setText(str);
-	}
-
-	public  HashMap<String, JButton> getListButton() {
+	public  HashMap<String, PanelButton> getListButton() {
 		return listButton;
 	}
 
@@ -536,11 +452,6 @@ public class IHMV2 extends Observe{
 
 	public void setLevelCursort(int i) {
 		//		 textCusor.setText("Niveau de l'eau "+i);
-	}
-
-	public void activateSpecialButton(boolean he, boolean sa) {
-		btnHelico.setEnabled(he);
-		btnSacSable.setEnabled(sa);
 	}
 
 
@@ -644,5 +555,19 @@ public void rool(Aventurier a  , ArrayList<Aventurier> listAvent) {
 		}
 		
 		
+	}
+
+	public void afficherNivCurseur(int niv) {
+		sliderImg.setNiv(niv);
+		sliderImg.repaint();
+		sliderImg.revalidate();
+	}
+	
+	public void setIndication(String str) {
+		msgHelp.setText(str);
+	}
+	
+	public void afficherDefausse(Aventurier a) {
+		panelDefausse.setListCarte(a.getListeCarteJoueur());
 	}
 }

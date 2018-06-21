@@ -5,29 +5,19 @@
  */
 package ille_intedite;
 
-import IHM.IHM;
+import IHM.FenetreStart;
+//import IHM.IHM;
 import IHM.IHMV2;
-
+import IHM.PlaySound;
+//Com ref
 /**
  *
  * @author clercma
  */
 public class Main {
     public static void main(String [] args) {
-    	VueGrille vue = new VueGrille();
-        IHMV2 ihm = new IHMV2(vue);
-        Controleur ctrl = new Controleur(ihm,vue);
-//        ctrl.creeDeckInondation(); Debug en cours
-        
-        vue.setCtrl(ctrl);
-        vue.setIhm(ihm);
-        
-        ihm.addObservateur(ctrl);
-        
-        vue.afficherGrille();
-        
-       ctrl.piocher5Inondation();
-       //Comentaire de modification 
+    	//PlaySound.play("C:\\Users\\xam74\\Documents\\ille_interdit\\old\\Weeee.wav");
+    	FenetreStart f = new FenetreStart();
         
    }    
 }

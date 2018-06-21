@@ -1,4 +1,4 @@
-package IHM;
+/*package IHM;
 
 import ille_intedite.Grille;
 import ille_intedite.Message;
@@ -56,36 +56,12 @@ private JLabel textCusor;
 	
 	private JButton btnSacSable;
 	private JButton btnHelico;
-	
-	/**
-	 * Launch the application.
-	 */
-	//	public static void main(String[] args) {
-	//		EventQueue.invokeLater(new Runnable() {
-	//			public void run() {
-	//				try {
-	//					IHM window = new IHM();
-	//					window.frame.setVisible(true);
-	//
-	//
-	//				} catch (Exception e) {
-	//					e.printStackTrace();
-	//				}
-	//			}
-	//		});
-	//	}
 
-	/**
-	 * Create the application.
-	 */
 	public IHM(VueGrille vue) {
 		this.vue = vue;
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 408);
@@ -214,19 +190,7 @@ private JLabel textCusor;
 			}
 		});
 		panelAction_3.add(btnHelico);
-		
-		/*JButton btnAction_3 = new JButton("SacDeSable");
-		btnAction_3.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Message m = new Message(TypeMessage.Clique_Asseche_SacDeSable);
-				
-				;
-				
-				notifierObservateur(m);
-			}
-		});
-		bouton.add(btnAction_3);*/
+
 		bouton.add(panelAction_3);
 
 		JButton btFindeTour = new JButton("Fin de Tour");
@@ -444,4 +408,4 @@ private JLabel textCusor;
 		btnHelico.setEnabled(he);
 		btnSacSable.setEnabled(sa);
 	}
-}
+}*/
