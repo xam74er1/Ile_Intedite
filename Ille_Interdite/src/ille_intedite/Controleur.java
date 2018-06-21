@@ -192,7 +192,6 @@ public class Controleur implements Observateur{
 
 				break;
 
-/* -------------------------FIN CLIQUE SUR UNE TUILLE ----------------------------------------------- */
 				//Actoin lors du clique sur un sac de sable (carte ) 
 			case Clique_Asseche_SacDeSable :
 				grille.getTuile(msg.getLocation()).assecher();
@@ -209,6 +208,7 @@ public class Controleur implements Observateur{
 				assecher(msg.getLocation());
 				ihm.updateGrille();
 				getJoueurTour().actionJouer();
+				PlaySound.play(System.getProperty("user.dir")+"\\src\\"+"sound\\Sac_de_Sable.wav");
 
 				if(getJoueurTour() instanceof Ingenieur) {
 					Ingenieur i = (Ingenieur) getJoueurTour();
@@ -220,6 +220,8 @@ public class Controleur implements Observateur{
 					i.setDerniereActionAssecher(!i.getDerniereActionAssecher());
 				}
 				break;
+
+/* -------------------------FIN CLIQUE SUR UNE TUILLE ----------------------------------------------- */
 //Action lors du bouton fin de tour 
 			case Clique_Fin_Tour :
 				deplacer(msg.getLocation(),urgence);
@@ -606,14 +608,16 @@ public class Controleur implements Observateur{
 
 		int nbr = getJoueurTour().getNum();
 		for(Aventurier a : getJoueurTour().getJoueurTuile()) {
-			System.out.println(" k = "+a.getNum()+" nbr "+nbr);
+		//	System.out.println(" k = "+a.getNum()+" nbr "+nbr);
 			if(nbr != a.getNum()&&num==a.getNum()) {
 				givePlayer = a;
 				return true;
 			}
 
-
+		
 		}
+		
+	
 
 		return  false;
 	}
@@ -891,6 +895,9 @@ public class Controleur implements Observateur{
 
 	}*/
 
+	public static int getnbJoueur() {
+		return joueursList.size();
+	}
 
 }
 
