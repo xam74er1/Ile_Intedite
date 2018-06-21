@@ -121,11 +121,11 @@ public class IHMV2 extends Observe{
 
 		panelDefausse.setBounds(0, 0, 1280, 680);
 		frame.getContentPane().add(panelDefausse);
-		
+
 		panelCarteInondations=new PanelAfficheCarte(this, frame);
 		panelCarteInondations.setBounds(0, 0, 1280, 680);
 		frame.getContentPane().add(panelCarteInondations);
-		
+
 		panelCartePiochee=new PanelAfficheCarte(this, frame);
 		panelCartePiochee.setBounds(0, 0, 1280, 680);
 		frame.getContentPane().add(panelCartePiochee);
@@ -141,7 +141,7 @@ public class IHMV2 extends Observe{
 		frame.getContentPane().add(PanelHelp);
 		PanelHelp.setLayout(null);
 
-		 btnHelp = new JButton("");
+		btnHelp = new JButton("");
 		btnHelp.setBounds(0, 0, 100, 60);
 		btnHelp.setForeground(new Color(0, 0, 205));
 		btnHelp.setBackground(new Color(0, 0, 205));
@@ -153,10 +153,10 @@ public class IHMV2 extends Observe{
 				// TODO Auto-generated method stub
 				new FrameHtml();
 			}
-			
+
 		});
 		//BOUTON HELP
-		
+
 
 		ImageIcon imgHelp = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images\\Art\\btnAide.png");
 
@@ -176,31 +176,31 @@ public class IHMV2 extends Observe{
 		frame.getContentPane().add(CardPlayer);
 		CardPlayer.setLayout(null);
 
-		 panelCarte1 = new PanelCarte(0,this,true);
+		panelCarte1 = new PanelCarte(0,this,true);
 		panelCarte1.setBounds(12, 13, 100, 140);
 		CardPlayer.add(panelCarte1);
 		listCartes.put(0, panelCarte1);
 		panelCarte1.setLayout(null);
 
-		 panelCarte2 = new PanelCarte(1,this,true);
+		panelCarte2 = new PanelCarte(1,this,true);
 		panelCarte2.setBounds(138, 13, 100, 140);
 		CardPlayer.add(panelCarte2);
 		listCartes.put(1, panelCarte2);
 		panelCarte2.setLayout(null);
 
-		 panelCarte3 = new PanelCarte(2,this,true);
+		panelCarte3 = new PanelCarte(2,this,true);
 		panelCarte3.setBounds(12, 166, 100, 140);
 		CardPlayer.add(panelCarte3);
 		listCartes.put(2, panelCarte3);
 		panelCarte3.setLayout(null);
 
-		 panelCarte4 = new PanelCarte(3,this,true);
+		panelCarte4 = new PanelCarte(3,this,true);
 		panelCarte4.setBounds(138, 166, 100, 140);
 		CardPlayer.add(panelCarte4);
 		listCartes.put(3, panelCarte4);
 		panelCarte4.setLayout(null);
 
-		 panelCarte5 = new PanelCarte(4,this,true);
+		panelCarte5 = new PanelCarte(4,this,true);
 		panelCarte5.setBounds(75, 319, 100, 140);
 		CardPlayer.add(panelCarte5);
 		listCartes.put(4, panelCarte5);
@@ -353,78 +353,78 @@ public class IHMV2 extends Observe{
 		panel.setBackground(new Color(105, 105, 105));
 		panel.setBounds(0, 84, 279, 10);
 		PanelEast.add(panel);
-		
-		
+
+
 		panelCarte3T1 = new PanelCarte(0,this,true);
 		panelCarte3T1.setBounds(185, 101, 25, 35);
 		PanelEast.add(panelCarte3T1);
 		listeCartes3T.put(0, (PanelCarte) panelCarte3T1);
-		
+
 		panelCarte3T2 = new PanelCarte(1,this,true);
 		panelCarte3T2.setBounds(230, 101, 25, 35);
 		PanelEast.add(panelCarte3T2);
 		listeCartes3T.put(1, (PanelCarte) panelCarte3T2);
-		
+
 		panelCarte3T3 = new PanelCarte(2,this,true);
 		panelCarte3T3.setBounds(185, 149, 25, 35);
 		PanelEast.add(panelCarte3T3);
 		listeCartes3T.put(2, (PanelCarte) panelCarte3T3);
-		
+
 		panelCarte3T4 = new PanelCarte(3,this,true);
 		panelCarte3T4.setBounds(230, 149, 25, 35);
 		PanelEast.add(panelCarte3T4);
 		listeCartes3T.put(3, (PanelCarte) panelCarte3T4);
-		
+
 		panelCarte3T5 = new PanelCarte(4,this,true);
 		panelCarte3T5.setBounds(208, 197, 25, 35);
 		PanelEast.add(panelCarte3T5);
 		listeCartes3T.put(4, (PanelCarte) panelCarte3T5);
-		
+
 		panelCarte2T1 = new PanelCarte(0,this,true);
 		panelCarte2T1.setBounds(185, 264, 25, 35);
 		PanelEast.add(panelCarte2T1);
 		listeCartes2T.put(0, (PanelCarte) panelCarte3T4);
-		
+
 		panelCarte2T2 = new PanelCarte(1,this,true);
 		panelCarte2T2.setBounds(230, 264, 25, 35);
 		PanelEast.add(panelCarte2T2);
 		listeCartes2T.put(1, (PanelCarte) panelCarte3T4);
-		
+
 		panelCarte2T3 = new PanelCarte(2,this,true);
 		panelCarte2T3.setBounds(185, 312, 25, 35);
 		PanelEast.add(panelCarte2T3);
 		listeCartes2T.put(2, (PanelCarte) panelCarte3T4);
-		
+
 		panelCarte2T4 = new PanelCarte(3,this,true);
 		panelCarte2T4.setBounds(230, 312, 25, 35);
 		PanelEast.add(panelCarte2T4);
 		listeCartes2T.put(3, (PanelCarte) panelCarte3T4);
-		
+
 		panelCarte2T5 = new PanelCarte(4,this,true);
 		panelCarte2T5.setBounds(208, 360, 25, 35);
 		PanelEast.add(panelCarte2T5);
 		listeCartes2T.put(4, (PanelCarte) panelCarte3T4);
-		
+
 		panelCarte1T1 = new PanelCarte(0,this,true);
 		panelCarte1T1.setBounds(185, 434, 25, 35);
 		PanelEast.add(panelCarte1T1);
 		listeCartes1T.put(0, (PanelCarte) panelCarte3T4);
-		
+
 		panelCarte1T2 = new PanelCarte(1,this,true);
 		panelCarte1T2.setBounds(230, 434, 25, 35);
 		PanelEast.add(panelCarte1T2);
 		listeCartes1T.put(1, (PanelCarte) panelCarte3T4);
-		
+
 		panelCarte1T3 = new PanelCarte(2,this,true);
 		panelCarte1T3.setBounds(185, 482, 25, 35);
 		PanelEast.add(panelCarte1T3);
 		listeCartes1T.put(2, (PanelCarte) panelCarte3T4);
-		
+
 		panelCarte1T4 = new PanelCarte(3,this,true);
 		panelCarte1T4.setBounds(230, 482, 25, 35);
 		PanelEast.add(panelCarte1T4);
 		listeCartes1T.put(3, (PanelCarte) panelCarte3T4);
-		
+
 		panelCarte1T5 = new PanelCarte(4,this,true);
 		panelCarte1T5.setBounds(208, 530, 25, 35);
 		PanelEast.add(panelCarte1T5);
@@ -448,7 +448,7 @@ public class IHMV2 extends Observe{
 		//----------------
 		//PROVISOIRE 
 		//--------------
-		
+
 		frame.getContentPane().add(panelDefausse);
 
 		lblJoeurN = new JLabel();
@@ -458,19 +458,19 @@ public class IHMV2 extends Observe{
 		frame.setResizable(false);
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 	}
-	
+
 	public void setTresorEnabled(NomTresor nomTresor) {
 		switch (nomTresor) {
 		case CaliceOnde:lbImgTresor1.setEnabled(true);
-			break;
+		break;
 		case CristalArdent:lbImgTresor2.setEnabled(true);
-			break;
+		break;
 		case PierreSacree:lbImgTresor3.setEnabled(true);
-			break;
+		break;
 		case StatueZephir:lbImgTresor4.setEnabled(true);
-			break;
+		break;
 		}
 	}
 
@@ -679,12 +679,12 @@ public class IHMV2 extends Observe{
 	}
 
 	public void afficherDefausse(Aventurier a) {
-		//setPanelVisible(false);
+		setPanelEnabled(false);
 		panelDefausse.setListCarte(a.getListeCarteJoueur());
 		panelDefausse.repaint();
 		panelDefausse.setVisible(true);
 	}
-	
+
 	public void afficherPioche(ArrayList<Carte> listCartes) {
 		setPanelEnabled(false);
 		panelCartePiochee.setListCarte(listCartes);
@@ -693,14 +693,6 @@ public class IHMV2 extends Observe{
 	}
 
 	public void setPanelEnabled(boolean b) {
-		PanelEast.setVisible(b);
-		PanelHelp.setVisible(b);
-		panHelp.setVisible(b);
-		PanelSouth.setVisible(b);
-		Plateau.setVisible(b);
-		PanelTresor.setVisible(b);
-		sliderImg.setVisible(b);
-		CardPlayer.setVisible(b);
 		PanelEast.setEnabled(b);
 		PanelHelp.setEnabled(b);
 		panHelp.setEnabled(b);
@@ -719,22 +711,22 @@ public class IHMV2 extends Observe{
 		panelCarte3.setEnabled(b);
 		panelCarte4.setEnabled(b);
 		panelCarte5.setEnabled(b);
-		 panelCarte3T2.setEnabled( b);
-		  panelCarte3T1.setEnabled( b);
-		  panelCarte3T3.setEnabled( b);
-		  panelCarte3T4.setEnabled( b);
-		  panelCarte3T5.setEnabled( b);
-	 panelCarte2T1.setEnabled(b);
-		  panelCarte2T2.setEnabled(b);
-		  panelCarte2T3.setEnabled(b);
-		  panelCarte2T4.setEnabled(b);
-		  panelCarte2T5.setEnabled(b);
-		  panelCarte1T1.setEnabled(b);
-		  panelCarte1T2.setEnabled(b);
-		  panelCarte1T3.setEnabled(b);
-		  panelCarte1T4.setEnabled(b);
-		  panelCarte1T5.setEnabled(b);
-		
+		panelCarte3T2.setEnabled( b);
+		panelCarte3T1.setEnabled( b);
+		panelCarte3T3.setEnabled( b);
+		panelCarte3T4.setEnabled( b);
+		panelCarte3T5.setEnabled( b);
+		panelCarte2T1.setEnabled(b);
+		panelCarte2T2.setEnabled(b);
+		panelCarte2T3.setEnabled(b);
+		panelCarte2T4.setEnabled(b);
+		panelCarte2T5.setEnabled(b);
+		panelCarte1T1.setEnabled(b);
+		panelCarte1T2.setEnabled(b);
+		panelCarte1T3.setEnabled(b);
+		panelCarte1T4.setEnabled(b);
+		panelCarte1T5.setEnabled(b);
+
 		for (PanelButton j : listButton.values()) {
 			j.setEnabled(b);
 		}
@@ -747,10 +739,10 @@ public class IHMV2 extends Observe{
 		for (JPanel j : listPan.values()) {
 			j.setEnabled(b);
 		}
-		
-		
+
+
 	}
-	
+
 	public void afficherPlateau() {
 		setPanelEnabled(true);
 		panelCartePiochee.setVisible(false);
