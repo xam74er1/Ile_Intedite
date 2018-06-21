@@ -37,7 +37,8 @@ public class PanelAfficheCarte extends JPanel {
 	}
 
 	public void setListCarte(ArrayList<Carte> listCarte) {
-		me.listCarte = listCarte;
+		this.listCarte = new ArrayList<Carte>();
+		this.listCarte = listCarte;
 		me.setLayout(new GridLayout(4, 10,10,10));
 		for(int i=0;i<10;i++) {
 			me.add(new PanelNoir());

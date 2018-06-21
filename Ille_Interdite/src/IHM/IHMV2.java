@@ -716,7 +716,6 @@ public class IHMV2 extends Observe{
 			j.setEnabled(b);
 		}
 		
-		
 	}
 	
 	public void afficherPlateau() {

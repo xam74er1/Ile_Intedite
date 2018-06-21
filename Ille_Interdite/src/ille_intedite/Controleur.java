@@ -56,6 +56,7 @@ public class Controleur implements Observateur{
 	private Classique carteSpe;
 	private ArrayList<Carte> listPioche;
 	private boolean finTour=false;
+	private boolean defausse=false;
 
 	private int numCarte = -1;
 
@@ -268,10 +269,10 @@ public class Controleur implements Observateur{
 			break;
 		case Clique_DonneCarte :
 
-			ihm.setIndication("Clique sur la carte que vous voullez donne ");
+			ihm.setIndication("Clique sur la carte que vous voulez donner ");
 			break;
 		case Clique_Deplace_Helico :
-			ihm.setIndication("Clique sur le joeur que vous voullez deplace");
+			ihm.setIndication("Clique sur le joueur que vous voulez deplacer");
 			carteSpe=(Classique) msg.getCarte();
 			ArrayList<Tuile> listCaseAvent = new ArrayList<Tuile>() ;
 			for(Tuile t : Grille.tuilesListe.values()) {
@@ -290,6 +291,15 @@ public class Controleur implements Observateur{
 
 				numCarte = msg.getNum();
 				ihm.setIndication("Cliquez sur le joueur a qui vous voulez donner la carte");
+			}else if(lastAction==TypeMessage.Defausse_Joueur) {
+				getJoueurTour().removeCarte((Classique) msg.getCarte());
+				carteTresorsDefausse.add(msg.getCarte());
+				if(getJoueurTour().getNbCarte()>5) {
+					afficherDefausseFinTour();
+				}else {
+					defausse=false;
+					finDeTour();
+				}
 			}
 			break;
 		case Clique_Joueur :
@@ -306,11 +316,27 @@ public class Controleur implements Observateur{
 					numCarte = -1;
 					ihm.setIndication("");
 				}
-
-
-
 			}
 
+			break;
+			
+		case Clique_Ok :
+			
+			if(defausse) {
+				ihm.afficherPlateau();
+				ihm.afficherDefausse(getJoueurTour());
+			}else if (lastAction==TypeMessage.Clique_Fin_Tour){
+				if(getJoueurTour().getNbCarte()>5) {
+					afficherDefausseFinTour();
+				}else {
+					ihm.afficherPlateau();
+					finDeTour();
+					//afficherPiocheInondation();
+				}
+			}else if (lastAction==TypeMessage.Clique_Ok){
+				finDeTour();
+			}
+			
 			break;
 
 		}
@@ -323,6 +349,8 @@ public class Controleur implements Observateur{
 		lastAction = msg.getMessage();
 		if (helicoTuileSelect!=null) {
 			lastAction=TypeMessage.Clique_Deplace_Helico;
+		}else if(defausse) {
+			lastAction=TypeMessage.Defausse_Joueur;
 		}
 
 
@@ -336,14 +364,7 @@ public class Controleur implements Observateur{
 	private void finDeTour() {
 		// TODO Auto-generated method stub
 
-		if (getJoueurTour().getListeCarteJoueur().size() > 5) {
-			lastAction = TypeMessage.Defausse_Joueur;
-			ihm.afficherDefausse(getJoueurTour());
-
-
-			ihm.setIndication("Vous avez " + (getJoueurTour().getListeCarteJoueur().size()-5) + " cartes en trop dans votre main, choisir les cartes Ã  dÃ©fausser :");
-
-		}
+		
 
 		if(!urg) {
 			ihm.setIndication("Fin du tour du joueur "+numTour);
@@ -368,6 +389,7 @@ public class Controleur implements Observateur{
 			ihm.rool(getJoueurTour(), joueursList);
 			grille.activateAll();
 			miseAJourGrille();
+			finTour=false;
 		}
 	}
 
@@ -379,6 +401,16 @@ public class Controleur implements Observateur{
 		listPioche.add(piocherClassique(getJoueurTour()));
 		listPioche.add(piocherClassique(getJoueurTour()));
 		ihm.afficherPioche(listPioche);
+	}
+	
+	private void afficherDefausseFinTour() {
+		defausse=true;
+		if (getJoueurTour().getListeCarteJoueur().size() > 5) {
+			lastAction = TypeMessage.Defausse_Joueur;
+			ihm.afficherDefausse(getJoueurTour());
+			ihm.setIndication("Vous avez " + (getJoueurTour().getListeCarteJoueur().size()-5) + " cartes en trop dans votre main, choisir les cartes Ã  dÃ©fausser :");
+
+		}
 	}
 
 	public void creeDeckInondation() {
