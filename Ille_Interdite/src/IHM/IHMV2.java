@@ -88,7 +88,7 @@ public class IHMV2 extends Observe{
 
 
 		sliderImg = new PanelCurseur(this);
-		sliderImg.setBounds(0, 60, 100, 673);
+		sliderImg.setBounds(0, 59, 100, 674);
 		frame.getContentPane().add(sliderImg);
 
 		/*sliderPanel = new JPanel();
