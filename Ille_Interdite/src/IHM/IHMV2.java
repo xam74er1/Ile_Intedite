@@ -166,23 +166,23 @@ public class IHMV2 extends Observe{
 		PanelSouth.setLayout(null);
 
 		PanelButton Deplace = new PanelButton(this,"Deplacer",TypeMessage.Clique_Deplace);
-		Deplace.setBounds(12, 13, 97, 25);
+		Deplace.setBounds(10, 5, 110, 34);
 		PanelSouth.add(Deplace);
 
 		PanelButton btAssecher = new PanelButton(this,"Assecher",TypeMessage.Clique_Asseche);
-		btAssecher.setBounds(121, 13, 97, 25);
+		btAssecher.setBounds(140, 5, 110, 34);
 		PanelSouth.add(btAssecher);
 
 		PanelButton btDonneCarte = new PanelButton(this,"DonnerCarte",TypeMessage.Clique_DonneCarte);
-		btDonneCarte.setBounds(230, 13, 97, 25);
+		btDonneCarte.setBounds(270, 5, 110, 34);
 		PanelSouth.add(btDonneCarte);
 
 		PanelButton btRecupereTresort = new PanelButton(this,"RecupererTresor",TypeMessage.Clique_RecupereTresor);
-		btRecupereTresort.setBounds(339, 13, 130, 25);
+		btRecupereTresort.setBounds(454, 9, 130, 25);
 		PanelSouth.add(btRecupereTresort);
 
 		PanelButton btFinDeTour = new PanelButton(this,"FinDeTour",TypeMessage.Clique_Fin_Tour);
-		btFinDeTour.setBounds(1056, 13, 97, 25);
+		btFinDeTour.setBounds(1030, 5, 110, 34);
 		PanelSouth.add(btFinDeTour);
 
 
