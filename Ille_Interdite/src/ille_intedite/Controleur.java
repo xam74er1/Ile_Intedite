@@ -12,6 +12,7 @@ import IHM.FenetreStart;
 //import IHM.IHM;
 import IHM.IHMV2;
 import IHM.MessageInit;
+import IHM.PlaySound;
 import ille_intedite.Aventurie.Aventurier;
 import ille_intedite.Aventurie.Aviateur;
 import ille_intedite.Aventurie.Explorateur;
@@ -65,7 +66,7 @@ public class Controleur implements Observateur{
 
 	IHMV2 ihm;
 
-
+//Consturcteur
 	public Controleur(IHMV2 ihm,VueGrille vue,MessageInit msgInit) {
 
 		this.ihm = ihm;
@@ -110,23 +111,23 @@ public class Controleur implements Observateur{
 			ihm.setIndication("Cliquez sur une case pour l'assecher");
 			break;
 
+/* -------------------------CLIQUE SUR UNE TUILLE ----------------------------------------------- */
+			//Diffrente action lorsque lon clique sur une tuille on regarde laction precedente pour savoir quoi faire 
 		case Clique_Tuile :
 			switch(lastAction) {
+			
+			
 			case Clique_Deplace:
-
-
-				//Utils.debugln("Tuille = "+msg.getLocation());
-
-				//Si le deplacement cest bien passe 
 				deplacer(msg.getLocation(),getJoueurTour());
 				ihm.updateGrille();
 				getJoueurTour().actionJouer();
 
+				//Cas spetiale pour lingeneure 
 				if(getJoueurTour() instanceof Ingenieur) {
 					Ingenieur i = (Ingenieur) getJoueurTour();
 					i.setDerniereActionAssecher(false);
 				}
-
+				//Cas spetiale pour l'aviateur
 				if(getJoueurTour() instanceof Aviateur) {
 					Aviateur a = (Aviateur) getJoueurTour();
 					Tuile from = a.getFrom();
@@ -139,6 +140,7 @@ public class Controleur implements Observateur{
 				break;
 
 			case Clique_Deplace_Helico :
+				
 
 				if (helicoTuileSelect!=null) {
 
@@ -154,6 +156,7 @@ public class Controleur implements Observateur{
 
 
 							deplacer(msg.getLocation(),a);
+							PlaySound.play(System.getProperty("user.dir")+"\\src\\"+"sound\\vrai_son_helicoptere.wav");
 						}
 					}
 					getJoueurTour().removeCarte(carteSpe);
@@ -178,6 +181,7 @@ public class Controleur implements Observateur{
 					ihm.afficherDep(tuilesDep);
 					helicoTuileSelect=grille.getTuile(msg.getLocation());
 				}
+				//Mise as jour de la grille quimporte laction effectuer 
 				afficherCartes(getJoueurTour());
 				miseAJourGrille();
 
@@ -185,6 +189,8 @@ public class Controleur implements Observateur{
 
 				break;
 
+/* -------------------------FIN CLIQUE SUR UNE TUILLE ----------------------------------------------- */
+				//Actoin lors du clique sur un sac de sable (carte ) 
 			case Clique_Asseche_SacDeSable :
 				grille.getTuile(msg.getLocation()).assecher();
 				ihm.setIndication("Case assechee en "+msg.getLocation());
@@ -195,8 +201,7 @@ public class Controleur implements Observateur{
 				miseAJourGrille();
 				afficherCartes(getJoueurTour());
 				break;
-
-
+//Action lors du clique du bouton assehce 
 			case Clique_Asseche :
 				assecher(msg.getLocation());
 				ihm.updateGrille();
@@ -212,7 +217,7 @@ public class Controleur implements Observateur{
 					i.setDerniereActionAssecher(!i.getDerniereActionAssecher());
 				}
 				break;
-
+//Action lors du bouton fin de tour 
 			case Clique_Fin_Tour :
 				deplacer(msg.getLocation(),urgence);
 				miseAJourGrille();

@@ -75,7 +75,7 @@ public class IHMV2 extends Observe{
 	JPanel PanelPlayerIn3T,PanelPlayerIn2T,PanelPlayerIn1T;
 	Image imP3T,imP2T,imP1T;
 	JLabel lbIconJoueur;
-	JButton btnImgPlayerIn1T,btnImgPlayerIn2T,btnImgPlayerIn3T;
+	JButton btnImgPlayerIn1T,btnImgPlayerIn2T,btnImgPlayerIn3T,btnHelp;
 	private JPanel panelCarte3T2;
 	private JPanel panelCarte3T1;
 	private JPanel panelCarte3T3;
@@ -91,6 +91,7 @@ public class IHMV2 extends Observe{
 	private JPanel panelCarte1T3;
 	private JPanel panelCarte1T4;
 	private JPanel panelCarte1T5;
+	private PanelCarte panelCarte1,panelCarte2,panelCarte3,panelCarte4,panelCarte5;
 
 	/**
 	 * 
@@ -111,6 +112,7 @@ public class IHMV2 extends Observe{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		//Creation de la fenetre
 		frame = new JFrame();
 		frame.getContentPane().setBackground(new Color(105, 105, 105));
 		frame.getContentPane().setLayout(null);
@@ -139,7 +141,7 @@ public class IHMV2 extends Observe{
 		frame.getContentPane().add(PanelHelp);
 		PanelHelp.setLayout(null);
 
-		JButton btnHelp = new JButton("");
+		 btnHelp = new JButton("");
 		btnHelp.setBounds(0, 0, 100, 60);
 		btnHelp.setForeground(new Color(0, 0, 205));
 		btnHelp.setBackground(new Color(0, 0, 205));
@@ -174,31 +176,31 @@ public class IHMV2 extends Observe{
 		frame.getContentPane().add(CardPlayer);
 		CardPlayer.setLayout(null);
 
-		PanelCarte panelCarte1 = new PanelCarte(0,this,true);
+		 panelCarte1 = new PanelCarte(0,this,true);
 		panelCarte1.setBounds(12, 13, 100, 140);
 		CardPlayer.add(panelCarte1);
 		listCartes.put(0, panelCarte1);
 		panelCarte1.setLayout(null);
 
-		PanelCarte panelCarte2 = new PanelCarte(1,this,true);
+		 panelCarte2 = new PanelCarte(1,this,true);
 		panelCarte2.setBounds(138, 13, 100, 140);
 		CardPlayer.add(panelCarte2);
 		listCartes.put(1, panelCarte2);
 		panelCarte2.setLayout(null);
 
-		PanelCarte panelCarte3 = new PanelCarte(2,this,true);
+		 panelCarte3 = new PanelCarte(2,this,true);
 		panelCarte3.setBounds(12, 166, 100, 140);
 		CardPlayer.add(panelCarte3);
 		listCartes.put(2, panelCarte3);
 		panelCarte3.setLayout(null);
 
-		PanelCarte panelCarte4 = new PanelCarte(3,this,true);
+		 panelCarte4 = new PanelCarte(3,this,true);
 		panelCarte4.setBounds(138, 166, 100, 140);
 		CardPlayer.add(panelCarte4);
 		listCartes.put(3, panelCarte4);
 		panelCarte4.setLayout(null);
 
-		PanelCarte panelCarte5 = new PanelCarte(4,this,true);
+		 panelCarte5 = new PanelCarte(4,this,true);
 		panelCarte5.setBounds(75, 319, 100, 140);
 		CardPlayer.add(panelCarte5);
 		listCartes.put(4, panelCarte5);
@@ -456,6 +458,7 @@ public class IHMV2 extends Observe{
 		frame.setResizable(false);
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 	}
 	
 	public void setTresorEnabled(NomTresor nomTresor) {
@@ -711,6 +714,12 @@ public class IHMV2 extends Observe{
 		btDonneCarte.setEnabled(b);
 		btFinDeTour.setEnabled(b);
 		btRecupereTresor.setEnabled(b);
+		panelCarte1.setEnabled(b);
+		panelCarte2.setEnabled(b);
+		panelCarte3.setEnabled(b);
+		panelCarte4.setEnabled(b);
+		panelCarte5.setEnabled(b);
+		
 		for (PanelButton j : listButton.values()) {
 			j.setEnabled(b);
 		}
