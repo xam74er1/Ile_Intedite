@@ -54,7 +54,7 @@ public class IHMV2 extends Observe{
 	HashMap<Integer,JPanel> listCurseur = new HashMap<Integer,JPanel>();
 	private JTextField textField;
 	JPanel PanelHelp;
-	JPanel CardPlayer;
+	PanelFont CardPlayer;
 	JPanel PanelSouth;
 	JPanel PanelEast;
 	JPanel PanelTresor;
@@ -156,7 +156,7 @@ public class IHMV2 extends Observe{
 		//BOUTON HELP
 		
 
-		ImageIcon imgHelp = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/icones/iconHelp.png");
+		ImageIcon imgHelp = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/Art/btnAide.png");
 
 		Image imH = imgHelp.getImage();
 
@@ -168,7 +168,7 @@ public class IHMV2 extends Observe{
 		PanelHelp.add(btnHelp);
 
 
-		CardPlayer = new JPanel();
+		CardPlayer = new PanelFont(0, this, true);
 		CardPlayer.setBackground(new Color(139, 69, 19));
 		CardPlayer.setBounds(114, 31, 250, 597);
 		frame.getContentPane().add(CardPlayer);
