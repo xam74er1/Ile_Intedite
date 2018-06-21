@@ -293,16 +293,6 @@ public class Controleur implements Observateur{
 		throw new UnsupportedOperationException();
 	}
 
-	private void conditionVictoire() {
-		// TODO - implement Controleur.conditionVictoire
-		throw new UnsupportedOperationException();
-	}
-
-	private void conditionDefaite() {
-		// TODO - implement Controleur.conditionDÃ©faite
-		throw new UnsupportedOperationException();
-	}
-
 	private void deplacer(String str) {
 		Aventurier a = getJoueurTour();
 
@@ -401,11 +391,6 @@ public class Controleur implements Observateur{
 
 	}
 
-	public void recupereTresort() {
-		// TODO - implement Controleur.recupereTresort
-		throw new UnsupportedOperationException();
-	}
-
 	/**
 	 * 
 	 * @param numJoeur
@@ -423,9 +408,6 @@ public class Controleur implements Observateur{
 	public String getMessageConsole() {
 		return messageConsole;
 	}
-
-
-
 
 	/**
 	 * 
