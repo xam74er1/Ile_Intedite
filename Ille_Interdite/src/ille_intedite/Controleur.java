@@ -243,7 +243,6 @@ public class Controleur implements Observateur{
 				//-------------FIN DES CLIQUE TUILE ----------------------------
 			}
 
-
 			break;
 
 		case Clique_Fin_Tour :
@@ -464,7 +463,7 @@ public class Controleur implements Observateur{
 
 		carteTresorDeck.add(new MonteeEaux("1MonteeDesEaux"));
 		carteTresorDeck.add(new MonteeEaux("2MonteeDesEaux"));
-		//carteTresorDeck.add(new MonteeEaux("3Monte des EAU"));
+		//carteTresorDeck.add(new MonteeEaux("3MonteeDesEaux"));
 
 		carteTresorDeck.add(new CarteHelicoptere("1Helicoptere"));
 		carteTresorDeck.add(new CarteHelicoptere("2Helicoptere"));
@@ -672,23 +671,6 @@ public class Controleur implements Observateur{
 
 	}
 
-	@Deprecated
-	public void afficherListeCarteJoueur() {
-		ihm.setIndication("Main du joueur : " + getJoueurTour().getNom());
-		int i = 1;
-		for (Carte c : getJoueurTour().getListeCarteJoueur()){
-			ihm.setIndication(i +" : " + c.getNom());
-			i = i+1;
-		}
-
-		if (getJoueurTour().getListeCarteJoueur().size() > 5) {
-			lastAction = TypeMessage.Defausse_Joueur;
-			ihm.setIndication("Vous avez " + (getJoueurTour().getListeCarteJoueur().size()-5) + " cartes en trop dans votre main, choisir les cartes ÃƒÂƒÃ‚Â  dÃƒÂƒÃ‚Â©fausser :");
-		}
-
-
-	}
-
 	private void defausser(String str, Aventurier a) {
 		a.removeCarte(a.getCarte(Integer.parseInt(str)));
 	}
@@ -802,19 +784,19 @@ public class Controleur implements Observateur{
 		//Condition(s) defaite
 		if(noyade) {
 			msg.setVictoire(false);
-			msg.setTypeDefaite("Un des aventuriers s'est noyé..");
+			msg.setTypeDefaite("Un des aventuriers s'est noye..");
 			new FenetreFin(msg);
 					}
 
 		if(helicoCoule) {
 			msg.setVictoire(false);
-			msg.setTypeDefaite("L'héliport a coulé..");
+			msg.setTypeDefaite("L'heliport a coule..");
 			new FenetreFin(msg);												//Heliport coule
 		}
 
 		if(curseur.getNiv()==10) {
 			msg.setVictoire(false);
-			msg.setTypeDefaite("L'île a sombré complètement..");
+			msg.setTypeDefaite("L'ile a sombre completement..");
 			new FenetreFin(msg);												//Curseur au niveau maximum
 		}
 
@@ -849,7 +831,7 @@ public class Controleur implements Observateur{
 
 		if(temple==2||caverne==2||palais==2||jardin==2) {
 			
-			msg.setTypeDefaite("Tout les trésors ont coulés..");
+			msg.setTypeDefaite("Tous les tresors ont coules..");
 			new FenetreFin(msg);												//Deux cases de recuperation de tresor coulees
 		}
 		
