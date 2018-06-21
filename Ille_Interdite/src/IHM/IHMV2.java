@@ -133,9 +133,24 @@ public class IHMV2 extends Observe{
 		btnHelp.setBounds(0, 0, 60, 60);
 		btnHelp.setForeground(new Color(0, 0, 205));
 		btnHelp.setBackground(new Color(0, 0, 205));
+		
+		btnHelp.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				new FrameHtml();
+			}
+			
+		});
+		//BOUTON HELP
+		
 		ImageIcon imgHelp = new ImageIcon("images/icones/iconHelp.png");
 		Image imH = imgHelp.getImage();
 		imH = imH.getScaledInstance(60, 60, Image.SCALE_DEFAULT);
+		
+		
+		
 		ImageIcon imgH = new ImageIcon(imH);
 		btnHelp.setIcon(imgH);
 		PanelHelp.add(btnHelp);
