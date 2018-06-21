@@ -85,7 +85,7 @@ public class FenetreStart extends JFrame {
     JLabel labelTitre = new JLabel();
     JPanel panTitre = new JPanel();
      
-    ImageIcon imgIconTitre = new ImageIcon("images/titre.png");
+    ImageIcon imgIconTitre = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/titre.png");
     labelTitre.setIcon(imgIconTitre);
     panTitre.add(labelTitre);
     panTitre.setBackground(new Color(139,69,18));
@@ -172,44 +172,44 @@ public class FenetreStart extends JFrame {
      labelPilo = new JLabel();
      labelPlon = new JLabel();
     
-    ImageIcon imgIcon = new ImageIcon("images/persos/explorateur.png");
-    ImageIcon imgIconS = new ImageIcon("images/persos/explorateurSelected.png");
-    ImageIcon imgIconAS = new ImageIcon("images/persos/explorateurAlreadySelected.png");
+    ImageIcon imgIcon = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/explorateur.png");
+    ImageIcon imgIconS = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/explorateurSelected.png");
+    ImageIcon imgIconAS = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/explorateurAlreadySelected.png");
 
     labelExplo.setIcon(imgIconAS);
     panChoixCarte.add(labelExplo);
     
-    ImageIcon imgIcon1 = new ImageIcon("images/persos/ingenieur.png");
-    ImageIcon imgIcon1S = new ImageIcon("images/persos/ingenieurSelected.png");
-    ImageIcon imgIcon1AS = new ImageIcon("images/persos/ingenieuralreadySelected.png");
+    ImageIcon imgIcon1 = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/ingenieur.png");
+    ImageIcon imgIcon1S = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/ingenieurSelected.png");
+    ImageIcon imgIcon1AS = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/ingenieuralreadySelected.png");
     
     labelInge.setIcon(imgIcon1AS);
     panChoixCarte.add(labelInge);
     
-    ImageIcon imgIcon2 = new ImageIcon("images/persos/messager.png");
-    ImageIcon imgIcon2S = new ImageIcon("images/persos/messagerSelected.png");
-    ImageIcon imgIcon2AS = new ImageIcon("images/persos/messageralreadySelected.png");
+    ImageIcon imgIcon2 = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/messager.png");
+    ImageIcon imgIcon2S = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/messagerSelected.png");
+    ImageIcon imgIcon2AS = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/messageralreadySelected.png");
     
     labelMessa.setIcon(imgIcon2AS);
     panChoixCarte.add(labelMessa);
     
-    ImageIcon imgIcon3 = new ImageIcon("images/persos/navigateur.png");
-    ImageIcon imgIcon3S = new ImageIcon("images/persos/navigateurSelected.png");
-    ImageIcon imgIcon3AS = new ImageIcon("images/persos/navigateuralreadySelected.png");
+    ImageIcon imgIcon3 = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/navigateur.png");
+    ImageIcon imgIcon3S = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/navigateurSelected.png");
+    ImageIcon imgIcon3AS = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/navigateuralreadySelected.png");
     
     labelNavi.setIcon(imgIcon3AS);
     panChoixCarte.add(labelNavi);
     
-    ImageIcon imgIcon4 = new ImageIcon("images/persos/aviateur.png");
-    ImageIcon imgIcon4S = new ImageIcon("images/persos/piloteSelected.png");
-    ImageIcon imgIcon4AS = new ImageIcon("images/persos/pilotealreadySelected.png");
+    ImageIcon imgIcon4 = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/aviateur.png");
+    ImageIcon imgIcon4S = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/piloteSelected.png");
+    ImageIcon imgIcon4AS = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/pilotealreadySelected.png");
     
     labelPilo.setIcon(imgIcon4AS);
     panChoixCarte.add(labelPilo);
 
-    ImageIcon imgIcon5 = new ImageIcon("images/persos/plongeur.png");
-    ImageIcon imgIcon5S = new ImageIcon("images/persos/plongeurSelected.png");
-    ImageIcon imgIcon5AS = new ImageIcon("images/persos/plongeuralreadySelected.png");
+    ImageIcon imgIcon5 = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/plongeur.png");
+    ImageIcon imgIcon5S = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/plongeurSelected.png");
+    ImageIcon imgIcon5AS = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/plongeuralreadySelected.png");
     
     labelPlon.setIcon(imgIcon5AS);
     panChoixCarte.add(labelPlon);

@@ -64,9 +64,9 @@ public class PanelCarte extends JPanel{
 		g.drawRect(0, 0,  this.getWidth(),this.getHeight());
 
 		try {
-			path = "images\\cartes\\"+carte.getNom().substring(1)+".png";
+			path = System.getProperty("user.dir")+"\\src\\"+"images\\cartes\\"+carte.getNom().substring(1)+".png";
 		}catch(Exception e){
-			path = "images\\cartes\\Fond rouge.png";
+			path = System.getProperty("user.dir")+"\\src\\"+"images\\cartes\\Fond rouge.png";
 		}
 
 		try {			image = ImageIO.read(new File(path));

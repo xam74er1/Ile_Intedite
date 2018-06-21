@@ -92,16 +92,16 @@ public class CasePlateau extends JPanel  {
 
 
 					if(t.getStatut()==0) {
-						path = "images\\tuiles\\"+name+".png";
+						path = System.getProperty("user.dir")+"\\src\\"+"images\\tuiles\\"+name+".png";
 					}else if(t.getStatut()==1) {
-						path = "images\\tuiles\\"+name+"_Inonde.png";
+						path = System.getProperty("user.dir")+"\\src\\"+"images\\tuiles\\"+name+"_Inonde.png";
 					}
 
 					image = ImageIO.read(new File(path));
 					//super.paintComponent(g);
 					g.drawImage(image, 0, 0,this.getWidth(),this.getHeight(), null);
 				}else {
-					path = "images\\watterTexture.jpg";
+					path = System.getProperty("user.dir")+"\\src\\"+"images\\watterTexture.jpg";
 					//System.out.println("coule");
 					image = ImageIO.read(new File(path));
 					//super.paintComponent(g);
@@ -117,7 +117,7 @@ public class CasePlateau extends JPanel  {
 		}else {
 
 			try {
-				image = ImageIO.read(new File("images\\watterTexture.jpg"));
+				image = ImageIO.read(new File(System.getProperty("user.dir")+"\\src\\"+"images\\watterTexture.jpg"));
 				//super.paintComponent(g);
 				g.drawImage(image, 0, 0,this.getWidth(),this.getHeight(), null);
 			} catch (IOException e) {
@@ -136,7 +136,7 @@ public class CasePlateau extends JPanel  {
 		
 		for(Aventurier a : t.getAventurie()) {
 			String name = a.getPion().toString();
-			path = "images\\pions\\pion"+name+".png";
+			path = System.getProperty("user.dir")+"\\src\\"+"images\\pions\\pion"+name+".png";
 
 			try {
 				image = ImageIO.read(new File(path));

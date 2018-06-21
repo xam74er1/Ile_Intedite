@@ -39,7 +39,7 @@ public class PanelButton extends JPanel{
 		name=name.replace(" ","");
 
 		try {
-			image = ImageIO.read(new File("images\\Art\\btn"+name+".png"));
+			image = ImageIO.read(new File(System.getProperty("user.dir")+"\\src\\"+"images\\Art\\btn"+name+".png"));
 			g.drawImage(image, 0, 0,this.getWidth(),this.getHeight(), null);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

@@ -140,7 +140,7 @@ public class IHMV2 extends Observe{
 		});
 		//BOUTON HELP
 		
-		ImageIcon imgHelp = new ImageIcon("images/icones/iconHelp.png");
+		ImageIcon imgHelp = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/icones/iconHelp.png");
 		Image imH = imgHelp.getImage();
 		imH = imH.getScaledInstance(60, 60, Image.SCALE_DEFAULT);
 		
@@ -191,7 +191,7 @@ public class IHMV2 extends Observe{
 
 		lbIconJoueur.setBounds(75, 472, 100, 100);
 		CardPlayer.add(lbIconJoueur);
-		ImageIcon imgIconJoueur = new ImageIcon("images/persos/explorateur.png");
+		ImageIcon imgIconJoueur = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/explorateur.png");
 		Image imPC = imgIconJoueur.getImage();
 		imPC = imPC.getScaledInstance(100, 100, Image.SCALE_DEFAULT);
 		ImageIcon imgPC = new ImageIcon(imPC);
@@ -249,7 +249,7 @@ public class IHMV2 extends Observe{
 		btnImgPlayerIn1T.setBackground(new Color(139, 69, 19));
 		btnImgPlayerIn1T.setBounds(0, 0, 150, 150);
 		PanelPlayerIn1T.add(btnImgPlayerIn1T);
-		imgPlayerIn1T = new ImageIcon("images/persos/plongeur.png");
+		imgPlayerIn1T = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/plongeur.png");
 		imP1T = imgPlayerIn1T.getImage();
 		imP1T = imP1T.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
 		imgP1T = new ImageIcon(imP1T);
@@ -274,7 +274,7 @@ public class IHMV2 extends Observe{
 
 
 
-		/*imgPlayerIn2T = new ImageIcon("images/persos/ingenieur.png");
+		/*imgPlayerIn2T = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/ingenieur.png");
 		imP2T = imgPlayerIn2T.getImage();
 		imP2T = imP2T.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
 		imgP2T = new ImageIcon(imP2T);
@@ -296,7 +296,7 @@ public class IHMV2 extends Observe{
 		btnImgPlayerIn3T.setForeground(new Color(139, 69, 19));
 		btnImgPlayerIn3T.setBounds(0, 0, 150, 150);
 		PanelPlayerIn3T.add(btnImgPlayerIn3T);
-		/*imgPlayerIn3T = new ImageIcon("images/persos/aviateur.png");
+		/*imgPlayerIn3T = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/aviateur.png");
 		imP3T = imgPlayerIn3T.getImage();
 		imP3T = imP3T.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
 		imgP3T = new ImageIcon(imP3T);
@@ -318,7 +318,7 @@ public class IHMV2 extends Observe{
 		//		btnHelp.setBackground(new Color(139, 69, 19));
 		//		btnHelp.setBounds(0, 0, 60, 60);
 		//		PanelHelp.add(btnHelp);
-		//		ImageIcon imgHelp = new ImageIcon("images/icones/iconHelp.png");
+		//		ImageIcon imgHelp = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/icones/iconHelp.png");
 		//		Image imH = imgHelp.getImage();
 		//		imH = imH.getScaledInstance(60, 60, Image.SCALE_DEFAULT);
 		//		ImageIcon imgH = new ImageIcon(imH);
@@ -337,7 +337,7 @@ public class IHMV2 extends Observe{
 		JLabel lbImgTresor1 = new JLabel("");
 		lbImgTresor1.setBounds(0, 0, 60, 82);
 		PanelTresor.add(lbImgTresor1);
-		ImageIcon ImgTresor1 = new ImageIcon("images/tresors/calice.png");
+		ImageIcon ImgTresor1 = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/tresors/calice.png");
 		Image imT1 = ImgTresor1.getImage();
 		imT1 = imT1.getScaledInstance(60, 82, Image.SCALE_DEFAULT);
 		ImageIcon imgT1 = new ImageIcon(imT1);
@@ -346,7 +346,7 @@ public class IHMV2 extends Observe{
 		JLabel lbImgTresor2 = new JLabel("");
 		lbImgTresor2.setBounds(72, 0, 60, 82);
 		PanelTresor.add(lbImgTresor2);
-		ImageIcon ImgTresor2 = new ImageIcon("images/tresors/cristal.png");
+		ImageIcon ImgTresor2 = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/tresors/cristal.png");
 		Image imT2 = ImgTresor2.getImage();
 		imT2 = imT2.getScaledInstance(60, 82, Image.SCALE_DEFAULT);
 		ImageIcon imgT2 = new ImageIcon(imT2);
@@ -355,7 +355,7 @@ public class IHMV2 extends Observe{
 		JLabel lbImgTresor3 = new JLabel("");
 		lbImgTresor3.setBounds(144, 0, 60, 82);
 		PanelTresor.add(lbImgTresor3);
-		ImageIcon ImgTresor3 = new ImageIcon("images/tresors/pierre.png");
+		ImageIcon ImgTresor3 = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/tresors/pierre.png");
 		Image imT3 = ImgTresor3.getImage();
 		imT3 = imT3.getScaledInstance(60, 82, Image.SCALE_DEFAULT);
 		ImageIcon imgT3 = new ImageIcon(imT3);
@@ -364,7 +364,7 @@ public class IHMV2 extends Observe{
 		JLabel lbImgTresor4 = new JLabel("");
 		lbImgTresor4.setBounds(219, 0, 60, 82);
 		PanelTresor.add(lbImgTresor4);
-		ImageIcon ImgTresor4 = new ImageIcon("images/tresors/zephyr.png");
+		ImageIcon ImgTresor4 = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/tresors/zephyr.png");
 		Image imT4 = ImgTresor4.getImage();
 		imT4 = imT4.getScaledInstance(60, 82, Image.SCALE_DEFAULT);
 		ImageIcon imgT4 = new ImageIcon(imT4);
@@ -529,12 +529,12 @@ public class IHMV2 extends Observe{
 		String path = a.getNom().toLowerCase();
 
 		i++;
-		//		Icon img = new ImageIcon("images/persos/"+path+".png");
+		//		Icon img = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/"+path+".png");
 		//		lbIconJoueur.setIcon(img);
 
 
 
-		ImageIcon imgIconJoueur = new ImageIcon("images/persos/"+path+".png");
+		ImageIcon imgIconJoueur = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/"+path+".png");
 		Image imPC = imgIconJoueur.getImage();
 		imPC = imPC.getScaledInstance(100, 100, Image.SCALE_DEFAULT);
 		ImageIcon imgPC = new ImageIcon(imPC);
@@ -549,7 +549,7 @@ public class IHMV2 extends Observe{
 
 		i++;
 
-		imgPlayerIn1T = new ImageIcon("images/persos/"+path+".png");
+		imgPlayerIn1T = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/"+path+".png");
 		imP1T = imgPlayerIn1T.getImage();
 		imP1T = imP1T.getScaledInstance(150,150, Image.SCALE_DEFAULT);
 		imgP1T = new ImageIcon(imP1T);
@@ -566,7 +566,7 @@ public class IHMV2 extends Observe{
 			path = a.getNom().toLowerCase();
 			i++;
 
-			imgPlayerIn2T = new ImageIcon("images/persos/"+path+".png");
+			imgPlayerIn2T = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/"+path+".png");
 			imP2T = imgPlayerIn2T.getImage();
 			imP2T = imP2T.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
 			imgP2T = new ImageIcon(imP2T);
@@ -584,7 +584,7 @@ public class IHMV2 extends Observe{
 			i++;
 
 
-			imgPlayerIn3T = new ImageIcon("images/persos/"+path+".png");
+			imgPlayerIn3T = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/"+path+".png");
 			imP3T = imgPlayerIn3T.getImage();
 			imP3T = imP3T.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
 			imgP3T = new ImageIcon(imP3T);

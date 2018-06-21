@@ -51,17 +51,17 @@ public class FrameHtml extends JFrame {
 		Main.setLayout(cl);
 
 
-
-		JScrollPane page1 = new JScrollPane( new htmlPan("images\\Help\\page1.html","images\\Help\\Fond1.jpg"));
+		System.out.println(System.getProperty("user.dir"));
+		JScrollPane page1 = new JScrollPane( new htmlPan(System.getProperty("user.dir")+"\\src\\"+"images\\Help\\page1.html",System.getProperty("user.dir")+"\\src\\"+"images\\Help\\Fond1.jpg"));
 		page1.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
 		
 		Main.add(page1, "page1");
 	
-		JScrollPane page2 =new JScrollPane( new htmlPan("images\\Help\\page2.html","images\\Help\\Fond1.jpg"));
+		JScrollPane page2 =new JScrollPane( new htmlPan(System.getProperty("user.dir")+"\\src\\"+"images\\Help\\page2.html",System.getProperty("user.dir")+"\\src\\"+"images\\Help\\Fond1.jpg"));
 		page2.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
 		Main.add(page2, "page2");
 
-		JScrollPane page3 = new JScrollPane(new htmlPan("images\\Help\\page3.html","images\\Help\\Fond1.jpg"));
+		JScrollPane page3 = new JScrollPane(new htmlPan(System.getProperty("user.dir")+"\\src\\"+"images\\Help\\page3.html",System.getProperty("user.dir")+"\\src\\"+"images\\Help\\Fond1.jpg"));
 	page3.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
 		Main.add(page3, "page3");
 
