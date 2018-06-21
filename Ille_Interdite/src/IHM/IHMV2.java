@@ -719,6 +719,21 @@ public class IHMV2 extends Observe{
 		panelCarte3.setEnabled(b);
 		panelCarte4.setEnabled(b);
 		panelCarte5.setEnabled(b);
+		 panelCarte3T2.setEnabled( b);
+		  panelCarte3T1.setEnabled( b);
+		  panelCarte3T3.setEnabled( b);
+		  panelCarte3T4.setEnabled( b);
+		  panelCarte3T5.setEnabled( b);
+	 panelCarte2T1.setEnabled(b);
+		  panelCarte2T2.setEnabled(b);
+		  panelCarte2T3.setEnabled(b);
+		  panelCarte2T4.setEnabled(b);
+		  panelCarte2T5.setEnabled(b);
+		  panelCarte1T1.setEnabled(b);
+		  panelCarte1T2.setEnabled(b);
+		  panelCarte1T3.setEnabled(b);
+		  panelCarte1T4.setEnabled(b);
+		  panelCarte1T5.setEnabled(b);
 		
 		for (PanelButton j : listButton.values()) {
 			j.setEnabled(b);
