@@ -253,7 +253,7 @@ public class Controleur implements Observateur{
 			break;
 
 		case Clique_RecupereTresor :
-			if(recupereTresor()) {
+			if(recupererTresor()) {
 				getJoueurTour().actionJouer();
 				ihm.setIndication("Vous avez recupere le tresor");
 			}else {
@@ -647,7 +647,7 @@ public class Controleur implements Observateur{
 
 	}
 
-	public boolean aficherJoeurCase() {
+	public boolean afficherJoueurCase() {
 		String str = "";
 		int nbr = getJoueurTour().getNum();
 		for(Aventurier a : getJoueurTour().getJoueurTuile()) {
@@ -754,7 +754,7 @@ public class Controleur implements Observateur{
 
 	}
 
-	public boolean recupereTresor() {
+	public boolean recupererTresor() {
 		// 
 
 		Aventurier a = getJoueurTour();
@@ -895,7 +895,7 @@ public class Controleur implements Observateur{
 
 	}*/
 
-	public static int getnbJoueur() {
+	public static int getNbJoueur() {
 		return joueursList.size();
 	}
 

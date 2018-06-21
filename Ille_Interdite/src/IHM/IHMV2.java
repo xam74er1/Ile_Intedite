@@ -512,7 +512,7 @@ public class IHMV2 extends Observe{
 
 		btnImgPlayerIn2T.setVisible(true);
 		btnImgPlayerIn2T.setEnabled(true);	
-		if(Controleur.getnbJoueur()<3) {
+		if(Controleur.getNbJoueur()<3) {
 			
 			btnImgPlayerIn2T.setEnabled(false);	
 			
@@ -537,7 +537,7 @@ public class IHMV2 extends Observe{
 			
 		}
 		
-		if(Controleur.getnbJoueur()<4) {
+		if(Controleur.getNbJoueur()<4) {
 			btnImgPlayerIn3T.setEnabled(false);	
 			
 			btnImgPlayerIn3T.setEnabled(false);	
