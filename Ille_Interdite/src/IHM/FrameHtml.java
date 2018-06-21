@@ -96,6 +96,7 @@ public class FrameHtml extends JFrame {
 //               System.out.println("lol");
 //            }
 //        });
+		
 	}
 
 	public void setPan() {

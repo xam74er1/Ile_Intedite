@@ -12,6 +12,7 @@ import IHM.FenetreStart;
 //import IHM.IHM;
 import IHM.IHMV2;
 import IHM.MessageInit;
+import IHM.PlaySound;
 import ille_intedite.Aventurie.Aventurier;
 import ille_intedite.Aventurie.Aviateur;
 import ille_intedite.Aventurie.Explorateur;
@@ -35,8 +36,8 @@ public class Controleur implements Observateur{
 
 	private Curseur curseur;
 	private Grille grille;
-	private ArrayList<Classique> carteTresorDeck;
-	public ArrayList<Classique> carteTresorsDefausse;
+	private ArrayList<Carte> carteTresorDeck;
+	public ArrayList<Carte> carteTresorsDefausse;
 	private ArrayList<CarteInondation> inondationDeck;
 	public ArrayList<CarteInondation> inondationDefausse;
 	public static ArrayList<Aventurier> joueursList;
@@ -56,6 +57,7 @@ public class Controleur implements Observateur{
 	private Classique carteSpe;
 	private ArrayList<Carte> listPioche;
 	private boolean finTour=false;
+	private boolean defausse=false;
 
 	private int numCarte = -1;
 
@@ -65,12 +67,12 @@ public class Controleur implements Observateur{
 
 	IHMV2 ihm;
 
-
+//Consturcteur
 	public Controleur(IHMV2 ihm,VueGrille vue,MessageInit msgInit) {
 
 		this.ihm = ihm;
-		carteTresorDeck = new ArrayList<Classique>();
-		carteTresorsDefausse = new ArrayList<Classique>();
+		carteTresorDeck = new ArrayList<Carte>();
+		carteTresorsDefausse = new ArrayList<Carte>();
 		inondationDeck = new ArrayList<CarteInondation>();
 		inondationDefausse = new ArrayList<CarteInondation>();
 		joueursList = new ArrayList<Aventurier>();
@@ -110,23 +112,23 @@ public class Controleur implements Observateur{
 			ihm.setIndication("Cliquez sur une case pour l'assecher");
 			break;
 
+/* -------------------------CLIQUE SUR UNE TUILLE ----------------------------------------------- */
+			//Diffrente action lorsque lon clique sur une tuille on regarde laction precedente pour savoir quoi faire 
 		case Clique_Tuile :
 			switch(lastAction) {
+			
+			
 			case Clique_Deplace:
-
-
-				//Utils.debugln("Tuille = "+msg.getLocation());
-
-				//Si le deplacement cest bien passe 
 				deplacer(msg.getLocation(),getJoueurTour());
 				ihm.updateGrille();
 				getJoueurTour().actionJouer();
 
+				//Cas spetiale pour lingeneure 
 				if(getJoueurTour() instanceof Ingenieur) {
 					Ingenieur i = (Ingenieur) getJoueurTour();
 					i.setDerniereActionAssecher(false);
 				}
-
+				//Cas spetiale pour l'aviateur
 				if(getJoueurTour() instanceof Aviateur) {
 					Aviateur a = (Aviateur) getJoueurTour();
 					Tuile from = a.getFrom();
@@ -140,9 +142,10 @@ public class Controleur implements Observateur{
 
 			case Clique_Deplace_Helico :
 				
+
 				if (helicoTuileSelect!=null) {
 
-					
+
 					if (helicoTuileSelect.getNum()==22) {
 						aCarteHelicoptere=true;
 						verifierFinDePartie();
@@ -154,6 +157,7 @@ public class Controleur implements Observateur{
 
 
 							deplacer(msg.getLocation(),a);
+							PlaySound.play(System.getProperty("user.dir")+"\\src\\"+"sound\\vrai_son_helicoptere.wav");
 						}
 					}
 					getJoueurTour().removeCarte(carteSpe);
@@ -162,7 +166,7 @@ public class Controleur implements Observateur{
 				}else {
 
 					ihm.setIndication("Clique sur une case pour vous deplace");
-					
+
 
 					if (grille.getTuile(msg.getLocation()).getNum()==22) {
 						aCarteHelicoptere=true;
@@ -178,13 +182,16 @@ public class Controleur implements Observateur{
 					ihm.afficherDep(tuilesDep);
 					helicoTuileSelect=grille.getTuile(msg.getLocation());
 				}
+				//Mise as jour de la grille quimporte laction effectuer 
 				afficherCartes(getJoueurTour());
 				miseAJourGrille();
-	
+
 
 
 				break;
 
+/* -------------------------FIN CLIQUE SUR UNE TUILLE ----------------------------------------------- */
+				//Actoin lors du clique sur un sac de sable (carte ) 
 			case Clique_Asseche_SacDeSable :
 				grille.getTuile(msg.getLocation()).assecher();
 				ihm.setIndication("Case assechee en "+msg.getLocation());
@@ -195,8 +202,7 @@ public class Controleur implements Observateur{
 				miseAJourGrille();
 				afficherCartes(getJoueurTour());
 				break;
-
-
+//Action lors du clique du bouton assehce 
 			case Clique_Asseche :
 				assecher(msg.getLocation());
 				ihm.updateGrille();
@@ -212,13 +218,13 @@ public class Controleur implements Observateur{
 					i.setDerniereActionAssecher(!i.getDerniereActionAssecher());
 				}
 				break;
-
+//Action lors du bouton fin de tour 
 			case Clique_Fin_Tour :
 				deplacer(msg.getLocation(),urgence);
 				miseAJourGrille();
 				grille.activateAll();
 				lastAction=TypeMessage.Clique_Fin_Tour;
-				finDeTour();
+				afficherPiocheFinTour();
 
 				break;
 			case Clique_Tuile :
@@ -228,11 +234,11 @@ public class Controleur implements Observateur{
 					miseAJourGrille();
 					grille.activateAll();
 					lastAction=TypeMessage.Clique_Fin_Tour;
-					finDeTour();
+					afficherPiocheFinTour();
 
 				}
 
-			//-------------FIN DES CLIQUE TUILE ----------------------------
+				//-------------FIN DES CLIQUE TUILE ----------------------------
 			}
 
 
@@ -240,9 +246,9 @@ public class Controleur implements Observateur{
 
 		case Clique_Fin_Tour :
 			lastAction=TypeMessage.Clique_Deplace_Urgence;
-			finDeTour();
+			afficherPiocheFinTour();
 			break;
-	
+
 		case Clique_RecupereTresor :
 			if(recupereTresor()) {
 				getJoueurTour().actionJouer();
@@ -268,10 +274,10 @@ public class Controleur implements Observateur{
 			break;
 		case Clique_DonneCarte :
 
-			ihm.setIndication("Clique sur la carte que vous voullez donne ");
+			ihm.setIndication("Clique sur la carte que vous voulez donner ");
 			break;
 		case Clique_Deplace_Helico :
-			ihm.setIndication("Clique sur le joeur que vous voullez deplace");
+			ihm.setIndication("Clique sur le joueur que vous voulez deplacer");
 			carteSpe=(Classique) msg.getCarte();
 			ArrayList<Tuile> listCaseAvent = new ArrayList<Tuile>() ;
 			for(Tuile t : Grille.tuilesListe.values()) {
@@ -290,6 +296,15 @@ public class Controleur implements Observateur{
 
 				numCarte = msg.getNum();
 				ihm.setIndication("Cliquez sur le joueur a qui vous voulez donner la carte");
+			}else if(lastAction==TypeMessage.Defausse_Joueur) {
+				getJoueurTour().removeCarte((Classique) msg.getCarte());
+				carteTresorsDefausse.add(msg.getCarte());
+				if(getJoueurTour().getNbCarte()>5) {
+					afficherDefausseFinTour();
+				}else {
+					defausse=false;
+					finDeTour();
+				}
 			}
 			break;
 		case Clique_Joueur :
@@ -306,11 +321,27 @@ public class Controleur implements Observateur{
 					numCarte = -1;
 					ihm.setIndication("");
 				}
-
-
-
 			}
 
+			break;
+			
+		case Clique_Ok :
+			
+			if(defausse) {
+				ihm.afficherPlateau();
+				ihm.afficherDefausse(getJoueurTour());
+			}else if (lastAction==TypeMessage.Clique_Fin_Tour){
+				if(getJoueurTour().getNbCarte()>5) {
+					afficherDefausseFinTour();
+				}else {
+					ihm.afficherPlateau();
+					finDeTour();
+					//afficherPiocheInondation();
+				}
+			}else if (lastAction==TypeMessage.Clique_Ok){
+				finDeTour();
+			}
+			
 			break;
 
 		}
@@ -323,42 +354,23 @@ public class Controleur implements Observateur{
 		lastAction = msg.getMessage();
 		if (helicoTuileSelect!=null) {
 			lastAction=TypeMessage.Clique_Deplace_Helico;
+		}else if(defausse) {
+			lastAction=TypeMessage.Defausse_Joueur;
 		}
 
 
 		if(getJoueurTour().getNbAction()<1) {
 			//	System.out.println(" nb act = "+getJoueurTour().getNbAction());
-			finDeTour();
+			afficherPiocheFinTour();
 		}
 
 	}
 
 	private void finDeTour() {
 		// TODO Auto-generated method stub
-		finTour=true;
-		listPioche=new ArrayList();
+
 		
-		listPioche.add(piocherClassique(getJoueurTour()));
-		listPioche.add(piocherClassique(getJoueurTour()));
-		
-		try {
-			ihm.afficherPioche(listPioche);
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		ihm.afficherPlateau();
 
-		if (getJoueurTour().getListeCarteJoueur().size() > 5) {
-			lastAction = TypeMessage.Defausse_Joueur;
-			ihm.afficherDefausse(getJoueurTour());
-
-
-			ihm.setIndication("Vous avez " + (getJoueurTour().getListeCarteJoueur().size()-5) + " cartes en trop dans votre main, choisir les cartes Ã  dÃ©fausser :");
-
-		}
-		
 		if(!urg) {
 			ihm.setIndication("Fin du tour du joueur "+numTour);
 
@@ -382,6 +394,27 @@ public class Controleur implements Observateur{
 			ihm.rool(getJoueurTour(), joueursList);
 			grille.activateAll();
 			miseAJourGrille();
+			finTour=false;
+		}
+	}
+
+	private void afficherPiocheFinTour() {
+		finTour=true;
+		listPioche=new ArrayList();
+
+		melanger(carteTresorDeck);
+		listPioche.add(piocherClassique(getJoueurTour()));
+		listPioche.add(piocherClassique(getJoueurTour()));
+		ihm.afficherPioche(listPioche);
+	}
+	
+	private void afficherDefausseFinTour() {
+		defausse=true;
+		if (getJoueurTour().getListeCarteJoueur().size() > 5) {
+			lastAction = TypeMessage.Defausse_Joueur;
+			ihm.afficherDefausse(getJoueurTour());
+			ihm.setIndication("Vous avez " + (getJoueurTour().getListeCarteJoueur().size()-5) + " cartes en trop dans votre main, choisir les cartes Ã  dÃ©fausser :");
+
 		}
 	}
 
@@ -444,7 +477,7 @@ public class Controleur implements Observateur{
 
 	public Carte piocherClassique(Aventurier a) {
 		if(carteTresorDeck.size()!=0) {
-			Classique cC = carteTresorDeck.get(0);
+			Classique cC = (Classique) carteTresorDeck.get(0);
 			if(!(cC instanceof MonteeEaux)) {
 				a.getListeCarteJoueur().add(cC);	
 				carteTresorDeck.remove(0);
@@ -463,7 +496,7 @@ public class Controleur implements Observateur{
 			}
 			return cC;
 		}else {
-			ArrayList<Classique> stamp = carteTresorDeck;
+			ArrayList<Carte> stamp = carteTresorDeck;
 			carteTresorDeck=carteTresorsDefausse;
 			carteTresorsDefausse=stamp;
 			return null;
@@ -487,7 +520,7 @@ public class Controleur implements Observateur{
 
 		creeDeckInondation();
 		creeDeckClassique();
-		
+
 		for(Aventurier av : joueursList) {
 			piocherClassique(av);
 			piocherClassique(av);
@@ -499,7 +532,6 @@ public class Controleur implements Observateur{
 
 		afficherCartes(getJoueurTour());
 		isInit = true;
-
 		//test();
 	}
 
@@ -628,7 +660,7 @@ public class Controleur implements Observateur{
 	private void piocherTresor() {
 
 		for(int i =0;i<2;i++) {
-			Classique cC = carteTresorDeck.get(1);
+			Carte cC = carteTresorDeck.get(1);
 			getJoueurTour().getListeCarteJoueur().add(cC);
 		}
 

@@ -67,6 +67,7 @@ public class PanelButton extends JPanel{
 			@Override
 			public void mousePressed(MouseEvent arg0) {
 				// TODO Auto-generated method stub
+				PlaySound.play(System.getProperty("user.dir")+"\\src\\"+"sound\\bouton.wav");
 				blanc = true;
 				repaint();
 			}

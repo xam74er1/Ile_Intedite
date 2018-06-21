@@ -122,8 +122,10 @@ public class PanelCarte extends JPanel{
 					m = new Message(TypeMessage.Clique_Deplace_Helico);
 				}else if (carte instanceof CarteSacSable) {
 					m = new Message(TypeMessage.Clique_Asseche_SacDeSable);
-				}else {
+				}else if (carte instanceof CarteTresor){
 					m = new Message(TypeMessage.Clique_Carte_Tresor);				
+				}else {
+					m=new Message(TypeMessage.Clique_Ok);
 				}
 				m.setNum(num);
 				m.setCarte(carte);
