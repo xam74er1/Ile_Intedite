@@ -409,13 +409,13 @@ public class Controleur implements Observateur{
 		System.out.println(listPioche.size());
 		ihm.afficherPioche(listPioche);
 	}
-	
+
 	private void afficherDefausseFinTour() {
 		defausse=true;
 		if (getJoueurTour().getListeCarteJoueur().size() > 5) {
 			lastAction = TypeMessage.Defausse_Joueur;
 			ihm.afficherDefausse(getJoueurTour());
-			ihm.setIndication("Vous avez " + (getJoueurTour().getListeCarteJoueur().size()-5) + " cartes en trop dans votre main, choisir les cartes Ã  dÃ©fausser :");
+			ihm.setIndication("Vous avez " + (getJoueurTour().getListeCarteJoueur().size()-5) + " cartes en trop dans votre main, choisir les cartes a defausser :");
 
 		}
 	}
@@ -657,7 +657,7 @@ public class Controleur implements Observateur{
 
 			return false;
 		}else {
-			ihm.setIndication("Joueur sur la meme case  : "+str+" \n Veiller entre le numerau du joeur selectione");
+			ihm.setIndication("Joueur sur la meme case  : "+str+" \n Entrez le numero du joueur selectionne");
 			return true;
 		}
 	}
