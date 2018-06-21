@@ -585,6 +585,16 @@ public class FenetreStart extends JFrame {
     
 
     JButton btnRegle = new JButton("Regles");
+    btnRegle.addActionListener(new ActionListener(){
+    	
+    
+		
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			new FrameHtml();
+			
+		}
+	});
     JButton btnCommencer = new JButton("Commencer");
     
     JPanel panBas = new JPanel();

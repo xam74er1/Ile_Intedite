@@ -25,6 +25,7 @@ public enum TypeMessage {
     Clique_Deplace_Urgence,
     Clique_Carte_Tresor, 
     Clique_RecupereTresort, 
-    Clique_Joueur;
+    Clique_Joueur,
+    Clique_Ok;
     
 }
