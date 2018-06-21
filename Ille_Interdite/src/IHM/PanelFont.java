@@ -45,9 +45,9 @@ public class PanelFont extends JPanel {
 		BufferedImage image;
 
 		try {
-			path = System.getProperty("user.dir")+"\\src\\"+"images\\Art\\PanelWest.png";
+			path = System.getProperty("user.dir")+"\\src\\"+"images\\Art\\PanelWestV2.png";
 		}catch(Exception e){
-			path = System.getProperty("user.dir")+"\\src\\"+"images\\Art\\PanelWest.png";
+			path = System.getProperty("user.dir")+"\\src\\"+"images\\Art\\PanelWestV2.png";
 		}
 
 		try {			image = ImageIO.read(new File(path));
