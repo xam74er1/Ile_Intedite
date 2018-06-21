@@ -156,7 +156,7 @@ public class IHMV2 extends Observe{
 		//BOUTON HELP
 		
 
-		ImageIcon imgHelp = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/icones/iconHelp.png");
+		ImageIcon imgHelp = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images\\Art\\btnAide.png");
 
 		Image imH = imgHelp.getImage();
 
