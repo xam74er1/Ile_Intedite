@@ -147,7 +147,7 @@ public class FenetreStart extends JFrame {
     panChoix.add(troisJoueurs);
     panChoix.add(quatreJoueurs);
     JPanel panSelectChoix = new JPanel();
-    JButton selectChoix = new JButton("Comfirmer");
+    JButton selectChoix = new JButton("Confirmer");
     JLabel labelJoueurCourrant = new JLabel("");
     JPanel panComfirmer = new JPanel();
     panComfirmer.add(labelJoueurCourrant);
@@ -605,7 +605,7 @@ public class FenetreStart extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             
-            if ("Comfirmer".equals(selectChoix.getText())){
+            if ("Confirmer".equals(selectChoix.getText())){
 
                 if (deuxJoueurs.isSelected()) {
                     nbJoueurs = 2;
