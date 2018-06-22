@@ -75,7 +75,8 @@ public class IHMV2 extends Observe{
 	JPanel PanelPlayerIn3T,PanelPlayerIn2T,PanelPlayerIn1T;
 	Image imP3T,imP2T,imP1T;
 	JLabel lbIconJoueur;
-	JButton btnImgPlayerIn1T,btnImgPlayerIn2T,btnImgPlayerIn3T,btnHelp;
+	JButton btnHelp;
+	PanelJoueur btnImgPlayerIn2T,btnImgPlayerIn1T,btnImgPlayerIn3T;
 	private PanelCarte panelCarte3T2,
 	panelCarte3T1,
 	panelCarte3T3,
@@ -146,7 +147,6 @@ public class IHMV2 extends Observe{
 			}
 
 		});
-		//BOUTON HELP
 
 
 
@@ -169,25 +169,25 @@ public class IHMV2 extends Observe{
 		CardPlayer.setLayout(null);
 
 		panelCarte1 = new PanelCarte(0,this,true);
-		panelCarte1.setBounds(12, 13, 100, 140);
+		panelCarte1.setBounds(19, 13, 100, 140);
 		CardPlayer.add(panelCarte1);
 		listCartes.put(0, panelCarte1);
 		panelCarte1.setLayout(null);
 
 		panelCarte2 = new PanelCarte(1,this,true);
-		panelCarte2.setBounds(138, 13, 100, 140);
+		panelCarte2.setBounds(131, 13, 100, 140);
 		CardPlayer.add(panelCarte2);
 		listCartes.put(1, panelCarte2);
 		panelCarte2.setLayout(null);
 
 		panelCarte3 = new PanelCarte(2,this,true);
-		panelCarte3.setBounds(12, 166, 100, 140);
+		panelCarte3.setBounds(19, 166, 100, 140);
 		CardPlayer.add(panelCarte3);
 		listCartes.put(2, panelCarte3);
 		panelCarte3.setLayout(null);
 
 		panelCarte4 = new PanelCarte(3,this,true);
-		panelCarte4.setBounds(138, 166, 100, 140);
+		panelCarte4.setBounds(131, 166, 100, 140);
 		CardPlayer.add(panelCarte4);
 		listCartes.put(3, panelCarte4);
 		panelCarte4.setLayout(null);
@@ -208,9 +208,9 @@ public class IHMV2 extends Observe{
 		ImageIcon imgPC = new ImageIcon(imPC);
 		lbIconJoueur.setIcon(imgPC);
 
-		PanelSouth = new JPanel();
+		PanelSouth = new PanelFont(4,true);
 		PanelSouth.setBackground(new Color(139, 69, 19));
-		PanelSouth.setBounds(99, 641, 1165, 50);
+		PanelSouth.setBounds(99, 641, 1165, 44);
 		frame.getContentPane().add(PanelSouth);
 		PanelSouth.setLayout(null);
 
@@ -244,65 +244,62 @@ public class IHMV2 extends Observe{
 		frame.getContentPane().add(Plateau);
 		//--------------------------------
 
-		PanelEast = new JPanel();
+		PanelEast = new PanelFont(3,true);
 		PanelEast.setBackground(new Color(139, 69, 19));
 		PanelEast.setBounds(985, 31, 279, 597);
 		frame.getContentPane().add(PanelEast);
 		PanelEast.setLayout(null);
 		//--------------------- 1 et principal -----------------------
+//Gestion du panel contenant bouton joueur dans 1 tour
 		PanelPlayerIn1T = new JPanel();
-		PanelPlayerIn1T.setBackground(new Color(139, 69, 19));
-		PanelPlayerIn1T.setBounds(23, 434, 150, 150);
+		PanelPlayerIn1T.setBackground(new Color(139, 69, 19,0));
+		PanelPlayerIn1T.setBounds(23, 425, 150, 150);
 		PanelEast.add(PanelPlayerIn1T);
 		PanelPlayerIn1T.setLayout(null);
-
-		btnImgPlayerIn1T = new JButton("");
+//Gestion du bouton joueur dans 1 tour
+		btnImgPlayerIn1T = new PanelJoueur(0,this, true);
 		btnImgPlayerIn1T.setForeground(new Color(139, 69, 19));
 		btnImgPlayerIn1T.setBackground(new Color(139, 69, 19));
 		btnImgPlayerIn1T.setBounds(0, 0, 150, 150);
 		PanelPlayerIn1T.add(btnImgPlayerIn1T);
-		btnImgPlayerIn1T.setIcon(imgP1T);
-		btnImgPlayerIn1T.addActionListener(actionBoutonJoueur());
 		btnImgPlayerIn1T.setBorder(null);
-
+//Gestion du panel contenant bouton joueur dans 2 tour
 		PanelPlayerIn2T = new JPanel();
-		PanelPlayerIn2T.setBackground(new Color(139, 69, 19));
+		PanelPlayerIn2T.setBackground(new Color(139, 69, 19,0));
 		PanelPlayerIn2T.setBounds(23, 264, 150, 150);
 		PanelEast.add(PanelPlayerIn2T);
 		PanelPlayerIn2T.setLayout(null);
-
-		btnImgPlayerIn2T = new JButton("");
+//Gestion du bouton joueur dans 2 tour
+		btnImgPlayerIn2T = new PanelJoueur(1, this, true);
 		btnImgPlayerIn2T.setForeground(new Color(139, 69, 19));
-		btnImgPlayerIn2T.setBackground(new Color(139, 69, 19));
+		btnImgPlayerIn2T.setBackground(new Color(139, 69, 19,0));
 		btnImgPlayerIn2T.setBounds(0, 0, 150, 150);
-		btnImgPlayerIn2T.addActionListener(actionBoutonJoueur());
 		PanelPlayerIn2T.add(btnImgPlayerIn2T);
 		btnImgPlayerIn2T.setBorder(null);
 
-
+//Gestion du panel contenant bouton joueur dans 3 tour
 		PanelPlayerIn3T = new JPanel();
-		PanelPlayerIn3T.setBackground(new Color(139, 69, 19));
+		PanelPlayerIn3T.setBackground(new Color(139, 69, 19,0));
 		PanelPlayerIn3T.setBounds(23, 101, 150, 150);
 		PanelEast.add(PanelPlayerIn3T);
 		PanelPlayerIn3T.setLayout(null);
 
-		btnImgPlayerIn3T = new JButton("");
-
-		btnImgPlayerIn3T.setBackground(new Color(139, 69, 19));
+//Gestion du bouton joueur dans 3 tour
+		btnImgPlayerIn3T = new PanelJoueur(2,this, true);
+		btnImgPlayerIn3T.setBackground(new Color(139, 69, 19,0));
 		btnImgPlayerIn3T.setForeground(new Color(139, 69, 19));
 		btnImgPlayerIn3T.setBounds(0, 0, 150, 150);
-		btnImgPlayerIn3T.addActionListener(actionBoutonJoueur());
 		PanelPlayerIn3T.add(btnImgPlayerIn3T);
 		btnImgPlayerIn3T.setBorder(null);
 
-
+//Mise en place panel Tresor
 		PanelTresor = new JPanel();
 		PanelTresor.setBackground(new Color(165, 42, 42));
 		PanelTresor.setBounds(0, 0, 279, 84);
 		PanelEast.add(PanelTresor);
 		PanelTresor.setLayout(null);
 
-
+//Mise en place Label des Tresor (Image)
 		lbImgTresor1.setBounds(0, 0, 60, 82);
 		PanelTresor.add(lbImgTresor1);
 		ImageIcon ImgTresor1 = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/tresors/calice.png");
@@ -342,7 +339,7 @@ public class IHMV2 extends Observe{
 		lbImgTresor4.setIcon(imgT4);
 		lbImgTresor4.setEnabled(false);
 
-
+//Panel Des petit carte a coter du joueur
 		panelCarte3T1 = new PanelCarte(0,this,true);
 		panelCarte3T1.setBounds(185, 101, 25, 35);
 		PanelEast.add(panelCarte3T1);
@@ -395,38 +392,38 @@ public class IHMV2 extends Observe{
 		listeCartes2T.put(4, (PanelCarte) panelCarte2T5);
 
 		panelCarte1T1 = new PanelCarte(0,this,true);
-		panelCarte1T1.setBounds(185, 434, 25, 35);
+		panelCarte1T1.setBounds(185, 425, 25, 35);
 		PanelEast.add(panelCarte1T1);
 		listeCartes1T.put(0, (PanelCarte) panelCarte1T1);
 
 		panelCarte1T2 = new PanelCarte(1,this,true);
-		panelCarte1T2.setBounds(230, 434, 25, 35);
+		panelCarte1T2.setBounds(230, 425, 25, 35);
 		PanelEast.add(panelCarte1T2);
 		listeCartes1T.put(1, (PanelCarte) panelCarte1T2);
 
 		panelCarte1T3 = new PanelCarte(2,this,true);
-		panelCarte1T3.setBounds(185, 482, 25, 35);
+		panelCarte1T3.setBounds(185, 473, 25, 35);
 		PanelEast.add(panelCarte1T3);
 		listeCartes1T.put(2, (PanelCarte) panelCarte1T3);
 
 		panelCarte1T4 = new PanelCarte(3,this,true);
-		panelCarte1T4.setBounds(230, 482, 25, 35);
+		panelCarte1T4.setBounds(230, 473, 25, 35);
 		PanelEast.add(panelCarte1T4);
 		listeCartes1T.put(3, (PanelCarte) panelCarte1T4);
 
 		panelCarte1T5 = new PanelCarte(4,this,true);
-		panelCarte1T5.setBounds(208, 530, 25, 35);
+		panelCarte1T5.setBounds(208, 521, 25, 35);
 		PanelEast.add(panelCarte1T5);
 		listeCartes1T.put(4, (PanelCarte) panelCarte1T5);
 
-		panHelp = new JPanel();
+		panHelp = new PanelFont(4,true);
 		panHelp.setBackground(new Color(144, 158, 181));
 		panHelp.setBounds(114, 0, 1150, 32);
 		frame.getContentPane().add(panHelp);
 		panHelp.setLayout(new BorderLayout(0, 0));
 
 		msgHelp = new JLabel("");
-		msgHelp.setForeground(Color.red);
+		msgHelp.setForeground(Color.WHITE);
 		msgHelp.setFont(new Font("Serif", Font.BOLD, 25));
 		msgHelp.setHorizontalAlignment(JLabel.CENTER);
 		msgHelp.setVerticalAlignment(JLabel.CENTER);
@@ -693,12 +690,8 @@ public class IHMV2 extends Observe{
 
 		i++;
 
-		imgPlayerIn1T = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/"+path+".png");
-		imP1T = imgPlayerIn1T.getImage();
-		imP1T = imP1T.getScaledInstance(150,150, Image.SCALE_DEFAULT);
-		imgP1T = new ImageIcon(imP1T);
-		btnImgPlayerIn1T.setIcon(imgP1T);
-		btnImgPlayerIn1T.setName(a.getNum()+"");
+		btnImgPlayerIn1T.setNumJoueur(a.getNum());
+		btnImgPlayerIn1T.setPath(System.getProperty("user.dir")+"\\src\\"+"images/persos/"+path+".png");
 
 		PanelPlayerIn1T.repaint();
 
@@ -739,13 +732,8 @@ public class IHMV2 extends Observe{
 
 			i++;
 
-			imgPlayerIn2T = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/"+path+".png");
-			imP2T = imgPlayerIn2T.getImage();
-			imP2T = imP2T.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
-			imgP2T = new ImageIcon(imP2T);
-			btnImgPlayerIn2T.setIcon(imgP2T);
-			btnImgPlayerIn2T.setName(a.getNum()+"");
-			PanelPlayerIn2T.repaint();
+			btnImgPlayerIn2T.setNumJoueur(a.getNum());
+			btnImgPlayerIn2T.setPath(System.getProperty("user.dir")+"\\src\\"+"images/persos/"+path+".png");
 
 		}
 		//---------------Joeur qui joeur dans 3T ------------------------
@@ -787,13 +775,9 @@ public class IHMV2 extends Observe{
 			i++;
 
 
-			imgPlayerIn3T = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/"+path+".png");
-			imP3T = imgPlayerIn3T.getImage();
-			imP3T = imP3T.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
-			imgP3T = new ImageIcon(imP3T);
-			btnImgPlayerIn3T.setIcon(imgP3T);
-			btnImgPlayerIn3T.setName(a.getNum()+"");
-			PanelPlayerIn3T.repaint();
+			btnImgPlayerIn3T.setNumJoueur(a.getNum());
+			btnImgPlayerIn3T.setPath(System.getProperty("user.dir")+"\\src\\"+"images/persos/"+path+".png");
+			//	System.out.println(" 3 = "+a.getNom()+" k"+k);
 		}
 
 	}
@@ -835,11 +819,15 @@ public class IHMV2 extends Observe{
 			btDonneCarte.activate();
 			btFinDeTour.activate();
 			btRecupereTresor.activate();
+			btnImgPlayerIn1T.activate();
+			btnImgPlayerIn2T.activate();
+			btnImgPlayerIn3T.activate();
 			panelCarte1.activate();
 			panelCarte2.activate();
 			panelCarte3.activate();
 			panelCarte4.activate();
 			panelCarte5.activate();
+
 
 
 		}else {
@@ -848,11 +836,15 @@ public class IHMV2 extends Observe{
 			btDonneCarte.desactivate();
 			btFinDeTour.desactivate();
 			btRecupereTresor.desactivate();
+			btnImgPlayerIn1T.desactivate();
+			btnImgPlayerIn2T.desactivate();
+			btnImgPlayerIn3T.desactivate();
 			panelCarte1.desactivate();
 			panelCarte2.desactivate();
 			panelCarte3.desactivate();
 			panelCarte4.desactivate();
 			panelCarte5.desactivate();
+
 		}
 		btnImgPlayerIn1T.setEnabled(b);
 

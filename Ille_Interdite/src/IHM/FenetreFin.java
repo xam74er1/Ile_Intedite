@@ -12,8 +12,11 @@ import ille_intedite.Curseur;
 
 public class FenetreFin extends JFrame{
 	private JLabel labelFin;
+	public static int nbFen=0;
+	
 	public FenetreFin(MessageFinPartie msg){
 		//Si le curseur jouais la musique de fin 
+		nbFen++;
 		Curseur.stopSound();
 		if (msg.isVictoire()) {
 			labelFin = new JLabel("Vous avez gagné !");
@@ -46,14 +49,19 @@ public class FenetreFin extends JFrame{
 
 		this.setResizable(false);
 		setBackground(new Color(139,69,18));
+		getContentPane().setLayout(null);
 
 
 
-		JPanel pan = new JPanel(new GridLayout(2,1));
-		add(pan);
+		PanelFont pan = new PanelFont(5,true);
+		pan.setLayout(new GridLayout(2, 1));
+		pan.setBounds(0, 0, 494, 465);
+		getContentPane().add(pan);
 
 		JPanel panHaut = new JPanel();
+		panHaut.setBackground(new Color(0,0,0,0));
 		JPanel panBas = new JPanel();
+		panBas.setBackground(new Color(0,0,0,0));
 
 		pan.add(panHaut);
 		pan.add(panBas);
