@@ -23,7 +23,7 @@ import ille_intedite.TypeMessage;
 import ille_intedite.Aventurie.Aventurier;
 
 public class CasePlateau extends JPanel  {
-//Com de referencement
+	//Com de referencement
 	private String str,location;
 	private Observe o;
 	private Tuile t;
@@ -33,7 +33,7 @@ public class CasePlateau extends JPanel  {
 	String path=" ";
 
 	public CasePlateau(String str,String location, Observe o,Tuile t) {
-//com ref
+		//com ref
 		this.str = str;
 		this.o = o;
 		this.t = t;
@@ -48,9 +48,9 @@ public class CasePlateau extends JPanel  {
 		lblNewLabel.setForeground(Color.BLACK);
 		add(lblNewLabel);
 		setBackground(Color.gray);*/
-		
+
 		this.t.setCase(this);
-		
+
 		//this.setBorder(BorderFactory.createLineBorder(Color.black));
 
 	}
@@ -63,7 +63,7 @@ public class CasePlateau extends JPanel  {
 		int ya = y;
 
 		BufferedImage image;
-		
+
 		if(activated) {
 			g.setColor(c);
 
@@ -72,7 +72,7 @@ public class CasePlateau extends JPanel  {
 			g.setColor(Color.black);
 			g.drawRect(0, 0,  this.getWidth(),this.getHeight());
 		}
-		
+
 		if(activated) {
 			String name = t.getNom();
 			path=" ";
@@ -133,7 +133,7 @@ public class CasePlateau extends JPanel  {
 
 			g.fillRect(0, 0,  this.getWidth(),this.getHeight());
 		}
-		
+
 		for(Aventurier a : t.getAventurie()) {
 			String name = a.getPion().toString();
 			path = System.getProperty("user.dir")+"\\src\\"+"images\\pions\\pion"+name+".png";
@@ -153,9 +153,9 @@ public class CasePlateau extends JPanel  {
 			xa += 2*s;
 
 		}
-		
+
 	}
-	
+
 	public MouseListener mouse() {
 		return new MouseListener() {
 
@@ -188,27 +188,27 @@ public class CasePlateau extends JPanel  {
 			public void mouseClicked(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				if(!blanc) {
-				
-				Message m = new Message(TypeMessage.Clique_Tuile);
-				m.setLocation(location);
-				o.notifierObservateur(m);
+
+					Message m = new Message(TypeMessage.Clique_Tuile);
+					m.setLocation(location);
+					o.notifierObservateur(m);
 				}
 
 
 			}
 		};
-		
+
 	}
 	public void desactivate() {
 		this.removeMouseListener(m);
 		activated = false;
 	}
-	
+
 	public void activate() {
 		this.addMouseListener(m);
 		activated = true;
 	}
-	
+
 	public boolean isActivated() {
 		return activated;
 	}
@@ -216,16 +216,27 @@ public class CasePlateau extends JPanel  {
 	public void setFond(Color c) {
 		this.c =c ;
 	}
-	
+
 	public void setBlanc() {
 		this.removeMouseListener(m);
-		
+
 		this.blanc = true;
 	}
-	
+
 	public void removeBlanc() {
 		this.blanc = false;
 		this.addMouseListener(m);
+	}
+
+	public void mouseEnable(boolean b) {
+		if(activated) {
+
+			if(b) {
+				this.addMouseListener(m);
+			}else {
+				this.removeMouseListener(m);
+			}
+		}
 	}
 
 }

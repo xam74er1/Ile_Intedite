@@ -27,7 +27,7 @@ import ille_intedite.Aventurie.Aventurier;
 
 public class PanelCarte extends JPanel{
 
-	private int num;
+	private int numCarte,numJoueur = -1;
 	private Observe o;
 	private boolean activated = false;
 	private MouseListener m;
@@ -37,10 +37,11 @@ public class PanelCarte extends JPanel{
 	private boolean blanc = false;
 	private JPanel me ;
 	private boolean classique;
+	
 
 	public PanelCarte(int num, Observe o,boolean classique) {
 
-		this.num = num;
+		this.numCarte = num;
 		this.o = o;
 		this.classique=classique;
 
@@ -147,7 +148,8 @@ public class PanelCarte extends JPanel{
 				}else {
 					m=new Message(TypeMessage.Clique_Ok);
 				}
-				m.setNum(num);
+				m.setNumJoueur(numJoueur);
+				m.setNum(numCarte);
 				m.setCarte(carte);
 				o.notifierObservateur(m);
 			}
@@ -178,4 +180,15 @@ public class PanelCarte extends JPanel{
 		}
 	}
 
+	public int getNumJoueur() {
+		return numJoueur;
+	}
+
+	public void setNumJoueur(int numJoueur) {
+		
+		this.numJoueur = numJoueur;
+	}
+
+	
+	
 }

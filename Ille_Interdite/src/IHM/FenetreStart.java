@@ -218,16 +218,22 @@ public class FenetreStart extends JFrame {
                     
                     
                     JPanel panChoixCarte = new JPanel();
-                    FlowLayout flowLayout = (FlowLayout) panChoixCarte.getLayout();
                     panChoixCarte.setBounds(50, 422, 700, 160);
                     PanelFont.add(panChoixCarte);
-                    panChoixCarte.setBackground(new Color(139,69,18));
+                    panChoixCarte.setBackground(new Color(139,69,18,0));
                     labelExplo = new JLabel();
+                    labelExplo.setBounds(50, 25, 120, 120);
                     labelInge = new JLabel();
+                    labelInge.setBounds(144, 25, 120, 120);
                     labelMessa = new JLabel();
+                    labelMessa.setBounds(250, 25, 120, 120);
                     labelNavi = new JLabel();
+                    labelNavi.setBounds(350, 25, 120, 120);
                     labelPilo = new JLabel();
+                    labelPilo.setBounds(435, 25, 120, 120);
                     labelPlon = new JLabel();
+                    labelPlon.setBounds(550, 25, 120, 120);
+                    panChoixCarte.setLayout(null);
                     
                     
 
@@ -255,9 +261,9 @@ public class FenetreStart extends JFrame {
                     panChoixCarte.add(labelPilo);
                     
                         
-                        
                     labelPlon.setIcon(imgIcon5AS);
-                        panChoixCarte.add(labelPlon);
+                    panChoixCarte.add(labelPlon);
+
                         
 
                     labelExplo.addMouseListener(new MouseListener(){
@@ -767,6 +773,7 @@ public void actionPerformed(ActionEvent arg0) {
                                 labelNavi.setIcon(imgIcon3);
                                 labelPilo.setIcon(imgIcon4);
                                 labelPlon.setIcon(imgIcon5);
+                                labelExplo.setBackground(new Color(0, 0, 0, 0));
                             	int j = 0;
                                 for (JLabel i : joueurs){
                                     Aventurier a;
