@@ -20,6 +20,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import Carte.Carte;
+import Carte.CarteTresor;
 import Carte.Classique;
 import Carte.NomTresor;
 import ille_intedite.Controleur;
@@ -290,6 +291,7 @@ public class IHMV2 extends Observe{
 		btnImgPlayerIn3T.setBackground(new Color(139, 69, 19));
 		btnImgPlayerIn3T.setForeground(new Color(139, 69, 19));
 		btnImgPlayerIn3T.setBounds(0, 0, 150, 150);
+		btnImgPlayerIn3T.addActionListener(actionBoutonJoueur());
 		PanelPlayerIn3T.add(btnImgPlayerIn3T);
 		btnImgPlayerIn3T.setBorder(null);
 
@@ -611,11 +613,12 @@ public class IHMV2 extends Observe{
 	}
 
 
+	//Genere automatiquement les bouton lorsque lon clique sur les joeur 
 	public ActionListener actionBoutonJoueur() {
 		return new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JButton bt = (JButton) e.getSource();
-
+				
 				if(bt.getName() != null) {
 					Message m = new Message(TypeMessage.Clique_Joueur);
 
@@ -628,7 +631,12 @@ public class IHMV2 extends Observe{
 		};
 	}
 
-	public void rool(Aventurier a  , ArrayList<Aventurier> listAvent) {
+
+	
+	//Mise as jour des carte sur le cote , des joeur qui ne joue pas 
+	public void miseAsJourJoeurCotte(Aventurier a  , ArrayList<Aventurier> listAvent) {
+		
+
 		int i = 1;
 		int k = listAvent.indexOf(a);
 		Iterator<PanelCarte> it;
@@ -660,16 +668,25 @@ public class IHMV2 extends Observe{
 
 		it = listeCartes1T.values().iterator();
 
+
 		for(int j = 0;it.hasNext();j++) {
 			PanelCarte p =it.next(); 
 			if(j<s) {
 
 				p.setCarte(a.getListeCarteJoueur().get(j));
+				// System.out.println("conard");
 				p.setNumJoueur(a.getNum());
+
+				if(a.getListeCarteJoueur().get(j) instanceof CarteTresor) {
+					p.desactivate();
+				}else {
+					p.activate();
+				}
 
 			}else {
 				p.setCarte(null);
 			}
+ 
 
 			p.repaint();
 		}
@@ -685,6 +702,7 @@ public class IHMV2 extends Observe{
 
 		PanelPlayerIn1T.repaint();
 
+
 		//---------------Joeur qui joeur dans 2T ------------------------
 		if(i<=listAvent.size()) {
 			k++;
@@ -697,11 +715,25 @@ public class IHMV2 extends Observe{
 
 			it = listeCartes2T.values().iterator();
 
-			for(int j = 0;j<s&&it.hasNext();j++) {
 
+			for(int j = 0;it.hasNext();j++) {
 				PanelCarte p =it.next(); 
-				p.setCarte(a.getListeCarteJoueur().get(j));
-				p.setNumJoueur(a.getNum());
+				if(j<s) {
+
+					p.setCarte(a.getListeCarteJoueur().get(j));
+					// System.out.println("conard");
+					p.setNumJoueur(a.getNum());
+
+					if(a.getListeCarteJoueur().get(j) instanceof CarteTresor) {
+						p.desactivate();
+					}else {
+						p.activate();
+					}
+
+				}else {
+					p.setCarte(null);
+				}
+
 				p.repaint();
 			}
 
@@ -728,13 +760,28 @@ public class IHMV2 extends Observe{
 
 			it = listeCartes3T.values().iterator();
 
-			for(int j = 0;j<s&&it.hasNext();j++) {
 
+			for(int j = 0;it.hasNext();j++) {
 				PanelCarte p =it.next(); 
-				p.setCarte(a.getListeCarteJoueur().get(j));
-				p.setNumJoueur(a.getNum());
+				if(j<s) {
+
+					p.setCarte(a.getListeCarteJoueur().get(j));
+					// System.out.println("conard");
+					p.setNumJoueur(a.getNum());
+
+					if(a.getListeCarteJoueur().get(j) instanceof CarteTresor) {
+						p.desactivate();
+					}else {
+						p.activate();
+					}
+
+				}else {
+					p.setCarte(null);
+				}
+
 				p.repaint();
 			}
+
 
 			path = a.getNom().toLowerCase();
 			i++;

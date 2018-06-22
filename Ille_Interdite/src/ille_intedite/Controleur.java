@@ -192,7 +192,7 @@ public class Controleur implements Observateur{
 
 				//Mise as jour de la grille quimporte laction effectuer 
 				afficherCartes(getJoueurTour());
-				ihm.rool(getJoueurTour(),joueursList);
+				ihm.miseAsJourJoeurCotte(getJoueurTour(),joueursList);
 				miseAJourGrille();
 
 
@@ -208,7 +208,7 @@ public class Controleur implements Observateur{
 				ihm.setIndication("Cliquez sur une case pour l'assecher");
 				miseAJourGrille();
 				afficherCartes(getJoueurTour());
-				ihm.rool(getJoueurTour(),joueursList);
+				ihm.miseAsJourJoeurCotte(getJoueurTour(),joueursList);
 				break;
 				//Si on a choisi d'assecher un case
 			case Clique_Asseche :
@@ -383,13 +383,16 @@ public class Controleur implements Observateur{
 				givePlayer = joueursList.get(msg.getNum()); 
 				Classique c =  (Classique) getJoueurTour().getListeCarteJoueur().get(numCarte);
 
+				//Si le joeur sur le quelle on as clique sur le bouton est  sur la meme case que le joeure actuelle / ou quil peut donne la carte 
 				if(donnerCarteJoueur(msg.getNum())) {
 					getJoueurTour().getListeCarteJoueur().remove(c);
 					givePlayer.getListeCarteJoueur().add(c);
 					afficherCartes(getJoueurTour());
-					ihm.rool(getJoueurTour(), joueursList);
+					ihm.miseAsJourJoeurCotte(getJoueurTour(), joueursList);
 					numCarte = -1;
-					ihm.setIndication("");
+					ihm.setIndication("La carte as bien ete donne ");
+				}else {
+					ihm.setIndication("Vous ne pouvez pas donne de carte as ce joueure ! ");
 				}
 			}
 
@@ -452,7 +455,7 @@ public class Controleur implements Observateur{
 			ihm.setIndication("Joueur "+(numTour+1)+" A vous de jouer");
 			ihm.miseAJourPlayer(numTour," ( "+getJoueurTour().getNom()+" )", getJoueurTour().getColor());
 			afficherCartes(getJoueurTour());
-			ihm.rool(getJoueurTour(), joueursList);
+			ihm.miseAsJourJoeurCotte(getJoueurTour(), joueursList);
 			grille.activateAll();
 			ihm.afficherPlateau();
 			miseAJourGrille();
@@ -630,7 +633,7 @@ public class Controleur implements Observateur{
 
 		ihm.miseAJourPlayer(0," ( "+getJoueurTour().getNom()+" )", getJoueurTour().getColor());
 
-		ihm.rool(getJoueurTour(), joueursList);
+		ihm.miseAsJourJoeurCotte(getJoueurTour(), joueursList);
 
 		afficherCartes(getJoueurTour());
 		isInit = true;
@@ -698,22 +701,29 @@ public class Controleur implements Observateur{
 		miseAJourGrille();
 	}
 
+
+	//Savoir si le joeur num est sur la case , il vas retune tout les joeur as qui il peut donne
+
 	//pour donner une carte a un joueur
+
 	private boolean donnerCarteJoueur(int num) {
 
 		int nbr = getJoueurTour().getNum();
 		for(Aventurier a : getJoueurTour().getJoueurTuile()) {
+			//Si l'aventurie n'est pas lui meme , et quil et egale au meme que le joeur cible je retun true 
 			if(nbr != a.getNum()&&num==a.getNum()) {
 				givePlayer = a;
 				return true;
 			}
 
 		}
-
+//Si non il ne peut pas donne les carte as ce joeur 
 		return  false;
 	}
 
+
 	//afficher un joueur sur sa case
+
 	public boolean afficherJoueurCase() {
 		String str = "";
 		int nbr = getJoueurTour().getNum();
