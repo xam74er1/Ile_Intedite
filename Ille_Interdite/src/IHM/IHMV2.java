@@ -833,6 +833,22 @@ public class IHMV2 extends Observe{
 		}
 
 	}
+	
+	public void setActionEnabled(boolean b) {
+		if(b) {
+			btAsseche.activate();
+			btDeplace.activate();
+			btDonneCarte.activate();
+			btFinDeTour.activate();
+			btRecupereTresor.activate();
+		}else {
+			btAsseche.desactivate();
+			btDeplace.desactivate();
+			btDonneCarte.desactivate();
+			btFinDeTour.desactivate();
+			btRecupereTresor.desactivate();
+		}
+	}
 
 	public void afficherPlateau() {
 		setPanelEnabled(true);
