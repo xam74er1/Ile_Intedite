@@ -12,8 +12,14 @@ import ille_intedite.Curseur;
 import javax.swing.SwingConstants;
 
 public class FenetreFin extends JFrame{
+
+	private JLabel labelFin;
+	public static int nbFen=0;
+	
+
 	public FenetreFin(MessageFinPartie msg){
 		//Si le curseur jouais la musique de fin 
+		nbFen++;
 		Curseur.stopSound();
 		this.setTitle("Fin Ile Interdite");
 

@@ -59,12 +59,16 @@ public abstract class Aventurier {
 
 	//permet de recuperer un tresor
 	public NomTresor recupereTresor() {
+		//Je recupere l'id de la tuile
 		int num = getTuile().getNum();
 		int numTresor = 0;
+		//Si il commence par 3xx il contien un tresort 
 		if (num / 100 == 3) {
+			//Le num du trsort a est 3ax (ici x respete le premier ou segond endrois pour recupere les tresort ) 
 			numTresor = (num / 10) % 10;
 			int nbr = 0;
 
+			//Je conte le nombre de carte dans son inv qui contienne des tresort du meme type 
 			for (Carte c : listeCarteJoueur) {
 				if (c instanceof CarteTresor) {
 					CarteTresor ct = (CarteTresor) c;
