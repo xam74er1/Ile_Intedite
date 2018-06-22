@@ -147,6 +147,7 @@ public class Controleur implements Observateur{
 				//tuile de destination choisie
 				if (helicoTuileSelect!=null && memoireAventuire != null) {
 
+					
 					Tuile t = grille.getTuile(msg.getLocation());
 					for(Aventurier a : joueursList) {
 						if(a.getTuile().equals(helicoTuileSelect)) {
@@ -155,7 +156,9 @@ public class Controleur implements Observateur{
 							PlaySound.play(System.getProperty("user.dir")+"\\src\\"+"sound\\vrai_son_helicoptere.wav");
 						}
 					}
+					
 					memoireAventuire.removeCarte(carteSpe);
+					
 					carteTresorsDefausse.add(carteSpe);
 					helicoTuileSelect=null;
 					if(defausse) {
@@ -169,7 +172,7 @@ public class Controleur implements Observateur{
 					memoireAventuire = null;
 					
 				}else { //tuile de depart choisie
-
+					
 					ihm.setIndication("Cliquez sur une case pour vous deplacer");
 
 
@@ -336,6 +339,7 @@ public class Controleur implements Observateur{
 				verifierFinDePartie();
 
 				carteSpe=(Classique) msg.getCarte();
+				
 				if(msg.getNumJoueur() != -1) {
 					memoireAventuire = joueursList.get(msg.getNumJoueur());
 				}else {
@@ -598,9 +602,17 @@ public class Controleur implements Observateur{
 		joueursList = msgInit.listJoueurs;
 
 
+		if(Parameters.ALEAS) {
 		Collections.shuffle(joueursList);
-
-		melanger(joueursList);
+		};
+		
+		int i = 0;
+		for(Aventurier a : joueursList) {
+			a.setNum(i);
+			i++;
+		}
+		
+		
 		grille = new Grille(ihm,joueursList);
 
 		ihm.fillPlataux2(grille);
