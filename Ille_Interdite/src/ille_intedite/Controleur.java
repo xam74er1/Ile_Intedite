@@ -891,7 +891,7 @@ public class Controleur implements Observateur{
 		}
 
 		if(temple==2||caverne==2||palais==2||jardin==2) {
-
+			msg.setVictoire(false);
 			msg.setTypeDefaite("Un des tr\u00E9sors coul\u00E9..");
 			new FenetreFin(msg);												//Deux cases de recuperation de tresor coulees
 		}

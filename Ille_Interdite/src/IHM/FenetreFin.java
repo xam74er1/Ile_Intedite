@@ -56,7 +56,9 @@ public class FenetreFin extends JFrame{
 		getContentPane().add(pan);
 
 		JPanel panHaut = new JPanel();
+		panHaut.setBackground(new Color(0,0,0,0));
 		JPanel panBas = new JPanel();
+		panBas.setBackground(new Color(0,0,0,0));
 
 		pan.add(panHaut);
 		pan.add(panBas);
