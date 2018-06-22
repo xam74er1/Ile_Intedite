@@ -12,7 +12,7 @@ public class Explorateur extends Aventurier {
     public Explorateur(int Num, String nom, Utils.Pion pion) {
         super(Num, nom,pion);
     }
-    
+    //deplacement de l'explorateur
 	@Override
 	public ArrayList<Tuile> getAdjacent(Tuile from, ArrayList<Tuile> listTuile){
 		ArrayList<Tuile> adjacent = new ArrayList<Tuile>();
@@ -35,7 +35,7 @@ public class Explorateur extends Aventurier {
 		
 		return adjacent;
 	}
-	
+	//assechement de l'explorateur
 	@Override
 	public ArrayList<Tuile> getAssecher(Tuile from, ArrayList<Tuile> listTuile){
 		ArrayList<Tuile> adjacent = new ArrayList<Tuile>();
