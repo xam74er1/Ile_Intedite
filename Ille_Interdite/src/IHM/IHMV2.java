@@ -497,6 +497,8 @@ public class IHMV2 extends Observe{
 			}
 		}
 
+		
+		//------Desactivation des bouton non necessaire en fonction du nombre de joeur ------------
 		btnImgPlayerIn2T.setVisible(true);
 		btnImgPlayerIn2T.setEnabled(true);	
 		if(Controleur.getNbJoueur()<3) {
@@ -545,6 +547,7 @@ public class IHMV2 extends Observe{
 			
 			
 		}
+		
 		
 		Plateau.revalidate();
 		//Fin fill plateau
@@ -604,9 +607,10 @@ public class IHMV2 extends Observe{
 	}
 
 
-	public void setCartePanel(int num, Classique c) {
+	public void setCartePanel(int num, Classique c,int numJoeur) {
 		PanelCarte p = listCartes.get(num);
 		
+		p.setNumJoueur(numJoeur);
 		p.setCarte(c);
 		p.repaint();
 		p.revalidate();
@@ -632,6 +636,7 @@ public class IHMV2 extends Observe{
 	}
 
 	public void rool(Aventurier a  , ArrayList<Aventurier> listAvent) {
+		System.out.println("rooll");
 		int i = 1;
 		int k = listAvent.indexOf(a);
 		Iterator<PanelCarte> it;
@@ -664,10 +669,19 @@ public class IHMV2 extends Observe{
 	
 		it = listeCartes1T.values().iterator();
 		
-		 for(int j = 0;j<s&&it.hasNext();j++) {
-			
+		System.out.println(" s = "+s);
+		 for(int j = 0;it.hasNext();j++) {
 			 PanelCarte p =it.next(); 
+			 if(j<s) {
+			 
 			 p.setCarte(a.getListeCarteJoueur().get(j));
+			// System.out.println("conard");
+			 p.setNumJoueur(a.getNum());
+			
+			 }else {
+				 p.setCarte(null);
+			 }
+			 
 			 p.repaint();
 		 }
 
@@ -699,6 +713,7 @@ public class IHMV2 extends Observe{
 				
 				 PanelCarte p =it.next(); 
 				 p.setCarte(a.getListeCarteJoueur().get(j));
+				 p.setNumJoueur(a.getNum());
 				 p.repaint();
 			 }
 			
@@ -729,6 +744,7 @@ public class IHMV2 extends Observe{
 				
 				 PanelCarte p =it.next(); 
 				 p.setCarte(a.getListeCarteJoueur().get(j));
+				 p.setNumJoueur(a.getNum());
 				 p.repaint();
 			 }
 			
@@ -829,7 +845,7 @@ public class IHMV2 extends Observe{
 		}
 		
 		for(CasePlateau c : listPan.values()) {
-			c.setEnabled(b);
+			c.mouseEnable(b);
 		}
 
 	}
