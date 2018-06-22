@@ -16,7 +16,7 @@ public class Message {
     TypeMessage message;
     String location;
     String text;
-    int num = -1;
+    int num = -1,numJoueur = -1;
     Carte carte;
     
    
@@ -64,6 +64,14 @@ public class Message {
 
 	public void setNum(int num) {
 		this.num = num;
+	}
+
+	public int getNumJoueur() {
+		return numJoueur;
+	}
+
+	public void setNumJoueur(int numJoueur) {
+		this.numJoueur = numJoueur;
 	}
 	
 	

@@ -41,7 +41,7 @@ public class PanelCurseur extends JPanel {
 		
 		try {
 
-			image = ImageIO.read(new File(System.getProperty("user.dir")+"\\src\\"+"images\\Art\\curseur.png"));
+			image = ImageIO.read(new File(System.getProperty("user.dir")+"\\src\\"+"images\\Art\\CursorV3.png"));
 
 			g.drawImage(image, 0, 0,this.getWidth(),this.getHeight(), null);
 		} catch (IOException e) {

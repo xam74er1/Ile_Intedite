@@ -52,6 +52,7 @@ public class FenetreStart extends JFrame {
         private boolean choisis = false;
 		
 	private JComboBox difficulte;
+	private JComboBox combobox;
 		
 	
 	
@@ -191,10 +192,10 @@ public class FenetreStart extends JFrame {
                     labelChoix.setHorizontalAlignment(SwingConstants.CENTER);
                     labelChoix.setFont(font);
                     
-                    JComboBox comboBox = new JComboBox();
-                    comboBox.setModel(new DefaultComboBoxModel(new String[] {"S\u00E9nario 1", "S\u00E9nario 2", "S\u00E9nario 3", "S\u00E9nario 4", "S\u00E9nario 5"}));
-                    comboBox.setBounds(51, 116, 100, 22);
-                    panel.add(comboBox);
+                    combobox = new JComboBox();
+                    combobox.setModel(new DefaultComboBoxModel(new String[] {"Partie normale", "Victoire", "D\u00E9faite curseur", "D\u00E9faite heliport", "D\u00E9faite noyade","D\u00E9faite tr\u00E9sor"}));
+                    combobox.setBounds(51, 116, 100, 22);
+                    panel.add(combobox);
                     
                     
                     
@@ -217,16 +218,22 @@ public class FenetreStart extends JFrame {
                     
                     
                     JPanel panChoixCarte = new JPanel();
-                    FlowLayout flowLayout = (FlowLayout) panChoixCarte.getLayout();
                     panChoixCarte.setBounds(50, 422, 700, 160);
                     PanelFont.add(panChoixCarte);
-                    panChoixCarte.setBackground(new Color(139,69,18));
+                    panChoixCarte.setBackground(new Color(139,69,18,0));
                     labelExplo = new JLabel();
+                    labelExplo.setBounds(50, 25, 120, 120);
                     labelInge = new JLabel();
+                    labelInge.setBounds(144, 25, 120, 120);
                     labelMessa = new JLabel();
+                    labelMessa.setBounds(250, 25, 120, 120);
                     labelNavi = new JLabel();
+                    labelNavi.setBounds(350, 25, 120, 120);
                     labelPilo = new JLabel();
+                    labelPilo.setBounds(435, 25, 120, 120);
                     labelPlon = new JLabel();
+                    labelPlon.setBounds(550, 25, 120, 120);
+                    panChoixCarte.setLayout(null);
                     
                     
 
@@ -254,9 +261,9 @@ public class FenetreStart extends JFrame {
                     panChoixCarte.add(labelPilo);
                     
                         
-                        
                     labelPlon.setIcon(imgIcon5AS);
-                        panChoixCarte.add(labelPlon);
+                    panChoixCarte.add(labelPlon);
+
                         
 
                     labelExplo.addMouseListener(new MouseListener(){
@@ -766,6 +773,7 @@ public void actionPerformed(ActionEvent arg0) {
                                 labelNavi.setIcon(imgIcon3);
                                 labelPilo.setIcon(imgIcon4);
                                 labelPlon.setIcon(imgIcon5);
+                                labelExplo.setBackground(new Color(0, 0, 0, 0));
                             	int j = 0;
                                 for (JLabel i : joueurs){
                                     Aventurier a;
@@ -825,6 +833,8 @@ public void actionPerformed(ActionEvent arg0) {
         } else {
         	m.niveauEau =4;
         }
+
+       m.scenario=(String) combobox.getSelectedItem();
 		
         int j = 0;
         for (JLabel i : joueurs){
