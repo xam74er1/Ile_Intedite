@@ -883,10 +883,13 @@ public class Controleur implements Observateur{
 			int numT=tresorsRecuperes.get(i).getNum();
 			switch (numT) {
 			case 1: caverne=-1;
+				break;
 			case 2: palais=-1;
+				break;
 			case 3: jardin=-1;
+				break;
 			case 4: temple=-1;
-			break;
+				break;
 			}
 		}
 
@@ -916,14 +919,6 @@ public class Controleur implements Observateur{
 		//Condition victoire
 
 		//Verification de si un joueur a une carte helicoptere
-		aCarteHelicoptere = false;
-		for(int i=0; i<joueursList.size(); i++) {
-			for(int j=0; j<joueursList.get(i).getNbCarte();j++) {
-				if(joueursList.get(i).getCarte(j) instanceof CarteHelicoptere) {
-					aCarteHelicoptere=true;
-				}
-			}
-		}
 
 
 		int joueursPresentsHeliport=0;
@@ -958,7 +953,7 @@ public class Controleur implements Observateur{
 					a.deplacer(t);
 				}
 			}
-		}
+		} 
 		tresorsRecuperes.add(NomTresor.CaliceOnde);
 		tresorsRecuperes.add(NomTresor.CaliceOnde);
 		tresorsRecuperes.add(NomTresor.CaliceOnde);
