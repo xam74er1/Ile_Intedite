@@ -749,7 +749,6 @@ public class IHMV2 extends Observe{
 			PanelPlayerIn3T.repaint();
 		}
 
-
 	}
 
 	public void afficherNivCurseur(int niv) {
