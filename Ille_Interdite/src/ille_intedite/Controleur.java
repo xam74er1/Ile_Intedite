@@ -258,7 +258,7 @@ public class Controleur implements Observateur{
 			break;
 
 		case Clique_RecupereTresor :
-			if(recupereTresor()) {
+			if(recupererTresor()) {
 				getJoueurTour().actionJouer();
 				ihm.setIndication("Vous avez recupere le tresor");
 			}else {
@@ -323,7 +323,7 @@ public class Controleur implements Observateur{
 				givePlayer = joueursList.get(msg.getNum()); 
 				Classique c =  (Classique) getJoueurTour().getListeCarteJoueur().get(numCarte);
 
-				if(donneCarteJoeur(msg.getNum())) {
+				if(donnerCarteJoueur(msg.getNum())) {
 					getJoueurTour().getListeCarteJoueur().remove(c);
 					givePlayer.getListeCarteJoueur().add(c);
 					afficherCartes(getJoueurTour());
@@ -430,7 +430,7 @@ public class Controleur implements Observateur{
 		ihm.afficherPioche(listPioche,true);
 	}
 
-	public void creeDeckInondation() {
+	public void creerDeckInondation() {
 		for(Tuile t :Grille.tuilesListe.values()){
 			if(t.getNum()!=-1) {
 				inondationDeck.add(new CarteInondation(t.getNom(),t));
@@ -444,7 +444,7 @@ public class Controleur implements Observateur{
 
 	}
 
-	public void creeDeckClassique() {
+	public void creerDeckClassique() {
 		for(int i=0;i<4;i++) {
 			for(int j=0;j<5;j++) {
 				switch (i) {
@@ -532,8 +532,8 @@ public class Controleur implements Observateur{
 
 		ihm.fillPlataux2(grille);
 
-		creeDeckInondation();
-		creeDeckClassique();
+		creerDeckInondation();
+		creerDeckClassique();
 
 		for(Aventurier av : joueursList) {
 			piocherClassique(av);
@@ -607,8 +607,8 @@ public class Controleur implements Observateur{
 		ihm.afficherDep(a.assecher2());
 		miseAJourGrille();
 	}
-
-	private boolean donneCarteJoeur(int num) {
+	
+	private boolean donnerCarteJoueur(int num) {
 
 		int nbr = getJoueurTour().getNum();
 		for(Aventurier a : getJoueurTour().getJoueurTuile()) {
@@ -643,7 +643,7 @@ public class Controleur implements Observateur{
 
 	}
 
-	public boolean aficherJoeurCase() {
+	public boolean afficherJoueurCase() {
 		String str = "";
 		int nbr = getJoueurTour().getNum();
 		for(Aventurier a : getJoueurTour().getJoueurTuile()) {
@@ -751,7 +751,7 @@ public class Controleur implements Observateur{
 
 	}
 
-	public boolean recupereTresor() {
+	public boolean recupererTresor() {
 		// 
 
 		Aventurier a = getJoueurTour();
@@ -892,7 +892,7 @@ public class Controleur implements Observateur{
 
 	}*/
 
-	public static int getnbJoueur() {
+	public static int getNbJoueur() {
 		return joueursList.size();
 	}
 

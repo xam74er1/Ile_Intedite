@@ -47,7 +47,7 @@ public class IHMV2 extends Observe{
 	JLabel lbImgTresor4 = new JLabel("");
 
 	HashMap<String,PanelButton> listButton = new HashMap();
-	HashMap<String,JPanel> listPan = new HashMap();
+	HashMap<String,CasePlateau> listPan = new HashMap();
 	HashMap<Integer,PanelCarte> listCartes = new HashMap<Integer,PanelCarte>();
 	HashMap<Integer, PanelCarte> listeCartes3T = new HashMap<Integer,PanelCarte>();
 	HashMap<Integer, PanelCarte> listeCartes2T = new HashMap<Integer,PanelCarte>();
@@ -499,7 +499,7 @@ public class IHMV2 extends Observe{
 
 		btnImgPlayerIn2T.setVisible(true);
 		btnImgPlayerIn2T.setEnabled(true);	
-		if(Controleur.getnbJoueur()<3) {
+		if(Controleur.getNbJoueur()<3) {
 			
 			btnImgPlayerIn2T.setEnabled(false);	
 			
@@ -524,7 +524,7 @@ public class IHMV2 extends Observe{
 			
 		}
 		
-		if(Controleur.getnbJoueur()<4) {
+		if(Controleur.getNbJoueur()<4) {
 			btnImgPlayerIn3T.setEnabled(false);	
 			
 			btnImgPlayerIn3T.setEnabled(false);	
@@ -790,6 +790,9 @@ public class IHMV2 extends Observe{
 			btFinDeTour.desactivate();
 			btRecupereTresor.desactivate();
 		}
+		btnImgPlayerIn1T.setEnabled(b);
+		
+		
 		
 		panelCarte1.setEnabled(b);
 		panelCarte2.setEnabled(b);
@@ -823,6 +826,10 @@ public class IHMV2 extends Observe{
 		}
 		for (JPanel j : listPan.values()) {
 			j.setEnabled(b);
+		}
+		
+		for(CasePlateau c : listPan.values()) {
+			c.setEnabled(b);
 		}
 
 	}
