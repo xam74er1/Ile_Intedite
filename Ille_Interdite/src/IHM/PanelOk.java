@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import ille_intedite.Message;
 import ille_intedite.Observe;
 import ille_intedite.TypeMessage;
-
+//panel du bouton ok
 public class PanelOk extends JPanel {
 
 	private Observe o;

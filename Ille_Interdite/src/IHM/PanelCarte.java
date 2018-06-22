@@ -24,7 +24,7 @@ import ille_intedite.Observe;
 import ille_intedite.Tuile;
 import ille_intedite.TypeMessage;
 import ille_intedite.Aventurie.Aventurier;
-
+//panel permettant d'afficher une carte
 public class PanelCarte extends JPanel{
 
 	private int numCarte,numJoueur = -1;

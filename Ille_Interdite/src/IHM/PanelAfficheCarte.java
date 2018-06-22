@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import Carte.Carte;
 import Carte.Classique;
 import ille_intedite.Observe;
-
+//Panel affichant les cartes en fin de tour
 public class PanelAfficheCarte extends JPanel {
 
 	private Observe o;
