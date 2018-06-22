@@ -87,6 +87,8 @@ public class PanelFont extends JPanel {
 				path = System.getProperty("user.dir")+"\\src\\"+"images\\Art\\StartPanelV3.png";
 				e.printStackTrace();
 			}
+			repaint();
+			revalidate();
 		}
 		
 		if (num == 2) {
@@ -109,9 +111,10 @@ public class PanelFont extends JPanel {
 				path = System.getProperty("user.dir")+"\\src\\"+"images\\Art\\StartPanelPanel1V1.png";
 				e.printStackTrace();
 			}
+			repaint();
+			revalidate();
 		}
-		repaint();
-		revalidate();
+		
 
 
 	}
