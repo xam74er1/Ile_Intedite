@@ -13,7 +13,7 @@ public class Ingenieur extends Aventurier {
 	public Ingenieur(int Num, String nom, Utils.Pion pion) {
         super(Num, nom,pion);
     }
-    
+    //pour la derniere action assecher (vu qu'il peut assecher deux fois)
     @Override
     public NomTresor recupereTresor() {
 		// TODO - implement Aventurier.RecupereTresort

@@ -8,7 +8,7 @@ public class Navigateur extends Aventurier {
 		super(Num, nom, pion);
 		this.setNbAction(4);
 	}
-	
+	//le navigateur a 4 actions (et non 3)
 	@Override
 	public void finTour() {
 		this.setNbAction(4);

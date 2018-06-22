@@ -15,59 +15,12 @@ public class Plongeur extends Aventurier {
 	private ArrayList<Tuile> tuilesDep = new ArrayList<Tuile>();
 	private boolean firstIter=true;
 
+	
 	public Plongeur(int Num, String nom, Utils.Pion pion) {
 		super(Num, nom,pion);
-	}
-	
-	//@Override
-	public ArrayList<Tuile> deplacementPossible(Tuile from, ArrayList<Tuile> listTuile) {
-		//creation de la liste des tuiles adjacentes et d'une copie
-		ArrayList<Tuile> adjacent = new ArrayList<Tuile>();
-		ArrayList<Tuile> newadjacent = adjacent;
-		//ajout des tuiles adjacentes a la tuile de depart
-		Iterator<Tuile> iAdj = getAdjacent(from, listTuile).iterator();
-		while (iAdj.hasNext()) {
-			newadjacent.add(iAdj.next());
-		}
-		//tant que la copie et l'originale ne sont pas identiques on recommence
-		while (!(newadjacent.equals(adjacent))) {
-			//System.out.println(newadjacent.toString());
-			adjacent= newadjacent;
-			Iterator<Tuile> it = adjacent.iterator();
-			//on regarde toutes les tuiles adjacentes a celles se trouvant dans Adjacent
-			while (it.hasNext()) {
-				Tuile t = it.next();
-				//seulement si les tuiles de depart sont inondees ou coulees
-				if (t.getStatut()!=0) {
-					ArrayList<Tuile> prox = getAdjacent(t, listTuile);
-					Iterator<Tuile> iP = prox.iterator();
-					//on rajoute les tuiles dans la copie si celles-ci n'y sont pas deja
-					while (iP.hasNext()){
-						Tuile tP = iP.next();
-						if (!newadjacent.contains(tP)) {
-							newadjacent.add(tP);
-						}
-						
-					}
-					
-				}
-				
-			}
-			
-		}
-		//on retire la case ou se trouve le plongeur ainsi que toutes les cases coulees, car on ne peut pas s'y arreter
-		Iterator<Tuile> it = adjacent.iterator();
-		while (it.hasNext()) {
-			Tuile t = it.next();
-			if (t.equals(from)||t.getStatut()==2) {
-				adjacent.remove(t);
-			}
-		}
+	}	
 
-		return adjacent;
-	}
-	
-
+	//fonction pour deplacer le plongeur
 	@Override
 	public ArrayList<Tuile> deplacer2(){
 		ArrayList<Tuile> listTuile = new ArrayList<Tuile>();
@@ -78,6 +31,7 @@ public class Plongeur extends Aventurier {
 		firstIter=true;
 		getAdjacent(this.getTuile(), listTuile);
 		
+		//on retire toutes les cases coulees
 		Iterator<Tuile> it = Grille.tuilesListe.values().iterator();
 		while(it.hasNext()) {
 			Tuile t = it.next();
@@ -85,12 +39,13 @@ public class Plongeur extends Aventurier {
 				tuilesDep.remove(t);
 			}
 		}
-
+		//on retire la case sur laquelle se trouve le plongeur
 		tuilesDep.remove(this.getTuile());
 		
 		return tuilesDep;
 	}
 
+	//retourne toutes les cases ou peut se deplacer le plongeur, y comprise les cases coulees
 	@Override
 	public ArrayList<Tuile> getAdjacent(Tuile from, ArrayList<Tuile> listTuile){
 		

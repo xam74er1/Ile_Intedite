@@ -14,6 +14,7 @@ public class Messager extends Aventurier {
         super(Num, nom,pion);
     }
     
+    //le messager peut donner une carte a n'importe qui
     @Override
     public ArrayList<Aventurier> getJoueurTuile(){
 		return Controleur.joueursList;

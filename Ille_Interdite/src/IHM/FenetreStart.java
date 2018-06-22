@@ -99,7 +99,7 @@ public class FenetreStart extends JFrame {
 		ImageIcon imgIcon5S = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/plongeurSelected.png");
 		ImageIcon imgIcon5AS = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/plongeuralreadySelected.png");
 
-		//création de la fenêtre
+		//creation de la fenetre
 		moi = this;
 		this.setTitle("Ile Interdite");
 
@@ -115,7 +115,7 @@ public class FenetreStart extends JFrame {
 		setBackground(new Color(139,69,18));
 
 
-		// création du panel principal
+		// creation du panel principal
 		JPanel pan = new JPanel();
 		pan.setBackground(new Color(139,69,18));
 		pan.setLayout(null);
@@ -124,7 +124,7 @@ public class FenetreStart extends JFrame {
 				ImageIcon imgIconTitre = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/titre.png");
 		Font font = new Font("Serif", Font.BOLD, 25);
 
-		//création d'un boutonGroup pour le choix de joueurs
+		//creation d'un boutonGroup pour le choix de joueurs
 		ButtonGroup choix = new ButtonGroup();
 		JLabel labelJoueurCourrant = new JLabel("");
 		labelJoueurCourrant.setBounds(0, 0, 0, 0);
@@ -146,7 +146,7 @@ public class FenetreStart extends JFrame {
 		labelTitre.setHorizontalAlignment(SwingConstants.CENTER);
 		labelTitre.setIcon(imgIconTitre);
 
-		// création des radios boutons pour le choix des joueurs et ajout dans le bouton group
+		// creation des radios boutons pour le choix des joueurs et ajout dans le bouton group
 		JRadioButton deuxJoueurs = new JRadioButton("2 joueurs");
 
 		JRadioButton troisJoueurs = new JRadioButton("3 joueurs");
@@ -160,7 +160,7 @@ public class FenetreStart extends JFrame {
 
 		deuxJoueurs.setBounds(51, 82, 100, 25);
 		panel.add(deuxJoueurs);
-		// choix par défault
+		// choix par default
 		deuxJoueurs.setSelected(true);
 
 		choix.add(deuxJoueurs);
@@ -173,7 +173,7 @@ public class FenetreStart extends JFrame {
 		panel.add(quatreJoueurs);
 		choix.add(quatreJoueurs);
 		
-		// création d'une combo box avec les difficultés
+		// creation d'une combo box avec les difficultes
 		difficulte = new JComboBox();
 		difficulte.setBounds(357, 116, 90, 22);
 		panel.add(difficulte);
@@ -182,7 +182,7 @@ public class FenetreStart extends JFrame {
 		difficulte.addItem("Elite");
 		difficulte.addItem("Legendaire");
 
-		// création du texte et ajour dans le panel principal
+		// creation du texte et ajour dans le panel principal
 		JLabel labelDifficulte = new JLabel("Choisir la difficulte du jeu :");
 		labelDifficulte.setForeground(Color.WHITE);
 		labelDifficulte.setBounds(181, 119, 154, 16);
@@ -194,7 +194,7 @@ public class FenetreStart extends JFrame {
 		labelChoix.setHorizontalAlignment(SwingConstants.CENTER);
 		labelChoix.setFont(font);
 
-		// choix du scénario
+		// choix du scenario
 		combobox = new JComboBox();
 		combobox.setModel(new DefaultComboBoxModel(new String[] {
 				"Partie normale",
@@ -207,28 +207,28 @@ public class FenetreStart extends JFrame {
 		panel.add(combobox);
 
 
-		//création du bouton pour confirmer
+		//creation du bouton pour confirmer
 		JButton selectChoix = new JButton("Confirmer");
 		selectChoix.setBounds(350, 384, 100, 25);
 		PanelFont.add(selectChoix);
 
-		//création d'un bouton règles
+		//creation d'un bouton règles
 		JButton btnRegle = new JButton("Regles");
 		btnRegle.setBounds(200, 600, 110, 25);
 		PanelFont.add(btnRegle);
 
-		// création d'un bouton commencer
+		// creation d'un bouton commencer
 		JButton btnCommencer = new JButton("Commencer");
 		btnCommencer.setBounds(490, 600, 110, 25);
 		PanelFont.add(btnCommencer);
 
-		// empecher l'utilisateur de cliquer sur "Commencer" si le choix des aventuriers n'as pas été fait
+		// empecher l'utilisateur de cliquer sur "Commencer" si le choix des aventuriers n'as pas ete fait
 		btnCommencer.setEnabled(false);
 
 
 
 
-		// création d'un autre panel qui va contenir les label des aventurier (avec les différentes images)
+		// creation d'un autre panel qui va contenir les label des aventurier (avec les differentes images)
 		JPanel panChoixCarte = new JPanel();
 		panChoixCarte.setBounds(50, 422, 700, 160);
 		PanelFont.add(panChoixCarte);
@@ -248,7 +248,7 @@ public class FenetreStart extends JFrame {
 		panChoixCarte.setLayout(null);
 
 
-		// Initialisation des label avec l'image grisé
+		// Initialisation des label avec l'image grise
 		labelExplo.setIcon(imgIconAS);
 		panChoixCarte.add(labelExplo);
 
@@ -277,13 +277,13 @@ public class FenetreStart extends JFrame {
 		panChoixCarte.add(labelPlon);
 
 
-		// mouseListener permettant de rendre les boutons cliquables et de changer les images en fonction du choix effectué
+		// mouseListener permettant de rendre les boutons cliquables et de changer les images en fonction du choix effectue
 		labelExplo.addMouseListener(new MouseListener(){
 
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				// reset toutes les images à "Séléectionnable" sauf celles déjà sélectionnées
+				// reset toutes les images à "Seleectionnable" sauf celles dejà selectionnees
 				if (termine == false){
 					if (etatBoutonInge){    
 						labelInge.setIcon(imgIcon1);
@@ -306,9 +306,9 @@ public class FenetreStart extends JFrame {
 						labelPlon.setIcon(imgIcon5);
 					}
 
-					// change l'image du label sélectionner pour que cela soit visible par l'utilisateur
+					// change l'image du label selectionner pour que cela soit visible par l'utilisateur
 					// rendre la bouton confirmer cliquable
-					// set la variable choixAven au numéro de l'aventurier selectionné
+					// set la variable choixAven au numero de l'aventurier selectionne
 					if (etatBoutonExplo){
 						labelExplo.setIcon(imgIconS);
 						choixAven = 0;
@@ -673,7 +673,7 @@ public class FenetreStart extends JFrame {
 
 		});
 		
-		// afficher la fenêtre des regles lors du clic sur le bouton regles 
+		// afficher la fenetre des regles lors du clic sur le bouton regles 
 		btnRegle.addActionListener(new ActionListener(){
 
 
@@ -691,8 +691,8 @@ public class FenetreStart extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				
-				// le bouton est set à Confirmer par défault
-				// permet de récupérer le nombre de joueurs sélectionné via les boutons radio et de la rendre non cliquable
+				// le bouton est set à Confirmer par default
+				// permet de recuperer le nombre de joueurs selectionne via les boutons radio et de la rendre non cliquable
 				if ("Confirmer".equals(selectChoix.getText())){
 
 					if (deuxJoueurs.isSelected()) {
@@ -708,12 +708,12 @@ public class FenetreStart extends JFrame {
 					choixCourant = choixCourant+1;
 					
 					//change le texte du bouton avec "Joueur + choixCourant"
-					//choixCourant initalisé à 1
+					//choixCourant initalise à 1
 					labelJoueurCourrant.setText("Joueur " + choixCourant);
 					selectChoix.setText("Valider");
 					selectChoix.setEnabled(false);
 
-					//dégrisage des images
+					//degrisage des images
 					labelExplo.setIcon(imgIcon);
 					labelInge.setIcon(imgIcon1);
 					labelMessa.setIcon(imgIcon2);
@@ -728,11 +728,11 @@ public class FenetreStart extends JFrame {
 					etatBoutonPlon = true;
 
 				} else {
-					//incrémentation de choixCourant et changement de nom du bouton
+					//incrementation de choixCourant et changement de nom du bouton
 					choixCourant = choixCourant+1;
 					labelJoueurCourrant.setText("Joueur " + choixCourant);
 					selectChoix.setText("Valider");
-					//vérifier si le bouton est séléctionner et le rendre grisé si c'est la cas
+					//verifier si le bouton est selectionner et le rendre grise si c'est la cas
 					//ajouter le label(image) dans une liste de joueurs 
 					switch (choixAven) {
 					case 0:
@@ -823,13 +823,13 @@ public class FenetreStart extends JFrame {
 		return nbJoueurs;
 	}
 
-	//création d'un MessageInit qui permettre de donner au controleur les différentes
-	//données choisis par l'utilisateur
+	//creation d'un MessageInit qui permettre de donner au controleur les differentes
+	//donnees choisis par l'utilisateur
 	public MessageInit createMessageInit(){
 		MessageInit m = new MessageInit();
 		m.nbJoueurs = nbJoueurs;
 		
-		// initialisation de la difficulté grace au ComboBox 
+		// initialisation de la difficulte grace au ComboBox 
 		if (difficulte.getSelectedItem() == "Novice"){
 			m.niveauEau =1;
 		} else if  (difficulte.getSelectedItem() == "Normal"){
@@ -842,7 +842,7 @@ public class FenetreStart extends JFrame {
 
 		m.scenario=(String) combobox.getSelectedItem();
 		
-		//création et ajout des aventuriers sélectionnés dans la paramêtre listJoueur du MessageInit
+		//creation et ajout des aventuriers selectionnes dans la parametre listJoueur du MessageInit
 		int j = 0;
 		for (JLabel i : joueurs){
 			Aventurier a;
