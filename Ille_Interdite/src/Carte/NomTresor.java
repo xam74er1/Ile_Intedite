@@ -16,7 +16,7 @@ public enum NomTresor {
 
 	public NomTresor getType() {
 		// TODO - implement NomTresor.getType
-		throw new UnsupportedOperationException();
+		return this;
 	}
 
 	public String getNom() {

@@ -161,7 +161,7 @@ public class IHMV2 extends Observe{
 		PanelHelp.add(btnHelp);
 
 
-		CardPlayer = new PanelFont(0, this, true);
+		CardPlayer = new PanelFont(0,true);
 		CardPlayer.setBackground(new Color(139, 69, 19));
 		CardPlayer.setBounds(114, 31, 250, 597);
 		frame.getContentPane().add(CardPlayer);
@@ -782,6 +782,8 @@ public class IHMV2 extends Observe{
 		panelCartePiochee.setListCarte(listCartes);
 		panelCartePiochee.repaint();
 		panelCartePiochee.setVisible(true);		
+		//CardPlayer.setEnabled(false);
+		//System.out.println(" pan ena = "+CardPlayer.isEnabled());
 	}
 
 	public void setPanelEnabled(boolean b) {
@@ -793,6 +795,9 @@ public class IHMV2 extends Observe{
 		PanelTresor.setEnabled(b);
 		sliderImg.setEnabled(b);
 		CardPlayer.setEnabled(b);
+		//CardPlayer.setVisible(b);
+		
+	//	panelC
 		if(b) {
 			btAsseche.activate();
 			btDeplace.activate();
@@ -848,6 +853,22 @@ public class IHMV2 extends Observe{
 			c.mouseEnable(b);
 		}
 
+	}
+	
+	public void setActionEnabled(boolean b) {
+		if(b) {
+			btAsseche.activate();
+			btDeplace.activate();
+			btDonneCarte.activate();
+			btFinDeTour.activate();
+			btRecupereTresor.activate();
+		}else {
+			btAsseche.desactivate();
+			btDeplace.desactivate();
+			btDonneCarte.desactivate();
+			btFinDeTour.desactivate();
+			btRecupereTresor.desactivate();
+		}
 	}
 
 	public void afficherPlateau() {
