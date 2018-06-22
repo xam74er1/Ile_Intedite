@@ -175,7 +175,7 @@ public class Controleur implements Observateur{
 					}
 				}else {
 
-					ihm.setIndication("Clique sur une case pour vous deplace");
+					ihm.setIndication("Cliquez sur une case pour vous deplacer");
 
 
 					if (grille.getTuile(msg.getLocation()).getNum()==22) {
@@ -206,7 +206,7 @@ public class Controleur implements Observateur{
 				getJoueurTour().removeCarte(carteSpe);
 				carteTresorsDefausse.add(carteSpe);
 				grille.activateAll();
-				ihm.setIndication("Clique sur une case pour l'assecher");
+				ihm.setIndication("Cliquez sur une case pour l'assecher");
 				miseAJourGrille();
 				afficherCartes(getJoueurTour());
 				break;
@@ -282,10 +282,10 @@ public class Controleur implements Observateur{
 			break;
 		case Clique_DonneCarte :
 
-			ihm.setIndication("Clique sur la carte que vous voulez donner ");
+			ihm.setIndication("Cliquez sur la carte que vous voulez donner ");
 			break;
 		case Clique_Deplace_Helico :
-			ihm.setIndication("Clique sur le joueur que vous voulez deplacer");
+			ihm.setIndication("Cliquez sur le joueur que vous voulez deplacer");
 			carteSpe=(Classique) msg.getCarte();
 			ArrayList<Tuile> listCaseAvent = new ArrayList<Tuile>() ;
 			for(Tuile t : Grille.tuilesListe.values()) {
@@ -583,7 +583,7 @@ public class Controleur implements Observateur{
 		while(it.hasNext()) {
 			Aventurier a =it.next();
 			if(!urg && a.getTuile().getStatut()==2) {
-				ihm.setIndication("Deplacez "+a.getNom()+" en urgence");
+				ihm.setIndication("Deplacer "+a.getNom()+" en urgence");
 				grille.activateAll();
 				urgence=a;
 				urg=true;
@@ -634,7 +634,7 @@ public class Controleur implements Observateur{
 
 			givePlayer.getListeCarteJoueur().add(c);
 
-			ihm.setIndication("Carte donne");
+			ihm.setIndication("Carte donnee");
 			givePlayer = null;
 			return true;
 		}else {
@@ -657,7 +657,7 @@ public class Controleur implements Observateur{
 
 			return false;
 		}else {
-			ihm.setIndication("Joueur sur la meme case  : "+str+" \n Entrez le numero du joueur selectionne");
+			ihm.setIndication("Joueurs sur la meme case  : "+str+" \n Entrez le numero du joueur selectionne");
 			return true;
 		}
 	}
