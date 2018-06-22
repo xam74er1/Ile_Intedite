@@ -810,6 +810,9 @@ public class IHMV2 extends Observe{
 			btFinDeTour.desactivate();
 			btRecupereTresor.desactivate();
 		}
+		btnImgPlayerIn1T.setEnabled(b);
+		
+		
 		
 		panelCarte1.setEnabled(b);
 		panelCarte2.setEnabled(b);

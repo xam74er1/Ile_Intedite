@@ -8,11 +8,16 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import ille_intedite.Curseur;
+
 public class FenetreFin extends JFrame{
 	private JLabel labelFin;
 	public FenetreFin(MessageFinPartie msg){
+		//Si le curseur jouais la musique de fin 
+		Curseur.stopSound();
 	if (msg.isVictoire()) {
 			labelFin = new JLabel("Vous avez gangé");
+			PlaySound.play(System.getProperty("user.dir")+"\\src\\"+"sound\\YEAAAAH.wav");
 			Font font = new Font("Serif", Font.BOLD, 25);
 			labelFin.setFont(font);
 			} else {
@@ -20,6 +25,16 @@ public class FenetreFin extends JFrame{
 			Font font = new Font("Serif", Font.BOLD, 25);
 			labelFin.setFont(font);
 		}
+	
+	if(msg.getTypeDefaite().equalsIgnoreCase("L'ile a sombre completement..")) {
+		
+	}else if(msg.getTypeDefaite().equalsIgnoreCase("L'heliport a coule..")) {
+		
+	}else if(msg.getTypeDefaite().equalsIgnoreCase("Un des aventuriers s'est noye..")) {
+		
+	};
+
+	
 		JLabel label = new JLabel(msg.getTypeDefaite());
 		this.setTitle("Fin Ile Interdite");
 
