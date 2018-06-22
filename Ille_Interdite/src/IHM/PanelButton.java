@@ -50,6 +50,8 @@ public class PanelButton extends JPanel{
 			g.setColor(new Color(0,0,0,128));
 			g.fillRect(0, 0,this.getWidth(),this.getHeight());
 		}
+		repaint();
+		revalidate();
 		
 	}
 	

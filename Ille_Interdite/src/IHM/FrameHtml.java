@@ -54,15 +54,18 @@ public class FrameHtml extends JFrame {
 		System.out.println(System.getProperty("user.dir"));
 		JScrollPane page1 = new JScrollPane( new htmlPan(System.getProperty("user.dir")+"\\src\\"+"images\\Help\\page1.html",System.getProperty("user.dir")+"\\src\\"+"images\\Help\\Fond2.jpg"));
 		page1.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
+		page1.setAutoscrolls(false);
 		
 		Main.add(page1, "page1");
 	
 		JScrollPane page2 =new JScrollPane( new htmlPan(System.getProperty("user.dir")+"\\src\\"+"images\\Help\\page2.html",System.getProperty("user.dir")+"\\src\\"+"images\\Help\\Fond2.jpg"));
 		page2.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
+		page2.setAutoscrolls(false);
 		Main.add(page2, "page2");
 
 		JScrollPane page3 = new JScrollPane(new htmlPan(System.getProperty("user.dir")+"\\src\\"+"images\\Help\\page3.html",System.getProperty("user.dir")+"\\src\\"+"images\\Help\\Fond2.jpg"));
-	page3.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
+		page3.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
+		page3.setAutoscrolls(false);
 		Main.add(page3, "page3");
 
 		JPanel panel = new JPanel();
