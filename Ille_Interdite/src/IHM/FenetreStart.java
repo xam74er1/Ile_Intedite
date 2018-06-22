@@ -843,36 +843,34 @@ public class FenetreStart extends JFrame {
 		m.scenario=(String) combobox.getSelectedItem();
 		
 		//creation et ajout des aventuriers selectionnes dans la parametre listJoueur du MessageInit
-		int j = 0;
 		for (JLabel i : joueurs){
 			Aventurier a;
 			i.setVisible(true);
 			if (i == labelExplo){
-				a = new Explorateur(j,"Explorateur",Pion.VERT);
+				a = new Explorateur(5,"Explorateur",Pion.VERT);
 				m.listJoueurs.add(a);
 
 			} else if (i == labelInge) {
-				a= new Ingenieur(j,"Ingenieur",Pion.ROUGE);
+				a= new Ingenieur(0,"Ingenieur",Pion.ROUGE);
 				m.listJoueurs.add(a);
 
 			} else if (i == labelMessa){
-				a = new Messager(j,"Messager",Pion.ORANGE);
+				a = new Messager(3,"Messager",Pion.GRIS);
 				m.listJoueurs.add(a);
 
 			} else if (i == labelNavi){
-				a = new Navigateur(j,"Navigateur",Pion.JAUNE);
+				a = new Navigateur(2,"Navigateur",Pion.JAUNE);
 				m.listJoueurs.add(a);
 
 			} else if (i == labelPilo){
-				a = new Aviateur(j,"Aviateur",Pion.BLEU);
+				a = new Aviateur(4,"Aviateur",Pion.BLEU);
 				m.listJoueurs.add(a);
 
 			} else if (i == labelPlon){
-				a = new Plongeur(j,"Plongeur",Pion.VIOLET);
+				a = new Plongeur(1,"Plongeur",Pion.NOIR);
 				m.listJoueurs.add(a);
 
 			}
-			j = j +1;
 		}
 
 		return m;
