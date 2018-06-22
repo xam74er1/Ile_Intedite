@@ -289,7 +289,6 @@ public class Controleur implements Observateur{
 				}
 			}else {
 				carteSpe=(Classique) msg.getCarte();
-				System.out.println(" num joeur = "+msg.getNumJoueur());
 				if(msg.getNumJoueur()!= -1) {
 					memoireAventuire = joueursList.get(msg.getNumJoueur());
 				}
@@ -328,13 +327,10 @@ public class Controleur implements Observateur{
 					afficherPiocheInondation();
 				}
 			}else {
-				ihm.setIndication("Cliquez sur le joueur que vous voulez deplacer");
 				carteSpe=(Classique) msg.getCarte();
-				System.out.println(" num "+msg.getNumJoueur());
 				if(msg.getNumJoueur() != -1) {
 					memoireAventuire = joueursList.get(msg.getNumJoueur());
 				}else {
-					System.out.println("Le joeur est =  -1 ");
 				}
 				ArrayList<Tuile> listCaseAvent = new ArrayList<Tuile>() ;
 				for(Tuile t : Grille.tuilesListe.values()) {
@@ -453,13 +449,14 @@ public class Controleur implements Observateur{
 			ihm.afficherPlateau();
 			miseAJourGrille();
 			finTour=false;
+			verifierFinDePartie();
 		}
 	}
 
 	private void afficherPiocheFinTour() {
 		finTour=true;
 		listPioche=new ArrayList();
-
+		ihm.setIndication("Voici les cartes tresor que vous avez pioche");
 		melanger(carteTresorDeck);
 		listPioche.add(piocherClassique(getJoueurTour()));
 		listPioche.add(piocherClassique(getJoueurTour()));
@@ -472,13 +469,11 @@ public class Controleur implements Observateur{
 			lastAction = TypeMessage.Defausse_Joueur;
 			ihm.afficherPioche(getJoueurTour().getListeCarteJoueur(),false);
 			ihm.setIndication("Vous avez " + (getJoueurTour().getListeCarteJoueur().size()-5) + " cartes en trop dans votre main, choisir les cartes a defausser :");
-
-
 		}
 	}
 
 	private void afficherPiocheInondation(){
-
+		ihm.setIndication("Voici les cartes inondation que vous avez pioche");
 		listPioche=new ArrayList();
 		for (int i=0;i<curseur.getNbCartesInond();i++) {
 			listPioche.add(piocherInondation());
@@ -610,6 +605,10 @@ public class Controleur implements Observateur{
 			scenario_defaite_curseur();
 		}else if(sc == "D\u00E9faite heliport") {
 			scenario_defaite_heliport();
+		}else if(sc == "D\u00E9faite noyade") {
+			scenario_defaite_noyade();
+		}else if(sc == "D\u00E9faite tr\u00E9sor") {
+			scenario_defaite_tresor();
 		}
 
 		ihm.miseAJourPlayer(0," ( "+getJoueurTour().getNom()+" )", getJoueurTour().getColor());
@@ -861,19 +860,19 @@ public class Controleur implements Observateur{
 		//Condition(s) defaite
 		if(noyade) {
 			msg.setVictoire(false);
-			msg.setTypeDefaite("Un des aventuriers s'est noye..");
+			msg.setTypeDefaite("Un des aventuriers s'est noy\u00E9..");
 			new FenetreFin(msg);
 		}
 
 		if(helicoCoule) {
 			msg.setVictoire(false);
-			msg.setTypeDefaite("L'heliport a coule..");
+			msg.setTypeDefaite("L'h\u00E9liport a coul\u00E9..");
 			new FenetreFin(msg);												//Heliport coule
 		}
 
 		if(curseur.getNiv()==10) {
 			msg.setVictoire(false);
-			msg.setTypeDefaite("L'ile a sombre completement..");
+			msg.setTypeDefaite("L'ile a sombr\u00E9 compl\u00E8tement..");
 			new FenetreFin(msg);												//Curseur au niveau maximum
 		}
 
@@ -911,7 +910,7 @@ public class Controleur implements Observateur{
 
 		if(temple==2||caverne==2||palais==2||jardin==2) {
 
-			msg.setTypeDefaite("Tous les tresors ont coules..");
+			msg.setTypeDefaite("Un des tr\u00E9sors coul\u00E9..");
 			new FenetreFin(msg);												//Deux cases de recuperation de tresor coulees
 		}
 
@@ -975,9 +974,9 @@ public class Controleur implements Observateur{
 
 		joueursList.removeAll(joueursList);
 		joueursList.add(new Aviateur(0,"Aviateur",Pion.BLEU));
-		joueursList.add(new Ingenieur(1,"Aviateur",Pion.ROUGE));
-		joueursList.add(new Plongeur(2,"Aviateur",Pion.NOIR));
-		joueursList.add(new Messager(3,"Aviateur",Pion.GRIS));
+		joueursList.add(new Ingenieur(1,"Ingenieur",Pion.ROUGE));
+		joueursList.add(new Plongeur(2,"Plongeur",Pion.NOIR));
+		joueursList.add(new Messager(3,"Messager",Pion.GRIS));
 
 		for(Tuile t : Grille.tuilesListe.values()) {
 			if(t.getNum()==24) {
@@ -1032,9 +1031,37 @@ public class Controleur implements Observateur{
 				inondationDeck.add(new CarteInondation(t.getNom(),t));
 			}
 		}
+	}
+	
+	private void scenario_defaite_noyade() {
+		curseur.setNiv(8);
+		ihm.afficherNivCurseur(8);
+		inondationDeck.removeAll(inondationDeck);
+		for(Tuile t :Grille.tuilesListe.values()){
+			if(t.getNum()!=-1 && t.getNum()!=24) {
+				inondationDeck.add(new CarteInondation(t.getNom(),t));
+			}
+		}
+		carteTresorDeck.removeAll(carteTresorDeck);
+		tresorsRecuperes.add(NomTresor.CaliceOnde);
+		tresorsRecuperes.add(NomTresor.PierreSacree);
+		tresorsRecuperes.add(NomTresor.StatueZephir);
+		tresorsRecuperes.add(NomTresor.CristalArdent);
+		ihm.setTresorEnabled(NomTresor.CaliceOnde);
+		ihm.setTresorEnabled(NomTresor.PierreSacree);
+		ihm.setTresorEnabled(NomTresor.StatueZephir);
+		ihm.setTresorEnabled(NomTresor.CristalArdent);
+	}
+	
+	private void scenario_defaite_tresor() {
+		inondationDeck.removeAll(inondationDeck);
+		for(Tuile t :Grille.tuilesListe.values()){
+			if(t.getNum()!=-1 && t.getNum()/100==3 || t.getNum()==1) {
+				inondationDeck.add(new CarteInondation(t.getNom(),t));
+			}
+		}
 		
-		
-		
+		carteTresorDeck.removeAll(carteTresorDeck);
 	}
 
 }

@@ -793,7 +793,7 @@ public class FenetreStart extends JFrame {
 							m.listJoueurs.add(a);
 
 						} else if (i == labelMessa){
-							a = new Messager(j,"Messager",Pion.ORANGE);
+							a = new Messager(j,"Messager",Pion.GRIS);
 							m.listJoueurs.add(a);
 
 						} else if (i == labelNavi){
@@ -805,7 +805,7 @@ public class FenetreStart extends JFrame {
 							m.listJoueurs.add(a);
 
 						} else if (i == labelPlon){
-							a = new Plongeur(j,"Plongeur",Pion.VIOLET);
+							a = new Plongeur(j,"Plongeur",Pion.NOIR);
 							m.listJoueurs.add(a);
 
 						}

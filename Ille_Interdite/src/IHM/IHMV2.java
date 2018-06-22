@@ -76,20 +76,20 @@ public class IHMV2 extends Observe{
 	JLabel lbIconJoueur;
 	JButton btnImgPlayerIn1T,btnImgPlayerIn2T,btnImgPlayerIn3T,btnHelp;
 	private PanelCarte panelCarte3T2,
-	 panelCarte3T1,
-	 panelCarte3T3,
-	 panelCarte3T4,
-	 panelCarte3T5,
-	 panelCarte2T1,
-	 panelCarte2T2,
-	 panelCarte2T3,
-	 panelCarte2T4,
-	 panelCarte2T5,
-	 panelCarte1T1,
-	 panelCarte1T2,
-	 panelCarte1T3,
-	 panelCarte1T4,
-	 panelCarte1T5;
+	panelCarte3T1,
+	panelCarte3T3,
+	panelCarte3T4,
+	panelCarte3T5,
+	panelCarte2T1,
+	panelCarte2T2,
+	panelCarte2T3,
+	panelCarte2T4,
+	panelCarte2T5,
+	panelCarte1T1,
+	panelCarte1T2,
+	panelCarte1T3,
+	panelCarte1T4,
+	panelCarte1T5;
 	private PanelCarte panelCarte1,panelCarte2,panelCarte3,panelCarte4,panelCarte5;
 
 	/**
@@ -340,7 +340,7 @@ public class IHMV2 extends Observe{
 		lbImgTresor4.setIcon(imgT4);
 		lbImgTresor4.setEnabled(false);
 
-		
+
 		panelCarte3T1 = new PanelCarte(0,this,true);
 		panelCarte3T1.setBounds(185, 101, 25, 35);
 		PanelEast.add(panelCarte3T1);
@@ -362,7 +362,7 @@ public class IHMV2 extends Observe{
 		listeCartes3T.put(3, (PanelCarte) panelCarte3T4);
 
 		panelCarte3T5 = new PanelCarte(4,this,true);
-		
+
 		panelCarte3T5.setBounds(208, 197, 25, 35);
 		PanelEast.add(panelCarte3T5);
 		listeCartes3T.put(4, (PanelCarte) panelCarte3T5);
@@ -438,7 +438,6 @@ public class IHMV2 extends Observe{
 
 		lblJoeurN = new JLabel();
 
-		System.out.println("Fin IHM generation");
 		frame.setVisible(true);
 		frame.setResizable(false);
 
@@ -492,58 +491,58 @@ public class IHMV2 extends Observe{
 			}
 		}
 
-		
+
 		//------Desactivation des bouton non necessaire en fonction du nombre de joeur ------------
 		btnImgPlayerIn2T.setVisible(true);
 		btnImgPlayerIn2T.setEnabled(true);	
 		if(Controleur.getNbJoueur()<3) {
-			
+
 			btnImgPlayerIn2T.setEnabled(false);	
-			
-			
-			
+
+
+
 			panelCarte2T1.setEnabled(false);
 			panelCarte2T1.setVisible(false);
-			
+
 			panelCarte2T2.setEnabled(false);
 			panelCarte2T2.setVisible(false);
-			
+
 			panelCarte2T3.setEnabled(false);
 			panelCarte2T3.setVisible(false);
-			
+
 			panelCarte2T4.setEnabled(false);
 			panelCarte2T4.setVisible(false);
-			
+
 			panelCarte2T5.setEnabled(false);
 			panelCarte2T5.setVisible(false);
-			
-			
-			
+
+
+
 		}
-		
+
 		if(Controleur.getNbJoueur()<4) {
 			btnImgPlayerIn3T.setEnabled(false);	
-			
+
 			btnImgPlayerIn3T.setEnabled(false);	
 			panelCarte3T1.setEnabled(false);
 			panelCarte3T1.setVisible(false);
-			
+
 			panelCarte3T2.setEnabled(false);
 			panelCarte3T2.setVisible(false);
-			
+
 			panelCarte3T3.setEnabled(false);
 			panelCarte3T3.setVisible(false);
-			
+
 			panelCarte3T4.setEnabled(false);
 			panelCarte3T4.setVisible(false);
-			
+
 			panelCarte3T5.setEnabled(false);
 			panelCarte3T5.setVisible(false);
-			
-			
+
+
 		}
-		
-		
+
+
 		Plateau.revalidate();
 		//Fin fill plateau
 
@@ -604,7 +603,7 @@ public class IHMV2 extends Observe{
 
 	public void setCartePanel(int num, Classique c,int numJoeur) {
 		PanelCarte p = listCartes.get(num);
-		
+
 		p.setNumJoueur(numJoeur);
 		p.setCarte(c);
 		p.repaint();
@@ -624,19 +623,16 @@ public class IHMV2 extends Observe{
 
 					notifierObservateur(m);
 				}else {
-					System.out.println("name is null"+(bt==null));
 				}
 			}
 		};
 	}
 
 	public void rool(Aventurier a  , ArrayList<Aventurier> listAvent) {
-		System.out.println("rooll");
 		int i = 1;
 		int k = listAvent.indexOf(a);
 		Iterator<PanelCarte> it;
 		int nbr,s ;
-		//System.out.println(" principal = "+a.getNom()+" k"+k);
 		String path = a.getNom().toLowerCase();
 
 		i++;
@@ -657,28 +653,26 @@ public class IHMV2 extends Observe{
 		//---------------Joeur qui joeur dans 1T ------------------------
 		k %=listAvent.size();
 		a = listAvent.get(k);
-		
+
 		path = a.getNom().toLowerCase();
-		
+
 		s = a.getListeCarteJoueur().size();
-	
+
 		it = listeCartes1T.values().iterator();
-		
-		System.out.println(" s = "+s);
-		 for(int j = 0;it.hasNext();j++) {
-			 PanelCarte p =it.next(); 
-			 if(j<s) {
-			 
-			 p.setCarte(a.getListeCarteJoueur().get(j));
-			// System.out.println("conard");
-			 p.setNumJoueur(a.getNum());
-			
-			 }else {
-				 p.setCarte(null);
-			 }
-			 
-			 p.repaint();
-		 }
+
+		for(int j = 0;it.hasNext();j++) {
+			PanelCarte p =it.next(); 
+			if(j<s) {
+
+				p.setCarte(a.getListeCarteJoueur().get(j));
+				p.setNumJoueur(a.getNum());
+
+			}else {
+				p.setCarte(null);
+			}
+
+			p.repaint();
+		}
 
 		i++;
 
@@ -690,28 +684,27 @@ public class IHMV2 extends Observe{
 		btnImgPlayerIn1T.setName(a.getNum()+"");
 
 		PanelPlayerIn1T.repaint();
-		//System.out.println(" 1 = "+a.getNom()+" k"+k);
-		
+
 		//---------------Joeur qui joeur dans 2T ------------------------
 		if(i<=listAvent.size()) {
 			k++;
 			k %= listAvent.size();
 			a = listAvent.get(k);
 			path = a.getNom().toLowerCase();
-			
-			
+
+
 			s = a.getListeCarteJoueur().size();
-			
+
 			it = listeCartes2T.values().iterator();
-			
-			 for(int j = 0;j<s&&it.hasNext();j++) {
-				
-				 PanelCarte p =it.next(); 
-				 p.setCarte(a.getListeCarteJoueur().get(j));
-				 p.setNumJoueur(a.getNum());
-				 p.repaint();
-			 }
-			
+
+			for(int j = 0;j<s&&it.hasNext();j++) {
+
+				PanelCarte p =it.next(); 
+				p.setCarte(a.getListeCarteJoueur().get(j));
+				p.setNumJoueur(a.getNum());
+				p.repaint();
+			}
+
 			i++;
 
 			imgPlayerIn2T = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/persos/"+path+".png");
@@ -728,21 +721,21 @@ public class IHMV2 extends Observe{
 			k++;
 			k %= listAvent.size();
 			a = listAvent.get(k);
-			
+
 			s = a.getListeCarteJoueur().size();
-			
+
 			s = a.getListeCarteJoueur().size();
-			
+
 			it = listeCartes3T.values().iterator();
-			
-			 for(int j = 0;j<s&&it.hasNext();j++) {
-				
-				 PanelCarte p =it.next(); 
-				 p.setCarte(a.getListeCarteJoueur().get(j));
-				 p.setNumJoueur(a.getNum());
-				 p.repaint();
-			 }
-			
+
+			for(int j = 0;j<s&&it.hasNext();j++) {
+
+				PanelCarte p =it.next(); 
+				p.setCarte(a.getListeCarteJoueur().get(j));
+				p.setNumJoueur(a.getNum());
+				p.repaint();
+			}
+
 			path = a.getNom().toLowerCase();
 			i++;
 
@@ -754,7 +747,6 @@ public class IHMV2 extends Observe{
 			btnImgPlayerIn3T.setIcon(imgP3T);
 			btnImgPlayerIn3T.setName(a.getNum()+"");
 			PanelPlayerIn3T.repaint();
-			//	System.out.println(" 3 = "+a.getNom()+" k"+k);
 		}
 
 
@@ -777,8 +769,6 @@ public class IHMV2 extends Observe{
 		panelCartePiochee.setListCarte(listCartes);
 		panelCartePiochee.repaint();
 		panelCartePiochee.setVisible(true);		
-		//CardPlayer.setEnabled(false);
-		//System.out.println(" pan ena = "+CardPlayer.isEnabled());
 	}
 
 	public void setPanelEnabled(boolean b) {
@@ -791,8 +781,8 @@ public class IHMV2 extends Observe{
 		sliderImg.setEnabled(b);
 		CardPlayer.setEnabled(b);
 		//CardPlayer.setVisible(b);
-		
-	//	panelC
+
+		//	panelC
 		if(b) {
 			btAsseche.activate();
 			btDeplace.activate();
@@ -804,8 +794,8 @@ public class IHMV2 extends Observe{
 			panelCarte3.activate();
 			panelCarte4.activate();
 			panelCarte5.activate();
-			
-			
+
+
 		}else {
 			btAsseche.desactivate();
 			btDeplace.desactivate();
@@ -819,9 +809,9 @@ public class IHMV2 extends Observe{
 			panelCarte5.desactivate();
 		}
 		btnImgPlayerIn1T.setEnabled(b);
-		
-		
-		
+
+
+
 		panelCarte1.setEnabled(b);
 		panelCarte2.setEnabled(b);
 		panelCarte3.setEnabled(b);
@@ -855,13 +845,13 @@ public class IHMV2 extends Observe{
 		for (JPanel j : listPan.values()) {
 			j.setEnabled(b);
 		}
-		
+
 		for(CasePlateau c : listPan.values()) {
 			c.mouseEnable(b);
 		}
 
 	}
-	
+
 	public void setActionEnabled(boolean b) {
 		if(b) {
 			btAsseche.activate();

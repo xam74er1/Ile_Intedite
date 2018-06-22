@@ -33,9 +33,6 @@ public class FenetreFin extends JFrame{
 			}
 		}
 
-
-
-
 		JLabel label = new JLabel(msg.getTypeDefaite());
 		this.setTitle("Fin Ile Interdite");
 
