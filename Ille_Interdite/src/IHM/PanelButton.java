@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 import ille_intedite.Message;
 import ille_intedite.Observe;
 import ille_intedite.TypeMessage;
-
+//panel des boutons d'action
 public class PanelButton extends JPanel{
 
 	private Observe o;

@@ -51,7 +51,7 @@ public class Tuile {
     	setStatut(0);
     }
 
-    private void setStatut(int i) {
+    public void setStatut(int i) {
         // TODO - implement Tuile.setStatut
         statut = i;
     }

@@ -16,6 +16,7 @@ public class Aviateur extends Aventurier {
 		super(Num, nom,pion);
 	}
 
+	//deplacement de l'aviateur
 	@Override
 	public ArrayList<Tuile> getAdjacent(Tuile from, ArrayList<Tuile> listTuile){
 		tFrom=from;
