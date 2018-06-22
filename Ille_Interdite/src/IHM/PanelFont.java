@@ -69,9 +69,9 @@ public class PanelFont extends JPanel {
 		
 		if (num == 1) {
 			try {
-				path = System.getProperty("user.dir")+"\\src\\"+"images\\Art\\PanelStartv2.png";
+				path = System.getProperty("user.dir")+"\\src\\"+"images\\Art\\StartPanelV3.png";
 			}catch(Exception e){
-				path = System.getProperty("user.dir")+"\\src\\"+"images\\Art\\PanelStartv2.png";
+				path = System.getProperty("user.dir")+"\\src\\"+"images\\Art\\StartPanelV3.png";
 				e.printStackTrace();
 			}
 
@@ -82,13 +82,15 @@ public class PanelFont extends JPanel {
 				e.printStackTrace();
 			}
 			try {
-				path = System.getProperty("user.dir")+"\\src\\"+"images\\Art\\PanelStartv2.png";
+				path = System.getProperty("user.dir")+"\\src\\"+"images\\Art\\StartPanelV3.png";
 			}catch(Exception e){
-				path = System.getProperty("user.dir")+"\\src\\"+"images\\Art\\PanelStartv2.png";
+				path = System.getProperty("user.dir")+"\\src\\"+"images\\Art\\StartPanelV3.png";
 				e.printStackTrace();
 				repaint();
 				revalidate();
 			}
+			repaint();
+			revalidate();
 		}
 		
 		if (num == 2) {
@@ -113,6 +115,8 @@ public class PanelFont extends JPanel {
 				repaint();
 				revalidate();
 			}
+			repaint();
+			revalidate();
 		}
 		
 

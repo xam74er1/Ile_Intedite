@@ -107,6 +107,10 @@ public class Tuile {
         AventuriesList.remove(joueur);
     }
     
+    public void removeAllAventurier() {
+    	AventuriesList.removeAll(AventuriesList);
+    }
+    
     public ArrayList<Aventurier> getAventurie() {
     	return AventuriesList;
     }

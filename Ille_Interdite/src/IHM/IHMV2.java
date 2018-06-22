@@ -340,11 +340,6 @@ public class IHMV2 extends Observe{
 		lbImgTresor4.setIcon(imgT4);
 		lbImgTresor4.setEnabled(false);
 
-		JPanel panel = new JPanel();
-		panel.setBackground(new Color(105, 105, 105));
-		panel.setBounds(0, 84, 279, 10);
-		PanelEast.add(panel);
-
 		
 		panelCarte3T1 = new PanelCarte(0,this,true);
 		panelCarte3T1.setBounds(185, 101, 25, 35);

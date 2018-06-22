@@ -16,12 +16,12 @@ public class FenetreFin extends JFrame{
 		//Si le curseur jouais la musique de fin 
 		Curseur.stopSound();
 		if (msg.isVictoire()) {
-			labelFin = new JLabel("Vous avez gangé");
+			labelFin = new JLabel("Vous avez gagné !");
 			PlaySound.play(System.getProperty("user.dir")+"\\src\\"+"sound\\YEAAAAH.wav");
 			Font font = new Font("Serif", Font.BOLD, 25);
 			labelFin.setFont(font);
 		} else {
-			labelFin = new JLabel("Vous avez perdu");
+			labelFin = new JLabel("Vous avez perdu...");
 			Font font = new Font("Serif", Font.BOLD, 25);
 			labelFin.setFont(font);
 			if(msg.getTypeDefaite().equalsIgnoreCase("L'ile a sombre completement..")) {

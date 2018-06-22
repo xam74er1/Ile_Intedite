@@ -603,8 +603,10 @@ public class Controleur implements Observateur{
 			piocherClassique(av);
 		}
 
+
 	//	scenario_victoire();
 		//miseAJourGrille();
+
 
 		ihm.miseAJourPlayer(0," ( "+getJoueurTour().getNom()+" )", getJoueurTour().getColor());
 
@@ -812,11 +814,9 @@ public class Controleur implements Observateur{
 				ihm.setCartePanel(i, null,a.getNum());
 			}
 		}
-
 	}
 
 	public boolean recupererTresor() {
-		// 
 
 		Aventurier a = getJoueurTour();
 
@@ -832,11 +832,19 @@ public class Controleur implements Observateur{
 			if(!dejaPresent) {
 				tresorsRecuperes.add(t);
 				ihm.setTresorEnabled(t.getType());
-				for(int i=0;i<a.getListeCarteJoueur().size(); i++) {
-					if(a.getListeCarteJoueur().get(i).getNom()==t.getType().getNom()) {
-						a.getListeCarteJoueur().remove(i);
+				ArrayList<Carte> listCarte = new ArrayList<Carte>();
+				for(Carte c : a.getListeCarteJoueur()) {
+					if(c instanceof CarteTresor) {
+						CarteTresor cT=(CarteTresor) c;
+						if(cT.getType()==t.getType()) {
+							listCarte.add(cT);
+						}
 					}
 				}
+				for(Carte c : listCarte) {
+					a.removeCarte((Classique) c);
+				}
+				afficherCartes(a);
 			}
 			return true;
 		}else {
@@ -961,6 +969,11 @@ public class Controleur implements Observateur{
 	}
 
 	private void scenario_victoire() {
+
+		for(Tuile t : Grille.tuilesListe.values()) {
+			t.removeAllAventurier();
+		}
+
 		joueursList.removeAll(joueursList);
 		joueursList.add(new Aviateur(0,"Aviateur",Pion.BLEU));
 		joueursList.add(new Ingenieur(1,"Aviateur",Pion.ROUGE));
@@ -987,6 +1000,11 @@ public class Controleur implements Observateur{
 		tresorsRecuperes.add(NomTresor.CaliceOnde);
 		tresorsRecuperes.add(NomTresor.PierreSacree);
 		tresorsRecuperes.add(NomTresor.StatueZephir);
+
+		ihm.setTresorEnabled(NomTresor.CaliceOnde);
+		ihm.setTresorEnabled(NomTresor.PierreSacree);
+		ihm.setTresorEnabled(NomTresor.StatueZephir);
+
 
 
 		afficherCartes(getJoueurTour());
