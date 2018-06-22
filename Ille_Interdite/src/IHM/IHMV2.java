@@ -440,7 +440,6 @@ public class IHMV2 extends Observe{
 
 		lblJoeurN = new JLabel();
 
-		System.out.println("Fin IHM generation");
 		frame.setVisible(true);
 		frame.setResizable(false);
 
@@ -456,7 +455,7 @@ public class IHMV2 extends Observe{
 		break;
 		case PierreSacree:lbImgTresor3.setEnabled(true);
 		break;
-		case StatueZephir:lbImgTresor4.setEnabled(true);
+		case StatueZephyr:lbImgTresor4.setEnabled(true);
 		break;
 		}
 	}
@@ -627,21 +626,21 @@ public class IHMV2 extends Observe{
 
 					notifierObservateur(m);
 				}else {
-					System.out.println("name is null"+(bt==null));
 				}
 			}
 		};
 	}
 
+
 	
 	//Mise as jour des carte sur le cote , des joeur qui ne joue pas 
 	public void miseAsJourJoeurCotte(Aventurier a  , ArrayList<Aventurier> listAvent) {
 		
+
 		int i = 1;
 		int k = listAvent.indexOf(a);
 		Iterator<PanelCarte> it;
 		int nbr,s ;
-		//System.out.println(" principal = "+a.getNom()+" k"+k);
 		String path = a.getNom().toLowerCase();
 
 		i++;
@@ -669,7 +668,7 @@ public class IHMV2 extends Observe{
 
 		it = listeCartes1T.values().iterator();
 
-		System.out.println(" s = "+s);
+
 		for(int j = 0;it.hasNext();j++) {
 			PanelCarte p =it.next(); 
 			if(j<s) {
@@ -688,6 +687,7 @@ public class IHMV2 extends Observe{
 				p.setCarte(null);
 			}
  
+
 			p.repaint();
 		}
 
@@ -701,7 +701,7 @@ public class IHMV2 extends Observe{
 		btnImgPlayerIn1T.setName(a.getNum()+"");
 
 		PanelPlayerIn1T.repaint();
-		//System.out.println(" 1 = "+a.getNom()+" k"+k);
+
 
 		//---------------Joeur qui joeur dans 2T ------------------------
 		if(i<=listAvent.size()) {
@@ -714,6 +714,7 @@ public class IHMV2 extends Observe{
 			s = a.getListeCarteJoueur().size();
 
 			it = listeCartes2T.values().iterator();
+
 
 			for(int j = 0;it.hasNext();j++) {
 				PanelCarte p =it.next(); 
@@ -735,7 +736,6 @@ public class IHMV2 extends Observe{
 
 				p.repaint();
 			}
-
 
 			i++;
 
@@ -759,6 +759,7 @@ public class IHMV2 extends Observe{
 			s = a.getListeCarteJoueur().size();
 
 			it = listeCartes3T.values().iterator();
+
 
 			for(int j = 0;it.hasNext();j++) {
 				PanelCarte p =it.next(); 
@@ -793,9 +794,7 @@ public class IHMV2 extends Observe{
 			btnImgPlayerIn3T.setIcon(imgP3T);
 			btnImgPlayerIn3T.setName(a.getNum()+"");
 			PanelPlayerIn3T.repaint();
-			//	System.out.println(" 3 = "+a.getNom()+" k"+k);
 		}
-
 
 	}
 
@@ -816,8 +815,6 @@ public class IHMV2 extends Observe{
 		panelCartePiochee.setListCarte(listCartes);
 		panelCartePiochee.repaint();
 		panelCartePiochee.setVisible(true);		
-		//CardPlayer.setEnabled(false);
-		//System.out.println(" pan ena = "+CardPlayer.isEnabled());
 	}
 
 	public void setPanelEnabled(boolean b) {
