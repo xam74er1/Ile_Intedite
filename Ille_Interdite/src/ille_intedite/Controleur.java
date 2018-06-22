@@ -8,9 +8,11 @@ import Carte.CarteTresor;
 import Carte.CarteSacSable;
 import Carte.MonteeEaux;
 import Carte.NomTresor;
+import IHM.FenetreFin;
 import IHM.FenetreStart;
 //import IHM.IHM;
 import IHM.IHMV2;
+import IHM.MessageFinPartie;
 import IHM.MessageInit;
 import IHM.PlaySound;
 import ille_intedite.Aventurie.Aventurier;
@@ -241,7 +243,6 @@ public class Controleur implements Observateur{
 				//-------------FIN DES CLIQUE TUILE ----------------------------
 			}
 
-
 			break;
 
 		case Clique_Fin_Tour :
@@ -405,6 +406,7 @@ public class Controleur implements Observateur{
 		melanger(carteTresorDeck);
 		listPioche.add(piocherClassique(getJoueurTour()));
 		listPioche.add(piocherClassique(getJoueurTour()));
+		System.out.println(listPioche.size());
 		ihm.afficherPioche(listPioche);
 	}
 	
@@ -461,7 +463,7 @@ public class Controleur implements Observateur{
 
 		carteTresorDeck.add(new MonteeEaux("1MonteeDesEaux"));
 		carteTresorDeck.add(new MonteeEaux("2MonteeDesEaux"));
-		//carteTresorDeck.add(new MonteeEaux("3Monte des EAU"));
+		//carteTresorDeck.add(new MonteeEaux("3MonteeDesEaux"));
 
 		carteTresorDeck.add(new CarteHelicoptere("1Helicoptere"));
 		carteTresorDeck.add(new CarteHelicoptere("2Helicoptere"));
@@ -550,6 +552,9 @@ public class Controleur implements Observateur{
 		if (tuilesDep.size()==0 && urg) {
 			noyade=true;
 			verifierFinDePartie();
+				
+			
+			
 		}
 
 		ihm.afficherDep(tuilesDep);
@@ -666,23 +671,6 @@ public class Controleur implements Observateur{
 
 	}
 
-	@Deprecated
-	public void afficherListeCarteJoueur() {
-		ihm.setIndication("Main du joueur : " + getJoueurTour().getNom());
-		int i = 1;
-		for (Carte c : getJoueurTour().getListeCarteJoueur()){
-			ihm.setIndication(i +" : " + c.getNom());
-			i = i+1;
-		}
-
-		if (getJoueurTour().getListeCarteJoueur().size() > 5) {
-			lastAction = TypeMessage.Defausse_Joueur;
-			ihm.setIndication("Vous avez " + (getJoueurTour().getListeCarteJoueur().size()-5) + " cartes en trop dans votre main, choisir les cartes ÃÂ  dÃÂ©fausser :");
-		}
-
-
-	}
-
 	private void defausser(String str, Aventurier a) {
 		a.removeCarte(a.getCarte(Integer.parseInt(str)));
 	}
@@ -791,19 +779,25 @@ public class Controleur implements Observateur{
 		}
 	}
 
-	public int verifierFinDePartie() {
-
+	public void verifierFinDePartie() {
+		MessageFinPartie msg = new MessageFinPartie();
 		//Condition(s) defaite
 		if(noyade) {
-			return -1;
-		}
+			msg.setVictoire(false);
+			msg.setTypeDefaite("Un des aventuriers s'est noye..");
+			new FenetreFin(msg);
+					}
 
 		if(helicoCoule) {
-			return -1;												//Heliport coule
+			msg.setVictoire(false);
+			msg.setTypeDefaite("L'heliport a coule..");
+			new FenetreFin(msg);												//Heliport coule
 		}
 
 		if(curseur.getNiv()==10) {
-			return -1;												//Curseur au niveau maximum
+			msg.setVictoire(false);
+			msg.setTypeDefaite("L'ile a sombre completement..");
+			new FenetreFin(msg);												//Curseur au niveau maximum
 		}
 
 
@@ -836,8 +830,11 @@ public class Controleur implements Observateur{
 		}
 
 		if(temple==2||caverne==2||palais==2||jardin==2) {
-			return -1;												//Deux cases de recuperation de tresor coulees
+			
+			msg.setTypeDefaite("Tous les tresors ont coules..");
+			new FenetreFin(msg);												//Deux cases de recuperation de tresor coulees
 		}
+		
 
 		//Condition victoire
 
@@ -863,12 +860,13 @@ public class Controleur implements Observateur{
 		if(	joueursPresentsHeliport==joueursList.size()&&
 				tresorsRecuperes.size()==4&&
 				aCarteHelicoptere) {
-			return 1;
+			msg.setVictoire(true);
+			new FenetreFin(msg);
 		}
 
 		aCarteHelicoptere=false;
 
-		return 0;
+		
 	}
 
 	private void melanger(ArrayList a) {

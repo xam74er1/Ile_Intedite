@@ -17,7 +17,6 @@ public class PanelAfficheCarte extends JPanel {
 	private Observe o;
 	private ArrayList<Carte> listCarte;
 	private JFrame frame;
-	private PanelAfficheCarte me;
 
 	public PanelAfficheCarte(Observe o, JFrame frame) {
 		super();
@@ -26,7 +25,6 @@ public class PanelAfficheCarte extends JPanel {
 		this.setBounds(0, 0, this.frame.getWidth(), this.frame.getHeight());
 		listCarte=new ArrayList<Carte>();
 		this.setBackground(new Color(0,0,0,128));
-		me=this;
 		this.setVisible(false);
 	}
 
@@ -39,24 +37,27 @@ public class PanelAfficheCarte extends JPanel {
 	public void setListCarte(ArrayList<Carte> listCarte) {
 		this.listCarte = new ArrayList<Carte>();
 		this.listCarte = listCarte;
-		me.setLayout(new GridLayout(4, 10,10,10));
+		this.setLayout(new GridLayout(4, 10,10,10));
 		for(int i=0;i<10;i++) {
-			me.add(new PanelNoir());
+			this.add(new PanelNoir());
 		}
-		for (int i=0;i<me.listCarte.size();i++) {
-			if(i%10==0) me.add(new PanelNoir());
-			else if(i%10==9) me.add(new PanelNoir());
-			else {
-				Carte c = me.listCarte.get(i);
-				PanelCarte pane = new PanelCarte(i, o, c instanceof Classique);
-				me.add(pane);
-				pane.setCarte(c);
-				pane.setBounds(0, 0,80, 112);
+		this.add(new PanelNoir());
+		for (int i=0;i<this.listCarte.size();i++) {
+			if(i%10==9) {
+				this.add(new PanelNoir());
+				this.add(new PanelNoir());
 			}
 
+			Carte c = this.listCarte.get(i);
+			PanelCarte pane = new PanelCarte(i, o, c instanceof Classique);
+			this.add(pane);
+			pane.setCarte(c);
+			pane.setBounds(0, 0,80, 112);
+
+
 		}
-		for (int i=listCarte.size();i<30-(2*(listCarte.size()/10+1));i++) {
-			me.add(new PanelNoir());
+		for (int i=listCarte.size();i<30-(2*(listCarte.size()/8+1));i++) {
+			this.add(new PanelNoir());
 		}
 		PanelNoir pane = new PanelNoir();
 		pane.setLayout(new GridLayout(4,1));
@@ -64,7 +65,7 @@ public class PanelAfficheCarte extends JPanel {
 			pane.add(new PanelNoir());
 		}
 		pane.add(new PanelOk(o));
-		me.add(pane);
+		this.add(pane);
 	}
 
 

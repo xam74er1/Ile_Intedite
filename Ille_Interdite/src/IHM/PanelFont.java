@@ -47,6 +47,7 @@ public class PanelFont extends JPanel {
 				path = System.getProperty("user.dir")+"\\src\\"+"images\\Art\\PanelWestV2.png";
 			}catch(Exception e){
 				path = System.getProperty("user.dir")+"\\src\\"+"images\\Art\\PanelWestV2.png";
+				e.printStackTrace();
 			}
 
 			try {			image = ImageIO.read(new File(path));
@@ -55,12 +56,23 @@ public class PanelFont extends JPanel {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
-		if (num == 1) {
+			
 			try {
 				path = System.getProperty("user.dir")+"\\src\\"+"images\\Art\\PanelWestV2.png";
 			}catch(Exception e){
 				path = System.getProperty("user.dir")+"\\src\\"+"images\\Art\\PanelWestV2.png";
+				e.printStackTrace();
+			}
+		}
+		
+		
+		
+		if (num == 1) {
+			try {
+				path = System.getProperty("user.dir")+"\\src\\"+"images\\Art\\PanelStartv2.png";
+			}catch(Exception e){
+				path = System.getProperty("user.dir")+"\\src\\"+"images\\Art\\PanelStartv2.png";
+				e.printStackTrace();
 			}
 
 			try {			image = ImageIO.read(new File(path));
@@ -69,21 +81,39 @@ public class PanelFont extends JPanel {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			try {
+				path = System.getProperty("user.dir")+"\\src\\"+"images\\Art\\PanelStartv2.png";
+			}catch(Exception e){
+				path = System.getProperty("user.dir")+"\\src\\"+"images\\Art\\PanelStartv2.png";
+				e.printStackTrace();
+			}
 		}
 		
+		if (num == 2) {
+			try {
+				path = System.getProperty("user.dir")+"\\src\\"+"images\\Art\\StartPanelPanel1V1.png";
+			}catch(Exception e){
+				path = System.getProperty("user.dir")+"\\src\\"+"images\\Art\\StartPanelPanel1V1.png";
+				e.printStackTrace();
+			}
 
-		try {
-			path = System.getProperty("user.dir")+"\\src\\"+"images\\Art\\PanelWestV2.png";
-		}catch(Exception e){
-			path = System.getProperty("user.dir")+"\\src\\"+"images\\Art\\PanelWestV2.png";
+			try {			image = ImageIO.read(new File(path));
+				g.drawImage(image, 0, 0,this.getWidth(),this.getHeight(), null);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				path = System.getProperty("user.dir")+"\\src\\"+"images\\Art\\StartPanelPanel1V1.png";
+			}catch(Exception e){
+				path = System.getProperty("user.dir")+"\\src\\"+"images\\Art\\StartPanelPanel1V1.png";
+				e.printStackTrace();
+			}
 		}
+		repaint();
+		revalidate();
 
-		try {			image = ImageIO.read(new File(path));
-			g.drawImage(image, 0, 0,this.getWidth(),this.getHeight(), null);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 	}
 	
 }

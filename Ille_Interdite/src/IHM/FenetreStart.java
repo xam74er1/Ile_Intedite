@@ -30,6 +30,9 @@ import ille_intedite.Aventurie.Navigateur;
 import ille_intedite.Aventurie.Plongeur;
 import utils.Utils.Pion;
 import javax.swing.SwingConstants;
+import java.awt.FlowLayout;
+import javax.swing.JList;
+import javax.swing.DefaultComboBoxModel;
 
  
 
@@ -106,664 +109,520 @@ public class FenetreStart extends JFrame {
     this.setResizable(false);
     setBackground(new Color(139,69,18));
     
-    JButton btnCommencer = new JButton("Commencer");
-    
-    JRadioButton deuxJoueurs = new JRadioButton("2 joueurs");
-    
-    JRadioButton troisJoueurs = new JRadioButton("3 joueurs");
-    
-    JRadioButton quatreJoueurs = new JRadioButton("4 joueurs");
-    
    
     
-    PanelFont pan = new PanelFont(1,true);
+    JPanel pan = new JPanel();
     pan.setBackground(new Color(139,69,18));
-    
-    JButton btnRegle = new JButton("Regles");
-    btnRegle.setBounds(200, 511, 110, 25);
-    pan.add(btnRegle);
-    btnRegle.addActionListener(new ActionListener(){
-    	
-    
-
-@Override
-public void actionPerformed(ActionEvent arg0) {
-	new FrameHtml();
-	
-}
-});
+    pan.setLayout(null);
+    pan.setBounds(0, 0, 800, 700);
      
     ImageIcon imgIconTitre = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/titre.png");
     Font font = new Font("Serif", Font.BOLD, 25);
 
     
     ButtonGroup choix = new ButtonGroup();
-    pan.setLayout(null);
-    
-    
-    JLabel labelTitre = new JLabel();
-    labelTitre.setHorizontalAlignment(SwingConstants.CENTER);
-    labelTitre.setText("fuuuuuuuuuuuuuuuu");
-    labelTitre.setBounds(350, 13, 100, 100);
-    pan.add(labelTitre);
-    labelTitre.setIcon(imgIconTitre);
-    JLabel labelChoix = new JLabel("Nombre de joueurs");
-    labelChoix.setHorizontalAlignment(SwingConstants.CENTER);
-    labelChoix.setBounds(295, 105, 210, 33);
-    pan.add(labelChoix);
-    labelChoix.setFont(font);
         JLabel labelJoueurCourrant = new JLabel("");
         labelJoueurCourrant.setBounds(0, 0, 0, 0);
         pan.add(labelJoueurCourrant);
-        JButton selectChoix = new JButton("Confirmer");
-        selectChoix.setBounds(350, 263, 100, 25);
-        pan.add(selectChoix);
-        
-        
-        selectChoix.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                
-                if ("Confirmer".equals(selectChoix.getText())){
-
-                    if (deuxJoueurs.isSelected()) {
-                        nbJoueurs = 2;
-                    } else if (troisJoueurs.isSelected()){
-                        nbJoueurs = 3;
-                    } else if (quatreJoueurs.isSelected()){
-                        nbJoueurs = 4;
-                    }
-                    deuxJoueurs.setEnabled(false);
-                    troisJoueurs.setEnabled(false);
-                    quatreJoueurs.setEnabled(false);
-                    choixCourant = choixCourant+1;
-                    labelJoueurCourrant.setText("Joueur " + choixCourant);
-                    selectChoix.setText("Valider");
-                    selectChoix.setEnabled(false);
-
-
-                    labelExplo.setIcon(imgIcon);
-                    labelInge.setIcon(imgIcon1);
-                    labelMessa.setIcon(imgIcon2);
-                    labelNavi.setIcon(imgIcon3);
-                    labelPilo.setIcon(imgIcon4);
-                    labelPlon.setIcon(imgIcon5);
-                    etatBoutonExplo = true;
-                    etatBoutonInge = true;
-                    etatBoutonMessa = true;
-                    etatBoutonNavi = true;
-                    etatBoutonPilo = true;
-                    etatBoutonPlon = true;
-                    
-                } else {
-                    
-                    choixCourant = choixCourant+1;
-                    labelJoueurCourrant.setText("Joueur " + choixCourant);
-                    selectChoix.setText("Valider");
-                    
-                    switch (choixAven) {
-                        case 0:
-                            labelExplo.setIcon(imgIconAS);
-                            etatBoutonExplo = false;
-                            joueurs.add(labelExplo);
-                            break;
-                        case 1:
-                            labelInge.setIcon(imgIcon1AS);
-                            etatBoutonInge = false;
-                            joueurs.add(labelInge);
-                            break;
-                        case 2:
-                            labelMessa.setIcon(imgIcon2AS);
-                            etatBoutonMessa = false;
-                            joueurs.add(labelMessa);
-                            break;
-                        case 3:
-                            labelNavi.setIcon(imgIcon3AS);
-                            etatBoutonNavi = false;
-                            joueurs.add(labelNavi);
-                            break;
-                        case 4:
-                            labelPilo.setIcon(imgIcon4AS);
-                            etatBoutonPilo = false;
-                            joueurs.add(labelPilo);
-                            break;
-                        case 5:
-                            labelPlon.setIcon(imgIcon5AS);
-                            etatBoutonPlon = false;
-                            joueurs.add(labelPlon);
-                            break;               
-                        default:
-                            break;
-                            
-                            
-                    }
-                    selectChoix.setEnabled(false);
-                } 
-                
-                if (choixCourant>nbJoueurs){
-                    selectChoix.setEnabled(false);
-                    selectChoix.setVisible(false);
-                    btnCommencer.setEnabled(true);
-                    labelJoueurCourrant.setText("");
-                    termine = true;
-                    MessageInit m = new MessageInit();
-                    
-                    
-                     
-                    
-                    
-                    labelExplo.setVisible(false);
-                    labelInge.setVisible(false);
-                    labelMessa.setVisible(false);
-                    labelNavi.setVisible(false);
-                    labelPilo.setVisible(false);
-                    labelPlon.setVisible(false);
-                    
-                    labelExplo.setIcon(imgIcon);
-                    labelInge.setIcon(imgIcon1);
-                    labelMessa.setIcon(imgIcon2);
-                    labelNavi.setIcon(imgIcon3);
-                    labelPilo.setIcon(imgIcon4);
-                    labelPlon.setIcon(imgIcon5);
-                	int j = 0;
-                    for (JLabel i : joueurs){
-                        Aventurier a;
-                        i.setVisible(true);
-                        if (i == labelExplo){
-                        	a = new Explorateur(j,"Explorateur",Pion.VERT);
-                        	m.listJoueurs.add(a);
-                        	
-                        } else if (i == labelInge) {
-                        	a= new Ingenieur(j,"Ingenieur",Pion.ROUGE);
-                        	m.listJoueurs.add(a);
-
-                        } else if (i == labelMessa){
-                        	a = new Messager(j,"Messager",Pion.ORANGE);
-                        	m.listJoueurs.add(a);
-                        	
-                        } else if (i == labelNavi){
-                        	a = new Navigateur(j,"Navigateur",Pion.JAUNE);
-                        	m.listJoueurs.add(a);
-                        	
-                        } else if (i == labelPilo){
-                        	a = new Aviateur(j,"Aviateur",Pion.BLEU);
-                        	m.listJoueurs.add(a);
-                        	
-                        } else if (i == labelPlon){
-                        	a = new Plongeur(j,"Plongeur",Pion.VIOLET);
-                        	m.listJoueurs.add(a);
-                        	
-                        }
-                         j = j +1;
-                    }
-                    
-                }
-                
-            }
-            
-        });
-    
-    
-
-    
-    
-    JPanel panChoixCarte = new JPanel();
-    panChoixCarte.setBounds(38, 332, 700, 160);
-    panChoixCarte.setBackground(new Color(139,69,18));
-     labelExplo = new JLabel();
-     labelInge = new JLabel();
-     labelMessa = new JLabel();
-     labelNavi = new JLabel();
-     labelPilo = new JLabel();
-     labelPlon = new JLabel();
-    
-    
-
-    labelExplo.setIcon(imgIconAS);
-    panChoixCarte.add(labelExplo);
-    
-    
-    
-    labelInge.setIcon(imgIcon1AS);
-    panChoixCarte.add(labelInge);
-    
-    
-    
-    labelMessa.setIcon(imgIcon2AS);
-    panChoixCarte.add(labelMessa);
-    
-    
-    
-    labelNavi.setIcon(imgIcon3AS);
-    panChoixCarte.add(labelNavi);
-    
-    
-    
-    labelPilo.setIcon(imgIcon4AS);
-    panChoixCarte.add(labelPilo);
-
-    
-    
-    labelPlon.setIcon(imgIcon5AS);
-    panChoixCarte.add(labelPlon);
-    
-    labelExplo.addMouseListener(new MouseListener(){
-
-		@Override
-		public void mouseClicked(MouseEvent e) {
-                if (termine == false){
-                if (etatBoutonInge){    
-                    labelInge.setIcon(imgIcon1);
-                    
-                }
-                
-                if (etatBoutonMessa){   
-                    labelMessa.setIcon(imgIcon2);
-                }
-                
-                if (etatBoutonNavi){   
-                    labelNavi.setIcon(imgIcon3);
-                }
-                    
-                if (etatBoutonPilo){   
-                    labelPilo.setIcon(imgIcon4);
-                }
-                    
-                if (etatBoutonPlon){   
-                    labelPlon.setIcon(imgIcon5);
-                }
-                    
-                            
-                    if (etatBoutonExplo){
-                        labelExplo.setIcon(imgIconS);
-                        choixAven = 0;
-                        selectChoix.setEnabled(true);
-                    }
-                }
-                        
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-    	
-    });
-    
-    labelInge.addMouseListener(new MouseListener(){
-
-		@Override
-		public void mouseClicked(MouseEvent e) {
-                if (termine == false){
-                    if (etatBoutonExplo){    
-                    labelExplo.setIcon(imgIcon);
-                }
-                
-                if (etatBoutonMessa){   
-                    labelMessa.setIcon(imgIcon2);
-                }
-                
-                if (etatBoutonNavi){   
-                    labelNavi.setIcon(imgIcon3);
-                }
-                    
-                if (etatBoutonPilo){   
-                    labelPilo.setIcon(imgIcon4);
-                }
-                    
-                if (etatBoutonPlon){   
-                    labelPlon.setIcon(imgIcon5);
-                }
-                    
-                            
-                    if (etatBoutonInge){
-                        labelInge.setIcon(imgIcon1S);
-                        choixAven = 1;
-                        selectChoix.setEnabled(true);                    }
-                }
-                    
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-    	
-    });
-    
-    labelMessa.addMouseListener(new MouseListener(){
-
-		@Override
-		public void mouseClicked(MouseEvent e) {
-                if (termine == false){
-                    if (etatBoutonInge){    
-                    labelInge.setIcon(imgIcon1);
-                }
-                
-                if (etatBoutonExplo){   
-                    labelExplo.setIcon(imgIcon);
-                }
-                
-                if (etatBoutonNavi){   
-                    labelNavi.setIcon(imgIcon3);
-                }
-                    
-                if (etatBoutonPilo){   
-                    labelPilo.setIcon(imgIcon4);
-                }
-                    
-                if (etatBoutonPlon){   
-                    labelPlon.setIcon(imgIcon5);
-                }
-                    
-                            
-                    if (etatBoutonMessa){
-                        labelMessa.setIcon(imgIcon2S);
-                        choixAven = 2;
-                        selectChoix.setEnabled(true);
-                    }
-                }
-		
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-    	
-    });
-    
-    labelNavi.addMouseListener(new MouseListener(){
-
-		@Override
-		public void mouseClicked(MouseEvent e) {
-                if (termine == false){
-                    if (etatBoutonInge){    
-                    labelInge.setIcon(imgIcon1);
-                }
-                
-                if (etatBoutonMessa){   
-                    labelMessa.setIcon(imgIcon2);
-                }
-                
-                if (etatBoutonExplo){   
-                    labelExplo.setIcon(imgIcon);
-                }
-                    
-                if (etatBoutonPilo){   
-                    labelPilo.setIcon(imgIcon4);
-                }
-                    
-                if (etatBoutonPlon){   
-                    labelPlon.setIcon(imgIcon5);
-                }
-                            
-                    if (etatBoutonNavi){
-                        labelNavi.setIcon(imgIcon3S);
-                        choixAven = 3;
-                        selectChoix.setEnabled(true);
-                    }
-                }
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-    	
-    });
-    
-    labelPilo.addMouseListener(new MouseListener(){
-
-		@Override
-		public void mouseClicked(MouseEvent e) {
-                if (termine == false){
-                    if (etatBoutonInge){    
-                    labelInge.setIcon(imgIcon1);
-                }
-                
-                if (etatBoutonMessa){   
-                    labelMessa.setIcon(imgIcon2);
-                }
-                
-                if (etatBoutonNavi){   
-                    labelNavi.setIcon(imgIcon3);
-                }
-                    
-                if (etatBoutonExplo){   
-                    labelExplo.setIcon(imgIcon);
-                }
-                    
-                if (etatBoutonPlon){   
-                    labelPlon.setIcon(imgIcon5);
-                }
-                    
-                            
-                    if (etatBoutonPilo){
-                        labelPilo.setIcon(imgIcon4S);
-                        choixAven = 4;
-                        selectChoix.setEnabled(true);
-                    }
-                }
-		
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-    	
-    });
-    
-    labelPlon.addMouseListener(new MouseListener(){
-
-		@Override
-		public void mouseClicked(MouseEvent e) {
-                if (termine == false){
-                    if (etatBoutonInge){    
-                    labelInge.setIcon(imgIcon1);
-                }
-                
-                if (etatBoutonMessa){   
-                    labelMessa.setIcon(imgIcon2);
-                }
-                
-                if (etatBoutonNavi){   
-                    labelNavi.setIcon(imgIcon3);
-                }
-                    
-                if (etatBoutonPilo){   
-                    labelPilo.setIcon(imgIcon4);
-                }
-                    
-                if (etatBoutonExplo){   
-                    labelExplo.setIcon(imgIcon);
-                }
-                    
-                            
-                    if (etatBoutonPlon){
-                        labelPlon.setIcon(imgIcon5S);
-                        choixAven = 5;
-                        selectChoix.setEnabled(true);
-                        
-                    }
-                }
-		
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-    	
-    });
-    
-    
-    
-    pan.add(panChoixCarte);
 
     
     this.setContentPane(pan);
     this.setVisible(true);
-    
-    JPanel panel = new JPanel();
-    panel.setBounds(200, 150, 400, 100);
-    pan.add(panel);
-    panel.setLayout(null);
-    
-    deuxJoueurs.setBounds(46, 12, 100, 25);
-    panel.add(deuxJoueurs);
-    deuxJoueurs.setBackground(new Color(139,69,18));
-    deuxJoueurs.setSelected(true);
-    
-    choix.add(deuxJoueurs);
-    
-    troisJoueurs.setBounds(150, 12, 100, 25);
-    panel.add(troisJoueurs);
-    troisJoueurs.setBackground(new Color(139,69,18));
-    choix.add(troisJoueurs);
-    
-    quatreJoueurs.setBounds(254, 12, 100, 25);
-    panel.add(quatreJoueurs);
-    quatreJoueurs.setBackground(new Color(139,69,18));
-    choix.add(quatreJoueurs);
-    
-        difficulte = new JComboBox();
-        difficulte.setBounds(264, 46, 90, 22);
-        panel.add(difficulte);
-        difficulte.addItem("Novice");
-        difficulte.addItem("Normal");
-        difficulte.addItem("Elite");
-        difficulte.addItem("Legendaire");
-        
             
-            JLabel labelDifficulte = new JLabel("Choisir la difficulte du jeu :");
-            labelDifficulte.setBounds(96, 49, 154, 16);
-            panel.add(labelDifficulte);
-            labelDifficulte.setBackground(new Color(139,69,18));
+            PanelFont PanelFont = new PanelFont(1, true);
+//            PanelFont.setBackground(new Color(139, 69, 19));
+            PanelFont.setBounds(0, 0, 794, 665);
+            pan.add(PanelFont);
+            PanelFont.setLayout(null);
             
+            
+            JLabel labelTitre = new JLabel();
+            labelTitre.setBounds(250, 42, 300, 100);
+            PanelFont.add(labelTitre);
+            labelTitre.setHorizontalAlignment(SwingConstants.CENTER);
+            labelTitre.setIcon(imgIconTitre);
+            
+            JRadioButton deuxJoueurs = new JRadioButton("2 joueurs");
+            
+            JRadioButton troisJoueurs = new JRadioButton("3 joueurs");
+            
+            JRadioButton quatreJoueurs = new JRadioButton("4 joueurs");
+            
+            PanelFont panel = new PanelFont(2,true);
+            panel.setBounds(150, 155, 500, 200);
+            PanelFont.add(panel);
+            panel.setLayout(null);
+            
+            deuxJoueurs.setBounds(51, 82, 100, 25);
+            panel.add(deuxJoueurs);
+//            deuxJoueurs.setBackground(new Color(139,69,18));
+            deuxJoueurs.setSelected(true);
+            
+            choix.add(deuxJoueurs);
+            
+            troisJoueurs.setBounds(199, 82, 100, 25);
+            panel.add(troisJoueurs);
+//            troisJoueurs.setBackground(new Color(139,69,18));
+            choix.add(troisJoueurs);
+            
+            quatreJoueurs.setBounds(347, 82, 100, 25);
+            panel.add(quatreJoueurs);
+//            quatreJoueurs.setBackground(new Color(139,69,18));
+            choix.add(quatreJoueurs);
+            
+                difficulte = new JComboBox();
+                difficulte.setBounds(357, 116, 90, 22);
+                panel.add(difficulte);
+                difficulte.addItem("Novice");
+                difficulte.addItem("Normal");
+                difficulte.addItem("Elite");
+                difficulte.addItem("Legendaire");
+                
+                    
+                    JLabel labelDifficulte = new JLabel("Choisir la difficulte du jeu :");
+                    labelDifficulte.setForeground(Color.WHITE);
+                    labelDifficulte.setBounds(181, 119, 154, 16);
+                    panel.add(labelDifficulte);
+//                    labelDifficulte.setBackground(new Color(139,69,18));
+                    JLabel labelChoix = new JLabel("Nombre de joueurs");
+                    labelChoix.setBounds(145, 40, 210, 33);
+                    panel.add(labelChoix);
+                    labelChoix.setForeground(Color.WHITE);
+                    labelChoix.setHorizontalAlignment(SwingConstants.CENTER);
+                    labelChoix.setFont(font);
+                    
+                    JComboBox comboBox = new JComboBox();
+                    comboBox.setModel(new DefaultComboBoxModel(new String[] {"S\u00E9nario 1", "S\u00E9nario 2", "S\u00E9nario 3", "S\u00E9nario 4", "S\u00E9nario 5"}));
+                    comboBox.setBounds(51, 116, 100, 22);
+                    panel.add(comboBox);
+                    
+                    
+                    
+                    JButton selectChoix = new JButton("Confirmer");
+                    selectChoix.setBounds(350, 384, 100, 25);
+                    PanelFont.add(selectChoix);
+                    
+                    JButton btnRegle = new JButton("Regles");
+                    btnRegle.setBounds(200, 600, 110, 25);
+                    PanelFont.add(btnRegle);
+                    
+                    JButton btnCommencer = new JButton("Commencer");
+                    btnCommencer.setBounds(490, 600, 110, 25);
+                    PanelFont.add(btnCommencer);
+                    
+                    btnCommencer.setEnabled(false);
+                    
+                    
 
-            
-            
-            btnCommencer.setBounds(490, 511, 110, 25);
-            pan.add(btnCommencer);
-            
-            btnCommencer.setEnabled(false);
-            btnCommencer.addActionListener(new ActionListener() {
+                    
+                    
+                    JPanel panChoixCarte = new JPanel();
+                    FlowLayout flowLayout = (FlowLayout) panChoixCarte.getLayout();
+                    panChoixCarte.setBounds(50, 422, 700, 160);
+                    PanelFont.add(panChoixCarte);
+                    panChoixCarte.setBackground(new Color(139,69,18));
+                    labelExplo = new JLabel();
+                    labelInge = new JLabel();
+                    labelMessa = new JLabel();
+                    labelNavi = new JLabel();
+                    labelPilo = new JLabel();
+                    labelPlon = new JLabel();
+                    
+                    
+
+                    labelExplo.setIcon(imgIconAS);
+                    panChoixCarte.add(labelExplo);
+                    
+                    
+                    
+                    labelInge.setIcon(imgIcon1AS);
+                    panChoixCarte.add(labelInge);
+                    
+                    
+                    
+                    labelMessa.setIcon(imgIcon2AS);
+                    panChoixCarte.add(labelMessa);
+                    
+                    
+                    
+                    labelNavi.setIcon(imgIcon3AS);
+                    panChoixCarte.add(labelNavi);
+                    
+                    
+                    
+                    labelPilo.setIcon(imgIcon4AS);
+                    panChoixCarte.add(labelPilo);
+                    
+                        
+                        
+                        labelPlon.setIcon(imgIcon5AS);
+                        panChoixCarte.add(labelPlon);
+                        
+                        labelExplo.addMouseListener(new MouseListener(){
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+                                    if (termine == false){
+                                    if (etatBoutonInge){    
+                                        labelInge.setIcon(imgIcon1);
+                                        
+                                    }
+                                    
+                                    if (etatBoutonMessa){   
+                                        labelMessa.setIcon(imgIcon2);
+                                    }
+                                    
+                                    if (etatBoutonNavi){   
+                                        labelNavi.setIcon(imgIcon3);
+                                    }
+                                        
+                                    if (etatBoutonPilo){   
+                                        labelPilo.setIcon(imgIcon4);
+                                    }
+                                        
+                                    if (etatBoutonPlon){   
+                                        labelPlon.setIcon(imgIcon5);
+                                    }
+                                        
+                                                
+                                        if (etatBoutonExplo){
+                                            labelExplo.setIcon(imgIconS);
+                                            choixAven = 0;
+                                            selectChoix.setEnabled(true);
+                                        }
+                                    }
+                                            
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+                        	
+                        });
+                        
+                        labelInge.addMouseListener(new MouseListener(){
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+                                    if (termine == false){
+                                        if (etatBoutonExplo){    
+                                        labelExplo.setIcon(imgIcon);
+                                    }
+                                    
+                                    if (etatBoutonMessa){   
+                                        labelMessa.setIcon(imgIcon2);
+                                    }
+                                    
+                                    if (etatBoutonNavi){   
+                                        labelNavi.setIcon(imgIcon3);
+                                    }
+                                        
+                                    if (etatBoutonPilo){   
+                                        labelPilo.setIcon(imgIcon4);
+                                    }
+                                        
+                                    if (etatBoutonPlon){   
+                                        labelPlon.setIcon(imgIcon5);
+                                    }
+                                        
+                                                
+                                        if (etatBoutonInge){
+                                            labelInge.setIcon(imgIcon1S);
+                                            choixAven = 1;
+                                            selectChoix.setEnabled(true);                    }
+                                    }
+                                        
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+                        	
+                        });
+                        
+                        labelMessa.addMouseListener(new MouseListener(){
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+                                    if (termine == false){
+                                        if (etatBoutonInge){    
+                                        labelInge.setIcon(imgIcon1);
+                                    }
+                                    
+                                    if (etatBoutonExplo){   
+                                        labelExplo.setIcon(imgIcon);
+                                    }
+                                    
+                                    if (etatBoutonNavi){   
+                                        labelNavi.setIcon(imgIcon3);
+                                    }
+                                        
+                                    if (etatBoutonPilo){   
+                                        labelPilo.setIcon(imgIcon4);
+                                    }
+                                        
+                                    if (etatBoutonPlon){   
+                                        labelPlon.setIcon(imgIcon5);
+                                    }
+                                        
+                                                
+                                        if (etatBoutonMessa){
+                                            labelMessa.setIcon(imgIcon2S);
+                                            choixAven = 2;
+                                            selectChoix.setEnabled(true);
+                                        }
+                                    }
+		
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+                        	
+                        });
+                        
+                        labelNavi.addMouseListener(new MouseListener(){
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+                                    if (termine == false){
+                                        if (etatBoutonInge){    
+                                        labelInge.setIcon(imgIcon1);
+                                    }
+                                    
+                                    if (etatBoutonMessa){   
+                                        labelMessa.setIcon(imgIcon2);
+                                    }
+                                    
+                                    if (etatBoutonExplo){   
+                                        labelExplo.setIcon(imgIcon);
+                                    }
+                                        
+                                    if (etatBoutonPilo){   
+                                        labelPilo.setIcon(imgIcon4);
+                                    }
+                                        
+                                    if (etatBoutonPlon){   
+                                        labelPlon.setIcon(imgIcon5);
+                                    }
+                                                
+                                        if (etatBoutonNavi){
+                                            labelNavi.setIcon(imgIcon3S);
+                                            choixAven = 3;
+                                            selectChoix.setEnabled(true);
+                                        }
+                                    }
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+                        	
+                        });
+                        
+                        labelPilo.addMouseListener(new MouseListener(){
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+                                    if (termine == false){
+                                        if (etatBoutonInge){    
+                                        labelInge.setIcon(imgIcon1);
+                                    }
+                                    
+                                    if (etatBoutonMessa){   
+                                        labelMessa.setIcon(imgIcon2);
+                                    }
+                                    
+                                    if (etatBoutonNavi){   
+                                        labelNavi.setIcon(imgIcon3);
+                                    }
+                                        
+                                    if (etatBoutonExplo){   
+                                        labelExplo.setIcon(imgIcon);
+                                    }
+                                        
+                                    if (etatBoutonPlon){   
+                                        labelPlon.setIcon(imgIcon5);
+                                    }
+                                        
+                                                
+                                        if (etatBoutonPilo){
+                                            labelPilo.setIcon(imgIcon4S);
+                                            choixAven = 4;
+                                            selectChoix.setEnabled(true);
+                                        }
+                                    }
+		
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+                        	
+                        });
+                        
+                        labelPlon.addMouseListener(new MouseListener(){
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+                                    if (termine == false){
+                                        if (etatBoutonInge){    
+                                        labelInge.setIcon(imgIcon1);
+                                    }
+                                    
+                                    if (etatBoutonMessa){   
+                                        labelMessa.setIcon(imgIcon2);
+                                    }
+                                    
+                                    if (etatBoutonNavi){   
+                                        labelNavi.setIcon(imgIcon3);
+                                    }
+                                        
+                                    if (etatBoutonPilo){   
+                                        labelPilo.setIcon(imgIcon4);
+                                    }
+                                        
+                                    if (etatBoutonExplo){   
+                                        labelExplo.setIcon(imgIcon);
+                                    }
+                                        
+                                                
+                                        if (etatBoutonPlon){
+                                            labelPlon.setIcon(imgIcon5S);
+                                            choixAven = 5;
+                                            selectChoix.setEnabled(true);
+                                            
+                                        }
+                                    }
+		
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+                        	
+                        });
+                    btnCommencer.addActionListener(new ActionListener() {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -786,8 +645,162 @@ public void actionPerformed(ActionEvent arg0) {
 	       
 	        
 		}
-            	
-            });
+                    	
+                    });
+                    btnRegle.addActionListener(new ActionListener(){
+                    	
+                    
+
+@Override
+public void actionPerformed(ActionEvent arg0) {
+	new FrameHtml();
+	
+}
+});
+                    
+                    
+                    selectChoix.addActionListener(new ActionListener(){
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            
+                            if ("Confirmer".equals(selectChoix.getText())){
+
+                                if (deuxJoueurs.isSelected()) {
+                                    nbJoueurs = 2;
+                                } else if (troisJoueurs.isSelected()){
+                                    nbJoueurs = 3;
+                                } else if (quatreJoueurs.isSelected()){
+                                    nbJoueurs = 4;
+                                }
+                                deuxJoueurs.setEnabled(false);
+                                troisJoueurs.setEnabled(false);
+                                quatreJoueurs.setEnabled(false);
+                                choixCourant = choixCourant+1;
+                                labelJoueurCourrant.setText("Joueur " + choixCourant);
+                                selectChoix.setText("Valider");
+                                selectChoix.setEnabled(false);
+
+
+                                labelExplo.setIcon(imgIcon);
+                                labelInge.setIcon(imgIcon1);
+                                labelMessa.setIcon(imgIcon2);
+                                labelNavi.setIcon(imgIcon3);
+                                labelPilo.setIcon(imgIcon4);
+                                labelPlon.setIcon(imgIcon5);
+                                etatBoutonExplo = true;
+                                etatBoutonInge = true;
+                                etatBoutonMessa = true;
+                                etatBoutonNavi = true;
+                                etatBoutonPilo = true;
+                                etatBoutonPlon = true;
+                                
+                            } else {
+                                
+                                choixCourant = choixCourant+1;
+                                labelJoueurCourrant.setText("Joueur " + choixCourant);
+                                selectChoix.setText("Valider");
+                                
+                                switch (choixAven) {
+                                    case 0:
+                                        labelExplo.setIcon(imgIconAS);
+                                        etatBoutonExplo = false;
+                                        joueurs.add(labelExplo);
+                                        break;
+                                    case 1:
+                                        labelInge.setIcon(imgIcon1AS);
+                                        etatBoutonInge = false;
+                                        joueurs.add(labelInge);
+                                        break;
+                                    case 2:
+                                        labelMessa.setIcon(imgIcon2AS);
+                                        etatBoutonMessa = false;
+                                        joueurs.add(labelMessa);
+                                        break;
+                                    case 3:
+                                        labelNavi.setIcon(imgIcon3AS);
+                                        etatBoutonNavi = false;
+                                        joueurs.add(labelNavi);
+                                        break;
+                                    case 4:
+                                        labelPilo.setIcon(imgIcon4AS);
+                                        etatBoutonPilo = false;
+                                        joueurs.add(labelPilo);
+                                        break;
+                                    case 5:
+                                        labelPlon.setIcon(imgIcon5AS);
+                                        etatBoutonPlon = false;
+                                        joueurs.add(labelPlon);
+                                        break;               
+                                    default:
+                                        break;
+                                        
+                                        
+                                }
+                                selectChoix.setEnabled(false);
+                            } 
+                            
+                            if (choixCourant>nbJoueurs){
+                                selectChoix.setEnabled(false);
+                                selectChoix.setVisible(false);
+                                btnCommencer.setEnabled(true);
+                                labelJoueurCourrant.setText("");
+                                termine = true;
+                                MessageInit m = new MessageInit();
+                                
+                                
+                                 
+                                
+                                
+                                labelExplo.setVisible(false);
+                                labelInge.setVisible(false);
+                                labelMessa.setVisible(false);
+                                labelNavi.setVisible(false);
+                                labelPilo.setVisible(false);
+                                labelPlon.setVisible(false);
+                                
+                                labelExplo.setIcon(imgIcon);
+                                labelInge.setIcon(imgIcon1);
+                                labelMessa.setIcon(imgIcon2);
+                                labelNavi.setIcon(imgIcon3);
+                                labelPilo.setIcon(imgIcon4);
+                                labelPlon.setIcon(imgIcon5);
+                            	int j = 0;
+                                for (JLabel i : joueurs){
+                                    Aventurier a;
+                                    i.setVisible(true);
+                                    if (i == labelExplo){
+                                    	a = new Explorateur(j,"Explorateur",Pion.VERT);
+                                    	m.listJoueurs.add(a);
+                                    	
+                                    } else if (i == labelInge) {
+                                    	a= new Ingenieur(j,"Ingenieur",Pion.ROUGE);
+                                    	m.listJoueurs.add(a);
+
+                                    } else if (i == labelMessa){
+                                    	a = new Messager(j,"Messager",Pion.ORANGE);
+                                    	m.listJoueurs.add(a);
+                                    	
+                                    } else if (i == labelNavi){
+                                    	a = new Navigateur(j,"Navigateur",Pion.JAUNE);
+                                    	m.listJoueurs.add(a);
+                                    	
+                                    } else if (i == labelPilo){
+                                    	a = new Aviateur(j,"Aviateur",Pion.BLEU);
+                                    	m.listJoueurs.add(a);
+                                    	
+                                    } else if (i == labelPlon){
+                                    	a = new Plongeur(j,"Plongeur",Pion.VIOLET);
+                                    	m.listJoueurs.add(a);
+                                    	
+                                    }
+                                     j = j +1;
+                                }
+                                
+                            }
+                            
+                        }
+                        
+                    });
             
     
   }
@@ -844,10 +857,5 @@ public void actionPerformed(ActionEvent arg0) {
         }
 		
 		return m;
-	}
-	
-
-	public static void main(String[] args){
-		FenetreStart f = new FenetreStart();
 	}
 }
