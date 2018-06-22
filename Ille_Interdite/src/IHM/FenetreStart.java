@@ -3,6 +3,7 @@ package IHM;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -48,6 +49,7 @@ public class FenetreStart extends JFrame {
 	private JLabel labelNavi;
 	private JLabel labelPilo;
 	private JLabel labelPlon;
+	private IHMV2 ihm;
 
 	private boolean choisis = false;
 
@@ -66,6 +68,7 @@ public class FenetreStart extends JFrame {
 	private boolean etatBoutonPilo = false;
 	private boolean etatBoutonPlon = false;
 	private boolean termine = false;
+	private boolean btno =true;
 
 	public FenetreStart(){
 
@@ -141,7 +144,7 @@ public class FenetreStart extends JFrame {
 
 		//ajout de l'image du titre "Ile Interdite"
 		JLabel labelTitre = new JLabel();
-		labelTitre.setBounds(250, 42, 300, 100);
+		labelTitre.setBounds(250, 40, 300, 110);
 		PanelFont.add(labelTitre);
 		labelTitre.setHorizontalAlignment(SwingConstants.CENTER);
 		labelTitre.setIcon(imgIconTitre);
@@ -208,18 +211,33 @@ public class FenetreStart extends JFrame {
 
 
 		//creation du bouton pour confirmer
-		JButton selectChoix = new JButton("Confirmer");
-		selectChoix.setBounds(350, 384, 100, 25);
+		JButton selectChoix = new JButton("");
+		selectChoix.setBounds(350, 384, 97, 25);
+		ImageIcon imgS = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/Art/btnConfirmer.png");
+		Image imS = imgS.getImage();
+		imS = imS.getScaledInstance(97, 25, Image.SCALE_DEFAULT);
+		selectChoix.setIcon(imgS);
+		selectChoix.setBorder(null);
 		PanelFont.add(selectChoix);
 
 		//creation d'un bouton règles
-		JButton btnRegle = new JButton("Regles");
-		btnRegle.setBounds(200, 600, 110, 25);
+		JButton btnRegle = new JButton("");
+		btnRegle.setBounds(200, 600, 97, 25);
+		ImageIcon imgR = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/Art/btnRegles.png");
+		Image imR = imgR.getImage();
+		imR = imR.getScaledInstance(97, 25, Image.SCALE_DEFAULT);
+		btnRegle.setIcon(imgR);
+		btnRegle.setBorder(null);
 		PanelFont.add(btnRegle);
 
 		// creation d'un bouton commencer
-		JButton btnCommencer = new JButton("Commencer");
-		btnCommencer.setBounds(490, 600, 110, 25);
+		JButton btnCommencer = new JButton("");
+		btnCommencer.setBounds(490, 600, 97, 25);
+		ImageIcon imgC = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/Art/btnCommencer.png");
+		Image imC = imgC.getImage();
+		imC = imC.getScaledInstance(97, 25, Image.SCALE_DEFAULT);
+		btnCommencer.setIcon(imgC);
+		btnCommencer.setBorder(null);
 		PanelFont.add(btnCommencer);
 
 		// empecher l'utilisateur de cliquer sur "Commencer" si le choix des aventuriers n'as pas ete fait
@@ -652,7 +670,7 @@ public class FenetreStart extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// initialisation de l'IHM principal et de la vue grille
 				VueGrille vue = new VueGrille();
-				IHMV2 ihm = new IHMV2(vue);
+				ihm = new IHMV2(vue);
 				Controleur ctrl = new Controleur(ihm,vue,createMessageInit());
 				//	        ctrl.creeDeckInondation(); Debug en cours
 
@@ -693,8 +711,9 @@ public class FenetreStart extends JFrame {
 				
 				// le bouton est set à Confirmer par default
 				// permet de recuperer le nombre de joueurs selectionne via les boutons radio et de la rendre non cliquable
-				if ("Confirmer".equals(selectChoix.getText())){
-
+				if (btno){
+					btno = false;
+					
 					if (deuxJoueurs.isSelected()) {
 						nbJoueurs = 2;
 					} else if (troisJoueurs.isSelected()){
@@ -710,7 +729,12 @@ public class FenetreStart extends JFrame {
 					//change le texte du bouton avec "Joueur + choixCourant"
 					//choixCourant initalise à 1
 					labelJoueurCourrant.setText("Joueur " + choixCourant);
-					selectChoix.setText("Valider");
+					
+					ImageIcon imgS = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/Art/btnValider.png");
+					Image imS = imgS.getImage();
+					imS = imS.getScaledInstance(97, 25, Image.SCALE_DEFAULT);
+					selectChoix.setIcon(imgS);
+				
 					selectChoix.setEnabled(false);
 
 					//degrisage des images
@@ -731,7 +755,14 @@ public class FenetreStart extends JFrame {
 					//incrementation de choixCourant et changement de nom du bouton
 					choixCourant = choixCourant+1;
 					labelJoueurCourrant.setText("Joueur " + choixCourant);
-					selectChoix.setText("Valider");
+					
+					ImageIcon imgS = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/Art/btnValider.png");
+					Image imS = imgS.getImage();
+					System.out.println(selectChoix.getText());
+					imS = imS.getScaledInstance(97, 25, Image.SCALE_DEFAULT);
+					selectChoix.setIcon(imgS);
+
+					
 					//verifier si le bouton est selectionner et le rendre grise si c'est la cas
 					//ajouter le label(image) dans une liste de joueurs 
 					switch (choixAven) {
@@ -751,6 +782,7 @@ public class FenetreStart extends JFrame {
 						joueurs.add(labelMessa);
 						break;
 					case 3:
+						System.out.println("salut");
 						labelNavi.setIcon(imgIcon3AS);
 						etatBoutonNavi = false;
 						joueurs.add(labelNavi);

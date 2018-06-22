@@ -3,6 +3,8 @@ package IHM;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -10,10 +12,12 @@ import javax.swing.JPanel;
 
 import ille_intedite.Curseur;
 import javax.swing.SwingConstants;
+import javax.swing.JButton;
 
 public class FenetreFin extends JFrame{
 
 	private JLabel labelFin;
+	private JFrame moi = this;
 	public static int nbFen=0;
 	
 
@@ -31,7 +35,7 @@ public class FenetreFin extends JFrame{
 
 		this.setVisible(true);
 
-		this.setResizable(false)
+		this.setResizable(false);
 		setBackground(new Color(139,69,18));
 		getContentPane().setLayout(null);
 
@@ -52,7 +56,8 @@ public class FenetreFin extends JFrame{
 				JLabel labelMort = new JLabel("");
 				labelMort.setForeground(Color.WHITE);
 				labelMort.setHorizontalAlignment(SwingConstants.CENTER);
-				labelMort.setBounds(0, 179, 500, 16);
+				labelMort.setBounds(0, 179, 500, 40);
+				labelMort.setFont(new Font("Serif", Font.BOLD, 25));
 				pan.add(labelMort);
 		if (msg.isVictoire()) {
 			labelFin.setText("Vous avez gagné !");
@@ -65,10 +70,7 @@ public class FenetreFin extends JFrame{
 			labelFin.setFont(font);
 			
 			labelMort.setText(msg.typeDefaite);
-
-			
-
-			
+	
 		}
 		
 
