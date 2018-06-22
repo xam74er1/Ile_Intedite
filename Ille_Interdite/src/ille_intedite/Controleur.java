@@ -146,9 +146,11 @@ public class Controleur implements Observateur{
 						if(a.getTuile().equals(helicoTuileSelect)) {
 
 							deplacer(msg.getLocation(),a);
-							PlaySound.play(System.getProperty("user.dir")+"\\src\\"+"sound\\vrai_son_helicoptere.wav");
+							
 						}
 					}
+					PlaySound.play(System.getProperty("user.dir")+"\\src\\"+"sound\\vrai_son_helicoptere.wav");
+					System.out.println(memoireAventuire.getNom());
 					memoireAventuire.removeCarte(carteSpe);
 					carteTresorsDefausse.add(carteSpe);
 					helicoTuileSelect=null;
@@ -165,12 +167,6 @@ public class Controleur implements Observateur{
 				}else { //tuile de depart choisie
 
 					ihm.setIndication("Cliquez sur une case pour vous deplacer");
-
-
-					if (grille.getTuile(msg.getLocation()).getNum()==22) {
-						aCarteHelicoptere=true;
-						verifierFinDePartie();
-					}
 
 					ArrayList<Tuile> tuilesDep = new ArrayList<Tuile>();
 					for(Tuile t : Grille.tuilesListe.values()) {
@@ -318,7 +314,6 @@ public class Controleur implements Observateur{
 				carteTresorsDefausse.add(msg.getCarte());
 				ihm.afficherPlateau();
 				defausse=false;
-				afficherPiocheInondation();
 				if(getJoueurTour().getNbCarte()>5) {
 					afficherDefausseFinTour();
 				}else {
@@ -385,6 +380,8 @@ public class Controleur implements Observateur{
 					ihm.miseAsJourJoeurCotte(getJoueurTour(), joueursList);
 					numCarte = -1;
 					ihm.setIndication("La carte as bien ete donne ");
+					getJoueurTour().actionJouer();
+
 				}else {
 					ihm.setIndication("Vous ne pouvez pas donne de carte as ce joueure ! ");
 				}
