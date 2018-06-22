@@ -84,7 +84,7 @@ public class Controleur implements Observateur{
 		init(msgInit.listJoueurs);
 		numTour =0;
 		curseur = new Curseur(msgInit.niveauEau);
-		ihm.afficherNivCurseur(10);
+		ihm.afficherNivCurseur(msgInit.niveauEau);
 
 		//Utils.debugln("controleur start");
 

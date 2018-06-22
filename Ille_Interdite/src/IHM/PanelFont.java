@@ -119,6 +119,53 @@ public class PanelFont extends JPanel {
 			revalidate();
 		}
 		
+		
+		if (num == 3) {
+			try {
+				path = System.getProperty("user.dir")+"\\src\\"+"images\\Art\\PanelEastV1.png";
+			}catch(Exception e){
+				path = System.getProperty("user.dir")+"\\src\\"+"images\\Art\\PanelEastV1.png";
+				e.printStackTrace();
+			}
+
+			try {			image = ImageIO.read(new File(path));
+				g.drawImage(image, 0, 0,this.getWidth(),this.getHeight(), null);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				path = System.getProperty("user.dir")+"\\src\\"+"images\\Art\\PanelEastV1.png";
+			}catch(Exception e){
+				path = System.getProperty("user.dir")+"\\src\\"+"images\\Art\\PanelEastV1.png";
+				e.printStackTrace();
+
+			}
+		}
+		
+		if (num == 4) {
+			try {
+				path = System.getProperty("user.dir")+"\\src\\"+"images\\Art\\PanelSouthV1.png";
+			}catch(Exception e){
+				path = System.getProperty("user.dir")+"\\src\\"+"images\\Art\\PanelSouthV1.png";
+				e.printStackTrace();
+			}
+
+			try {			image = ImageIO.read(new File(path));
+				g.drawImage(image, 0, 0,this.getWidth(),this.getHeight(), null);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				path = System.getProperty("user.dir")+"\\src\\"+"images\\Art\\PanelSouthV1.png";
+			}catch(Exception e){
+				path = System.getProperty("user.dir")+"\\src\\"+"images\\Art\\PanelSouthV1.png";
+				e.printStackTrace();
+
+			}
+		}
+		
 
 
 	}

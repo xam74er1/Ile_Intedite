@@ -1,6 +1,7 @@
 package IHM;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -24,6 +25,7 @@ public class htmlPan extends JPanel {
 		text.setText(str);
 		
 		this.img = img;
+		text.setForeground(new Color(255, 255, 255));
 		text.setHorizontalAlignment(JLabel.CENTER);
 		text.setVerticalAlignment(JLabel.CENTER);
 		this.add(text,BorderLayout.CENTER);
