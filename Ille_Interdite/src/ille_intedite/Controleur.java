@@ -80,7 +80,7 @@ public class Controleur implements Observateur{
 		joueursList = new ArrayList<Aventurier>();
 		this.vue = vue;
 		nbJoueurs = msgInit.nbJoueurs;
-		init(msgInit.listJoueurs);
+		init(msgInit);
 		numTour =0;
 		curseur = new Curseur(msgInit.niveauEau);
 		ihm.afficherNivCurseur(msgInit.niveauEau);
@@ -555,9 +555,9 @@ public class Controleur implements Observateur{
 
 	}
 
-	public void init(ArrayList<Aventurier> listJoueurs) {
+	public void init(MessageInit msgInit) {
 
-		joueursList = listJoueurs;
+		joueursList = msgInit.listJoueurs;
 
 
 		Collections.shuffle(joueursList);
@@ -575,6 +575,10 @@ public class Controleur implements Observateur{
 			piocherClassique(av);
 		}
 
+		String sc = msgInit.scenario;
+		if(sc == "Victoire") {
+			scenario_victoire();
+		}
 
 		ihm.miseAJourPlayer(0," ( "+getJoueurTour().getNom()+" )", getJoueurTour().getColor());
 
