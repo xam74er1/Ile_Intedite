@@ -1,12 +1,20 @@
 package ille_intedite;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+
 //import IHM.IHM;
 import IHM.IHMV2;
 import ille_intedite.Aventurie.Aventurier;
+import ille_intedite.Aventurie.Aviateur;
+import ille_intedite.Aventurie.Explorateur;
+import ille_intedite.Aventurie.Ingenieur;
+import ille_intedite.Aventurie.Messager;
+import ille_intedite.Aventurie.Navigateur;
+import ille_intedite.Aventurie.Plongeur;
 import utils.Parameters;
-
-import java.lang.reflect.Parameter;
-import java.util.*;
-import javax.swing.JButton;
 
 public class Grille {
 	IHMV2 ihm;
@@ -80,17 +88,19 @@ public class Grille {
 						Iterator<Aventurier> it = aventuriers.iterator();
 						while(it.hasNext()) {
 							Aventurier a = it.next();
-							if (a.getNum()==typeT-20) {
+							if ((a instanceof Explorateur && t.getNum()==25)
+									|| (a instanceof Ingenieur && t.getNum()==20)
+									|| (a instanceof Plongeur && t.getNum()==21)
+									|| (a instanceof Navigateur && t.getNum()==22)
+									|| (a instanceof Aviateur && t.getNum()==24)
+									|| (a instanceof Messager && t.getNum()==23)) {
 								a.setPosition(t);
 							}
+					
 						}
 
 					}
 
-
-					//				int num=(int) (Math.random()*tailleNom);
-					//				Tuile t = new Tuile(Integer.parseInt(nomTuiles[num].substring(0,3)),nomTuiles[num].substring(3),x,y);
-					//				nomTuiles[num]=nomTuiles[tailleNom-1];
 					tuilesListe.put(x+":"+y, t);
 
 					//tailleNom--;

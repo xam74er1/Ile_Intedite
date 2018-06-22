@@ -1,5 +1,6 @@
 
 package ille_intedite;
+
 import Carte.Carte;
 import Carte.CarteHelicoptere;
 import Carte.Classique;
@@ -8,29 +9,22 @@ import Carte.CarteTresor;
 import Carte.CarteSacSable;
 import Carte.MonteeEaux;
 import Carte.NomTresor;
+
 import IHM.FenetreFin;
-import IHM.FenetreStart;
 import IHM.IHMV2;
 import IHM.MessageFinPartie;
 import IHM.MessageInit;
 import IHM.PlaySound;
+
 import ille_intedite.Aventurie.Aventurier;
 import ille_intedite.Aventurie.Aviateur;
-import ille_intedite.Aventurie.Explorateur;
 import ille_intedite.Aventurie.Ingenieur;
 import ille_intedite.Aventurie.Messager;
-import ille_intedite.Aventurie.Navigateur;
 import ille_intedite.Aventurie.Plongeur;
-import Carte.NomTresor;
-import Carte.CarteHelicoptere;
 
-import java.awt.Color;
 import java.util.*;
-import java.util.Map.Entry;
-import java.util.concurrent.TimeUnit;
 
 import utils.Parameters;
-import utils.Utils;
 import utils.Utils.Pion;
 
 public class Controleur implements Observateur{
