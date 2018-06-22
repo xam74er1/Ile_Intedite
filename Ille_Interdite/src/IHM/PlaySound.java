@@ -10,7 +10,7 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
-
+//classe permettant de jouer un son
 public class PlaySound {
 
 	private static  Clip audioClip = null; 

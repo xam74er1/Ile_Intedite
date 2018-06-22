@@ -21,7 +21,7 @@ import ille_intedite.Observe;
 import ille_intedite.Tuile;
 import ille_intedite.TypeMessage;
 import ille_intedite.Aventurie.Aventurier;
-
+//panel affichant les cases du plateau
 public class CasePlateau extends JPanel  {
 	//Com de referencement
 	private String str,location;
@@ -33,7 +33,6 @@ public class CasePlateau extends JPanel  {
 	String path=" ";
 
 	public CasePlateau(String str,String location, Observe o,Tuile t) {
-		//com ref
 		this.str = str;
 		this.o = o;
 		this.t = t;
@@ -43,15 +42,7 @@ public class CasePlateau extends JPanel  {
 		this.addMouseListener(m);
 		setLayout(new BorderLayout(0, 0));
 
-		/*JLabel lblNewLabel = new JLabel(str);
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setForeground(Color.BLACK);
-		add(lblNewLabel);
-		setBackground(Color.gray);*/
-
 		this.t.setCase(this);
-
-		//this.setBorder(BorderFactory.createLineBorder(Color.black));
 
 	}
 
@@ -109,25 +100,21 @@ public class CasePlateau extends JPanel  {
 
 				}
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				System.out.println("name = "+name);
 				System.out.println("erruer :"+ path+" ");
-				//e.printStackTrace();
 			}
 		}else {
 
 			try {
 				image = ImageIO.read(new File(System.getProperty("user.dir")+"\\src\\"+"images\\watterTexture.jpg"));
-				//super.paintComponent(g);
 				g.drawImage(image, 0, 0,this.getWidth(),this.getHeight(), null);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				//System.out.println(new File().exists());
+
 				e.printStackTrace();
 			}
 		}
 
-		//Effect blanc pour la ou on ne peux pas ce deplace 
+		//Effect blanc pour la ou on ne peut pas se deplacer
 		if(blanc&&activated) {
 			g.setColor(new Color(0,0,0,128));
 
@@ -140,16 +127,12 @@ public class CasePlateau extends JPanel  {
 
 			try {
 				image = ImageIO.read(new File(path));
-				//super.paintComponent(g);
 				g.drawImage(image, xa, ya, 4*s, 4*s, null);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				//System.out.println(new File().exists());
+
 				System.out.println(path);
-				//e.printStackTrace();
 			}
-			//			g.setColor(a.getColor());
-			//			g.fillOval(xa, ya, xa+s, ya+s);
+
 			xa += 2*s;
 
 		}
@@ -241,4 +224,3 @@ public class CasePlateau extends JPanel  {
 
 }
 
-//testEUUU

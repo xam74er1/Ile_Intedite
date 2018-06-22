@@ -13,7 +13,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import ille_intedite.Observe;
-
+//panel du curseur
 public class PanelCurseur extends JPanel {
 	
 	private Observe o;
