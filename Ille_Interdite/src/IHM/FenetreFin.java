@@ -12,8 +12,11 @@ import ille_intedite.Curseur;
 
 public class FenetreFin extends JFrame{
 	private JLabel labelFin;
+	public static int nbFen=0;
+	
 	public FenetreFin(MessageFinPartie msg){
 		//Si le curseur jouais la musique de fin 
+		nbFen++;
 		Curseur.stopSound();
 		if (msg.isVictoire()) {
 			labelFin = new JLabel("Vous avez gagné !");
