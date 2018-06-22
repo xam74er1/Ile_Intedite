@@ -60,5 +60,9 @@ public class Curseur {
 			}
 		}
 	}
+	
+	public void setNiv(int niv) {
+		this.niveau=niv;
+	}
 
 }

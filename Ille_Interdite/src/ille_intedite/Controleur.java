@@ -83,8 +83,6 @@ public class Controleur implements Observateur{
 		nbJoueurs = msgInit.nbJoueurs;
 		init(msgInit);
 		numTour =0;
-		curseur = new Curseur(msgInit.niveauEau);
-		ihm.afficherNivCurseur(10);
 
 		//Utils.debugln("controleur start");
 
@@ -537,8 +535,6 @@ public class Controleur implements Observateur{
 		carteTresorDeck.add(new CarteHelicoptere("2Helicoptere"));
 		carteTresorDeck.add(new CarteHelicoptere("3Helicoptere"));
 
-
-
 		if(Parameters.ALEAS) {
 			melanger(carteTresorDeck);
 		}
@@ -604,9 +600,16 @@ public class Controleur implements Observateur{
 			piocherClassique(av);
 		}
 
+		curseur=new Curseur(msgInit.niveauEau);
+		ihm.afficherNivCurseur(msgInit.niveauEau);
+
 		String sc = msgInit.scenario;
 		if(sc == "Victoire") {
 			scenario_victoire();
+		}else if(sc == "D\u00E9faite curseur") {
+			scenario_defaite_curseur();
+		}else if(sc == "D\u00E9faite heliport") {
+			scenario_defaite_heliport();
 		}
 
 		ihm.miseAJourPlayer(0," ( "+getJoueurTour().getNom()+" )", getJoueurTour().getColor());
@@ -1011,6 +1014,32 @@ public class Controleur implements Observateur{
 		afficherCartes(getJoueurTour());
 
 
+	}
+
+	private void scenario_defaite_curseur() {
+		curseur.setNiv(8);
+		curseur.monteeEaux();
+		ihm.afficherNivCurseur(9);
+		
+		carteTresorDeck.removeAll(carteTresorDeck);
+		carteTresorDeck.add(new MonteeEaux("1MonteeDesEaux"));
+		carteTresorDeck.add(new MonteeEaux("2MonteeDesEaux"));
+	}
+	
+	private void scenario_defaite_heliport() {
+		inondationDeck.removeAll(inondationDeck);
+		for(Tuile t : Grille.tuilesListe.values()) {
+			if(t.getNum()==24) {
+				t.setStatut(-1);
+				inondationDeck.add(new CarteInondation(t.getNom(),t));
+			}
+			if(t.getNum()==22 || t.getNum()==23) {
+				inondationDeck.add(new CarteInondation(t.getNom(),t));
+			}
+		}
+		
+		
+		
 	}
 
 }
