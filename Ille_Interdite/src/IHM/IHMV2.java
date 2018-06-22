@@ -453,7 +453,7 @@ public class IHMV2 extends Observe{
 		break;
 		case PierreSacree:lbImgTresor3.setEnabled(true);
 		break;
-		case StatueZephir:lbImgTresor4.setEnabled(true);
+		case StatueZephyr:lbImgTresor4.setEnabled(true);
 		break;
 		}
 	}

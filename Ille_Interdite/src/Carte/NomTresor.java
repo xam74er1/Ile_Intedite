@@ -2,7 +2,7 @@ package Carte;
 public enum NomTresor {
 	
 	PierreSacree("Pierre Sacree",4),
-	StatueZephir("Statue Zephir",3),
+	StatueZephyr("Statue Zephir",3),
 	CristalArdent("Cristal Ardent",1),
 	CaliceOnde("Calice Onde",2);
 	
@@ -31,7 +31,7 @@ public enum NomTresor {
 		switch(n) {
 		case 1: return CristalArdent; 
 		case 2: return CaliceOnde; 
-		case 3: return StatueZephir;
+		case 3: return StatueZephyr;
 		case 4: return PierreSacree;
 		default : return null;
 		

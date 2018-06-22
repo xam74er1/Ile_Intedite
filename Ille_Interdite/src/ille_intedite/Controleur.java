@@ -522,7 +522,7 @@ public class Controleur implements Observateur{
 					break;
 				case 3:
 					// Statue
-					carteTresorDeck.add(new CarteTresor(j+"Zephyr", NomTresor.StatueZephir));
+					carteTresorDeck.add(new CarteTresor(j+"Zephyr", NomTresor.StatueZephyr));
 					break;
 				case 4:
 					// Pierre
@@ -961,11 +961,11 @@ public class Controleur implements Observateur{
 
 		tresorsRecuperes.add(NomTresor.CaliceOnde);
 		tresorsRecuperes.add(NomTresor.PierreSacree);
-		tresorsRecuperes.add(NomTresor.StatueZephir);
+		tresorsRecuperes.add(NomTresor.StatueZephyr);
 
 		ihm.setTresorEnabled(NomTresor.CaliceOnde);
 		ihm.setTresorEnabled(NomTresor.PierreSacree);
-		ihm.setTresorEnabled(NomTresor.StatueZephir);
+		ihm.setTresorEnabled(NomTresor.StatueZephyr);
 
 
 
@@ -1012,11 +1012,11 @@ public class Controleur implements Observateur{
 		carteTresorDeck.removeAll(carteTresorDeck);
 		tresorsRecuperes.add(NomTresor.CaliceOnde);
 		tresorsRecuperes.add(NomTresor.PierreSacree);
-		tresorsRecuperes.add(NomTresor.StatueZephir);
+		tresorsRecuperes.add(NomTresor.StatueZephyr);
 		tresorsRecuperes.add(NomTresor.CristalArdent);
 		ihm.setTresorEnabled(NomTresor.CaliceOnde);
 		ihm.setTresorEnabled(NomTresor.PierreSacree);
-		ihm.setTresorEnabled(NomTresor.StatueZephir);
+		ihm.setTresorEnabled(NomTresor.StatueZephyr);
 		ihm.setTresorEnabled(NomTresor.CristalArdent);
 	}
 	
