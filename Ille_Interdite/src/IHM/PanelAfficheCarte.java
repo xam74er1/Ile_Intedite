@@ -17,6 +17,8 @@ public class PanelAfficheCarte extends JPanel {
 	private Observe o;
 	private ArrayList<Carte> listCarte;
 	private JFrame frame;
+	private PanelOk pok;
+	private boolean ok;
 
 	public PanelAfficheCarte(Observe o, JFrame frame) {
 		super();
@@ -52,11 +54,14 @@ public class PanelAfficheCarte extends JPanel {
 			PanelCarte pane = new PanelCarte(i, o, c instanceof Classique);
 			this.add(pane);
 			pane.setCarte(c);
+			if(ok) {
+				pane.desactivate();
+			}
 			pane.setBounds(0, 0,80, 112);
 
 
 		}
-		for (int i=listCarte.size();i<30-(2*(listCarte.size()/8+1));i++) {
+		for (int i=listCarte.size();i<29-(2*(listCarte.size()/8+1));i++) {
 			this.add(new PanelNoir());
 		}
 		PanelNoir pane = new PanelNoir();
@@ -64,10 +69,15 @@ public class PanelAfficheCarte extends JPanel {
 		for (int i=0;i<3;i++) {
 			pane.add(new PanelNoir());
 		}
-		pane.add(new PanelOk(o));
+		pok = new PanelOk(o);
+		if(!ok) pok.desactivate();
+		pane.add(pok);
 		this.add(pane);
+		this.add(new PanelNoir());
 	}
-
-
+	
+	public void setOk(boolean ok) {
+		this.ok=ok;
+	}
 
 }

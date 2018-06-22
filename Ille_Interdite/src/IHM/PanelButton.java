@@ -93,5 +93,13 @@ public class PanelButton extends JPanel{
 			}
 		};
 	}
+	
+	public void activate() {
+		this.addMouseListener(m);
+	}
+	
+	public void desactivate() {
+		this.removeMouseListener(m);
+	}
 
 }

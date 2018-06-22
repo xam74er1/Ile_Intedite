@@ -255,10 +255,12 @@ public class FenetreStart extends JFrame {
                     
                         
                         
-                        labelPlon.setIcon(imgIcon5AS);
+                    labelPlon.setIcon(imgIcon5AS);
                         panChoixCarte.add(labelPlon);
                         
-                        labelExplo.addMouseListener(new MouseListener(){
+
+                    labelExplo.addMouseListener(new MouseListener(){
+
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
@@ -820,7 +822,7 @@ public void actionPerformed(ActionEvent arg0) {
         	m.niveauEau =2;
         } else if  (difficulte.getSelectedItem() == "Epique") {
         	m.niveauEau =3;
-        } else if  (difficulte.getSelectedItem() == "Legendaire") {
+        } else {
         	m.niveauEau =4;
         }
 		

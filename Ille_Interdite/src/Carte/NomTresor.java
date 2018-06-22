@@ -30,9 +30,9 @@ public enum NomTresor {
 	public static NomTresor getWisNum(int n ) {
 		switch(n) {
 		case 1: return CristalArdent; 
-		case 2 : return CaliceOnde; 
-		case 3: return NomTresor.StatueZephir;
-		case 4: return NomTresor.PierreSacree;
+		case 2: return CaliceOnde; 
+		case 3: return StatueZephir;
+		case 4: return PierreSacree;
 		default : return null;
 		
 		}

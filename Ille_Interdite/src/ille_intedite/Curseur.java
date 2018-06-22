@@ -1,7 +1,13 @@
 package ille_intedite;
+
+import javax.sound.sampled.Clip;
+
+import IHM.PlaySound;
+
 public class Curseur {
 
 	private int niveau;
+	private static Clip cl ;
 
 	/**
 	 * 
@@ -37,10 +43,22 @@ public class Curseur {
 
 	public void monteeEaux() {
 		niveau++;
+		
+		if(niveau==9) {
+			cl = PlaySound.play(System.getProperty("user.dir")+"\\src\\"+"sound\\Jawstheme.wav");
+		}
 	}
 	
 	public int getNiv() {
 		return niveau;
+	}
+	
+	public static void stopSound() {
+		if(cl != null) {
+			if(cl.isOpen()&& cl.isActive()) {
+				cl.stop();
+			}
+		}
 	}
 
 }
