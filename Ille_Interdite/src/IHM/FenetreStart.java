@@ -663,7 +663,7 @@ public class FenetreStart extends JFrame {
 
 				vue.afficherGrille();
 
-				ctrl.piocher5Inondation();
+				ctrl.piocher6Inondation();
 				//Comentaire de modification 
 				moi.setVisible(false);
 				//moi.dispose();
