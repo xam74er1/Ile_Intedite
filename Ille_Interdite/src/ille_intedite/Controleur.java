@@ -267,6 +267,7 @@ public class Controleur implements Observateur{
 			if(recupererTresor()) {
 				getJoueurTour().actionJouer();
 				ihm.setIndication("Vous avez recupere le tresor");
+				PlaySound.play(System.getProperty("user.dir")+"\\src\\"+"sound\\Recuperer_Tresor.wav");
 			}else {
 				ihm.setIndication("Impossible de recuperer le tresor");
 			}
