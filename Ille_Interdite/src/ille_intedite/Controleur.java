@@ -383,6 +383,7 @@ public class Controleur implements Observateur{
 					getJoueurTour().getListeCarteJoueur().remove(c);
 					givePlayer.getListeCarteJoueur().add(c);
 					afficherCartes(getJoueurTour());
+					ihm.rool(getJoueurTour(), joueursList);
 					numCarte = -1;
 					ihm.setIndication("");
 				}

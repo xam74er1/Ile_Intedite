@@ -799,12 +799,24 @@ public class IHMV2 extends Observe{
 			btDonneCarte.activate();
 			btFinDeTour.activate();
 			btRecupereTresor.activate();
+			panelCarte1.activate();
+			panelCarte2.activate();
+			panelCarte3.activate();
+			panelCarte4.activate();
+			panelCarte5.activate();
+			
+			
 		}else {
 			btAsseche.desactivate();
 			btDeplace.desactivate();
 			btDonneCarte.desactivate();
 			btFinDeTour.desactivate();
 			btRecupereTresor.desactivate();
+			panelCarte1.desactivate();
+			panelCarte2.desactivate();
+			panelCarte3.desactivate();
+			panelCarte4.desactivate();
+			panelCarte5.desactivate();
 		}
 		btnImgPlayerIn1T.setEnabled(b);
 		
