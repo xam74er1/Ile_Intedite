@@ -6,21 +6,12 @@ import ille_intedite.Tuile;
 public class CarteInondation extends Carte {
 
 	Tuile tuile;
-	String nom;
 
     public CarteInondation(String nom,Tuile tuile) {
     	super(nom);
         this.tuile = tuile;
     }
-
-	public String getNom() {
-		return nom;
-	}
-
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
-
+    
 	public Tuile getTuile() {
 		return tuile;
 	}

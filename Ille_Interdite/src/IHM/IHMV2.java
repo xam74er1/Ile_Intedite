@@ -67,8 +67,6 @@ public class IHMV2 extends Observe{
 
 	VueGrille vue;
 
-	PanelAfficheCarte panelDefausse;
-	PanelAfficheCarte panelCarteInondations;
 	PanelAfficheCarte panelCartePiochee;
 
 
@@ -118,15 +116,6 @@ public class IHMV2 extends Observe{
 		frame.getContentPane().setBackground(new Color(105, 105, 105));
 		frame.getContentPane().setLayout(null);
 
-		panelDefausse=new PanelAfficheCarte(this, frame);
-
-		panelDefausse.setBounds(0, 0, 1280, 680);
-		frame.getContentPane().add(panelDefausse);
-
-		panelCarteInondations=new PanelAfficheCarte(this, frame);
-		panelCarteInondations.setBounds(0, 0, 1280, 680);
-		frame.getContentPane().add(panelCarteInondations);
-
 		panelCartePiochee=new PanelAfficheCarte(this, frame);
 		panelCartePiochee.setBounds(0, 0, 1280, 680);
 		frame.getContentPane().add(panelCartePiochee);
@@ -172,7 +161,7 @@ public class IHMV2 extends Observe{
 		PanelHelp.add(btnHelp);
 
 
-		CardPlayer = new PanelFont(0, this, true);
+		CardPlayer = new PanelFont(0,true);
 		CardPlayer.setBackground(new Color(139, 69, 19));
 		CardPlayer.setBounds(114, 31, 250, 597);
 		frame.getContentPane().add(CardPlayer);
@@ -451,8 +440,6 @@ public class IHMV2 extends Observe{
 		//----------------
 		//PROVISOIRE 
 		//--------------
-
-		frame.getContentPane().add(panelDefausse);
 
 		lblJoeurN = new JLabel();
 
@@ -772,16 +759,9 @@ public class IHMV2 extends Observe{
 		msgHelp.setText(str);
 	}
 
-	public void afficherDefausse(Aventurier a) {
+	public void afficherPioche(ArrayList<Carte> listCartes, boolean ok) {
 		setPanelEnabled(false);
-		panelDefausse.removeAll();
-		panelDefausse.setListCarte(a.getListeCarteJoueur());
-		panelDefausse.repaint();
-		panelDefausse.setVisible(true);
-	}
-
-	public void afficherPioche(ArrayList<Carte> listCartes) {
-		setPanelEnabled(false);
+		panelCartePiochee.setOk(ok);
 		panelCartePiochee.removeAll();
 		panelCartePiochee.setListCarte(listCartes);
 		panelCartePiochee.repaint();
@@ -853,11 +833,25 @@ public class IHMV2 extends Observe{
 		}
 
 	}
+	
+	public void setActionEnabled(boolean b) {
+		if(b) {
+			btAsseche.activate();
+			btDeplace.activate();
+			btDonneCarte.activate();
+			btFinDeTour.activate();
+			btRecupereTresor.activate();
+		}else {
+			btAsseche.desactivate();
+			btDeplace.desactivate();
+			btDonneCarte.desactivate();
+			btFinDeTour.desactivate();
+			btRecupereTresor.desactivate();
+		}
+	}
 
 	public void afficherPlateau() {
 		setPanelEnabled(true);
 		panelCartePiochee.setVisible(false);
-		panelCarteInondations.setVisible(false);
-		panelDefausse.setVisible(false);
 	}
 }

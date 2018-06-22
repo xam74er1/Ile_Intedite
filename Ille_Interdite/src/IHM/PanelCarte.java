@@ -64,16 +64,36 @@ public class PanelCarte extends JPanel{
 		g.drawRect(0, 0,  this.getWidth(),this.getHeight());
 
 		try {
-			path = System.getProperty("user.dir")+"\\src\\"+"images\\cartes\\"+carte.getNom().substring(1)+".png";
+			if(classique) {
+				path = System.getProperty("user.dir")+"\\src\\"+"images\\cartes\\"+carte.getNom().substring(1)+".png";
+			}else {
+				String name = carte.getNom();
+				
+				name=	name.replace(" d", "D");
+				name=	name.replace(" ", "");
+				name = name.replace("’", "");
+				name = name.replace("'", "");
+				
+				path = System.getProperty("user.dir")+"\\src\\"+"images\\cartes\\"+name+".png";
+
+			}
 		}catch(Exception e){
-			path = System.getProperty("user.dir")+"\\src\\"+"images\\cartes\\Fond rouge.png";
+			if (classique) {
+				path = System.getProperty("user.dir")+"\\src\\"+"images\\cartes\\Fond rouge.png";
+			}else {
+				path = System.getProperty("user.dir")+"\\src\\"+"images\\cartes\\Fond bleu.png";
+			}
+			
+			
 		}
 
-		try {			image = ImageIO.read(new File(path));
+		try {		
+			image = ImageIO.read(new File(path));
 			g.drawImage(image, 0, 0,this.getWidth(),this.getHeight(), null);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(path);
+			//e.printStackTrace();
 		}
 
 		if(blanc) {
