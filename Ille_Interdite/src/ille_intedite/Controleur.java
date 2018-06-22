@@ -895,7 +895,7 @@ public class Controleur implements Observateur{
 					a.deplacer(t);
 				}
 			}
-		}
+		} 
 		tresorsRecuperes.add(NomTresor.CaliceOnde);
 		tresorsRecuperes.add(NomTresor.CaliceOnde);
 		tresorsRecuperes.add(NomTresor.CaliceOnde);
