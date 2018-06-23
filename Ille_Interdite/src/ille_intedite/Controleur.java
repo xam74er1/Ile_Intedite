@@ -253,8 +253,7 @@ public class Controleur implements Observateur{
 
 			//Clic sur le bouton Fin de tour
 		case Clique_Fin_Tour :
-			lastAction=TypeMessage.Clique_Deplace_Urgence;
-			afficherPiocheFinTour();
+			touteActionJouer();
 			break;
 
 			//Clic sur le bouton Recuperer Tresor
@@ -397,8 +396,10 @@ public class Controleur implements Observateur{
 			break;
 
 		case Clique_Ok :
+		
 			//Si on est dans l'affichage de la pioche tresor
 			if (tresoraffiche) {
+			
 				tresoraffiche=false;
 				if(getJoueurTour().getNbCarte()>5) {
 					ihm.afficherPlateau();
@@ -407,11 +408,13 @@ public class Controleur implements Observateur{
 					ihm.afficherPlateau();
 					afficherPiocheInondation();
 				}
+				tresoraffiche=false;
 			}else {
 				ihm.afficherPlateau();
 				finDeTour();
 			}
 
+			
 			break;
 
 		}
@@ -427,11 +430,21 @@ public class Controleur implements Observateur{
 		}
 
 
-		if(getJoueurTour().getNbAction()<1) {
+		if(getJoueurTour().getNbAction()<1 && ! finTour) {
 			finTour=true;
-			afficherPiocheFinTour();
+			
+			touteActionJouer();
 		}
 
+	}
+	
+	//-----------------FIN CONTROLEUR----------------------------
+	
+	
+	public void touteActionJouer() {
+		System.out.println("toute action jouer ");
+		lastAction=TypeMessage.Clique_Deplace_Urgence;
+		afficherPiocheFinTour();
 	}
 
 	//Gestion de la fin de tour (apres affichage des pioches)
@@ -457,7 +470,11 @@ public class Controleur implements Observateur{
 			finTour=false;
 			//on teste si un des tresor a coule
 			verifierFinDePartie();
+			
+			
 		}
+		
+		tresoraffiche=true;
 	}
 
 	//affichage de la pioche de carte tresor
@@ -468,8 +485,8 @@ public class Controleur implements Observateur{
 		melanger(carteTresorDeck);
 		listPioche.add(piocherClassique(getJoueurTour()));
 		listPioche.add(piocherClassique(getJoueurTour()));
-		tresoraffiche=true;
-		System.out.println("on pioche tresor");
+		//tresoraffiche=true;
+		System.out.println("aficher pioche fin de tour ");
 		ihm.afficherPioche(listPioche,true);
 	}
 
@@ -698,6 +715,7 @@ public class Controleur implements Observateur{
 
 	//deplacement (si necessaire) des aventuriers a sauver
 	private void deplacerUrgence() {
+		//ihm.setEtaCasePlateauEneble(true);
 		urgence=null;
 		urg=false;
 		ihm.setActionEnabled(false);
@@ -975,6 +993,8 @@ public class Controleur implements Observateur{
 	public static int getNbJoueur() {
 		return joueursList.size();
 	}
+	
+	//------------------------------SENARIO ---------------------------------------------------
 
 	//SCENARI
 	//victoire

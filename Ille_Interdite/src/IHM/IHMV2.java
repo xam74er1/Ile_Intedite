@@ -694,7 +694,8 @@ public class IHMV2 extends Observe{
 		btnImgPlayerIn1T.setPath(System.getProperty("user.dir")+"\\src\\"+"images/persos/"+path+".png");
 
 		PanelPlayerIn1T.repaint();
-
+		btnImgPlayerIn1T.repaint();
+		btnImgPlayerIn1T.revalidate();
 
 		//---------------Joeur qui joeur dans 2T ------------------------
 		if(i<=listAvent.size()) {
@@ -778,6 +779,9 @@ public class IHMV2 extends Observe{
 			btnImgPlayerIn3T.setPath(System.getProperty("user.dir")+"\\src\\"+"images/persos/"+path+".png");
 			//	System.out.println(" 3 = "+a.getNom()+" k"+k);
 		}
+		
+		PanelEast.repaint();
+		PanelEast.revalidate();
 
 	}
 
@@ -908,5 +912,11 @@ public class IHMV2 extends Observe{
 	public void afficherPlateau() {
 		setPanelEnabled(true);
 		panelCartePiochee.setVisible(false);
+	}
+	
+	public void setEtaCasePlateauEneble(boolean b) {
+		for(CasePlateau c : listPan.values()) {
+			c.mouseEnable(b);
+		}
 	}
 }
