@@ -143,7 +143,7 @@ public class Controleur implements Observateur{
 				//tuile de destination choisie
 				if (helicoTuileSelect!=null && memoireAventuire != null) {
 
-					
+
 					Tuile t = grille.getTuile(msg.getLocation());
 					for(Aventurier a : joueursList) {
 						if(a.getTuile().equals(helicoTuileSelect)) {
@@ -156,7 +156,7 @@ public class Controleur implements Observateur{
 					PlaySound.play(System.getProperty("user.dir")+"\\src\\"+"sound\\vrai_son_helicoptere.wav");
 
 					memoireAventuire.removeCarte(carteSpe);
-					
+
 					carteTresorsDefausse.add(carteSpe);
 					helicoTuileSelect=null;
 					if(defausse) {
@@ -170,7 +170,7 @@ public class Controleur implements Observateur{
 					memoireAventuire = null;
 
 				}else { //tuile de depart choisie
-					
+
 					ihm.setIndication("Cliquez sur une case pour vous deplacer");
 
 					ArrayList<Tuile> tuilesDep = new ArrayList<Tuile>();
@@ -330,7 +330,7 @@ public class Controleur implements Observateur{
 				verifierFinDePartie();
 
 				carteSpe=(Classique) msg.getCarte();
-				
+
 				if(msg.getNumJoueur() != -1) {
 					memoireAventuire = joueursList.get(msg.getNumJoueur());
 				}else {
@@ -620,16 +620,16 @@ public class Controleur implements Observateur{
 
 
 		if(Parameters.ALEAS) {
-		Collections.shuffle(joueursList);
+			Collections.shuffle(joueursList);
 		};
-		
+
 		int i = 0;
 		for(Aventurier a : joueursList) {
 			a.setNum(i);
 			i++;
 		}
-		
-		
+
+
 		grille = new Grille(ihm,joueursList);
 
 		ihm.fillPlataux2(grille);
@@ -843,34 +843,33 @@ public class Controleur implements Observateur{
 
 		if(tresorsRecuperes.contains(t)) return false;
 
-		boolean dejaPresent=false;
 		if(t!=null) {
-			for(int i=0;i>tresorsRecuperes.size(); i++) {
-				if (!dejaPresent&&tresorsRecuperes.get(i)==t) {
-					dejaPresent=true;
-				}
-			}
-			if(!dejaPresent) {
-				tresorsRecuperes.add(t);
-				ihm.setTresorEnabled(t.getType());
-				ArrayList<Carte> listCarte = new ArrayList<Carte>();
-				for(Carte c : a.getListeCarteJoueur()) {
-					if(c instanceof CarteTresor) {
-						CarteTresor cT=(CarteTresor) c;
-						if(cT.getType()==t.getType()) {
-							listCarte.add(cT);
-						}
+			int nbCartes=0;
+
+			ArrayList<Carte> listCarte = new ArrayList<Carte>();
+			for(Carte c : a.getListeCarteJoueur()) {
+				if(c instanceof CarteTresor) {
+					CarteTresor cT=(CarteTresor) c;
+					if(cT.getType()==t.getType()) {
+						listCarte.add(cT);
+						nbCartes++;
 					}
 				}
+			}
+			if (nbCartes>3) {
+				tresorsRecuperes.add(t);
+				ihm.setTresorEnabled(t.getType());
+
 				for(Carte c : listCarte) {
 					a.removeCarte((Classique) c);
 				}
 				afficherCartes(a);
+
+				return true;
 			}
-			return true;
-		}else {
-			return false;
 		}
+		return false;
+
 	}
 
 	//verification des conditions de fin de partie
