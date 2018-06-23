@@ -798,8 +798,8 @@ public class Controleur implements Observateur{
 		CarteInondation cInP = (CarteInondation) inondationDeck.get(0);
 		cInP.getTuile().inonder();
 		miseAJourGrille();
-		if(cInP.getTuile().getNum()==24 && cInP.getTuile().getStatut()==2) {
-			helicoCoule=true;
+		if((cInP.getTuile().getNum()==24 || cInP.getTuile().getNum()/100==3) && cInP.getTuile().getStatut()==2) {
+			if(cInP.getTuile().getNum()==24 ) helicoCoule=true;
 			verifierFinDePartie();
 		}
 
