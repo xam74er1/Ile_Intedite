@@ -70,6 +70,10 @@ public class FenetreFin extends JFrame{
 			labelFin.setFont(font);
 			
 			labelMort.setText(msg.typeDefaite);
+			switch(msg.typeDefaite) {
+			case "Un des aventuriers s'est noy\u00E9.." :
+				PlaySound.play(System.getProperty("user.dir")+"\\src\\"+"sound\\Darkness.wav");
+			}
 	
 		}
 		

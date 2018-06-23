@@ -66,6 +66,7 @@ public class Controleur implements Observateur{
 	private boolean urg=false;
 	private boolean finTour=false;
 	private boolean defausse=false;
+	private boolean tresoraffiche=true;
 
 	private VueGrille vue;
 
@@ -397,7 +398,8 @@ public class Controleur implements Observateur{
 
 		case Clique_Ok :
 			//Si on est dans l'affichage de la pioche tresor
-			if (lastAction==TypeMessage.Clique_Fin_Tour){
+			if (tresoraffiche) {
+				tresoraffiche=false;
 				if(getJoueurTour().getNbCarte()>5) {
 					ihm.afficherPlateau();
 					afficherDefausseFinTour();
@@ -405,12 +407,7 @@ public class Controleur implements Observateur{
 					ihm.afficherPlateau();
 					afficherPiocheInondation();
 				}
-				//Si on est dans l'affichage de la pioche inondation
-			}else if (lastAction==TypeMessage.Clique_Ok){
-				ihm.afficherPlateau();
-				finDeTour();
-				//idem mais si on a affiche la defausse avant
-			}else if(finTour) {
+			}else {
 				ihm.afficherPlateau();
 				finDeTour();
 			}
@@ -471,6 +468,8 @@ public class Controleur implements Observateur{
 		melanger(carteTresorDeck);
 		listPioche.add(piocherClassique(getJoueurTour()));
 		listPioche.add(piocherClassique(getJoueurTour()));
+		tresoraffiche=true;
+		System.out.println("on pioche tresor");
 		ihm.afficherPioche(listPioche,true);
 	}
 
@@ -562,27 +561,30 @@ public class Controleur implements Observateur{
 				if (isInit) {
 					carteTresorsDefausse.add(cC);
 					curseur.monteeEaux();
+					if (curseur.getNiv()>=10) {
+						verifierFinDePartie();
+					}
 					melanger(inondationDefausse);
 					for (Carte c : inondationDefausse) {
 						inondationDeck.add(0,c);
 					}
 					inondationDefausse.removeAll(inondationDefausse);
-					if (curseur.getNiv()>=10) {
-						verifierFinDePartie();
-					}
+					
 
 					ihm.afficherNivCurseur(curseur.getNiv());
 					carteTresorDeck.remove(0);
 				}else {
 					carteTresorDeck.remove(0);
 					carteTresorDeck.add((int) (Math.random()*carteTresorDeck.size()),cC);
+					return piocherClassique(a);
 				}
 			}
 			return cC;
 		}else {
-			ArrayList<Carte> stamp = carteTresorDeck;
-			carteTresorDeck=carteTresorsDefausse;
-			carteTresorsDefausse=stamp;
+			for (Carte c : carteTresorsDefausse) {
+				carteTresorDeck.add(c);
+			}
+			carteTresorsDefausse.removeAll(carteTresorsDefausse);
 			Classique cC = (Classique) carteTresorDeck.get(0);
 			if(!(cC instanceof MonteeEaux)) {
 				a.getListeCarteJoueur().add(cC);	
@@ -890,7 +892,7 @@ public class Controleur implements Observateur{
 
 				if(curseur.getNiv()==10) {
 					msg.setVictoire(false);
-					msg.setTypeDefaite("L'\u00CEle a sombr\u00E9 compl\u00E8tement..");
+					msg.setTypeDefaite("L'\u00CEle a sombr\u00E9 compl\u00E8tement...");
 					new FenetreFin(msg);												//Curseur au niveau maximum
 				}else {
 
@@ -1057,6 +1059,24 @@ public class Controleur implements Observateur{
 			}
 		}
 		carteTresorDeck.removeAll(carteTresorDeck);
+		for(int i=0;i<4;i++) {
+			for(int j=0;j<5;j++) {
+				switch (i) {
+				case 1:
+					carteTresorDeck.add(new CarteTresor(j+"Cristal", NomTresor.CristalArdent));
+					break;
+				case 2:
+					carteTresorDeck.add(new CarteTresor(j+"Calice", NomTresor.CaliceOnde));
+					break;
+				case 3:
+					carteTresorDeck.add(new CarteTresor(j+"Zephyr", NomTresor.StatueZephyr));
+					break;
+				case 4:
+					carteTresorDeck.add(new CarteTresor(j+"Pierre", NomTresor.PierreSacree));
+					break;
+				}
+			}
+		}
 		tresorsRecuperes.add(NomTresor.CaliceOnde);
 		tresorsRecuperes.add(NomTresor.PierreSacree);
 		tresorsRecuperes.add(NomTresor.StatueZephyr);

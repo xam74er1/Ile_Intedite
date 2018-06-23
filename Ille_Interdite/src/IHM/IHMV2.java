@@ -703,7 +703,6 @@ public class IHMV2 extends Observe{
 			a = listAvent.get(k);
 			path = a.getNom().toLowerCase();
 
-			System.out.println(" 2T = "+a);
 			s = a.getListeCarteJoueur().size();
 
 			it = listeCartes2T.values().iterator();

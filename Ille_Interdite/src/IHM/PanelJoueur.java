@@ -67,7 +67,6 @@ public class PanelJoueur extends JPanel {
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-					System.out.println("test"+numJoueur);
 
 					Message m = new Message(TypeMessage.Clique_Joueur);
 
