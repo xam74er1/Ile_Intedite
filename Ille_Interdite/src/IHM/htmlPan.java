@@ -30,6 +30,7 @@ public class htmlPan extends JPanel {
 		text.setVerticalAlignment(JLabel.CENTER);
 		this.add(text,BorderLayout.CENTER);
 		
+
 	}
 	
 	
