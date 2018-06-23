@@ -76,16 +76,21 @@ public class PanelCarte extends JPanel{
 				name = name.replace("'", "");
 				
 				path = System.getProperty("user.dir")+"\\src\\"+"images\\cartes\\"+name+".png";
+				//Pour que lon puisse clique sur les carte 
+				if(activated) {
+					this.addMouseListener(m);
+				}
 
 			}
 		}catch(Exception e){
 			if (classique) {
 				path = System.getProperty("user.dir")+"\\src\\"+"images\\cartes\\Fond rouge.png";
 			}else {
+			
 				path = System.getProperty("user.dir")+"\\src\\"+"images\\cartes\\Fond bleu.png";
 			}
 			
-			
+			this.removeMouseListener(m);
 		}
 
 		try {		
@@ -93,7 +98,7 @@ public class PanelCarte extends JPanel{
 			g.drawImage(image, 0, 0,this.getWidth(),this.getHeight(), null);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			System.out.println(path);
+			//System.out.println(path);
 			//e.printStackTrace();
 		}
 
@@ -148,6 +153,7 @@ public class PanelCarte extends JPanel{
 				}else {
 					m=new Message(TypeMessage.Clique_Ok);
 				}
+				
 				m.setNumJoueur(numJoueur);
 				m.setNum(numCarte);
 				m.setCarte(carte);
