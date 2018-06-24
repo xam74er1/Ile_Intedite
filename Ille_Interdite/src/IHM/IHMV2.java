@@ -833,17 +833,17 @@ public class IHMV2 extends Observe{
 			panelCarte5.activate();
 
 			for(PanelCarte p : listeCartes1T.values()) {
-				
+				p.setEnabled(true);
 				p.activate();;
 			}
 			
 			for(PanelCarte p : listeCartes1T.values()) {
-			
+				p.setEnabled(true);
 				p.activate();;
 			}
 			
 			for(PanelCarte p : listeCartes1T.values()) {
-				
+				p.setEnabled(true);
 				p.activate();;
 			}
 
@@ -865,17 +865,17 @@ public class IHMV2 extends Observe{
 			
 			
 			for(PanelCarte p : listeCartes1T.values()) {
-				
+				p.setEnabled(false);
 				p.desactivate();
 			}
 			
 			for(PanelCarte p : listeCartes2T.values()) {
 				p.desactivate();
-				
+				p.setEnabled(false);
 			}
 			
 			for(PanelCarte p : listeCartes3T.values()) {
-				
+				p.setEnabled(false);
 				p.desactivate();
 			}
 			
