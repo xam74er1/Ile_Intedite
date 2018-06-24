@@ -73,6 +73,12 @@ public class FenetreFin extends JFrame{
 			switch(msg.typeDefaite) {
 			case "Un des aventuriers s'est noy\u00E9.." :
 				PlaySound.play(System.getProperty("user.dir")+"\\src\\"+"sound\\Darkness.wav");
+				break;
+			case "D\\u00E9faite curseur" : break;
+			
+			case "D\\u00E9faite heliport" : break;
+			
+			case "D\\u00E9faite tr\\u00E9sor" : break;
 			}
 	
 		}

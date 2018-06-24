@@ -445,6 +445,8 @@ public class Controleur implements Observateur{
 	
 		lastAction=TypeMessage.Clique_Deplace_Urgence;
 		afficherPiocheFinTour();
+		//Lors que cela est fini il dois apuille sur le bouton ok (c'est sa seul option )
+		
 	}
 
 	//Gestion de la fin de tour (apres affichage des pioches)
@@ -486,7 +488,7 @@ public class Controleur implements Observateur{
 		listPioche.add(piocherClassique(getJoueurTour()));
 		listPioche.add(piocherClassique(getJoueurTour()));
 		//tresoraffiche=true;
-		System.out.println("aficher pioche fin de tour ");
+		
 		ihm.afficherPioche(listPioche,true);
 	}
 

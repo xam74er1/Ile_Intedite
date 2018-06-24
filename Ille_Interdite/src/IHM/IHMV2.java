@@ -805,6 +805,7 @@ public class IHMV2 extends Observe{
 	}
 
 	public void setPanelEnabled(boolean b) {
+		
 		PanelEast.setEnabled(b);
 		PanelHelp.setEnabled(b);
 		panHelp.setEnabled(b);
@@ -831,6 +832,20 @@ public class IHMV2 extends Observe{
 			panelCarte4.activate();
 			panelCarte5.activate();
 
+			for(PanelCarte p : listeCartes1T.values()) {
+				
+				p.activate();;
+			}
+			
+			for(PanelCarte p : listeCartes1T.values()) {
+			
+				p.activate();;
+			}
+			
+			for(PanelCarte p : listeCartes1T.values()) {
+				
+				p.activate();;
+			}
 
 
 		}else {
@@ -847,6 +862,24 @@ public class IHMV2 extends Observe{
 			panelCarte3.desactivate();
 			panelCarte4.desactivate();
 			panelCarte5.desactivate();
+			
+			
+			for(PanelCarte p : listeCartes1T.values()) {
+				
+				p.desactivate();
+			}
+			
+			for(PanelCarte p : listeCartes2T.values()) {
+				p.desactivate();
+				
+			}
+			
+			for(PanelCarte p : listeCartes3T.values()) {
+				
+				p.desactivate();
+			}
+			
+			
 
 		}
 		btnImgPlayerIn1T.setEnabled(b);
@@ -873,6 +906,8 @@ public class IHMV2 extends Observe{
 		panelCarte1T3.setEnabled(b);
 		panelCarte1T4.setEnabled(b);
 		panelCarte1T5.setEnabled(b);
+		
+		
 
 		for (PanelButton j : listButton.values()) {
 			j.setEnabled(b);
