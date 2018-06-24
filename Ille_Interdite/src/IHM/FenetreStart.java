@@ -69,6 +69,7 @@ public class FenetreStart extends JFrame {
 	private boolean etatBoutonPlon = false;
 	private boolean termine = false;
 	private boolean btno =true;
+	private boolean asCliquer = false;
 
 	public FenetreStart(){
 
@@ -668,6 +669,10 @@ public class FenetreStart extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				//POur evite le double clique sur la fenetre 
+				if(!asCliquer) {
+				
+					asCliquer = true;
 				// initialisation de l'IHM principal et de la vue grille
 				VueGrille vue = new VueGrille();
 				ihm = new IHMV2(vue);
@@ -686,6 +691,7 @@ public class FenetreStart extends JFrame {
 				moi.setVisible(false);
 				//moi.dispose();
 
+				}
 
 			}
 

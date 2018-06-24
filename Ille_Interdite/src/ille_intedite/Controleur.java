@@ -442,7 +442,7 @@ public class Controleur implements Observateur{
 	
 	
 	public void touteActionJouer() {
-		System.out.println("toute action jouer ");
+	
 		lastAction=TypeMessage.Clique_Deplace_Urgence;
 		afficherPiocheFinTour();
 	}
