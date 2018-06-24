@@ -17,8 +17,7 @@ import IHM.PlaySound;
  */
 public class Main {
     public static void main(String [] args) {
-    	//PlaySound.play("C:\\Users\\xam74\\Documents\\ille_interdit\\old\\Weeee.wav");
-    	//com rzef
+
     	FenetreStart f = new FenetreStart();
         
    }    

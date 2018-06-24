@@ -764,7 +764,6 @@ public class FenetreStart extends JFrame {
 					
 					ImageIcon imgS = new ImageIcon(System.getProperty("user.dir")+"\\src\\"+"images/Art/btnValider.png");
 					Image imS = imgS.getImage();
-					System.out.println(selectChoix.getText());
 					imS = imS.getScaledInstance(97, 25, Image.SCALE_DEFAULT);
 					selectChoix.setIcon(imgS);
 
@@ -788,7 +787,6 @@ public class FenetreStart extends JFrame {
 						joueurs.add(labelMessa);
 						break;
 					case 3:
-						System.out.println("salut");
 						labelNavi.setIcon(imgIcon3AS);
 						etatBoutonNavi = false;
 						joueurs.add(labelNavi);

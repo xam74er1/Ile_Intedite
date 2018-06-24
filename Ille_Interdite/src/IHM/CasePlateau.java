@@ -93,15 +93,12 @@ public class CasePlateau extends JPanel  {
 					g.drawImage(image, 0, 0,this.getWidth(),this.getHeight(), null);
 				}else {
 					path = System.getProperty("user.dir")+"\\src\\"+"images\\watterTexture.jpg";
-					//System.out.println("coule");
 					image = ImageIO.read(new File(path));
 					//super.paintComponent(g);
 					g.drawImage(image, 0,0,this.getWidth(),this.getHeight(), null);
 
 				}
 			} catch (IOException e) {
-				System.out.println("name = "+name);
-				System.out.println("erruer :"+ path+" ");
 			}
 		}else {
 
@@ -130,7 +127,6 @@ public class CasePlateau extends JPanel  {
 				g.drawImage(image, xa, ya, 4*s, 4*s, null);
 			} catch (IOException e) {
 
-				System.out.println(path);
 			}
 
 			xa += 2*s;

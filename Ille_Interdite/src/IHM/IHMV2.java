@@ -671,7 +671,6 @@ public class IHMV2 extends Observe{
 			if(j<s) {
 
 				p.setCarte(a.getListeCarteJoueur().get(j));
-				// System.out.println("conard");
 				p.setNumJoueur(a.getNum());
 
 				if(a.getListeCarteJoueur().get(j) instanceof CarteTresor) {
@@ -714,7 +713,6 @@ public class IHMV2 extends Observe{
 				if(j<s) {
 
 					p.setCarte(a.getListeCarteJoueur().get(j));
-					// System.out.println("conard");
 					p.setNumJoueur(a.getNum());
 
 					if(a.getListeCarteJoueur().get(j) instanceof CarteTresor) {
@@ -754,7 +752,6 @@ public class IHMV2 extends Observe{
 				if(j<s) {
 
 					p.setCarte(a.getListeCarteJoueur().get(j));
-					// System.out.println("conard");
 					p.setNumJoueur(a.getNum());
 
 					if(a.getListeCarteJoueur().get(j) instanceof CarteTresor) {
@@ -777,7 +774,6 @@ public class IHMV2 extends Observe{
 
 			btnImgPlayerIn3T.setNumJoueur(a.getNum());
 			btnImgPlayerIn3T.setPath(System.getProperty("user.dir")+"\\src\\"+"images/persos/"+path+".png");
-			//	System.out.println(" 3 = "+a.getNom()+" k"+k);
 		}
 		
 		PanelEast.repaint();

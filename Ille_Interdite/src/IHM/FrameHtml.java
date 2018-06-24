@@ -51,7 +51,6 @@ public class FrameHtml extends JFrame {
 		Main.setLayout(cl);
 
 
-		System.out.println(System.getProperty("user.dir"));
 		JScrollPane page1 = new JScrollPane( new htmlPan(System.getProperty("user.dir")+"\\src\\"+"images\\Help\\page1.html",System.getProperty("user.dir")+"\\src\\"+"images\\Help\\Fond2.jpg"));
 		page1.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
 		page1.setAutoscrolls(false);
@@ -94,11 +93,7 @@ public class FrameHtml extends JFrame {
 		contentPane.add(scrollPane, BorderLayout.NORTH);
 		
 		this.setVisible(true);
-//		this.addWindowListener(new WindowAdapter(){
-//            public void windowClosing(WindowEvent e){
-//               System.out.println("lol");
-//            }
-//        });
+
 		
 	}
 

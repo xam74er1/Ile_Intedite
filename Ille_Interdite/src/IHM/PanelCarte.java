@@ -98,9 +98,7 @@ public class PanelCarte extends JPanel{
 			image = ImageIO.read(new File(path));
 			g.drawImage(image, 0, 0,this.getWidth(),this.getHeight(), null);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			//System.out.println(path);
-			//e.printStackTrace();
+
 		}
 
 		if(blanc) {

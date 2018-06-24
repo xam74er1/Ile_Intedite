@@ -109,7 +109,6 @@ public class PanelJoueur extends JPanel {
 
 	public void paintComponent(Graphics g){
 
-		//System.out.println(path);
 		g.setColor(c);
 		
 		BufferedImage image;

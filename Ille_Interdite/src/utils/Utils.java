@@ -93,9 +93,7 @@ public class Utils {
      * @return true si l'utilisateur répond oui, false sinon
      */
     public static Boolean poserQuestion(String question) {
-        System.out.println("Divers.poserQuestion(" + question + ")");
         int reponse = JOptionPane.showConfirmDialog (null, question, "", JOptionPane.YES_NO_OPTION) ;
-        System.out.println("\tréponse : " + (reponse == JOptionPane.YES_OPTION ? "Oui" : "Non"));
         return reponse == JOptionPane.YES_OPTION;
     }    
     

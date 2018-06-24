@@ -23,5 +23,4 @@ public abstract class Carte {
 		// TODO - implement Carte.Carte
 		this.nom = nom;
 	}
-        //test netbeans 2
 }
