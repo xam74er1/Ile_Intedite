@@ -98,10 +98,14 @@ public class PanelButton extends JPanel{
 	
 	public void activate() {
 		this.addMouseListener(m);
+		this.blanc = false;
+		this.repaint();
 	}
 	
 	public void desactivate() {
 		this.removeMouseListener(m);
+		this.blanc = true;
+		this.repaint();
 	}
 
 }
